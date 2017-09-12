@@ -31,7 +31,7 @@ gulp.task('ws', gulp.parallel('watch', 'serve'));
 
 gulp.task('minimal', gulp.series('sass', 'js', 'watch'));
 
-gulp.task('build', gulp.series('font', 'sprite', 'image', 'sass', 'js'));
+gulp.task('build', gulp.series('font', 'sprite', 'image', 'sass', 'js', 'html'));
 
 gulp.task('rebuild', gulp.series('clean', 'build'));
 

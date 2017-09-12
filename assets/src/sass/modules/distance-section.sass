@@ -1,0 +1,138 @@
+.distance-section
+	color: $white
+	margin-bottom: 60px
+	.wrapper-inner
+		display: flex
+		+clearfix
+	.section-title
+		color: $pink
+		text-transform: uppercase
+		font:
+			size: 48px
+			weight: 700
+		line-height: 65px
+	.col
+		float: left
+		width: 300 / 1200 * 100%
+		min-height: 730px
+		&.dark
+			background: $dark-pink-bg
+		&.medium
+			background: $medium-pink-bg
+		&.light
+			background: $light-pink-bg
+	.image-container
+		position: relative
+		overflow: hidden
+		&:before
+			content: ''
+			display: block
+			position: absolute
+			width: 100%
+			height: 100%
+			top: 0
+			left: 0
+			background: $black
+			opacity: .35
+		img
+			display: block
+			position: absolute
+			min-width: 100%
+			min-height: 100%
+			width: auto
+			height: auto
+			max-width: none
+			left: 50%
+			transform: translateX(-50%)
+			z-index: -1
+	.distance-container
+		position: relative
+		padding: 30px 20px 40px
+	.unit-info
+		margin-bottom: 35px
+		.icon
+			float: left
+			margin-right: 15px
+			svg
+				display: block
+				width: 30px
+				height: 30px
+				color: $white
+		.label
+			position: relative
+			left: 15px
+		.value
+			font:
+				size: 24px
+				weight: 700
+		.text-container
+			position: relative
+			top: -12px
+		.start
+			margin-bottom: 10px
+	.distance
+		position: absolute
+		top: 14px
+		right: 20px
+		font:
+			size: 46px
+			weight: 800
+		line-height: 56px
+	ul
+		padding-left: 30px
+		margin-bottom: 35px
+		li
+			position: relative
+			margin-bottom: 5px
+			&:before
+				content: ''
+				display: block
+				position: absolute
+				width: 9px
+				height: 9px
+				background: $white
+				border-radius: 50%
+				left: -20px
+				top: 7px
+	.prices
+		margin-bottom: 40px
+		.icon
+			float: left
+			margin-right: 15px
+		svg
+			display: block
+			width: 35px
+			height: 35px
+			stroke: $white
+		.price-item
+			+clearfix
+			margin-bottom: 25px
+			&:last-child
+				margin-bottom: 0
+			&.inactive
+				color: $purple
+				svg
+					stroke: $purple
+				.price
+					text-decoration: line-through
+		.text-container
+			position: relative
+		.price
+			position: relative
+			top: 3px
+			font:
+				size: 30px
+				weight: 800
+			line-height: 1
+		.date
+			position: absolute
+			left: calc(50% - 10px)
+			top: -13px
+	.button
+		display: block
+		max-width: 160px
+		margin: 0 auto
+		padding: 25px 20px
+		font-size: 12px
+		line-height: 16px
+		letter-spacing: .25px

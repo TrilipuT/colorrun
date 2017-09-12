@@ -4,13 +4,13 @@ const config = require('../config.js');
 module.exports = function() {
 	let serveFunction = () => {
 		browserSync.init({
-			/*server: {
+			server: {
 			    baseDir: config.built.dir,
 			    directory: true
-			},*/
-			proxy: {
-				target: "http://skeleton.wordpress.dev"
 			},
+			// proxy: {
+			// 	target: "http://color-run.wordpress.dev"
+			// },
 
 			// tunnel: true,
 			open: false,

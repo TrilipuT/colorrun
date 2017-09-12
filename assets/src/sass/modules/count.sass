@@ -1,0 +1,82 @@
+$size: 150px
+$progress-clr: $pink
+$progress-size: 8px
+$trail-clr: $white
+
+
+=draw-progress($progress, $color)
+	.pie
+		@if $progress > 50
+			clip: rect(auto, auto, auto, auto)
+			.right-side
+				transform: rotate(180deg)
+		@else if $progress <= 50
+			.right-side
+				display: none
+		.half-circle
+			border-color: $color
+		.left-side
+			$rotate: $progress * 3.6
+			transform: rotate(#{$rotate}deg)
+
+.pie-wrapper
+	width: $size
+	height: $size
+	position: relative
+
+	.pie
+		width: 100%
+		height: 100%
+		clip: rect(0, $size, $size, $size / 2)
+		left: 0
+		position: absolute
+		top: 0
+
+		.right-side,
+		.left-side
+			box-sizing: border-box
+
+		.half-circle
+			width: 100%
+			height: 100%
+			border: $progress-size solid #3498db
+			border-radius: 50%
+			clip: rect(0, $size / 2, $size, 0)
+			left: 0
+			position: absolute
+			top: 0
+	.label
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: center
+		position: absolute
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+		color: $blue
+		text-align: center
+		.value,
+		.text
+			display: block
+			line-height: 1
+		.value
+			font:
+				size: 60px
+				weight: 800
+		.text
+			font:
+				size: 16px
+				weight: 700
+	.shadow
+		width: 100%
+		height: 100%
+		border: $progress-size solid $trail-clr
+		border-radius: 50%
+		box-sizing: border-box
+
+	@for $i from 1 through 100
+		&.progress-#{$i}
+			+draw-progress($i, $pink)
+
