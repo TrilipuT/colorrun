@@ -1,0 +1,116 @@
+<?php
+
+namespace modules\distance;
+
+use WPKit\Fields\DateTime;
+use WPKit\Fields\Select2;
+use WPKit\Module\AbstractInitialization;
+use WPKit\PostType\MetaBox;
+use WPKit\PostType\MetaBoxRepeatable;
+use WPKit\PostType\PostType;
+
+/**
+ * Class Initialization
+ *
+ * @package modules\theme
+ */
+class Initialization extends AbstractInitialization {
+	const POST_TYPE = 'distance';
+
+	const STATUS = [
+		'NOT_PAYED'        => 0,
+		'AWAITING_PAYMENT' => 1,
+		'PAYED'            => 2,
+
+	];
+	/**
+	 * @var PostType
+	 */
+	private $post_type;
+
+
+	public function register_post_type() {
+		$post_type = new PostType( self::POST_TYPE, __( 'Distance', TEXT_DOMAIN ) );
+		$post_type->set_supports( [ 'title', 'editor' ] );
+		$post_type->set_menu_icon( 'dashicons-location-alt' );
+		$post_type->set_publicly_queryable( false );
+		$post_type->set_rewrite( false );
+		$post_type->set_use_archive( false );
+		$post_type->set_public( false );
+		$post_type->set_show_in_nav_menus( false );
+		$post_type->set_menu_position( 8 );
+		$this->post_type = $post_type;
+		$this->setup_columns();
+		$this->event_info();
+		$this->event_price();
+	}
+
+	public function setup_columns() {
+		$this->post_type->add_column( __( 'Event Date', TEXT_DOMAIN ), function () {
+			global $post;
+			echo MetaBox::get( $post->ID, Initialization::POST_TYPE, 'date' );
+		}, true, 2 );
+
+		$this->post_type->add_column( __( 'Slots', TEXT_DOMAIN ), function () {
+			global $post;
+			$registered = \modules\participant\Functions::get_registered_for_distance( $post->ID );
+			$slots      = MetaBox::get( $post->ID, Initialization::POST_TYPE, 'slots' );
+			echo "{$registered} / {$slots}";
+		} );
+	}
+
+	public function event_info() {
+		$meta = new MetaBox( self::POST_TYPE, __( 'Details', TEXT_DOMAIN ) );
+		$meta->set_context( 'side' );
+		$meta->add_field( 'date', __( 'Start date', TEXT_DOMAIN ), 'Datetime' );
+		$meta->add_field( 'slots', __( 'Count of slots', TEXT_DOMAIN ), 'Number' );
+		$meta->add_field( 'bib_from', __( 'Bib start', TEXT_DOMAIN ), 'Number' );
+		$meta->add_field( 'event', __( 'Event', TEXT_DOMAIN ), function () {
+			$f       = new Select2();
+			$options = \modules\event\Functions::get_all_events();
+			$f->set_options( wp_list_pluck( $options->posts, 'post_title', 'ID' ) );
+
+			return $f;
+		} );
+
+		$this->post_type->add_meta_box( $meta );
+	}
+
+	public function event_price() {
+		// Price
+		$meta = new MetaBoxRepeatable( Initialization::POST_TYPE . '_price', __( 'Price', THEME_TEXT_DOMAIN ) );
+		$meta->add_field( 'date', __( 'Period end date', THEME_TEXT_DOMAIN ), function () {
+			$f = new DateTime();
+			$f->set_attribute( 'data-format', 'yyyy-mm-dd' );
+			$f->set_attribute( 'data-pick-time', 'false' );
+			$f->set_placeholder( 'yyyy-mm-dd' );
+
+			return $f;
+		} );
+		$meta->add_field( 'fee', __( 'Price in this period', THEME_TEXT_DOMAIN ), 'Number' );
+		$meta->set_priority( 'high' );
+		$meta->add_post_type( $this->posttype );
+	}
+
+	/**
+	 * @param $wp_query \WP_Query
+	 */
+	public function add_filter_pre_get_posts( $wp_query ) {
+		if ( $wp_query->is_main_query() && is_admin() && get_post_type() == Initialization::POST_TYPE ) {
+			$wp_query->set( 'orderby', 'meta_value' );
+			$wp_query->set( 'order', 'DESC' );
+		}
+	}
+
+	public function admin_register_remove_columns() {
+		add_filter( "manage_posts_columns", function ( $columns ) {
+			if ( isset( $_GET['post_type'] ) && $_GET['post_type'] == self::POST_TYPE ) {
+				unset( $columns['date'] );
+			}
+
+			return $columns;
+		} );
+	}
+
+}
+

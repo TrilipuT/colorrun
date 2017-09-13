@@ -4,5 +4,19 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHP" type="php">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../wp-admin" />
+          <root url="file://$MODULE_DIR$/../../plugins" />
+          <root url="file://$MODULE_DIR$/../../../wp-includes" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../../../wp-admin" />
+          <root url="file://$MODULE_DIR$/../../plugins" />
+          <root url="file://$MODULE_DIR$/../../../wp-includes" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

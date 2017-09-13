@@ -1,0 +1,7 @@
+{
+    "require": {
+        "redink-no/wpkit": "dev-develop",
+        "shtrihstr/simple-rest-api": "dev-master",
+        "liqpay/liqpay": "^1.2"
+    }
+}

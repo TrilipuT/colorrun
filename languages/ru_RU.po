@@ -1,0 +1,362 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-06-09 09:05+0300\n"
+"PO-Revision-Date: 2017-06-09 09:06+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c;_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets\n"
+"X-Poedit-SearchPathExcluded-1: gulp\n"
+"X-Poedit-SearchPathExcluded-2: vendor\n"
+"X-Poedit-SearchPathExcluded-3: node_modules\n"
+
+#: 404.php:4
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+#: 404.php:5
+msgid "Homepage"
+msgstr "На главную"
+
+#: archive-article.php:12 modules/article/Initialization.php:56
+#: modules/article/Initialization.php:60
+msgid "Articles"
+msgstr "Статьи"
+
+#: archive-news.php:12 modules/news/Initialization.php:18
+#: modules/news/Initialization.php:19 modules/news/Initialization.php:20
+#: modules/news/Initialization.php:22 partials/single/category-label.php:10
+msgid "News"
+msgstr "Новости"
+
+#: archive-video.php:13 modules/theme/Initialization.php:787
+#: modules/theme/Initialization.php:788 modules/video/Initialization.php:23
+#: modules/video/Initialization.php:25 modules/video/Initialization.php:38
+#: partials/video/category-label.php:10
+msgid "Video"
+msgstr "Видео"
+
+#: modules/article/Initialization.php:55 modules/article/Initialization.php:57
+msgid "Article"
+msgstr "Статья"
+
+#: modules/article/Initialization.php:58
+msgid "All articles"
+msgstr "Все статьи"
+
+#: modules/article/Initialization.php:59
+msgid "Add new article"
+msgstr "Добавить статью"
+
+#: modules/article/Initialization.php:69
+#: modules/shortcode/shortcodes/Related.php:29
+#: modules/video/Initialization.php:41 partials/article/related.php:13
+msgid "Related"
+msgstr "В ТЕМУ"
+
+#: modules/article/Initialization.php:79
+msgid "Partner"
+msgstr "Партнер"
+
+#: modules/article/Initialization.php:80
+msgid "Partners"
+msgstr "Партнеры"
+
+#: modules/article/Initialization.php:81
+msgid "All partners"
+msgstr "Все партнеры"
+
+#: modules/article/Initialization.php:82
+msgid "Edit partner"
+msgstr "Редактировать партнера"
+
+#: modules/article/Initialization.php:83
+msgid "Add new partner"
+msgstr "Добавить партнера"
+
+#: modules/article/Initialization.php:84
+msgid "New partner"
+msgstr "Новый партнер"
+
+#: modules/article/Initialization.php:87
+msgid "Link"
+msgstr "Ссылка"
+
+#: modules/article/Initialization.php:88
+msgid "Logo"
+msgstr "Лого"
+
+#: modules/article/Initialization.php:93
+msgid "Description"
+msgstr "Описание"
+
+#: modules/article/Initialization.php:120
+msgid "Align left"
+msgstr ""
+
+#: modules/article/Initialization.php:127
+msgid "Align right"
+msgstr ""
+
+#: modules/elementor/widgets/Quote.php:17
+#: modules/shortcode/shortcodes/Quote.php:29
+msgid "Quote"
+msgstr "Цитата"
+
+#: modules/elementor/widgets/Quote.php:31
+#: modules/elementor/widgets/Rating.php:31
+msgid "Content"
+msgstr ""
+
+#: modules/elementor/widgets/Quote.php:38
+#: modules/shortcode/shortcodes/Quote.php:33
+msgid "Text"
+msgstr ""
+
+#: modules/elementor/widgets/Quote.php:41
+msgid "Enter some content"
+msgstr ""
+
+#: modules/elementor/widgets/Quote.php:47
+msgid "Style"
+msgstr ""
+
+#: modules/elementor/widgets/Quote.php:50
+msgid "Style of quote"
+msgstr ""
+
+#: modules/elementor/widgets/Quote.php:61
+#: modules/shortcode/shortcodes/Quote.php:34
+msgid "Author"
+msgstr "Автор"
+
+#: modules/elementor/widgets/Rating.php:17
+#: modules/shortcode/shortcodes/Rating.php:29
+#: modules/shortcode/shortcodes/Rating.php:33
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: modules/elementor/widgets/Rating.php:38
+#: modules/elementor/widgets/Rating.php:43
+msgid "Value"
+msgstr ""
+
+#: modules/loadmore/Functions.php:57
+msgid "Load more"
+msgstr "Больше статей"
+
+#: modules/loadmore/Functions.php:58
+msgid "More articles"
+msgstr "Больше статей"
+
+#: modules/loadmore/Functions.php:59
+msgid "More news"
+msgstr "Больше новостей"
+
+#: modules/loadmore/Functions.php:60
+msgid "More videos"
+msgstr "Больше видео"
+
+#: modules/multiplethumbnails/MultiPostThumbnails.php:69
+#, php-format
+msgid ""
+"The 'label' and 'id' values of the 'args' parameter of '%s::%s()' are "
+"required"
+msgstr ""
+
+#: modules/multiplethumbnails/MultiPostThumbnails.php:268
+#: modules/multiplethumbnails/MultiPostThumbnails.php:269
+#, php-format
+msgid "Set %s"
+msgstr ""
+
+#: modules/multiplethumbnails/MultiPostThumbnails.php:282
+#, php-format
+msgid "Remove %s"
+msgstr ""
+
+#: modules/multiplethumbnails/MultiPostThumbnails.php:331
+#, php-format
+msgid "Set as %3$s"
+msgstr ""
+
+#: modules/news/Initialization.php:21
+msgid "All news"
+msgstr "Все новости"
+
+#: modules/shortcode/shortcodes/Quote.php:35
+msgid "Align"
+msgstr ""
+
+#: modules/shortcode/shortcodes/Related.php:33
+msgid "Post"
+msgstr ""
+
+#: modules/theme/Initialization.php:287
+msgid "Excerpt"
+msgstr "Отрывок"
+
+#: modules/theme/Initialization.php:417
+msgid "Full width"
+msgstr ""
+
+#: modules/theme/Initialization.php:498
+msgid "Primary"
+msgstr ""
+
+#: modules/theme/Initialization.php:499
+msgid "Footer lfeft"
+msgstr ""
+
+#: modules/theme/Initialization.php:500
+msgid "Footer right"
+msgstr ""
+
+#: modules/theme/Initialization.php:501
+msgid "Footer mobile"
+msgstr ""
+
+#: modules/theme/Initialization.php:507
+msgid "Single news"
+msgstr ""
+
+#: modules/theme/Initialization.php:509
+msgid "Widgets in this area will be shown on all news."
+msgstr ""
+
+#: modules/theme/Initialization.php:688
+msgid ""
+"JavaScript is disabled on your browser. Please enable JavaScript or upgrade "
+"to a JavaScript-capable browser to use this site."
+msgstr ""
+
+#: modules/theme/Initialization.php:745
+msgid "Theme Settings"
+msgstr "Настройки темы"
+
+#: modules/theme/Initialization.php:746
+msgid "Social"
+msgstr "Социалки"
+
+#: modules/theme/Initialization.php:756
+msgid "Home page"
+msgstr "Домашняя страница"
+
+#: modules/theme/Initialization.php:757
+msgid "Featured article"
+msgstr "Избранные материалы"
+
+#: modules/theme/Initialization.php:766 modules/theme/Initialization.php:783
+msgid "Select post"
+msgstr "Выберите пост"
+
+#: modules/theme/Initialization.php:791
+msgid "General Options"
+msgstr "Главные настройки"
+
+#: modules/theme/Initialization.php:792
+msgid "Head code"
+msgstr "Head code"
+
+#: modules/theme/Initialization.php:793
+msgid "Footer code"
+msgstr "Footer code"
+
+#: modules/theme/Initialization.php:798
+msgid "Social Links"
+msgstr "Социальные ссылки"
+
+#: modules/theme/Initialization.php:799
+msgid "Facebook"
+msgstr "Facebook"
+
+#: modules/theme/Initialization.php:800
+msgid "Twitter"
+msgstr "Twitter"
+
+#: modules/theme/Initialization.php:801
+msgid "Vkontakte"
+msgstr "Vkontakte"
+
+#: modules/theme/Initialization.php:802
+msgid "Instagram"
+msgstr "Instagram"
+
+#: modules/theme/Initialization.php:803
+msgid "Telegram"
+msgstr ""
+
+#: modules/theme/widgets/Latest_Posts.php:17
+#: modules/theme/widgets/Latest_Posts.php:28
+msgid "Recent Posts"
+msgstr "Недавние посты"
+
+#: modules/theme/widgets/Latest_Posts.php:24
+msgid "Title"
+msgstr "Заголовок"
+
+#: modules/video/Initialization.php:24 modules/video/Initialization.php:27
+msgid "Videos"
+msgstr "Видео"
+
+#: modules/video/Initialization.php:26
+msgid "All videos"
+msgstr "Все видео"
+
+#: modules/video/Initialization.php:36
+msgid "Info"
+msgstr "Инфо"
+
+#: modules/video/Initialization.php:37
+msgid "Author/Band name"
+msgstr "Исполнитель/группа"
+
+#: modules/viewcount/Initialization.php:35
+msgid "Every 5 Minutes"
+msgstr "Каждые 5 минут"
+
+#: partials/article/partner.php:10
+msgid "Partner article"
+msgstr "Партнерский материал"
+
+#: partials/header/search.php:15 search.php:13
+msgid "Search"
+msgstr "Поиск"
+
+#: partials/shortcode/rating.php:11
+msgid "rating"
+msgstr "оценка"
+
+#: partials/single/comments-toggler.php:10
+msgid "comments"
+msgstr "комментарии"
+
+#: partials/single/social-share.php:8
+msgid "share with friends"
+msgstr "поделитесь с друзьями"
+
+#: partials/single/tags.php:15
+msgid "tags"
+msgstr "теги"
+
+#: search.php:21
+#, php-format
+msgid "Found %d results for «%s»"
+msgstr "Найдено %d результатов по запросу «%s»"
+
+#~ msgid "Recent posts"
+#~ msgstr "Недавние материалы"

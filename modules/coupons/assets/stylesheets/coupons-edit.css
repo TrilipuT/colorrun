@@ -1,0 +1,15 @@
+.editeable input {
+    width: 100%;
+}
+
+.editeable input[type='number'] {
+    width: 50px;
+}
+
+.editeable select {
+    margin-top: -2px;
+}
+
+.editeable .row-actions {
+    position: static;
+}
