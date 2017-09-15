@@ -2,7 +2,6 @@
 
 namespace modules\participant;
 
-use modules\coupons\Coupon;
 use WPKit\Fields\Select;
 use WPKit\Fields\Select2;
 use WPKit\Fields\Text;
@@ -18,12 +17,6 @@ use WPKit\PostType\PostType;
 class Initialization extends AbstractInitialization {
 	const POST_TYPE = 'participant';
 
-	const STATUS = [
-		'NOT_PAYED'        => 0,
-		'AWAITING_PAYMENT' => 1,
-		'PAYED'            => 2,
-
-	];
 	/**
 	 * @var PostType
 	 */
@@ -31,28 +24,6 @@ class Initialization extends AbstractInitialization {
 
 	public function _add_action_add_meta_boxes() {
 		remove_meta_box( 'slugdiv', [ self::POST_TYPE ], 'normal' );
-	}
-
-	public function admin_register_create_coupons_table() {
-		global $wpdb;
-
-		$charset_collate = $wpdb->get_charset_collate();
-		$table_name      = $wpdb->prefix . Coupon::TABLE;
-		$sql             = "CREATE TABLE {$table_name} (
-			  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-			  `code` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-			  `amount` tinyint(4) DEFAULT NULL,
-			  `used` int(11) DEFAULT '0',
-			  `count` int(11) DEFAULT '1',
-			  `type` tinyint(1) DEFAULT '0',
-			  `status` tinyint(1) DEFAULT '1',
-			  `created` datetime DEFAULT '0000-00-00 00:00:00',
-			  PRIMARY KEY (`code`),
-			  KEY `id` (`id`)
-			) ENGINE=InnoDB {$charset_collate};";
-
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		dbDelta( $sql );
 	}
 
 	public function register_post_type() {
@@ -69,7 +40,18 @@ class Initialization extends AbstractInitialization {
 		$this->setup_columns();
 		$this->participant_info();
 		$this->payment_info();
+		$this->custom_info();
 	}
+
+	public function custom_info() {
+		$meta = new MetaBox( self::POST_TYPE . '_additional', __( 'Additional info', TEXT_DOMAIN ) );
+		foreach ( Functions::get_additional_fileds() as $key => $title ) {
+			$meta->add_field( $key, __( $title, TEXT_DOMAIN ) );
+		}
+		$meta->set_priority( 'high' );
+		$meta->add_post_type( $this->post_type );
+	}
+
 
 	public function setup_columns() {
 		$this->post_type->add_column( __( 'Distance', TEXT_DOMAIN ), function () {
@@ -101,6 +83,16 @@ class Initialization extends AbstractInitialization {
 		$meta->add_field( 'firstname', __( 'First name', TEXT_DOMAIN ) );
 		$meta->add_field( 'lastname', __( 'Last name', TEXT_DOMAIN ) );
 		$meta->add_field( 'email', __( 'Email', TEXT_DOMAIN ), 'Email' );
+		$meta->add_field( 'dateofbirth', __( 'Date of birth', TEXT_DOMAIN ), 'Date' );
+		$meta->add_field( 'sex', __( 'Sex', TEXT_DOMAIN ), function () {
+			$f = new Select();
+			$f->set_options( [
+				'male'   => __( 'Male', TEXT_DOMAIN ),
+				'female' => __( 'Female', TEXT_DOMAIN ),
+			] );
+
+			return $f;
+		} );
 		$meta->add_field( 'bib', __( 'Bib', TEXT_DOMAIN ), function () {
 			global $post;
 			if ( $event = Functions::get_event( $post->ID ) ) {

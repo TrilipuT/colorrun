@@ -398,8 +398,8 @@ class Initialization extends AbstractThemeInitialization {
 	}
 
 	public function admin_register_option_pages() {
-		new OptionPage( 'theme', __( 'Theme Settings', TEXT_DOMAIN ), 'options-general.php' );
-		new OptionPage( 'social', __( 'Social', TEXT_DOMAIN ), 'options-general.php' );
+		new OptionPage( 'theme_settings', __( 'Theme Settings', TEXT_DOMAIN ) );
+		new OptionPage( 'social', __( 'Social', TEXT_DOMAIN ), 'theme_settings' );
 	}
 
 	public function admin_register_options() {
@@ -410,41 +410,11 @@ class Initialization extends AbstractThemeInitialization {
 	protected function _add_theme_options() {
 
 		$option_box = new OptionBox( 'homepage', __( 'Home page', TEXT_DOMAIN ) );
-		$option_box->add_field( 'featured_article', __( 'Featured article', TEXT_DOMAIN ), function () {
-			$f = new Select2();
-			$q = new \WP_Query( [
-				'post_status'    => 'publish',
-				'posts_per_page' => 100,
-			] );
-
-			$f->set_options( wp_list_pluck( $q->posts, 'post_title', 'ID' ) );
-			$f->set_placeholder( __( 'Select post', TEXT_DOMAIN ) );
-
-			return $f;
-		} );
-		$video_select = function () {
-			$f       = new Select2();
-			$q       = new \WP_Query( [
-				'post_status'    => 'publish',
-				'posts_per_page' => 100,
-			] );
-			$options = [];
-			while ( $q->have_posts() ) {
-				$q->the_post();
-			}
-			$f->set_options( $options );
-			$f->set_placeholder( __( 'Select post', TEXT_DOMAIN ) );
-
-			return $f;
-		};
-		$option_box->add_field( 'featured_video1', __( 'Video', TEXT_DOMAIN ) . ' 1', $video_select );
-		$option_box->add_field( 'featured_video2', __( 'Video', TEXT_DOMAIN ) . ' 2', $video_select );
-		$option_box->set_page( 'theme' );
 
 		$option_box = new OptionBox( 'general', __( 'General Options', TEXT_DOMAIN ) );
 		$option_box->add_field( 'head_code', __( 'Head code', TEXT_DOMAIN ), 'Textarea' );
 		$option_box->add_field( 'footer_code', __( 'Footer code', TEXT_DOMAIN ), 'Textarea' );
-		$option_box->set_page( 'theme' );
+		$option_box->set_page( 'theme_settings' );
 	}
 
 	protected function _add_social_options() {

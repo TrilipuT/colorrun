@@ -4,6 +4,7 @@ namespace modules\distance;
 
 use WPKit\Module\AbstractFunctions;
 use WPKit\PostType\MetaBox;
+use WPKit\PostType\MetaBoxRepeatable;
 
 /**
  * Class Functions
@@ -14,10 +15,14 @@ class Functions extends AbstractFunctions {
 
 	public static function get_statuses(): array {
 		return [
-			Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', TEXT_DOMAIN ),
-			Initialization::STATUS['AWAITING_PAYMENT'] => __( 'Awaiting Payment', TEXT_DOMAIN ),
-			Initialization::STATUS['PAYED']            => __( 'Payed', TEXT_DOMAIN ),
+			\modules\payment\Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', TEXT_DOMAIN ),
+			\modules\payment\Initialization::STATUS['AWAITING_PAYMENT'] => __( 'Awaiting Payment', TEXT_DOMAIN ),
+			\modules\payment\Initialization::STATUS['PAYED']            => __( 'Payed', TEXT_DOMAIN ),
 		];
+	}
+
+	public static function get_distance_current_amount( int $id ): int {
+		MetaBoxRepeatable::get($id,Initialization::POST_TYPE . '_price');
 	}
 
 	public static function get_distances(): \WP_Query {

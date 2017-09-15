@@ -17,12 +17,6 @@ use WPKit\PostType\PostType;
 class Initialization extends AbstractInitialization {
 	const POST_TYPE = 'distance';
 
-	const STATUS = [
-		'NOT_PAYED'        => 0,
-		'AWAITING_PAYMENT' => 1,
-		'PAYED'            => 2,
-
-	];
 	/**
 	 * @var PostType
 	 */
@@ -42,7 +36,7 @@ class Initialization extends AbstractInitialization {
 		$this->post_type = $post_type;
 		$this->setup_columns();
 		$this->event_info();
-		$this->event_price();
+		$this->distance_price();
 	}
 
 	public function setup_columns() {
@@ -53,7 +47,7 @@ class Initialization extends AbstractInitialization {
 
 		$this->post_type->add_column( __( 'Slots', TEXT_DOMAIN ), function () {
 			global $post;
-			$registered = \modules\participant\Functions::get_registered_for_distance( $post->ID );
+			$registered = \modules\registration\Functions::get_registered_for_distance_count( $post->ID );
 			$slots      = MetaBox::get( $post->ID, Initialization::POST_TYPE, 'slots' );
 			echo "{$registered} / {$slots}";
 		} );
@@ -76,10 +70,9 @@ class Initialization extends AbstractInitialization {
 		$this->post_type->add_meta_box( $meta );
 	}
 
-	public function event_price() {
-		// Price
-		$meta = new MetaBoxRepeatable( Initialization::POST_TYPE . '_price', __( 'Price', THEME_TEXT_DOMAIN ) );
-		$meta->add_field( 'date', __( 'Period end date', THEME_TEXT_DOMAIN ), function () {
+	public function distance_price() {
+		$meta = new MetaBoxRepeatable( Initialization::POST_TYPE . '_price', __( 'Price', TEXT_DOMAIN ) );
+		$meta->add_field( 'date', __( 'Period end date', TEXT_DOMAIN ), function () {
 			$f = new DateTime();
 			$f->set_attribute( 'data-format', 'yyyy-mm-dd' );
 			$f->set_attribute( 'data-pick-time', 'false' );
@@ -87,9 +80,9 @@ class Initialization extends AbstractInitialization {
 
 			return $f;
 		} );
-		$meta->add_field( 'fee', __( 'Price in this period', THEME_TEXT_DOMAIN ), 'Number' );
+		$meta->add_field( 'fee', __( 'Price in this period', TEXT_DOMAIN ), 'Number' );
 		$meta->set_priority( 'high' );
-		$meta->add_post_type( $this->posttype );
+		$meta->add_post_type( $this->post_type );
 	}
 
 	/**
