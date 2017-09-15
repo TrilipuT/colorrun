@@ -1,0 +1,83 @@
+.news-grid
+	display: flex
+	flex-wrap: wrap
+	.news-item
+		display: flex
+		width: 50%
+		+hover
+			.text-container
+				background: $pink
+				color: $white
+				&:after
+					border-right-color: $pink
+			.button
+				border-color: $white
+				color: $white
+			svg
+				stroke: $white
+		&:nth-child(3n),
+		&:nth-child(4n)
+			.image-container
+				order: 2
+			.text-container
+				&:after
+					right: auto
+					left: 100%
+					border-right-color: transparent
+					border-left-color: $light-gray
+			+hover
+				.text-container
+					&:after
+						border-right-color: transparent
+						border-left-color: $pink
+	.image-container,
+	.text-container
+		width: 50%
+	.image-container
+		position: relative
+		img
+			position: relative
+			display: block
+			min-width: 100%
+			min-height: 100%
+			max-width: none
+			width: auto
+			height: auto
+	.text-container
+		position: relative
+		padding: 20px
+		color: $pink
+		background: $light-gray
+		box-sizing: border-box
+		&:after
+			content: ''
+			display: block
+			position: absolute
+			border: solid transparent
+			border-color: transparent
+			border-right-color: $light-gray
+			border-width: 20px
+			margin-top: -20px
+			height: 0
+			width: 0
+			right: 100%
+			bottom: 30px
+			pointer-events: none
+		.title
+			font:
+				size: 24px
+				weight: 800
+			line-height: 1
+		.date
+			font:
+				size: 12px
+			line-height: 1
+			i
+				font-style: normal
+				margin-right: 5px
+			svg
+				stroke: $pink
+	.button
+		position: absolute
+		left: 20px
+		bottom: 20px

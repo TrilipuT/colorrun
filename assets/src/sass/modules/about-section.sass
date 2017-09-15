@@ -23,13 +23,14 @@
 			display: block
 			position: absolute
 			width: 60px
-			height: 2000px
+			height: 1000px
 			background: $white
 			border-left: 10000px solid $pink
 			z-index: -1
-			right: -250px
-			top: -610%
-			transform: rotate(20deg)
+			right: 120px
+			top: 50%
+			transform: rotate(30deg) translateY(-50%)
+			transform-origin: right
 
 	.info-container
 		display: flex
@@ -84,5 +85,29 @@
 			display: block
 			font-size: 11px
 			line-height: 1
+	&.final
+		position: relative
+		.thumbnail-container
+			position: absolute
+			right: 0
+			top: 0
+			width: 66%
+			height: 100%
+			img
+				position: absolute
+				width: auto
+				height: auto
+				min-width: 100%
+				min-height: 100%
+				max-width: none
+				left: 50%
+				transform: translateX(-50%)
+		.description
+			strong, p
+				font:
+					size: 24px
+				line-height: 28px
+			p
+				margin-bottom: 20px
 
 
