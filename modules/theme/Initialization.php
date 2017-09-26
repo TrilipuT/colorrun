@@ -2,9 +2,7 @@
 
 namespace modules\theme;
 
-use modules\theme\widgets\Latest_Posts;
 use WPKit\AdminPage\OptionPage;
-use WPKit\Fields\Select2;
 use WPKit\Module\AbstractThemeInitialization;
 use WPKit\Options\Option;
 use WPKit\Options\OptionBox;
@@ -24,12 +22,7 @@ class Initialization extends AbstractThemeInitialization {
 	 * @var array
 	 */
 	protected static $_image_sizes = [
-		'hero'         => [ 1440, 630, true ],
-		'gallery'      => [ 1024, 680, false ],
-		'archive-news' => [ 300, 300, true ],
-		'news'         => [ 800, 470, true ],
-		'grid-medium'  => [ 630, 400, true ],
-		'grid-small'   => [ 590, 440, true ],
+//		'grid-small'   => [ 590, 440, true ],
 	];
 
 	public static function register_login_url() {
@@ -40,10 +33,6 @@ class Initialization extends AbstractThemeInitialization {
 
 
 	public function add_filter_wp_calculate_image_srcset( $source ) {
-		if ( is_singular( \modules\article\Initialization::POST_TYPE ) ) {
-			return false;
-		}
-
 		return $source;
 	}
 
@@ -280,8 +269,13 @@ class Initialization extends AbstractThemeInitialization {
 	}
 
 	public function add_action_after_setup_theme() {
-		add_theme_support( 'post-thumbnails', [ 'news', 'page' ] );
+		add_theme_support( 'post-thumbnails', [  'page' ] );
 		add_theme_support( 'title-tag' );
+		add_theme_support( 'custom-logo', [
+			'height'      => 190,
+			'flex-height' => true,
+			'flex-width'  => true,
+		] );
 		remove_action( 'wp_head', 'wp_generator' );
 		remove_action( 'wp_head', 'wlwmanifest_link' );
 		remove_action( 'wp_head', 'rsd_link' );
@@ -421,7 +415,6 @@ class Initialization extends AbstractThemeInitialization {
 		$option_box = new OptionBox( self::OPTIONS_SOCIAL_KEY, __( 'Social Links', TEXT_DOMAIN ) );
 		$option_box->add_field( 'facebook', __( 'Facebook', TEXT_DOMAIN ), 'Url' );
 		$option_box->add_field( 'twitter', __( 'Twitter', TEXT_DOMAIN ), 'Url' );
-		$option_box->add_field( 'vkontakte', __( 'Vkontakte', TEXT_DOMAIN ), 'Url' );
 		$option_box->add_field( 'instagram', __( 'Instagram', TEXT_DOMAIN ), 'Url' );
 		$option_box->add_field( 'telegram', __( 'Telegram', TEXT_DOMAIN ), 'Url' );
 		$option_box->set_page( self::OPTIONS_PAGE_SOCIAL );

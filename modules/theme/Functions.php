@@ -18,11 +18,10 @@ class Functions extends AbstractThemeFunctions {
 	 */
 	public static function get_socials() {
 		$socials = [
-			'facebook'  => Option::get( 'facebook' ),
-			'twitter'   => Option::get( 'twitter' ),
-			'vkontakte' => Option::get( 'vkontakte' ),
-			'instagram' => Option::get( 'instagram' ),
-			'telegram'  => Option::get( 'telegram' ),
+			'fb'       => Option::get( 'facebook' ),
+			'twitter'  => Option::get( 'twitter' ),
+			'inst'     => Option::get( 'instagram' ),
+			'telegram' => Option::get( 'telegram' ),
 		];
 
 		return array_filter( $socials );

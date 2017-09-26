@@ -13,6 +13,9 @@ use WPKit\PostType\MetaBoxRepeatable;
  */
 class Functions extends AbstractFunctions {
 
+	/**
+	 * @return array
+	 */
 	public static function get_statuses(): array {
 		return [
 			\modules\payment\Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', TEXT_DOMAIN ),
@@ -21,10 +24,101 @@ class Functions extends AbstractFunctions {
 		];
 	}
 
-	public static function get_distance_current_amount( int $id ): int {
-		MetaBoxRepeatable::get($id,Initialization::POST_TYPE . '_price');
+	/**
+	 * @param int $id
+	 *
+	 * @return int
+	 */
+	private static function get_id( int $id ): int {
+		if ( ! $id ) {
+			$id = get_the_ID();
+		}
+
+		return (int) $id;
 	}
 
+	/**
+	 * @param int $id
+	 * @param string $format
+	 *
+	 * @return string
+	 */
+	public static function get_date( int $id = 0, string $format = 'd.m.Y' ): string {
+		$id = self::get_id( $id );
+
+		return date( $format, strtotime( MetaBox::get( $id, Initialization::POST_TYPE, 'date' ) ) );
+	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return string
+	 */
+	public static function get_distance( int $id = 0 ): string {
+		$id = self::get_id( $id );
+
+		return (string) MetaBox::get( $id, Initialization::POST_TYPE, 'distance' );
+	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return int
+	 */
+	public static function get_slots( int $id = 0 ): int {
+		$id = self::get_id( $id );
+
+		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'slots' );
+	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return int
+	 */
+	public static function get_current_amount( int $id = 0 ): int {
+		return (int) MetaBoxRepeatable::get( $id, Initialization::POST_TYPE, '_price' );
+	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return array
+	 */
+	public static function get_prices( int $id = 0 ): array {
+		$id     = self::get_id( $id );
+		$dates  = MetaBoxRepeatable::get( $id, Initialization::POST_TYPE . '_price', 'date' );
+		$fees   = MetaBoxRepeatable::get( $id, Initialization::POST_TYPE . '_price', 'fee' );
+		$prices = [];
+		if ( $dates ) {
+			foreach ( $dates as $i => $date ) {
+				$prices[] = [
+					'date'   => $date,
+					'fee'    => $fees[ $i ],
+					'active' => strtotime( $date ) > time() ? true : false,
+				];
+			}
+		}
+
+		/*usort( $prices, function ( $a, $b ) {
+			return strtotime( $a['date'] ) > strtotime( $b['date'] );
+		} );*/
+
+		return $prices;
+	}
+
+	/**
+	 * @param int $price
+	 *
+	 * @return string
+	 */
+	public static function format_price( int $price ): string {
+		return $price . __( 'UAH', TEXT_DOMAIN );
+	}
+
+	/**
+	 * @return \WP_Query
+	 */
 	public static function get_distances(): \WP_Query {
 		return new \WP_Query( [
 			'posts_per_page' => - 1,
@@ -32,6 +126,9 @@ class Functions extends AbstractFunctions {
 		] );
 	}
 
+	/**
+	 * @return \WP_Query
+	 */
 	public static function get_current_distances(): \WP_Query {
 		return new \WP_Query( [
 			'posts_per_page' => - 1,

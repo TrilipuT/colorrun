@@ -3,6 +3,7 @@
 namespace modules\event;
 
 use WPKit\Module\AbstractFunctions;
+use WPKit\PostType\MetaBox;
 
 /**
  * Class Functions
@@ -37,5 +38,17 @@ class Functions extends AbstractFunctions {
 	 */
 	public static function get_all_events() {
 		return self::get_events( - 1 );
+	}
+
+	/**
+	 * @param string $format
+	 *
+	 * @return string
+	 */
+	public static function get_current_event_date( string $format = 'd/m/Y' ): string {
+		$event = self::get_current_event();
+		$date  = MetaBox::get( $event->post->ID, Initialization::POST_TYPE, 'date' );
+
+		return date( $format, strtotime( $date ) );
 	}
 }

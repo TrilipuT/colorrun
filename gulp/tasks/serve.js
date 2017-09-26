@@ -21,7 +21,7 @@ module.exports = function() {
 			config.built.all,
 			// '*.php',
 			// 'templates/*.php',
-			// 'partials/**/*.php'
+			// 'parts/**/*.php'
 		];
 		browserSync.watch(watch_folders).on('change', browserSync.reload);
 	}

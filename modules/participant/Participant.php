@@ -45,7 +45,7 @@ class Participant {
 	}
 
 	public function get_amount_to_pay(): int {
-		$amount = \modules\distance\Functions::get_distance_current_amount( $this->distance );
+		$amount = \modules\distance\Functions::get_current_amount( $this->distance );
 
 		return (int) $amount;
 	}

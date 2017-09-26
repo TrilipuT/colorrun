@@ -48,7 +48,7 @@ class Initialization extends AbstractInitialization {
 		$this->post_type->add_column( __( 'Slots', TEXT_DOMAIN ), function () {
 			global $post;
 			$registered = \modules\registration\Functions::get_registered_for_distance_count( $post->ID );
-			$slots      = MetaBox::get( $post->ID, Initialization::POST_TYPE, 'slots' );
+			$slots      = Functions::get_slots( $post->ID );
 			echo "{$registered} / {$slots}";
 		} );
 	}
@@ -57,6 +57,7 @@ class Initialization extends AbstractInitialization {
 		$meta = new MetaBox( self::POST_TYPE, __( 'Details', TEXT_DOMAIN ) );
 		$meta->set_context( 'side' );
 		$meta->add_field( 'date', __( 'Start date', TEXT_DOMAIN ), 'Datetime' );
+		$meta->add_field( 'distance', __( 'Distance', TEXT_DOMAIN ) );
 		$meta->add_field( 'slots', __( 'Count of slots', TEXT_DOMAIN ), 'Number' );
 		$meta->add_field( 'bib_from', __( 'Bib start', TEXT_DOMAIN ), 'Number' );
 		$meta->add_field( 'event', __( 'Event', TEXT_DOMAIN ), function () {

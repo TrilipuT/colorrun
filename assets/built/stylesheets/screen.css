@@ -1459,7 +1459,7 @@ body {
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center; }
-  .main-navigation .logo {
+  .main-navigation .custom-logo-link {
     margin-right: 3.35821%;
     max-width: 75px;
     max-height: 95px; }
