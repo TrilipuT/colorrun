@@ -1,0 +1,42 @@
+.gallery-widget
+	margin: 30px 0
+	max-height: 550px
+	.thumbnail-container
+		overflow: hidden
+		img
+			position: relative
+			width: auto
+			height: auto
+			left: 50%
+			transform: translateX(-50%)
+			min-height: 100%
+			min-width: 100%
+			max-width: none
+	.swiper-button-next,
+	.swiper-button-prev
+		width: 38px
+		height: 38px
+		border-radius: 50%
+		background: rgba($white, .66)
+		transition: background .3s ease
+		+hover
+			background: rgba($pink, .66)
+		&:before
+			content: ''
+			position: absolute
+			top: 50%
+			left: 50%
+			transform: translateX(-50%) translateY(-50%)
+			width: 0
+			height: 0
+			border-style: solid
+	.swiper-button-prev
+		&:before
+			left: calc(50% - 2px)
+			border-width: 10px 10px 10px 0
+			border-color: transparent $white transparent transparent
+	.swiper-button-next
+		&:before
+			left: calc(50% + 2px)
+			border-width: 10px 0 10px 10px
+			border-color: transparent transparent transparent $white
