@@ -13,15 +13,49 @@
 		width: 100%
 		font-size: 16px
 		font-weight: 600
-		a
+		&-item
 			display: inline-block
 			max-width: 100px
 			margin-right: 50 / 1340 * 100%
 			vertical-align: middle
 			text-align: center
-			color: $white
 			text-decoration: none
-			+hover
-				color: $yellow-warm
 			&:last-of-type
 				margin-right: 0
+		&-item-has-children
+			position: relative
+			+hover
+				.sub-menu
+					transform: translateY(100%)
+					opacity: 1
+					pointer-events: auto
+		.sub-menu
+			min-width: 160px
+			max-width: 220px
+			position: absolute
+			padding-top: 15px
+			bottom: 0
+			left: -20px
+			opacity: 0
+			transform: translateY(calc(100% - 15px))
+			pointer-events: none
+			transition: transform .3s ease, opacity .3s ease
+			.menu-item
+				display: block
+				max-width: none
+				margin-right: 0
+				background: $white
+				color: $black-clr
+				text-align: left
+				font-weight: 400
+				+hover
+					color: $yellow-warm
+					background: $light-gray
+				a
+					display: block
+					padding: 10px 20px
+					color: inherit
+		a
+			color: $white
+			+hover
+				color: $yellow-warm

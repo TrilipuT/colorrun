@@ -4,13 +4,13 @@ import detectTouchSupport from "./modules/detectTouchSupport";
 import gallery from "./modules/gallery";
 
 import dropdown from './modules/dropdownToggler';
-import radialProgress from './modules/drawRadialProgress';
+import accordion from './modules/accordionWidget';
 
 $( function ( $ ) {
     detectTouchSupport();
     gallery();
 
     dropdown();
-    radialProgress();
+    accordion();
 } );
 

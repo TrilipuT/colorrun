@@ -1,3 +1,66 @@
+$default-margin: 20px
+
+$h1-fz: 60px
+$h1-lh: 60px
+$h2-fz: 40px
+$h2-lh: 40px
+$h3-fz: 20px
+$h3-lh: 28px
+$h4-fz: 20px
+$h4-lh: 30px
+$h5-fz: $default-font-size
+$h5-lh: $default-line-height
+$h6-fz: 16px
+$h6-lh: 24px
+
+%h1
+	font-family: $font-title
+	font-size: $h1-fz
+	line-height: $h1-lh
+	font-weight: 700
+	margin-bottom: $default-margin
+
+%h2
+	font-family: $font-title
+	font-size: $h2-fz
+	line-height: $h2-lh
+	font-weight: 700
+	margin-bottom: $default-margin
+
+%h3
+	font-family: $font-title
+	font-size: $h3-fz
+	line-height: $h3-lh
+	font-weight: 700
+	margin-bottom: $default-margin
+
+%h4
+	font-family: $font-title
+	font-size: $h4-fz
+	line-height: $h4-lh
+	font-weight: 700
+	margin-bottom: $default-margin
+
+%h5
+	font-family: $font-title
+	font-size: $h5-fz
+	line-height: $h5-lh
+	font-weight: 700
+	margin-bottom: $default-margin
+
+%h6
+	font-family: $font-title
+	font-size: $h6-fz
+	line-height: $h6-lh
+	font-weight: 700
+	margin-bottom: $default-margin
+
+%link
+	color: blue
+	text-decoration: none
+	+hover
+		text-decoration: none
+
 h1
 	@extend %h1
 h2
