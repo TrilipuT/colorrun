@@ -8,6 +8,8 @@
 				max-height: 1200px
 				padding: 25px
 				animation: accordionIn 0.45s normal ease-in-out both 1
+			.toggler
+				transform: translateY(-50%) rotate(180deg)
 	.label
 		position: relative
 		padding: 15px 80px 15px 25px
@@ -24,7 +26,7 @@
 		height: 38px
 		border-radius: 50%
 		background: rgba($white, 0)
-		transition: background .3s ease
+		transition: background .3s ease, transform .3s ease
 		cursor: pointer
 		+hover
 			background: rgba($white, .3)
@@ -46,7 +48,7 @@
 		opacity: 0
 		max-height: 0
 		overflow: hidden
-		animation: accordionOut 0.45s alternate ease-in-out both 1;
+		animation: accordionOut 0.45s alternate ease-in-out both 1
 		transition: opacity .8s ease, max-height .8s, padding .3s ease
 		p, ul, ol
 			margin-bottom: 15px
