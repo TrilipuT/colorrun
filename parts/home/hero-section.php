@@ -5,16 +5,16 @@
  * @author     vitaly
  *
  */ ?>
-<div class="hero-section">
+<section class="hero-section">
 	<div class="thumbnail-container">
 		<img src="<?php background_image() ?>" alt="">
 	</div>
 	<div class="text-container">
 		<h1 class="title"><?php bloginfo('name') ?></h1>
-		<h2 class="date"><?= \modules\event\Functions::get_current_event_date() ?></h2>
+		<h2 class="date"><?= Event::get_current_event_date() ?></h2>
 		<div class="countdown">
 			<div class="count days">
-				<div class="pie-wrapper progress-95">
+				<div class="pie-wrapper progress-55">
                         <span class="label">
                             <span class="value">57</span>
                             <span class="text">днів</span>
@@ -67,4 +67,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</section>

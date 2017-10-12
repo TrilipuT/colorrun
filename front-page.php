@@ -6,9 +6,10 @@
  * Time: 20:01
  */
 get_header();
+the_post();
 get_template_part( 'parts/home/hero-section' );
 
-if ( false ) {
+if ( Event::get_current_event_date( 'U' ) < time() ) {
 	get_template_part( 'parts/home/about-section', 'final' );
 	get_template_part( 'parts/home/media-section' );
 } else {

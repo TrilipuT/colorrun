@@ -1,9 +1,198 @@
 <?php
 the_post();
 get_header(); ?>
-    <div class="wrapper">
-        <div class="is-container">
-	        <?php get_template_part( 'content', get_post_type() ); ?>
+    <section class="hero-section single">
+        <div class="thumbnail-container">
+			<?php the_post_thumbnail( 'full' ) ?>
         </div>
-    </div>
+        <div class="text-container">
+            <h1 class="title"><?php the_title() ?></h1>
+        </div>
+    </section>
+    <section class="single-content">
+        <div class="wrapper-outer">
+            <div class="wrapper-content">
+                <div class="content">
+					<?php if ( has_excerpt() ): ?>
+                        <div class="excerpt">
+							<?php the_excerpt(); ?>
+                        </div>
+					<?php endif; ?>
+	                <?php the_content() ?>
+                    <!--<p>
+                        Для всіх спортсменів та любителів бігу, дорослих та дітей, прихильників активного відпочинку,
+                        здорового способу життя, доброчинності, а також,бажаючих емоційно зустріти літо 2017, столичний
+                        клуб
+                        <a href="#">«KM Running club»</a> та компанія «New Balance Україна» четвертий рік поспіль
+                        проводять <strong>«Кольоровий пробіг – Color Run»</strong>.
+                    </p>
+                    <p>
+                        Дистанції 3 та 6км будуть щедро розфарбовані у яскраві кольори фарб холі та запалені енергійною
+                        музикою від діджеїв! Дистанції 3 та 6км будуть щедро розфарбовані у яскраві кольори фарб холі та
+                        запалені енергійною музикою від діджеїв!Дистанції 3 та 6км будуть щедро розфарбовані у яскраві
+                        кольори фарб холі та запалені енергійною музикою від діджеїв!
+                    </p>
+                    <div class="swiper-container gallery-widget">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/gallery-1.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/hero-single.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/gallery-1.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/img-wiget.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/gallery-1.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/thum8" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/gallery-1.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/hero.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/gallery-1.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="thumbnail-container">
+                                    <img src="../images/fake/distance-photo.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <p>
+                        В «стартовий пакет» учасника на дистанції 21.0975 км включені:
+                    </p>
+                    <ul>
+                        <li>Cтартовий номер учасника з іменем (для тих, хто зареєструється до 01 квітня 2017 р.)</li>
+                        <li>Медаль фінішера (медаль видається в разі подолання всієї дистанції в рамках часового
+                            ліміту).
+                        </li>
+                        <li>Пакет фінішера: яблуко, банан, вода, освіжаючі пункти по трасі відвідування безкоштовних
+                            тренувань на відкритому повітрі Open run day відвідування виставки спортивних товарів
+                            SportExpoUA 2017.
+                        </li>
+                        <li>Cтартовий номер учасника з іменем (для тих, хто зареєструється до 01 квітня 2017 р.)</li>
+                        <li>Медаль фінішера (медаль видається в разі подолання всієї дистанції в рамках часового
+                            ліміту).
+                        </li>
+                        <li>Пакет фінішера: яблуко, банан, вода, освіжаючі пункти по трасі відвідування безкоштовних
+                            тренувань на відкритому повітрі Open run day відвідування виставки спортивних товарів
+                            SportExpoUA 2017.
+                        </li>
+                    </ul>
+                    <div class="image-widget">
+                        <div class="thumbnail-container">
+                            <img src="../images/fake/img-wiget.jpg" alt="">
+                        </div>
+                        <div class="text-container">
+                            <p>
+                                “Учасник Змагання, який не мав можливості взяти участь у Змаганні, може отримати
+                                стартовий пакет протягом 10 робочих днів після проведення Змагання в офісі організатора
+                                Змагання, повідомивши йому на електронну пошту або залишити прохання надіслати стартовий
+                                пакет на вказану адресу ”, - розповіла організаторка забігу <strong>Катерина
+                                    Фомченко</strong>.
+                            </p>
+                        </div>
+                    </div>
+                    <h2>H2 Умови участі:</h2>
+                    <ol>
+                        <li>Cтартовий номер учасника з іменем (для тих, хто зареєструється до 01 квітня 2017 р.)</li>
+                        <li>Медаль фінішера (медаль видається в разі подолання всієї дистанції в рамках часового
+                            ліміту).
+                        </li>
+                        <li>Пакет фінішера: яблуко, банан, вода, освіжаючі пункти по трасі відвідування безкоштовних
+                            тренувань на відкритому повітрі Open run day відвідування виставки спортивних товарів
+                            <a href="#">SportExpoUA 2017</a>.
+                        </li>
+                    </ol>
+                    <p>
+                        Для всіх спортсменів та любителів бігу, дорослих та дітей, прихильників активного відпочинку,
+                        здорового способу життя, доброчинності, а також,бажаючих емоційно зустріти літо 2017. Дистанції
+                        3 та 6км будуть щедро розфарбовані у яскраві кольори фарб холі та запалені енергійною музикою
+                        від діджеїв! Дистанції 3 та 6км будуть щедро розфарбовані у яскраві кольори фарб холі та
+                        запалені енергійною музикою від діджеїв!Дистанції 3 та 6км будуть щедро розфарбовані у яскраві
+                        кольори фарб холі та запалені енергійною музикою від діджеїв!
+                    </p>
+                    <div class="wp-caption">
+                        <img src="../images/fake/wp-caption.jpg" alt="">
+                        <p class="wp-caption-text">Для всіх спортсменів та любителів бігу, дорослих та дітей,
+                            прихильників активного відпочинку, здорового способу життя, доброчинності, а також,бажаючих
+                            емоційно зустріти літо 2017.</p>
+                    </div>
+                    <p>
+                        Для всіх спортсменів та любителів бігу, дорослих та дітей, прихильників активного відпочинку,
+                        здорового способу життя, доброчинності, а також,бажаючих емоційно зустріти літо 2017. Дистанції
+                        3 та 6км будуть щедро розфарбовані у яскраві кольори фарб холі та запалені енергійною музикою
+                        від діджеїв! Дистанції 3 та 6км будуть щедро розфарбовані у яскраві кольори фарб холі та
+                        запалені енергійною музикою від діджеїв!Дистанції 3 та 6км будуть щедро розфарбовані у яскраві
+                        кольори фарб холі та запалені енергійною музикою від діджеїв!
+                    </p>
+                    <div class="accordion-widget">
+                        <div class="accordion-item">
+                            <div class="label">
+                                <h4 class="title">H4 1. Дата, час, місце проведення</h4>
+                                <button class="toggler"></button>
+                            </div>
+                            <div class="accordion-content">
+                                <p>
+                                    Організатором Змагання виступає громадська організація «Бігова Україна».
+                                </p>
+                                <h4>H4 Під патронатом:</h4>
+                                <ul>
+                                    <li>Федерації легкої атлетики м.Києва</li>
+                                    <li>Головного управління у справах сім’ї, молоді та спорту (КМДА)</li>
+                                </ul>
+                                <h4>За підтримки:</h4>
+                                <ul>
+                                    <li>Компанії «Нова пошта»</li>
+                                    <li>Компанії «Адідас-Україна»</li>
+                                    <li>Мережі ресторанів «Макдональдс»</li>
+                                    <li>ІП «Кока-Кола БеверіджизУкраїна», ТМ BONAQUA</li>
+                                </ul>
+                                <p>
+                                    Організатор формує оргкомітет з числа своїх штатних співробітників, а також із
+                                    залучаенням вузькопрофільних фахівців з різних видів спорту.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="label">
+                                <h4 class="title">H4 1. Дата, час, місце проведення</h4>
+                                <button class="toggler"></button>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </section>
 <?php get_footer();

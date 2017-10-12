@@ -9,11 +9,7 @@
 </div>
 <footer id="footer">
     <div class="wrapper-outer">
-        <nav class="footer-nav">
-            <a href="#">Питання та відповіді</a>
-            <a href="#">Благодійність</a>
-            <a href="#">Контакти</a>
-        </nav>
+	    <?php wp_nav_menu( [ 'id' => 'footer', 'container_class' => 'footer-nav', 'container' => 'nav' ] ) ?>
         <nav class="socials">
             <a href="#" class="social-item">
                 <svg role="icon" class="sprite-icon sprite-icon-fb">

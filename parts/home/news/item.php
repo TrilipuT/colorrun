@@ -7,7 +7,7 @@
  */ ?>
 <article class="news-item">
     <div class="image-container">
-		<?php the_post_thumbnail() ?>
+		<?php the_post_thumbnail('thumbnail') ?>
     </div>
     <div class="text-container">
         <h3 class="title"><?php the_title() ?></h3>

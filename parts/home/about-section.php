@@ -4,8 +4,7 @@
  * @package    colorrun
  * @author     vitaly
  *
- */
-the_post(); ?>
+ */ ?>
 <section class="about-section">
     <div class="wrapper-outer">
         <div class="description">

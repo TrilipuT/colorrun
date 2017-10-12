@@ -156,9 +156,6 @@ class Initialization extends AbstractThemeInitialization {
 	public function register_nav_menus() {
 		register_nav_menus( [
 			'primary' => __( 'Primary', TEXT_DOMAIN ),
-			'footer1' => __( 'Footer lfeft', TEXT_DOMAIN ),
-			'footer2' => __( 'Footer right', TEXT_DOMAIN ),
-			'mobile'  => __( 'Footer mobile', TEXT_DOMAIN ),
 		] );
 	}
 
@@ -269,7 +266,7 @@ class Initialization extends AbstractThemeInitialization {
 	}
 
 	public function add_action_after_setup_theme() {
-		add_theme_support( 'post-thumbnails', [  'page' ] );
+		add_theme_support( 'post-thumbnails', [ 'post', 'page' ] );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'custom-logo', [
 			'height'      => 190,

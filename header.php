@@ -29,16 +29,7 @@
         <div class="main-navigation">
             <div class="wrapper-outer">
 			    <?php the_custom_logo() ?>
-                <nav class="menu">
-                    <a href="#">Новини</a>
-                    <a href="#">Про захід</a>
-                    <a href="#">Отриманя стартового пакету</a>
-                    <a href="#">Список учасників</a>
-                    <a href="#">Маршрути</a>
-                    <a href="#">Програма</a>
-                    <a href="#">Спонсори</a>
-                    <a href="#">Контакти</a>
-                </nav>
+	            <?php wp_nav_menu( [ 'id' => 'primary', 'container' => 'ul' ] ) ?>
                 <a href="#" class="registration button">
 				    <?php _e( 'Register now', TEXT_DOMAIN ) ?>
                 </a>
