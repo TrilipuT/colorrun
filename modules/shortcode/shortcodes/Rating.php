@@ -26,10 +26,10 @@ class Rating extends AbstractShortcode {
 	 * @return string
 	 */
 	protected static function _get_label() {
-		return __( 'Rating', TEXT_DOMAIN );
+		return __( 'Rating', 'colorrun' );
 	}
 
 	protected function _add_fields() {
-		$this->_add_field( 'value', __( 'Rating', TEXT_DOMAIN ), 'number' );
+		$this->_add_field( 'value', __( 'Rating', 'colorrun' ), 'number' );
 	}
 }

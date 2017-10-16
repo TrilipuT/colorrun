@@ -9,7 +9,7 @@
 <section class="sponsors-section">
     <div class="wrapper-outer">
     <div class="section-title">
-		<?php _e( 'Sponsors and partners', TEXT_DOMAIN ) ?>
+	    <?php _e( 'Sponsors and partners', 'colorrun' ) ?>
     </div>
 <?php if ( $sponsors->have_posts() ): ?>
         <div class="logos-container">
@@ -19,7 +19,7 @@
 		        $type = Sponsor::get_type();
 		        ?>
                 <a href="<?= $url ?>" class="logo-item <?= $type ?>">
-                    <img src="<?= get_template_directory_uri() ?>/assets/built/images/fake/turkish.jpg" alt="">
+	                <?php the_post_thumbnail( 'large' ) ?>
                 </a>
 	        <?php endwhile; ?>
         </div>

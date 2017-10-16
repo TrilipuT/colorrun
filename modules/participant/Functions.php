@@ -14,9 +14,9 @@ class Functions extends AbstractFunctions {
 
 	public static function get_statuses(): array {
 		return [
-			\modules\payment\Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', TEXT_DOMAIN ),
-			\modules\payment\Initialization::STATUS['AWAITING_PAYMENT'] => __( 'Awaiting Payment', TEXT_DOMAIN ),
-			\modules\payment\Initialization::STATUS['PAYED']            => __( 'Payed', TEXT_DOMAIN ),
+			\modules\payment\Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', 'colorrun' ),
+			\modules\payment\Initialization::STATUS['AWAITING_PAYMENT'] => __( 'Awaiting Payment', 'colorrun' ),
+			\modules\payment\Initialization::STATUS['PAYED']            => __( 'Payed', 'colorrun' ),
 		];
 	}
 

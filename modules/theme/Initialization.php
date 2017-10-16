@@ -155,15 +155,15 @@ class Initialization extends AbstractThemeInitialization {
 
 	public function register_nav_menus() {
 		register_nav_menus( [
-			'primary' => __( 'Primary', TEXT_DOMAIN ),
+			'primary' => __( 'Primary', 'colorrun' ),
 		] );
 	}
 
 	public function register_dynamic_sidebars() {
 		register_sidebar( array(
-			'name'          => __( 'Single news', TEXT_DOMAIN ),
+			'name'          => __( 'Single news', 'colorrun' ),
 			'id'            => 'single-news',
-			'description'   => __( 'Widgets in this area will be shown on all news.', TEXT_DOMAIN ),
+			'description'   => __( 'Widgets in this area will be shown on all news.', 'colorrun' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
 			'before_title'  => '<h5 class="title">',
@@ -332,7 +332,7 @@ class Initialization extends AbstractThemeInitialization {
 	public function add_action_wp_footer() {
 		echo "<noscript>
             <div style=\"position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 20px; background-color: #FFF; text-align: center; color: #000; z-index: 999; border-top: 1px solid #000;\">
-                " . __( 'JavaScript is disabled on your browser. Please enable JavaScript or upgrade to a JavaScript-capable browser to use this site.', TEXT_DOMAIN ) . "
+                " . __( 'JavaScript is disabled on your browser. Please enable JavaScript or upgrade to a JavaScript-capable browser to use this site.', 'colorrun' ) . "
             </div>
         </noscript>
         <script>
@@ -389,8 +389,8 @@ class Initialization extends AbstractThemeInitialization {
 	}
 
 	public function admin_register_option_pages() {
-		new OptionPage( 'theme_settings', __( 'Theme Settings', TEXT_DOMAIN ) );
-		new OptionPage( 'social', __( 'Social', TEXT_DOMAIN ), 'theme_settings' );
+		new OptionPage( 'theme_settings', __( 'Theme Settings', 'colorrun' ) );
+		new OptionPage( 'social', __( 'Social', 'colorrun' ), 'theme_settings' );
 	}
 
 	public function admin_register_options() {
@@ -400,20 +400,21 @@ class Initialization extends AbstractThemeInitialization {
 
 	protected function _add_theme_options() {
 
-		$option_box = new OptionBox( 'homepage', __( 'Home page', TEXT_DOMAIN ) );
+		$option_box = new OptionBox( 'homepage', __( 'Home page', 'colorrun' ) );
 
-		$option_box = new OptionBox( 'general', __( 'General Options', TEXT_DOMAIN ) );
-		$option_box->add_field( 'head_code', __( 'Head code', TEXT_DOMAIN ), 'Textarea' );
-		$option_box->add_field( 'footer_code', __( 'Footer code', TEXT_DOMAIN ), 'Textarea' );
+		$option_box = new OptionBox( 'general', __( 'General Options', 'colorrun' ) );
+		$option_box->add_field( 'head_code', __( 'Head code', 'colorrun' ), 'Textarea' );
+		$option_box->add_field( 'footer_code', __( 'Footer code', 'colorrun' ), 'Textarea' );
 		$option_box->set_page( 'theme_settings' );
 	}
 
 	protected function _add_social_options() {
-		$option_box = new OptionBox( self::OPTIONS_SOCIAL_KEY, __( 'Social Links', TEXT_DOMAIN ) );
-		$option_box->add_field( 'facebook', __( 'Facebook', TEXT_DOMAIN ), 'Url' );
-		$option_box->add_field( 'twitter', __( 'Twitter', TEXT_DOMAIN ), 'Url' );
-		$option_box->add_field( 'instagram', __( 'Instagram', TEXT_DOMAIN ), 'Url' );
-		$option_box->add_field( 'telegram', __( 'Telegram', TEXT_DOMAIN ), 'Url' );
+		$option_box = new OptionBox( self::OPTIONS_SOCIAL_KEY, __( 'Social Links', 'colorrun' ) );
+		$option_box->add_field( 'facebook', 'Facebook', 'Url' );
+//		$option_box->add_field( 'twitter', 'Twitter', 'Url' );
+		$option_box->add_field( 'youtube', 'Youtube', 'Url' );
+		$option_box->add_field( 'instagram', 'Instagram', 'Url' );
+//		$option_box->add_field( 'telegram', 'Telegram', 'Url' );
 		$option_box->set_page( self::OPTIONS_PAGE_SOCIAL );
 	}
 
@@ -477,7 +478,7 @@ class Initialization extends AbstractThemeInitialization {
 			    var_dump($current_language->home_url , $preview_url);
 				if ( $current_language->home_url !== $preview_url ) {
 					$wp_customize->add_section( 'languages', [
-						'title'           => sprintf( __( 'Languages | %s', TEXT_DOMAIN ), $current_language->name ),
+						'title'           => sprintf( __( 'Languages | %s', 'colorrun' ), $current_language->name ),
 						'description'     => $current_language->name,
 						'active_callback' => function () {
 							return is_home() || is_front_page();

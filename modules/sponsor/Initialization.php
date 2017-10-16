@@ -22,7 +22,7 @@ class Initialization extends AbstractInitialization {
 
 
 	public function register_post_type() {
-		$post_type = new PostType( self::POST_TYPE, __( 'Sponsor', TEXT_DOMAIN ) );
+		$post_type = new PostType( self::POST_TYPE, __( 'Sponsor', 'colorrun' ) );
 		$post_type->set_supports( [ 'title', 'thumbnail' ] );
 		$post_type->set_menu_icon( 'dashicons-awards' );
 		$post_type->set_publicly_queryable( false );
@@ -41,8 +41,8 @@ class Initialization extends AbstractInitialization {
 	}
 
 	private function add_meta() {
-		$meta = new MetaBox( self::POST_TYPE, __( 'Info', TEXT_DOMAIN ) );
-		$meta->add_field( 'type', __( 'Type', TEXT_DOMAIN ), function () {
+		$meta = new MetaBox( self::POST_TYPE, __( 'Info', 'colorrun' ) );
+		$meta->add_field( 'type', __( 'Type', 'colorrun' ), function () {
 			$f = new Select();
 			$f->set_options( [
 				'large'    => __( 'Large' ),
@@ -52,7 +52,7 @@ class Initialization extends AbstractInitialization {
 
 			return $f;
 		} );
-		$meta->add_field( 'url', __( 'Url', TEXT_DOMAIN ), 'Url' );
+		$meta->add_field( 'url', __( 'Url', 'colorrun' ), 'Url' );
 		$meta->add_post_type( $this->post_type );
 	}
 }

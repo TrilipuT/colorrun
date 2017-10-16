@@ -7,7 +7,7 @@
  */ ?>
 <section class="corporate-section">
     <div class="wrapper-outer">
-        <h2 class="section-title"><?php vprintf( '%s <span class="offset">%s</span>', explode( ' ', __( 'Corporate teams' ) ) ) ?></h2>
+        <h2 class="section-title"><?php vprintf( '%s <span class="offset">%s</span>', explode( ' ', __( 'Corporate teams', 'colorrun' ) ) ) ?></h2>
         <div class="wrapper-inner">
             <div class="corporate-container">
                 <div class="image-container">

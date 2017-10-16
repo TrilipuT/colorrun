@@ -33,20 +33,20 @@ class GeneratorPage extends CustomPage {
                 <table class="form-table">
                     <tbody>
                     <tr>
-                        <th scope="row"><label for="count"><?php _e( 'Count', TEXT_DOMAIN ); ?></label></th>
+                        <th scope="row"><label for="count"><?php _e( 'Count', 'colorrun' ); ?></label></th>
                         <td><input name="count" type="number" id="count" class="regular-text" min="1" value="10"
                                    required="required">
                             <p class="description"><?php _e( 'How many coupons to generate.' ) ?></p></td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="amount"><?php _e( 'Amount', TEXT_DOMAIN ); ?></label></th>
+                        <th scope="row"><label for="amount"><?php _e( 'Amount', 'colorrun' ); ?></label></th>
                         <td><input name="amount" type="number" id="amount" class="regular-text" min="0"
                                    required="required">
                             <p class="description" id="tagline-description"><?php _e( 'Amount of discount.' ) ?></p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php _e( 'Type', TEXT_DOMAIN ) ?></th>
+                        <th scope="row"><?php _e( 'Type', 'colorrun' ) ?></th>
                         <td>
 							<?php foreach ( Coupon::get_types() as $value => $type ) : ?>
                                 <label><input type="radio" name="type" value="<?= $value ?>"
@@ -56,7 +56,7 @@ class GeneratorPage extends CustomPage {
                     </tr>
                     </tbody>
                 </table>
-				<?php submit_button( __( 'Generate', TEXT_DOMAIN ) ) ?>
+				<?php submit_button( __( 'Generate', 'colorrun' ) ) ?>
             </form>
         </div>
 		<?php
@@ -67,7 +67,7 @@ class GeneratorPage extends CustomPage {
 		$amount = (int) $_POST['amount'];
 		$type   = (int) $_POST['type'];
 		if ( ! $count ) {
-			$this->show_error( __( 'Could not create. Enter count of codes to generate.', TEXT_DOMAIN ) );
+			$this->show_error( __( 'Could not create. Enter count of codes to generate.', 'colorrun' ) );
 		}
 
 		for ( $i = 0; $i < $count; $i ++ ) {
@@ -78,7 +78,7 @@ class GeneratorPage extends CustomPage {
 		add_filter( 'generated_codes_list', function () use ( $codes ) {
 			return $codes;
 		} );
-		$this->show_success( sprintf( __( '%d coupons successfully generated', TEXT_DOMAIN ), $count ) );
+		$this->show_success( sprintf( __( '%d coupons successfully generated', 'colorrun' ), $count ) );
 	}
 
 	private function show_error( string $message ): void {

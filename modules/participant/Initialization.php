@@ -27,7 +27,7 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function register_post_type() {
-		$post_type = new PostType( self::POST_TYPE, __( 'Participant', TEXT_DOMAIN ) );
+		$post_type = new PostType( self::POST_TYPE, __( 'Participant', 'colorrun' ) );
 		$post_type->set_supports( [ 'title' ] );
 		$post_type->set_menu_icon( 'dashicons-universal-access' );
 		$post_type->set_rewrite( false );
@@ -44,9 +44,9 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function custom_info() {
-		$meta = new MetaBox( self::POST_TYPE . '_additional', __( 'Additional info', TEXT_DOMAIN ) );
+		$meta = new MetaBox( self::POST_TYPE . '_additional', __( 'Additional info', 'colorrun' ) );
 		foreach ( Functions::get_additional_fileds() as $key => $title ) {
-			$meta->add_field( $key, __( $title, TEXT_DOMAIN ) );
+			$meta->add_field( $key, __( $title, 'colorrun' ) );
 		}
 		$meta->set_priority( 'high' );
 		$meta->add_post_type( $this->post_type );
@@ -54,23 +54,23 @@ class Initialization extends AbstractInitialization {
 
 
 	public function setup_columns() {
-		$this->post_type->add_column( __( 'Distance', TEXT_DOMAIN ), function () {
+		$this->post_type->add_column( __( 'Distance', 'colorrun' ), function () {
 			global $post;
 
 			$distance = MetaBox::get( $post->ID, Initialization::POST_TYPE, 'distance' );
 			echo get_the_title( $distance );
 		} );
-		$this->post_type->add_column( __( 'Bib', TEXT_DOMAIN ), function () {
+		$this->post_type->add_column( __( 'Bib', 'colorrun' ), function () {
 			global $post;
 
 			echo MetaBox::get( $post->ID, Initialization::POST_TYPE, 'bib' );
 		} );
-		$this->post_type->add_column( __( 'Email', TEXT_DOMAIN ), function () {
+		$this->post_type->add_column( __( 'Email', 'colorrun' ), function () {
 			global $post;
 
 			echo MetaBox::get( $post->ID, Initialization::POST_TYPE, 'email' );
 		} );
-		$this->post_type->add_column( __( 'Status', TEXT_DOMAIN ), function () {
+		$this->post_type->add_column( __( 'Status', 'colorrun' ), function () {
 			global $post;
 
 			$status = MetaBox::get( $post->ID, Initialization::POST_TYPE, 'status' );
@@ -79,21 +79,21 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function participant_info() {
-		$meta = new MetaBox( self::POST_TYPE, __( 'Details', TEXT_DOMAIN ) );
-		$meta->add_field( 'firstname', __( 'First name', TEXT_DOMAIN ) );
-		$meta->add_field( 'lastname', __( 'Last name', TEXT_DOMAIN ) );
-		$meta->add_field( 'email', __( 'Email', TEXT_DOMAIN ), 'Email' );
-		$meta->add_field( 'dateofbirth', __( 'Date of birth', TEXT_DOMAIN ), 'Date' );
-		$meta->add_field( 'sex', __( 'Sex', TEXT_DOMAIN ), function () {
+		$meta = new MetaBox( self::POST_TYPE, __( 'Details', 'colorrun' ) );
+		$meta->add_field( 'firstname', __( 'First name', 'colorrun' ) );
+		$meta->add_field( 'lastname', __( 'Last name', 'colorrun' ) );
+		$meta->add_field( 'email', __( 'Email', 'colorrun' ), 'Email' );
+		$meta->add_field( 'dateofbirth', __( 'Date of birth', 'colorrun' ), 'Date' );
+		$meta->add_field( 'sex', __( 'Sex', 'colorrun' ), function () {
 			$f = new Select();
 			$f->set_options( [
-				'male'   => __( 'Male', TEXT_DOMAIN ),
-				'female' => __( 'Female', TEXT_DOMAIN ),
+				'male'   => __( 'Male', 'colorrun' ),
+				'female' => __( 'Female', 'colorrun' ),
 			] );
 
 			return $f;
 		} );
-		$meta->add_field( 'bib', __( 'Bib', TEXT_DOMAIN ), function () {
+		$meta->add_field( 'bib', __( 'Bib', 'colorrun' ), function () {
 			global $post;
 			if ( $event = Functions::get_event( $post->ID ) ) {
 
@@ -113,14 +113,14 @@ class Initialization extends AbstractInitialization {
 
 			return $f;
 		} );
-		$meta->add_field( 'distance', __( 'Distance', TEXT_DOMAIN ), function () {
+		$meta->add_field( 'distance', __( 'Distance', 'colorrun' ), function () {
 			$f       = new Select2();
 			$options = \modules\distance\Functions::get_current_distances();
 			$f->set_options( wp_list_pluck( $options->posts, 'post_title', 'ID' ) );
 
 			return $f;
 		} );
-		$meta->add_field( 'status', __( 'Status', TEXT_DOMAIN ), function () {
+		$meta->add_field( 'status', __( 'Status', 'colorrun' ), function () {
 			$f = new Select();
 			$f->set_options( Functions::get_statuses() );
 
@@ -131,12 +131,12 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function payment_info() {
-		$meta = new MetaBox( 'payment', __( 'Payment', TEXT_DOMAIN ) );
+		$meta = new MetaBox( 'payment', __( 'Payment', 'colorrun' ) );
 		$this->post_type->add_meta_box( $meta );
 	}
 
 	public function admin_register_coupon_generator_page() {
-		new ImportExportPage( 'import-export', __( 'Import/Export', TEXT_DOMAIN ), 'edit.php?post_type=participant' );
+		new ImportExportPage( 'import-export', __( 'Import/Export', 'colorrun' ), 'edit.php?post_type=participant' );
 	}
 
 	public function admin_register_add_filters() {
@@ -149,7 +149,7 @@ class Initialization extends AbstractInitialization {
 				$values = wp_list_pluck( \modules\distance\Functions::get_current_distances()->posts, 'post_title', 'ID' );
 				?>
                 <select name="distance">
-                    <option value=""><?php _e( 'Distance' ); ?></option>
+                    <option value=""><?php _e( 'Distance', 'colorrun' ); ?></option>
 					<?php
 					$current_v = isset( $_GET['distance'] ) ? $_GET['distance'] : '';
 					foreach ( $values as $value => $label ) {

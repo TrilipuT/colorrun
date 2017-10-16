@@ -41,7 +41,7 @@ class Initialization extends AbstractInitialization {
 
 			return $coupon->get_amount_string();
 		} );
-		$t->setup_column( 'used', __( 'Used', TEXT_DOMAIN ), function ( $item, $key ) {
+		$t->setup_column( 'used', __( 'Used', 'colorrun' ), function ( $item, $key ) {
 			$coupon = new Coupon( $item );
 
 			return $coupon->get_used_string();
@@ -101,7 +101,7 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function admin_register_coupon_generator_page() {
-		new GeneratorPage( 'coupons_generator', __( 'Coupons generator', TEXT_DOMAIN ), 'coupons' );
+		new GeneratorPage( 'coupons_generator', __( 'Coupons generator', 'colorrun' ), 'coupons' );
 	}
 }
 

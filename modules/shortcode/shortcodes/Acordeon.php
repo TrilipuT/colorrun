@@ -25,11 +25,11 @@ class Acordeon extends AbstractShortcode {
 	 * @return string
 	 */
 	protected static function _get_label() {
-		return __( 'Acordeon', TEXT_DOMAIN );
+		return __( 'Acordeon', 'colorrun' );
 	}
 
 	protected function _add_fields() {
-		$this->_add_field( 'title', __( 'Title', TEXT_DOMAIN ) );
-		$this->_add_field( 'content', __( 'Text', TEXT_DOMAIN ), 'textarea' );
+		$this->_add_field( 'title', __( 'Title', 'colorrun' ) );
+		$this->_add_field( 'content', __( 'Text', 'colorrun' ), 'textarea' );
 	}
 }

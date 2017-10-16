@@ -11,7 +11,7 @@
  */ ?>
 <section class="media-section">
     <div class="wrapper-outer">
-        <h2 class="section-title"><?php _e( 'Photo and video', TEXT_DOMAIN ) ?></h2>
+        <h2 class="section-title"><?php _e( 'Photo and video', 'colorrun' ) ?></h2>
         <div class="media-grid">
 			<?php foreach ( $images as $i => $image ) :?>
 				<?php if ( $i % 2 == 0 ): ?>

@@ -33,8 +33,8 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function admin_register_about_metabox() {
-		$meta = new MetaBoxRepeatable( self::HOME_INFO, __( 'Homepage about blocks', TEXT_DOMAIN ) );
-		$meta->add_field( 'icon', __( 'Icon', TEXT_DOMAIN ), function () {
+		$meta = new MetaBoxRepeatable( self::HOME_INFO, __( 'Homepage about blocks', 'colorrun' ) );
+		$meta->add_field( 'icon', __( 'Icon', 'colorrun' ), function () {
 			$f = new Select2();
 //			$f->add_select2_option( 'templateResult', 'window.formatIcon' );
 			$scanned_directory = array_diff( scandir( get_template_directory() . '/assets/src/images/sprite/' ), array(
@@ -75,19 +75,19 @@ class Initialization extends AbstractInitialization {
 		if ( empty ( $post_ID ) && get_post_type() == 'page' ) {
 			return;
 		}
-		if ( $post_ID == (int) get_option( 'page_on_front' ) ) {
+		if ( in_array( $post_ID, array_values( pll_get_post_translations( (int) get_option( 'page_on_front' ) ) ) ) ) {
 			$metabox->add_post_type( 'page' );
 		}
 	}
 
 	public function admin_register_distance_metabox() {
-		$meta = new MetaBox( self::HOME_DISTANCES, __( 'Homepage distance', TEXT_DOMAIN ) );
+		$meta = new MetaBox( self::HOME_DISTANCES, __( 'Homepage distance', 'colorrun' ) );
 		$meta->add_field( 'image', __( 'Image' ), 'Image' );
 		$this->add_metabox( $meta );
 	}
 
 	public function admin_register_corporate_metabox() {
-		$meta = new MetaBox( self::HOME_CORPORATE, __( 'Homepage corporate', TEXT_DOMAIN ) );
+		$meta = new MetaBox( self::HOME_CORPORATE, __( 'Homepage corporate', 'colorrun' ) );
 		$meta->add_field( 'image', __( 'Image' ), 'Image' );
 		$meta->add_field( 'text_left', __( 'Text left' ), 'WPEditor' );
 		$meta->add_field( 'text_right', __( 'Text right' ), 'WPEditor' );

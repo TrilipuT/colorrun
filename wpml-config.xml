@@ -1,0 +1,11 @@
+<wpml-config>
+    <custom-fields>
+        <custom-field action="copy">home_info_icon</custom-field>
+        <custom-field action="translate">home_info_title</custom-field>
+        <custom-field action="translate">home_info_text</custom-field>
+        <custom-field action="copy">home_corporate_image</custom-field>
+        <custom-field action="translate">home_corporate_text_left</custom-field>
+        <custom-field action="translate">home_corporate_text_right</custom-field>
+        <custom-field action="copy">home_distances_image</custom-field>
+    </custom-fields>
+</wpml-config>

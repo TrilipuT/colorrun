@@ -24,7 +24,7 @@ class Initialization extends AbstractInitialization {
 
 
 	public function register_post_type() {
-		$post_type = new PostType( self::POST_TYPE, __( 'Distance', TEXT_DOMAIN ) );
+		$post_type = new PostType( self::POST_TYPE, __( 'Distance', 'colorrun' ) );
 		$post_type->set_supports( [ 'title', 'editor' ] );
 		$post_type->set_menu_icon( 'dashicons-location-alt' );
 		$post_type->set_publicly_queryable( false );
@@ -40,12 +40,12 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function setup_columns() {
-		$this->post_type->add_column( __( 'Event Date', TEXT_DOMAIN ), function () {
+		$this->post_type->add_column( __( 'Event Date', 'colorrun' ), function () {
 			global $post;
 			echo MetaBox::get( $post->ID, Initialization::POST_TYPE, 'date' );
 		}, true, 2 );
 
-		$this->post_type->add_column( __( 'Slots', TEXT_DOMAIN ), function () {
+		$this->post_type->add_column( __( 'Slots', 'colorrun' ), function () {
 			global $post;
 			$registered = \modules\registration\Functions::get_registered_for_distance_count( $post->ID );
 			$slots      = Functions::get_slots( $post->ID );
@@ -54,13 +54,13 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function event_info() {
-		$meta = new MetaBox( self::POST_TYPE, __( 'Details', TEXT_DOMAIN ) );
+		$meta = new MetaBox( self::POST_TYPE, __( 'Details', 'colorrun' ) );
 		$meta->set_context( 'side' );
-		$meta->add_field( 'date', __( 'Start date', TEXT_DOMAIN ), 'Datetime' );
-		$meta->add_field( 'distance', __( 'Distance', TEXT_DOMAIN ) );
-		$meta->add_field( 'slots', __( 'Count of slots', TEXT_DOMAIN ), 'Number' );
-		$meta->add_field( 'bib_from', __( 'Bib start', TEXT_DOMAIN ), 'Number' );
-		$meta->add_field( 'event', __( 'Event', TEXT_DOMAIN ), function () {
+		$meta->add_field( 'date', __( 'Start date', 'colorrun' ), 'Datetime' );
+		$meta->add_field( 'distance', __( 'Distance', 'colorrun' ) );
+		$meta->add_field( 'slots', __( 'Count of slots', 'colorrun' ), 'Number' );
+		$meta->add_field( 'bib_from', __( 'Bib start', 'colorrun' ), 'Number' );
+		$meta->add_field( 'event', __( 'Event', 'colorrun' ), function () {
 			$f       = new Select2();
 			$options = \modules\event\Functions::get_all_events();
 			$f->set_options( wp_list_pluck( $options->posts, 'post_title', 'ID' ) );
@@ -72,8 +72,8 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function distance_price() {
-		$meta = new MetaBoxRepeatable( Initialization::POST_TYPE . '_price', __( 'Price', TEXT_DOMAIN ) );
-		$meta->add_field( 'date', __( 'Period end date', TEXT_DOMAIN ), function () {
+		$meta = new MetaBoxRepeatable( Initialization::POST_TYPE . '_price', __( 'Price', 'colorrun' ) );
+		$meta->add_field( 'date', __( 'Period end date', 'colorrun' ), function () {
 			$f = new DateTime();
 			$f->set_attribute( 'data-format', 'yyyy-mm-dd' );
 			$f->set_attribute( 'data-pick-time', 'false' );
@@ -81,7 +81,7 @@ class Initialization extends AbstractInitialization {
 
 			return $f;
 		} );
-		$meta->add_field( 'fee', __( 'Price in this period', TEXT_DOMAIN ), 'Number' );
+		$meta->add_field( 'fee', __( 'Price in this period', 'colorrun' ), 'Number' );
 		$meta->set_priority( 'high' );
 		$meta->add_post_type( $this->post_type );
 	}

@@ -26,13 +26,13 @@ class Quote extends AbstractShortcode {
 	 * @return string
 	 */
 	protected static function _get_label() {
-		return __( 'Quote', TEXT_DOMAIN );
+		return __( 'Quote', 'colorrun' );
 	}
 
 	protected function _add_fields() {
-		$this->_add_field( 'text', __( 'Text', TEXT_DOMAIN ), 'textarea' );
-		$this->_add_field( 'author', __( 'Author', TEXT_DOMAIN ) );
-		$this->_add_field( 'align', __( 'Align', TEXT_DOMAIN ), 'select', [
+		$this->_add_field( 'text', __( 'Text', 'colorrun' ), 'textarea' );
+		$this->_add_field( 'author', __( 'Author', 'colorrun' ) );
+		$this->_add_field( 'align', __( 'Align', 'colorrun' ), 'select', [
 			'options' => array(
 				'center'    => 'Center',
 				'small'     => 'Small',

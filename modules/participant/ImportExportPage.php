@@ -26,16 +26,16 @@ class ImportExportPage extends CustomPage {
                     <tbody>
                     <tr>
                         <th scope="row"><label
-                                    for="export_id"><?php _e( 'Choose what to export', TEXT_DOMAIN ); ?></label>
+                                    for="export_id"><?php _e( 'Choose what to export', 'colorrun' ); ?></label>
                         </th>
                         <td>
                             <select name="export_id" id="export_id" class="regular-text select2" required="required">
-                                <optgroup label="<?php _e( 'Event', TEXT_DOMAIN ); ?>">
+                                <optgroup label="<?php _e( 'Event', 'colorrun' ); ?>">
 									<?php foreach ( \modules\event\Functions::get_all_events()->posts as $distance ) : ?>
                                         <option value="<?= $distance->ID ?>"><?= get_the_title( $distance ) ?></option>
 									<?php endforeach; ?>
                                 </optgroup>
-                                <optgroup label="<?php _e( 'Distance', TEXT_DOMAIN ); ?>">
+                                <optgroup label="<?php _e( 'Distance', 'colorrun' ); ?>">
 									<?php foreach ( \modules\distance\Functions::get_distances()->posts as $distance ) : ?>
                                         <option value="<?= $distance->ID ?>"><?= get_the_title( $distance ) ?></option>
 									<?php endforeach; ?>
@@ -53,14 +53,14 @@ class ImportExportPage extends CustomPage {
                 <table class="form-table">
                     <tbody>
                     <tr>
-                        <th scope="row"><label for="count"><?php _e( 'File', TEXT_DOMAIN ); ?></label></th>
+                        <th scope="row"><label for="count"><?php _e( 'File', 'colorrun' ); ?></label></th>
                         <td><input type="file" name="import_file">
                             <p class="description">Archive could contain any amount of files, could have
                                 subdirectories.</p></td>
                     </tr>
 
                     <tr>
-                        <th scope="row"><label for="export_id"><?php _e( 'Distance', TEXT_DOMAIN ) ?></label></th>
+                        <th scope="row"><label for="export_id"><?php _e( 'Distance', 'colorrun' ) ?></label></th>
                         <td>
                             <select name="import_id" id="import_id" class="regular-text select2" required="required">
 								<?php foreach ( \modules\distance\Functions::get_distances()->posts as $distance ) : ?>
@@ -94,7 +94,7 @@ class ImportExportPage extends CustomPage {
 	private function export() {
 		$export_id = (int) $_POST['export_id'];
 		if ( ! $export_id ) {
-			$this->show_error( __( 'Nothing selected', TEXT_DOMAIN ) );
+			$this->show_error( __( 'Nothing selected', 'colorrun' ) );
 		}
 
 

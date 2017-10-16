@@ -12,7 +12,7 @@ $col_classes = [
 ]; ?>
 <section class="distance-section">
     <div class="wrapper-outer">
-        <h2 class="section-title"><?php _e( 'Distances', TEXT_DOMAIN ) ?></h2>
+        <h2 class="section-title"><?php _e( 'Distances', 'colorrun' ) ?></h2>
         <div class="wrapper-inner">
             <div class="col image-container">
 				<?= Homepage::get_distances_image(); ?>

@@ -19,6 +19,6 @@
             </i>
             <time><?= date_i18n( 'd F Y', get_the_date( 'U' ) ); ?></time>
         </div>
-        <a href="<?php the_permalink() ?>" class="button"><?php _e( 'Read more' ) ?></a>
+        <a href="<?php the_permalink() ?>" class="button"><?php _e( 'Read more', 'colorrun' ) ?></a>
     </div>
 </article>

@@ -36,10 +36,10 @@ class Initialization extends AbstractInitialization {
 
 	public function register_options() {
 		add_action( 'init', function () {
-			new OptionPage( 'payment', __( 'Payment', TEXT_DOMAIN ), 'theme_settings' );
-			$options = new OptionBox( 'liqpay_options', __( 'LiqPay', TEXT_DOMAIN ) );
-			$options->add_field( 'liqpay_public_key', __( 'Public key', TEXT_DOMAIN ) );
-			$options->add_field( 'liqpay_private_key', __( 'Private key', TEXT_DOMAIN ) );
+			new OptionPage( 'payment', __( 'Payment', 'colorrun' ), 'theme_settings' );
+			$options = new OptionBox( 'liqpay_options', __( 'LiqPay', 'colorrun' ) );
+			$options->add_field( 'liqpay_public_key', __( 'Public key', 'colorrun' ) );
+			$options->add_field( 'liqpay_private_key', __( 'Private key', 'colorrun' ) );
 			$options->set_page( 'payment' );
 		}, 11 );
 

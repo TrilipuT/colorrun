@@ -18,9 +18,9 @@ class Functions extends AbstractFunctions {
 	 */
 	public static function get_statuses(): array {
 		return [
-			\modules\payment\Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', TEXT_DOMAIN ),
-			\modules\payment\Initialization::STATUS['AWAITING_PAYMENT'] => __( 'Awaiting Payment', TEXT_DOMAIN ),
-			\modules\payment\Initialization::STATUS['PAYED']            => __( 'Payed', TEXT_DOMAIN ),
+			\modules\payment\Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', 'colorrun' ),
+			\modules\payment\Initialization::STATUS['AWAITING_PAYMENT'] => __( 'Awaiting Payment', 'colorrun' ),
+			\modules\payment\Initialization::STATUS['PAYED']            => __( 'Payed', 'colorrun' ),
 		];
 	}
 
@@ -113,7 +113,7 @@ class Functions extends AbstractFunctions {
 	 * @return string
 	 */
 	public static function format_price( int $price ): string {
-		return $price . __( 'UAH', TEXT_DOMAIN );
+		return $price . __( 'UAH', 'colorrun' );
 	}
 
 	/**

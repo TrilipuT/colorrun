@@ -78,16 +78,16 @@ class Initialization extends AbstractModuleInitialization {
 
 		// Header
 		$customize->add_section( 'header' );
-		$customize->add_field( 'place', __( 'Place', TEXT_DOMAIN ), 'header', 'Виставковий центр', 'textarea' );
+		$customize->add_field( 'place', __( 'Place', 'colorrun' ), 'header', 'Виставковий центр', 'textarea' );
 //		          ->add_partial_refresh( 'place', '#header .place', [ '\modules\theme\Functions', 'get_place' ] );
-//		$customize->add_field( 'social_fb', __( 'Facebook', TEXT_DOMAIN ), 'header', '#' );
-//		$customize->add_field( 'social_vk', __( 'Vkontakte', TEXT_DOMAIN ), 'header', '#' );
-//		$customize->add_field( 'social_gplus', __( 'Google plus', TEXT_DOMAIN ), 'header', '#' );
-//		$customize->add_field( 'social_youtube', __( 'YouTube', TEXT_DOMAIN ), 'header', '#' );
-//		$customize->add_field( 'social_instagram', __( 'Instagram', TEXT_DOMAIN ), 'header', '#' );
+//		$customize->add_field( 'social_fb', __( 'Facebook', 'colorrun' ), 'header', '#' );
+//		$customize->add_field( 'social_vk', __( 'Vkontakte', 'colorrun' ), 'header', '#' );
+//		$customize->add_field( 'social_gplus', __( 'Google plus', 'colorrun' ), 'header', '#' );
+//		$customize->add_field( 'social_youtube', __( 'YouTube', 'colorrun' ), 'header', '#' );
+//		$customize->add_field( 'social_instagram', __( 'Instagram', 'colorrun' ), 'header', '#' );
 
-		$customize->add_field( 'date', __( 'Date', TEXT_DOMAIN ), 'title_tagline', '7 - 8 квітня 2017' )->add_partial_refresh( 'date', '#header .date' );
-//		$customize->add_field( 'schedule', __( 'Schedule', TEXT_DOMAIN ), 'title_tagline', 'Графік роботи:', 'textarea' )->add_partial_refresh( 'schedule', '#header .schedule' );
+		$customize->add_field( 'date', __( 'Date', 'colorrun' ), 'title_tagline', '7 - 8 квітня 2017' )->add_partial_refresh( 'date', '#header .date' );
+//		$customize->add_field( 'schedule', __( 'Schedule', 'colorrun' ), 'title_tagline', 'Графік роботи:', 'textarea' )->add_partial_refresh( 'schedule', '#header .schedule' );
 
 	}
 

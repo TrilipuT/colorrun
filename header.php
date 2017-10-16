@@ -31,7 +31,7 @@
 			    <?php the_custom_logo() ?>
 	            <?php wp_nav_menu( [ 'id' => 'primary', 'container' => 'ul' ] ) ?>
                 <a href="#" class="registration button">
-				    <?php _e( 'Register now', TEXT_DOMAIN ) ?>
+				    <?php _e( 'Register now', 'colorrun' ) ?>
                 </a>
             </div>
         </div>

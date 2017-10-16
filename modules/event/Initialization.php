@@ -20,7 +20,7 @@ class Initialization extends AbstractInitialization {
 	private $post_type;
 
 	public function register_post_type() {
-		$post_type = new PostType( self::POST_TYPE, __( 'Event', TEXT_DOMAIN ) );
+		$post_type = new PostType( self::POST_TYPE, __( 'Event', 'colorrun' ) );
 		$post_type->set_supports( [ 'title' ] );
 		$post_type->set_menu_icon( 'dashicons-calendar' );
 		$post_type->set_rewrite( false );
@@ -35,14 +35,14 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function event_info() {
-		$meta = new MetaBox( self::POST_TYPE, __( 'Details', TEXT_DOMAIN ) );
-		$meta->add_field( 'date', __( 'Event date', TEXT_DOMAIN ), 'DateTime' );
+		$meta = new MetaBox( self::POST_TYPE, __( 'Details', 'colorrun' ) );
+		$meta->add_field( 'date', __( 'Event date', 'colorrun' ), 'DateTime' );
 
 		$this->post_type->add_meta_box( $meta );
 	}
 
 	public function setup_columns() {
-		$this->post_type->add_column( __( 'Event Date', TEXT_DOMAIN ), function () {
+		$this->post_type->add_column( __( 'Event Date', 'colorrun' ), function () {
 			global $post;
 			echo MetaBox::get( $post->ID, Initialization::POST_TYPE, 'date' );
 

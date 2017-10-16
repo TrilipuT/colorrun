@@ -99,8 +99,8 @@ class Coupon {
 
 	public static function get_statuses() {
 		return [
-			self::STATUS_USED   => __( 'Used', TEXT_DOMAIN ),
-			self::STATUS_ACTIVE => __( 'Aсtive', TEXT_DOMAIN ),
+			self::STATUS_USED   => __( 'Used', 'colorrun' ),
+			self::STATUS_ACTIVE => __( 'Aсtive', 'colorrun' ),
 		];
 	}
 
@@ -117,7 +117,7 @@ class Coupon {
 	public static function get_types() {
 		return [
 			self::TYPES['PERCENTAGE'] => '%',
-			self::TYPES['FIXED']      => __( 'UAH', TEXT_DOMAIN )
+			self::TYPES['FIXED']      => __( 'UAH', 'colorrun' )
 		];
 	}
 

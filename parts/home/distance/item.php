@@ -14,7 +14,7 @@
                 </svg>
             </i>
             <div class="text-container">
-                <div class="label"><?php _e( 'start', TEXT_DOMAIN ) ?></div>
+                <div class="label"><?php _e( 'start', 'colorrun' ) ?></div>
                 <div class="value"><?= Distance::get_date( get_the_ID(), 'H:i' ) ?></div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 </svg>
             </i>
             <div class="text-container">
-                <div class="label"><?php _e( 'participants', TEXT_DOMAIN ); ?></div>
+                <div class="label"><?php _e( 'participants', 'colorrun' ); ?></div>
                 <div class="value"><?= Registration::get_registered_for_distance_count( get_the_ID() ) ?>
                     /<?= Distance::get_slots() ?></div>
             </div>
@@ -45,10 +45,10 @@
                 </i>
                 <div class="text-container">
                     <span class="price"><?= Distance::format_price( $price['fee'] ) ?></span>
-                    <span class="date"><?php printf( __( 'till %s', TEXT_DOMAIN ), date( 'd.m.Y', strtotime( $price['date'] ) ) ) ?></span>
+                    <span class="date"><?php printf( __( 'till %s', 'colorrun' ), date( 'd.m.Y', strtotime( $price['date'] ) ) ) ?></span>
                 </div>
             </div>
 		<?php endforeach; ?>
     </div>
-    <a href="#" class="button"><?php _e( 'REGISTER NOW', TEXT_DOMAIN ); ?></a>
+    <a href="#" class="button"><?php _e( 'REGISTER NOW', 'colorrun' ); ?></a>
 </div>
