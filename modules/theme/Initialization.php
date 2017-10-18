@@ -294,12 +294,12 @@ class Initialization extends AbstractThemeInitialization {
 	}
 
 	public function add_action_admin_menu() {
-//		remove_submenu_page( 'options-general.php', 'options-discussion.php' );
+		remove_submenu_page( 'options-general.php', 'options-discussion.php' );
 		remove_submenu_page( 'edit-comments.php', 'edit-comments.php' );
-		remove_menu_page( 'edit.php' );
-		if ( ! is_user_admin() ) {
-			remove_menu_page( 'edit-comments.php' );
+		remove_menu_page( 'edit-comments.php' );
+		if ( ! current_user_can('manage_options') ) {
 			remove_menu_page( 'plugins.php' );
+			remove_menu_page( 'tools.php' );
 			remove_submenu_page( 'themes.php', 'themes.php' );
 		}
 	}

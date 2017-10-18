@@ -9,7 +9,7 @@
 	<div class="text-container">
         <h1 class="title"><?php the_title() ?></h1>
 		<h2 class="date"><?= Event::get_current_event_date() ?></h2>
-		<div class="countdown">
+		<div class="countdown" data-time="<?= Event::get_current_event_date('U') ?>">
 			<div class="count days">
 				<div class="pie-wrapper progress-55">
                         <span class="label">
