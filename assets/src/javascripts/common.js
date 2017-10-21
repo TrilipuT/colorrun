@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
 import detectTouchSupport from "./modules/detectTouchSupport";
+import shave from "shave";
 import gallery from "./modules/gallery";
 import countdown from "./modules/countdown";
 
@@ -13,5 +14,9 @@ $( function ( $ ) {
     countdown();
     dropdown();
     accordion();
+    $('.shave').each(function (i, item) {
+        shave(item, $(item).parent().height() * 0.6);
+    });
+
 } );
 

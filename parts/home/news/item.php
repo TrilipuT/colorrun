@@ -10,7 +10,7 @@
 		<?php the_post_thumbnail('thumbnail') ?>
     </div>
     <div class="text-container">
-        <h3 class="title"><?php the_title() ?></h3>
+        <h3 class="title shave"><?php the_title() ?></h3>
         <div class="date">
             <i class="icon">
                 <svg role="icon" class="sprite-icon sprite-icon-calendar">
