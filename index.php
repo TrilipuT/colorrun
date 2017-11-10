@@ -2,7 +2,7 @@
 the_post();
 get_header(); ?>
 <?php if ( has_post_thumbnail() ): ?>
-    <section class="hero-section single" style="background-image: url('<?php the_post_thumbnail_url( 'full' ) ?>')">
+    <section class="hero-section single" style="background-image: url('<?php the_post_thumbnail_url( 'hero' ) ?>')">
         <div class="text-container">
             <h1 class="title"><?php the_title() ?></h1>
         </div>

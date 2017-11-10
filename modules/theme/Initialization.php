@@ -22,7 +22,7 @@ class Initialization extends AbstractThemeInitialization {
 	 * @var array
 	 */
 	protected static $_image_sizes = [
-//		'grid-small'   => [ 590, 440, true ],
+		'hero' => [ 1440, 530 ]
 	];
 
 	public static function register_login_url() {

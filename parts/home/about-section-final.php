@@ -17,7 +17,7 @@
 			<strong>Далі буде...</strong>-->
 		</div>
 		<div class="thumbnail-container">
-			<?php the_post_thumbnail( 'full' ) ?>
+			<?php the_post_thumbnail( 'hero' ) ?>
 		</div>
 	</div>
 </section>
