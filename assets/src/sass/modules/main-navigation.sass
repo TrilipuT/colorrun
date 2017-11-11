@@ -26,6 +26,9 @@
 			text-decoration: none
 			&:last-of-type
 				margin-right: 0
+			&:hover, &.current-menu-item, &.current-menu-ancestor
+				a
+					color: $yellow-warm
 		&-item-has-children
 			position: relative
 			+hover
@@ -34,8 +37,8 @@
 					opacity: 1
 					pointer-events: auto
 		.sub-menu
-			min-width: 160px
-			max-width: 220px
+			min-width: 220px
+			max-width: 300px
 			position: absolute
 			padding-top: 15px
 			bottom: 0
@@ -61,7 +64,5 @@
 					color: inherit
 		a
 			color: $white
-			+hover
-				color: $yellow-warm
 	.registration
 		margin-left: 50 / 1340 * 100%
