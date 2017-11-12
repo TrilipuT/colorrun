@@ -33,6 +33,7 @@ class Functions extends AbstractThemeFunctions {
 	 */
 	public static function get_footer_menu() {
 		wp_nav_menu( [
+			'theme_location'  => 'footer',
 			'id'              => 'footer',
 			'container_class' => 'footer-nav',
 			'container'       => 'nav',

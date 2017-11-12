@@ -29,7 +29,7 @@
         <div class="main-navigation">
             <div class="wrapper-outer">
 			    <?php the_custom_logo() ?>
-	            <?php wp_nav_menu( [ 'id' => 'primary', 'container' => 'ul' ] ) ?>
+	            <?php wp_nav_menu( [ 'theme_location' => 'primary', 'container' => 'ul' ] ) ?>
                 <a href="#" class="registration button">
 				    <?php _e( 'Register now', 'colorrun' ) ?>
                 </a>

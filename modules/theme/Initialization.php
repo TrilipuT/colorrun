@@ -156,6 +156,7 @@ class Initialization extends AbstractThemeInitialization {
 	public function register_nav_menus() {
 		register_nav_menus( [
 			'primary' => __( 'Primary', 'colorrun' ),
+			'footer'  => __( 'Footer', 'colorrun' ),
 		] );
 	}
 
