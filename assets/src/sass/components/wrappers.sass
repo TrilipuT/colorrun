@@ -8,10 +8,10 @@
     padding-bottom: $footer-height
 
 .main-wrapper
-    box-sizing: border-box 
-    overflow: hidden  
+    box-sizing: border-box
+    overflow: hidden
     width: 100%
-    position: relative        
+    position: relative
 
 .wrapper-outer
     max-width: $wrapper-outer
@@ -19,6 +19,9 @@
     padding-left: $wrapper-padding
     padding-right: $wrapper-padding
     box-sizing: border-box
+    +breakpoint-max(1024)
+        padding-left: $wrapper-padding/2
+        padding-right: $wrapper-padding/2
 
 .wrapper-inner
     max-width: $wrapper-inner

@@ -23,6 +23,8 @@
 		padding: 50px 180px
 		min-height: 200px
 		box-sizing: border-box
+		+breakpoint-max($ipad-h)
+			padding: 50px
 	.image-container
 		position: absolute
 		width: 100%
@@ -59,5 +61,8 @@
 		z-index: 1
 		color: $white
 		font-weight: 800
+		+breakpoint-max($ipad-h)
+			width: 40%
+			margin-left: 10%
 		strong, a
 			color: $yellow-warm

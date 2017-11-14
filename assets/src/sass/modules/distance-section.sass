@@ -4,6 +4,8 @@
 	.wrapper-inner
 		display: flex
 		+clearfix
+		+breakpoint-max(768)
+			flex-direction: column
 	.section-title
 		color: $pink
 		text-transform: uppercase
@@ -15,6 +17,12 @@
 		float: left
 		width: 300 / 1200 * 100%
 		min-height: 730px
+		+breakpoint-max($ipad-h)
+			width: 400 / 1200 * 100%
+		+breakpoint-max(768)
+			float: none
+			width: 100%
+			min-height: 0
 		&.dark
 			background: $dark-pink-bg
 		&.medium
@@ -24,6 +32,8 @@
 	.image-container
 		position: relative
 		overflow: hidden
+		+breakpoint-max($ipad-h)
+			display: none
 		&:before
 			content: ''
 			display: block
@@ -71,13 +81,20 @@
 		.start
 			margin-bottom: 10px
 	.distance
-		position: absolute
-		top: 14px
-		right: 20px
+		margin-bottom: 20px
+		display: block
 		font:
 			size: 46px
 			weight: 800
 		line-height: 56px
+		+breakpoint-min(1280px)
+			position: absolute
+			top: 14px
+			right: 20px
+		+breakpoint-max(768)
+			position: absolute
+			top: 14px
+			right: 20px
 	ul
 		padding-left: 30px
 		margin-bottom: 35px
@@ -96,6 +113,7 @@
 				top: 7px
 	.prices
 		margin-bottom: 40px
+		margin-top: 15px
 		.icon
 			float: left
 			margin-right: 15px

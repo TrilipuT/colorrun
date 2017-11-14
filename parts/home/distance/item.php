@@ -6,6 +6,7 @@
  * Time: 11:56
  */ ?>
 <div class="distance-container">
+    <span class="distance"><?= Distance::get_distance() ?></span>
     <div class="unit-info">
         <div class="start">
             <i class="icon">
@@ -31,7 +32,6 @@
             </div>
         </div>
     </div>
-    <span class="distance"><?= Distance::get_distance() ?></span>
 	<?php the_content() ?>
     <div class="prices">
 		<?php $prices = Distance::get_prices();

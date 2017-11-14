@@ -4,6 +4,9 @@
 	background-position: center
 	min-height: 650px
 	margin-bottom: 60px
+	background-size: cover
+	+breakpoint-max(1024)
+		margin-bottom: 30px
 	//.thumbnail-container
 		position: relative
 		img
@@ -46,6 +49,9 @@
 		line-height: 1
 		text-transform: uppercase
 		box-sizing: border-box
+		+breakpoint-max(1023)
+			width: auto
+			font-size: 40px
 	.date
 		display: inline-block
 		padding: 23.5px 80px
@@ -54,17 +60,20 @@
 			weight: 800
 			size: 48px
 		line-height: 1
+		+breakpoint-max(1023)
+			font-size: 34px
 	.countdown
 		display: flex
-		justify-content: space-between
+		justify-content: space-around
 		padding: 20px 100px
 		+clearfix
+		+breakpoint-max(1023)
+			padding: 20px
 	&.single
 		margin-bottom: 35px
 		min-height: 400px
 		height: 100%
 		background-position: center center
-		background-size: cover
 		&:before
 			opacity: .5
 		.text-container

@@ -15,12 +15,15 @@
 		font-weight: 600
 		display: flex
 		align-items: center
-		justify-content: space-between
+		justify-content: space-around
+		flex-wrap: wrap
+		> .menu-item
+			margin-top: 5px
+			margin-bottom: 5px
 		&-item
 			//display: inline-block
 			//max-width: 100px
-			margin-right: 25px //50 / 1340 * 100%
-			//margin: 0 25px
+			margin-right: 50 / 1340 * 100%
 			vertical-align: middle
 			text-align: center
 			text-decoration: none
@@ -29,6 +32,17 @@
 			&:hover, &.current-menu-item, &.current-menu-ancestor
 				a
 					color: $yellow-warm
+			&.menu-item-has-children:after
+				content: ''
+				position: absolute
+				margin: auto
+				top: 10px
+				right: -20px
+				width: 0
+				height: 0
+				border-left: 5px solid transparent
+				border-right: 5px solid transparent
+				border-top: 5px solid #fff
 		&-item-has-children
 			position: relative
 			+hover

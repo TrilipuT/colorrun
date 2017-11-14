@@ -1,6 +1,7 @@
 .news-grid
 	display: flex
 	flex-wrap: wrap
+	overflow: hidden
 	.news-item
 		display: flex
 		width: 50%
@@ -35,6 +36,8 @@
 		width: 50%
 	.image-container
 		position: relative
+		+breakpoint-max($ipad-h)
+			width: 40%
 		img
 			position: relative
 			display: block
@@ -49,6 +52,8 @@
 		color: $pink
 		background: $light-gray
 		box-sizing: border-box
+		+breakpoint-max($ipad-h)
+			width: 60%
 		&:after
 			content: ''
 			display: block
