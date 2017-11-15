@@ -22,10 +22,24 @@
 			.image-container
 				+breakpoint-max(767)
 					order: 0 !important
+			.text-container
+				&:after
+					+breakpoint-max(767)
+						right: 100% !important
+						left: auto !important
+						border-right-color: $light-gray !important
+						border-left-color: transparent !important
 		&:nth-child(even)
 			.image-container
 				+breakpoint-max(767)
 					order: 1 !important
+			.text-container
+				&:after
+					+breakpoint-max(767)
+						right: auto
+						left: 100%
+						border-right-color: transparent
+						border-left-color: $light-gray
 		&:nth-child(3n),
 		&:nth-child(4n)
 			.image-container
@@ -58,7 +72,7 @@
 			height: auto
 	.text-container
 		position: relative
-		padding: 20px
+		padding: 20px 20px 80px
 		color: $pink
 		background: $light-gray
 		box-sizing: border-box
