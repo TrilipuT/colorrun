@@ -29,7 +29,14 @@
         <div class="main-navigation">
             <div class="wrapper-outer">
 			    <?php the_custom_logo() ?>
-	            <?php wp_nav_menu( [ 'theme_location' => 'primary', 'container' => 'ul' ] ) ?>
+                <div class="main-menu">
+                    <div class="burger-mobile">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+	                <?php wp_nav_menu( [ 'theme_location' => 'primary', 'container' => 'ul' ] ) ?>
+                </div>
                 <a href="#" class="registration button">
 				    <?php _e( 'Register now', 'colorrun' ) ?>
                 </a>
