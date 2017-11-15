@@ -1,7 +1,11 @@
 .sponsors-section
 	margin-bottom: 60px
+	+breakpoint-max(767)
+		margin-bottom: 30px
 	.wrapper-outer
 		display: flex
+		+breakpoint-max(767)
+			flex-wrap: wrap
 	.section-title
 		width: 365 / 1340 * 100%
 		padding-right: 30px
@@ -11,12 +15,18 @@
 			weight: 700
 		line-height: 1
 		text-transform: uppercase
+		+breakpoint-max(767)
+			width: 100%
+			margin-bottom: 40px
 	.logos-container
 		display: flex
 		flex-wrap: wrap
 		justify-content: center
 		width: 975 / 1340 * 100%
 		margin: 0 -25 / 1340 * 100%
+		+breakpoint-max(767)
+			width: 100%
+			margin: 0
 		.logo-item
 			margin: 0 25 / 975 * 100% 40px
 			&.large
@@ -25,6 +35,8 @@
 				max-width: 150px
 			&.small
 				max-width: 100px
+			&:last-child
+				margin: 0 25 / 975 * 100%
 			img
 				display: block
 

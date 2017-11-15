@@ -1,4 +1,6 @@
 $size: 150px
+$size-m: 125px
+
 $progress-clr: $pink
 $progress-size: 8px
 $trail-clr: $white
@@ -19,10 +21,23 @@ $trail-clr: $white
 			$rotate: $progress * 3.6
 			transform: rotate(#{$rotate}deg)
 
+.count
+	+breakpoint-max(767)
+		width: 50%
+		margin-bottom: 40px
+	&.seconds,
+	&.minutes
+		+breakpoint-max(767)
+			margin-bottom: 0
+
 .pie-wrapper
 	width: $size
 	height: $size
 	position: relative
+	+breakpoint-max(767)
+		width: $size-m
+		height: $size-m
+		margin: 0 auto
 
 	.pie
 		width: 100%
@@ -31,6 +46,8 @@ $trail-clr: $white
 		left: 0
 		position: absolute
 		top: 0
+		+breakpoint-max(767)
+			clip: rect(0, $size-m, $size-m, $size-m / 2)
 
 		.right-side,
 		.left-side
@@ -45,6 +62,8 @@ $trail-clr: $white
 			left: 0
 			position: absolute
 			top: 0
+			+breakpoint-max(767)
+				clip: rect(0, $size-m / 2, $size-m, 0)
 	.label
 		display: flex
 		flex-direction: column
@@ -65,6 +84,8 @@ $trail-clr: $white
 			font:
 				size: 60px
 				weight: 800
+			+breakpoint-max(767)
+				font-size: 45px
 		.text
 			font:
 				size: 16px

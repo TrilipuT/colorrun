@@ -5,10 +5,15 @@
 	.wrapper-outer
 		display: flex
 		align-items: center
+		+breakpoint-max(767)
+			justify-content: space-between
 	.custom-logo-link
 		margin-right: 45 / 1340 * 100%
 		max-width: 75px
 		max-height: 95px
+		+breakpoint-max(767)
+			max-width: 50px
+			order: 0
 	.menu
 		width: 100%
 		font-size: 16px
@@ -17,16 +22,26 @@
 		align-items: center
 		justify-content: space-around
 		flex-wrap: wrap
-		> .menu-item
+		transition: .3s ease
+		+breakpoint-max(767)
+			position: absolute
+			left: 0
+			top: 0
+			padding: 15px 0
+			transform: translateY(-100%)
+			background: rgba($black, .8)
+			z-index: -1
+		&-item
+			margin-right: 50 / 1340 * 100%
 			margin-top: 5px
 			margin-bottom: 5px
-		&-item
-			//display: inline-block
-			//max-width: 100px
-			margin-right: 50 / 1340 * 100%
 			vertical-align: middle
 			text-align: center
 			text-decoration: none
+			+breakpoint-max(767)
+				display: block
+				margin: 10px 0
+				width: 100%
 			&:last-of-type
 				margin-right: 0
 			&:hover, &.current-menu-item, &.current-menu-ancestor
@@ -43,8 +58,13 @@
 				border-left: 5px solid transparent
 				border-right: 5px solid transparent
 				border-top: 5px solid #fff
+				+breakpoint-max(767)
+					display: none
 		&-item-has-children
 			position: relative
+			& > a
+				+breakpoint-max(767)
+					color: $yellow-warm !important
 			+hover
 				.sub-menu
 					transform: translateY(100%)
@@ -61,6 +81,14 @@
 			transform: translateY(calc(100% - 15px))
 			pointer-events: none
 			transition: transform .3s ease, opacity .3s ease
+			+breakpoint-max(767)
+				min-width: 0
+				max-width: none
+				position: relative
+				left: 0
+				opacity: 1
+				transform: none
+				pointer-events: auto
 			.menu-item
 				display: block
 				max-width: none
@@ -69,6 +97,12 @@
 				color: $black-clr
 				text-align: left
 				font-weight: 400
+				+breakpoint-max(767)
+					background: transparent
+					color: $white
+					text-align: center
+					font-weight: 600
+					margin: 0
 				+hover
 					color: $yellow-warm
 					background: $light-gray
@@ -76,7 +110,15 @@
 					display: block
 					padding: 10px 20px
 					color: inherit
+					&:before
+						+breakpoint-max(767)
+							content: '— '
 		a
 			color: $white
 	.registration
 		margin-left: 50 / 1340 * 100%
+		+breakpoint-max(767)
+			float: right
+			width: 140px
+			margin-left: 0
+			order: 1

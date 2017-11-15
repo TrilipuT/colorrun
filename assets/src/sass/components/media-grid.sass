@@ -27,11 +27,17 @@
 		float: left
 		width: 365 / 1340 * 100%
 		margin-right: 10 / 1340 * 100%
+		+breakpoint-max(767)
+			float: none
+			width: 100%
+			margin-right: 0
 		&:last-of-type
 			margin-right: 0
 		&:nth-of-type(2),
 		&:nth-of-type(3)
 			width: 290 / 1340 * 100%
+			+breakpoint-max(767)
+				width: 100%
 	.thumbnail-container
 		position: relative
 		&:before

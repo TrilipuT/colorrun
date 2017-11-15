@@ -1,0 +1,32 @@
+.burger-mobile
+	display: none
+	position: relative
+	width: 30px
+	height: 25px
+	margin-left: 20px
+	transform: rotate(0deg)
+	transition: .3s ease
+	cursor: pointer
+	+breakpoint-max(767)
+		display: block
+	span
+		display: block
+		width: 100%
+		position: absolute
+		left: 0
+		height: 4px
+		background: $white
+		border-radius: 2px
+		opacity: 1
+		transform: rotate(0deg)
+		transition: .25s ease-in-out
+		&:nth-child(1)
+			top: 0
+			transform-origin: left center
+		&:nth-child(2)
+			top: 9px
+			transform-origin: left center
+		&:nth-child(3)
+			top: 18px
+			transform-origin: left center
+

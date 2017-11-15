@@ -7,6 +7,7 @@ import countdown from "./modules/countdown";
 
 import dropdown from './modules/dropdownToggler';
 import accordion from './modules/accordionWidget';
+import burger from './modules/burgerToggler';
 
 $( function ( $ ) {
     detectTouchSupport();
@@ -14,6 +15,7 @@ $( function ( $ ) {
     countdown();
     dropdown();
     accordion();
+    burger();
     $('.shave').each(function (i, item) {
         shave(item, $(item).parent().height() * 0.6);
     });

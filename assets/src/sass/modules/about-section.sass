@@ -68,11 +68,15 @@
 			width: calc(100% + 40px)
 			margin: 0 -20px
 			box-sizing: border-box
+		+breakpoint-max(767)
+			flex-wrap: wrap
 
 	.column
 		width: 300 / 675 * 100%
 		+breakpoint-max($ipad-h)
 			width: 50%
+		+breakpoint-max(767)
+			width: 100%
 
 	.info-item
 		width: 100%
@@ -88,6 +92,8 @@
 			margin-bottom: 0
 			+breakpoint-max($ipad-h)
 				padding-right: 0
+			+breakpoint-max(767)
+				width: 100%
 			.icon
 				width: 45 / 375 * 100%
 				margin-right: 35 / 375 * 100%
@@ -131,6 +137,11 @@
 			top: 0
 			width: 66%
 			height: 100%
+			overflow: hidden
+			+breakpoint-max(1200)
+				width: 55%
+			+breakpoint-max(1023)
+				display: none
 			img
 				position: absolute
 				width: auto

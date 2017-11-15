@@ -1,0 +1,20 @@
+.main-menu
+	+breakpoint-max(767)
+		order: 2
+	&.open
+		.burger-mobile
+			span:nth-child(1)
+				top: -2px
+				left: 4px
+				transform: rotate(45deg)
+			span:nth-child(2)
+				width: 0%
+				opacity: 0
+			span:nth-child(3)
+				transform: rotate(-45deg)
+				top: 19px
+				left: 4px
+		.menu
+			+breakpoint-max(767)
+				top: 125px
+				transform: translateY(0)

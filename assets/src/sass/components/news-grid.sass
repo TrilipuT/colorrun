@@ -5,6 +5,8 @@
 	.news-item
 		display: flex
 		width: 50%
+		+breakpoint-max(767)
+			width: 100%
 		+hover
 			.text-container
 				background: $pink
@@ -16,6 +18,14 @@
 				color: $white
 			svg
 				stroke: $white
+		&:nth-child(odd)
+			.image-container
+				+breakpoint-max(767)
+					order: 0 !important
+		&:nth-child(even)
+			.image-container
+				+breakpoint-max(767)
+					order: 1 !important
 		&:nth-child(3n),
 		&:nth-child(4n)
 			.image-container
