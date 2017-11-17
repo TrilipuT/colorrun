@@ -27,6 +27,8 @@ lazyRequireTask('watch', './gulp/tasks/watch');
 
 lazyRequireTask('serve', './gulp/tasks/serve');
 
+lazyRequireTask('deploy', './gulp/tasks/deploy');
+
 gulp.task('ws', gulp.parallel('watch', 'serve'));
 
 gulp.task('minimal', gulp.series('sass', 'js', 'watch'));
