@@ -108,7 +108,7 @@ class Initialization extends AbstractInitialization {
 			} else {
 				$f = new Text();
 				$f->set_disabled( true );
-				$f->set_value( 'Next free bib will be assigned after event choosen and participant saved' );
+				$f->set_value( 'Next free bib will be assigned after event chosen and participant saved' );
 			}
 
 			return $f;
