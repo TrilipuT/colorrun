@@ -1,0 +1,49 @@
+.select
+	position: relative
+	display: block
+	margin-bottom: 28px
+	border-bottom: 1px solid $reg-bg
+	color: $placeholder-clr
+	font:
+		size: 14px
+	line-height: 20px
+	cursor: pointer
+	.select-hidden
+		display: none
+	.select-styled
+		position: relative
+		padding: 5px 0
+		&:after
+			content: ''
+			position: absolute
+			right: 0
+			top: 50%
+			transform: translateY(-50%)
+			display: block
+			width: 0
+			height: 0
+			border-style: solid
+			border-width: 7px 7.5px 0 7.5px
+			border-color: $placeholder-clr transparent transparent transparent
+		&.active
+			&:after
+				transform: translateY(-50%) rotate(180deg)
+	.select-options
+		display: none
+		position: absolute
+		top: 100%
+		right: 0
+		left: 0
+		margin: 0
+		padding: 0
+		z-index: 999
+		li
+			padding: 5px 10px
+			border-bottom: 1px solid $reg-bg
+			background: $semi-light-gray
+			color: $blue
+			transition: .3s ease
+			&[rel="hide"]
+				display: none
+			&:hover
+				background: $light-gray

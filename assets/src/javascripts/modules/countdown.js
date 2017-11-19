@@ -27,4 +27,13 @@ export default () => {
         $seconds.find('.pie-wrapper')[0].className = 'pie-wrapper progress-' + ~~(event.offset.seconds * 100 / 60);
         $seconds.find('.value').text(event.offset.seconds);
     });
+
+    let $regCount = $('.registration-countdown');
+
+    let oldDate = new Date();
+    let newDate = new Date(oldDate.getTime() + 15 * 60000);
+
+    $regCount.countdown(newDate, function (event) {
+        $(this).find('.timer').text(event.strftime('%M : %S'))
+    });
 }

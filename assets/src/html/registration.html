@@ -1,0 +1,195 @@
+@@include('includes/head.html',{
+"title":"ColorRun",
+"body": "registration"
+})
+
+@@include('includes/header.html')
+
+<div class="main-wrapper">
+    <div class="hero-section registration" style="background-image: url('../images/fake/hero-single.jpg')">
+        <div class="text-container">
+            <h1 class="title">Реєстрація</h1>
+        </div>
+    </div>
+    <section class="registration-section">
+        <div class="wrapper-inner">
+            <div class="registration-breadcrumbs">
+                <div class="item first active">
+                    <span>1. Внесіть особисті дані</span>
+                </div>
+                <div class="item second">
+                    <span>2. Перевірка даних</span>
+                </div>
+                <div class="item third">
+                    <span>3. Оплата реєстрації</span>
+                </div>
+            </div>
+            <div class="steps-area">
+                <div class="registration-countdown" data-time="900000">
+                    <time class="timer">14 : 47</time>
+                    <div class="text-container">
+                        Ваша реєстрація буде видалена, <br>
+                        якщо ви не зареєструєтесь протягом <strong>15 хвилин.</strong>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-row">
+                        <h2 class="title">Форма заповнення даних</h2>
+                        <div class="form-area">
+                            <form class="user-form">
+                                <select id="distance">
+                                    <option value="hide">Дистанція</option>
+                                    <option value="42">42</option>
+                                    <option value="21">21</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <input type="text" placeholder="Прізвище">
+                                <input type="text" placeholder="Ім'я">
+                                <div class="radio-group">
+                                    <span class="label">Стать: </span>
+                                    <div class="options">
+                                        <label class="radio">
+                                            <input id="gender_male" type="radio" name="gender">
+                                            <span class="outer">
+                                            <span class="inner"></span>
+                                        </span>
+                                            Чоловіча
+                                        </label>
+                                        <label class="radio">
+                                            <input id="gender_female" type="radio" name="gender">
+                                            <span class="outer">
+                                            <span class="inner"></span>
+                                        </span>
+                                            Жіноча
+                                        </label>
+                                    </div>
+                                </div>
+                                <input type="email" placeholder="E-mail">
+                                <input type="text" placeholder="Моб. телефон">
+                                <input type="text" placeholder="Країна">
+                                <input type="text" placeholder="Місто">
+                                <input type="text" placeholder="Клуб">
+                                <div class="radio-group">
+                                    <span class="label">Розмір футболки: </span>
+                                    <div class="options">
+                                        <label class="radio">
+                                            <input id="xs" type="radio" name="tshirt-size">
+                                            <span class="outer">
+                                            <span class="inner"></span>
+                                        </span>
+                                            XS
+                                        </label>
+                                        <label class="radio">
+                                            <input id="s" type="radio" name="tshirt-size">
+                                            <span class="outer">
+                                            <span class="inner"></span>
+                                        </span>
+                                            S
+                                        </label>
+                                        <label class="radio">
+                                            <input id="m" type="radio" name="tshirt-size">
+                                            <span class="outer">
+                                            <span class="inner"></span>
+                                        </span>
+                                            M
+                                        </label>
+                                        <label class="radio">
+                                            <input id="l" type="radio" name="tshirt-size">
+                                            <span class="outer">
+                                            <span class="inner"></span>
+                                        </span>
+                                            L
+                                        </label>
+                                        <label class="radio">
+                                            <input id="xl" type="radio" name="tshirt-size">
+                                            <span class="outer">
+                                            <span class="inner"></span>
+                                        </span>
+                                            XL
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="personal_data" />
+                                    <label for="personal_data">
+                                        Так, я підтверджую, що вказані мною дані є вірними та актуальними. <strong>Згода на обробку персональних даних</strong>.
+                                    </label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="event_rules" />
+                                    <label for="event_rules">
+                                        Я ознайомлений/ознайомлена з <strong>Регламентом Заходу</strong>.
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="step-row">
+                        <h2 class="title">Персональна інформація</h2>
+                        <div class="personal-info">
+                            <button class="edit-info">
+                                <img src="../images/fake/pencil.png" alt="">
+                                <span>РЕДАГУВАТИ</span>
+                            </button>
+                            <dl class="info">
+                                <dt>Дистанція</dt>
+                                <dd>Turkish airlines Color Run 6 km</dd>
+                                <dt>Прізвище</dt>
+                                <dd>Andrushkevich</dd>
+                                <dt>Ім’я</dt>
+                                <dd>Olga</dd>
+                                <dt>Стать</dt>
+                                <dd>Жіноча</dd>
+                                <dt>E-mail</dt>
+                                <dd>o.andrushkevych@gmail.com</dd>
+                                <dt>Моб. телефон</dt>
+                                <dd>+380930334567</dd>
+                                <dt>Дата народження</dt>
+                                <dd>10/05/1992</dd>
+                                <dt>Країна</dt>
+                                <dd>Україна</dd>
+                                <dt>Місто</dt>
+                                <dd>Київ</dd>
+                                <dt>Клуб</dt>
+                                <dd>KM Runing Club</dd>
+                                <dt>Розмір футболки</dt>
+                                <dd>M</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="step-row">
+                        <h2 class="title">Підтвердження замовлення</h2>
+                        <div class="personal-info">
+                            <dl class="preliminary-price">
+                                <dt>Turkish airlines Color Run 6 km</dt>
+                                <dd>150 грн.</dd>
+                            </dl>
+                            <div class="promo-group">
+                                <input type="text" class="promo-input" placeholder="Ввести промокод">
+                                <button class="promo-submit">ЗАСТОСУВАТИ</button>
+                            </div>
+                            <dl class="final-price">
+                                <dt>Сума до сплати</dt>
+                                <dd>150 грн.</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="step-row">
+                        <h2 class="title">Оплата реєстрації</h2>
+                        <div class="personal-info">
+                            <h3 class="user-name">Olga Andrushkevich</h3>
+                            <h3 class="distance">Turkish airlines Color Run 6 km</h3>
+                            <p class="price">Сума до сплати: <span class="amount">150 грн.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation-buttons">
+                <button class="button back">НАЗАД</button>
+                <button class="button next disable">ПРОДОВЖИТИ</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+@@include('includes/footer.html')

@@ -31,7 +31,7 @@
 			background: rgba($black, .8)
 			z-index: -1
 		&-item
-			max-width: 90px
+			max-width: 110px
 			margin-right: 50 / 1340 * 100%
 			margin-top: 5px
 			margin-bottom: 5px
@@ -52,7 +52,7 @@
 				content: ''
 				position: absolute
 				margin: auto
-				top: 10px
+				top: calc(50% - 1px)
 				right: -20px
 				width: 0
 				height: 0
@@ -123,6 +123,8 @@
 		margin-left: 50 / 1340 * 100%
 		width: 195px
 		box-sizing: border-box
+		+bodyclass(registration)
+			display: none
 		+breakpoint-max(767)
 			float: right
 			width: 140px

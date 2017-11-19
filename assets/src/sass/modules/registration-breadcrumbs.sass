@@ -1,0 +1,36 @@
+.registration-breadcrumbs
+	margin: 60px 0
+	+clearfix
+	.item
+		position: relative
+		float: left
+		width: 33.33%
+		padding: 12px 20px
+		text-align: center
+		color: $pink
+		font:
+			size: 20px
+			weight: 800
+		line-height: 30px
+		background: $light-pink
+		box-sizing: border-box
+		&.active
+			background: $pink
+			color: $white
+		&.second
+			&:before,
+			&:after
+				content: ''
+				display: block
+				position: absolute
+				top: -10px
+				width: 15px
+				height: 150%
+				background: $white
+				z-index: 1
+			&:before
+				left: 0
+				transform: translateX(-50%) rotate(14deg)
+			&:after
+				right: 0
+				transform: translateX(50%) rotate(14deg)

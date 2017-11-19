@@ -1,0 +1,135 @@
+.personal-info
+	max-width: 600px
+	margin: 0 auto 40px
+
+	.edit-info
+		display: block
+		width: 180px
+		margin: 0 auto
+		padding: 5px 30px
+		border-radius: 10px
+		background: $pink
+		color: $white
+		font:
+			size: 12px
+			weight: 800
+		line-height: 18px
+		text-transform: uppercase
+		cursor: pointer
+		transition: opacity .3s ease
+		+hover
+			opacity: .8
+
+		img
+			position: relative
+			top: 4px
+			margin-right: 5px
+
+		span
+			display: inline-block
+			margin: 5px 0
+			position: relative
+			top: -1px
+
+	.info,
+	.preliminary-price,
+	.final-price
+		margin: 40px 0 20px
+
+		dt, dd
+			display: inline-block
+			width: 45%
+			margin-bottom: 20px
+			font:
+				size: 14px
+				weight: 800
+			line-height: 20px
+
+		dt
+			margin-right: 3%
+			color: $placeholder-clr
+			text-align: right
+
+		dd
+			color: $blue
+
+	.preliminary-price,
+	.final-price
+		margin: 0
+
+		dt
+			color: $pink
+
+	.promo-group
+		margin-bottom: 20px
+		+clearfix
+
+		.promo-input
+			width: 200px
+			float: left
+			margin:
+				bottom: 0
+				left: 50px
+			padding: 8px 15px
+			border: 2px solid $blue
+			background: $white
+			border-radius: 10px
+			color: $blue
+			font:
+				size: 14px
+			line-height: 20px
+			box-sizing: border-box
+			+placeholder
+				color: $placeholder-clr
+
+		.promo-submit
+			position: relative
+			left: -15px
+			width: 140px
+			float: left
+			padding: 10px 15px
+			border-radius: 10px
+			background: rgba($blue, 1)
+			color: $white
+			font:
+				size: 11px
+				weight: 800
+			line-height: 20px
+			text-transform: uppercase
+			cursor: pointer
+			transition: background .3s ease
+			+hover
+				background: #5d53d8
+
+	.user-name,
+	.distance,
+	.price
+		text-align: center
+
+	.user-name,
+	.distance
+		font:
+			size: 24px
+			weight: 800
+		line-height: 30px
+
+	.user-name
+		color: $pink
+
+	.distance
+		color: $blue
+
+	.price
+		color: $placeholder-clr
+		font:
+			size: 20px
+			weight: 700
+		line-height: 30px
+
+	.amount
+		margin-left: 20px
+		color: $pink
+		font:
+			size: 24px
+			weight: 800
+
