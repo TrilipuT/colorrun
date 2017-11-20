@@ -40,4 +40,15 @@ class Functions extends AbstractThemeFunctions {
 			'depth'           => 1
 		] );
 	}
+
+	/**
+	 * @return string
+	 */
+	public static function get_background_image(): string {
+		if ( has_post_thumbnail() ) {
+			return get_the_post_thumbnail_url( get_the_ID(), 'hero' );
+		}
+
+		return get_background_image();
+	}
 }

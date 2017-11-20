@@ -5,7 +5,7 @@
  * @author     vitaly
  *
  */ ?>
-<section class="hero-section" style="background-image: url('<?php background_image() ?>')">
+<section class="hero-section" style="background-image: url('<?= Theme::get_background_image() ?>')">
 	<div class="text-container">
         <h1 class="title"><?php the_title() ?></h1>
 		<h2 class="date"><?= Event::get_current_event_date() ?></h2>

@@ -2,7 +2,7 @@
 the_post();
 get_header(); ?>
 <?php if ( has_post_thumbnail() ): ?>
-    <section class="hero-section single" style="background-image: url('<?php the_post_thumbnail_url( 'hero' ) ?>')">
+    <section class="hero-section single" style="background-image: url('<?= Theme::get_background_image() ?>')">
         <div class="text-container">
             <h1 class="title"><?php the_title() ?></h1>
         </div>
@@ -23,7 +23,7 @@ get_header(); ?>
 							<?php the_excerpt(); ?>
                         </div>
 					<?php endif; ?>
-	                <?php the_content() ?>
+					<?php the_content() ?>
                 </div>
             </div>
         </div>
