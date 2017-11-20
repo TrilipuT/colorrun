@@ -82,9 +82,9 @@
 	
 	var _customSelect2 = _interopRequireDefault(_customSelect);
 	
-	var _validation = __webpack_require__(12);
+	var _sendValidation = __webpack_require__(12);
 	
-	var _validation2 = _interopRequireDefault(_validation);
+	var _sendValidation2 = _interopRequireDefault(_sendValidation);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -97,7 +97,7 @@
 	    (0, _burgerToggler2.default)();
 	    (0, _customSelect2.default)();
 	
-	    $('.registration-buttons').on('click', _validation2.default);
+	    (0, _sendValidation2.default)();
 	
 	    $('.shave').each(function (i, item) {
 	        (0, _shave2.default)(item, $(item).parent().height() * 0.6);
@@ -5653,7 +5653,7 @@
 	
 	    var $regCount = (0, _jquery2.default)('.registration-countdown');
 	
-	    var oldDate = new Date();
+	    var oldDate = new Date($regCount.data('time') * 1000);
 	    var newDate = new Date(oldDate.getTime() + 15 * 60000);
 	
 	    $regCount.countdown(newDate, function (event) {
@@ -6043,7 +6043,7 @@
 	        $listItems.click(function (e) {
 	            e.stopPropagation();
 	            $styledSelect.text((0, _jquery2.default)(this).text()).removeClass('active');
-	            $this.val((0, _jquery2.default)(this).attr('rel'));
+	            $this.val((0, _jquery2.default)(this).attr('rel')).trigger('change');
 	            $list.hide('fast');
 	        });
 	
@@ -6071,12 +6071,39 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = function () {
-	    var names = ['distance', 'surname', 'name', 'gender', 'email', 'phone', 'country', 'city', 'tshirt_size', 'personal_data', 'event_rules'];
+	    var names = ['distance', 'surname', 'name', 'gender', 'email', 'phone', 'country', 'city', 'tshirt_size', 'personal_data', 'event_rules'],
+	        errors = [];
 	
-	    names.forEach(function (name) {
-	        var $input = (0, _jquery2.default)('[name="' + name + '"]'),
-	            type = $input.attr('type'),
-	            $wrapper = void 0;
+	    (0, _jquery2.default)('.registration-buttons').on('click', function () {
+	        sendValidation(names);
+	        errorsChecker(errors);
+	    });
+	
+	    (0, _jquery2.default)('.registration-form').find('select, input').on('change', function () {
+	        var inputName = (0, _jquery2.default)(this).attr('name'),
+	            $item = (0, _jquery2.default)(this);
+	
+	        checkInputs(false, inputName, $item);
+	        errorsChecker(errors);
+	    });
+	
+	    function sendValidation(array) {
+	        array.forEach(function (name) {
+	            checkInputs(true, name);
+	        });
+	    }
+	
+	    function checkInputs(action, itemName, item) {
+	        var $input = void 0;
+	
+	        if (action) {
+	            $input = (0, _jquery2.default)('[name="' + itemName + '"]');
+	        } else {
+	            $input = item;
+	        }
+	
+	        var type = $input.attr('type');
+	        var $wrapper = void 0;
 	
 	        switch (type) {
 	
@@ -6099,12 +6126,48 @@
 	                break;
 	        }
 	
-	        if (!type && $input.val() === 'hide') $wrapper.addClass('error');else if (!type && $input.val() !== 'hide') $wrapper.removeClass('error');
+	        if (!type && $input.val() === 'hide') {
+	            $wrapper.addClass('error');
+	            errors.push(itemName);
+	        } else if (!type && $input.val() !== 'hide') {
+	            $wrapper.removeClass('error');
+	            removeItem(errors, itemName);
+	        }
 	
-	        if ((type === 'radio' || type === 'checkbox') && !$input.filter(':checked').length) $wrapper.addClass('error');else if ((type === 'radio' || type === 'checkbox') && $input.filter(':checked').length > 0) $wrapper.removeClass('error');
+	        if ((type === 'radio' || type === 'checkbox') && !$input.filter(':checked').length) {
+	            $wrapper.addClass('error');
+	            errors.push(itemName);
+	        } else if ((type === 'radio' || type === 'checkbox') && $input.filter(':checked').length > 0) {
+	            $wrapper.removeClass('error');
+	            removeItem(errors, itemName);
+	        }
 	
-	        if ((type === 'text' || type === 'email' || type === 'number') && !$input.val()) $wrapper.addClass('error');else if ((type === 'text' || type === 'email' || type === 'number') && $input.val()) $wrapper.removeClass('error');
-	    });
+	        if ((type === 'text' || type === 'email' || type === 'number') && !$input.val()) {
+	            $wrapper.addClass('error');
+	            errors.push(itemName);
+	        } else if ((type === 'text' || type === 'email' || type === 'number') && $input.val()) {
+	            $wrapper.removeClass('error');
+	            removeItem(errors, itemName);
+	        }
+	    }
+	
+	    function errorsChecker(array) {
+	        if (array.length) (0, _jquery2.default)('.registration-buttons .next').addClass('disable');else (0, _jquery2.default)('.registration-buttons .next').removeClass('disable');
+	    }
+	
+	    function removeItem(arr) {
+	        var what = void 0,
+	            a = arguments,
+	            L = a.length,
+	            ax = void 0;
+	        while (L > 1 && arr.length) {
+	            what = a[--L];
+	            while ((ax = arr.indexOf(what)) !== -1) {
+	                arr.splice(ax, 1);
+	            }
+	        }
+	        return arr;
+	    }
 	};
 
 /***/ })
