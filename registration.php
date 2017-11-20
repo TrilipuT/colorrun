@@ -26,10 +26,10 @@ get_header(); ?>
                 </div>
             </div>
             <div class="steps-area">
-                <div class="registration-countdown" data-time="900000">
-                    <time class="timer">14 : 47</time>
+                <div class="registration-countdown" data-time="<?= time() ?>">
+                    <time class="timer">15 : 00</time>
                     <div class="text-container">
-						<?php _ex( 'Your registration will be deleted, <br>if you do not sign up for <strong> 15 minutes. </strong>', 'Ваша реєстрація буде видалена,<br>якщо ви не зареєструєтесь протягом <strong>15 хвилин.</strong>', 'colorrun' ); ?>
+						<?php _ex( 'You have <strong> 15 minutes</strong><br> to complete your registration', 'У вас є <strong>15 хвилин</strong><br> щоб завершити реєстрацію', 'colorrun' ); ?>
                     </div>
                 </div>
                 <div class="step">

@@ -30,7 +30,7 @@ export default () => {
 
     let $regCount = $('.registration-countdown');
 
-    let oldDate = new Date();
+    let oldDate = new Date($regCount.data('time') * 1000);
     let newDate = new Date(oldDate.getTime() + 15 * 60000);
 
     $regCount.countdown(newDate, function (event) {
