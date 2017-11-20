@@ -1,6 +1,10 @@
 .input-group
 	position: relative
 	margin-bottom: 28px
+	&.filled
+		label
+			top: -14px !important
+			font-size: 11px !important
 	input[type="text"],
 	input[type="email"],
 	input[type="number"]
@@ -12,6 +16,7 @@
 			size: 14px
 		line-height: 20px
 		color: $blue
+		transition: border .3s ease
 		&:focus,
 		&:valid
 			& ~ label
@@ -22,7 +27,8 @@
 			& ~ .bar:before,
 			& ~ .bar:after
 				width: 50%
-		&#club
+		&#club,
+		&#email
 			&:valid
 				& ~ label
 					top: 5px

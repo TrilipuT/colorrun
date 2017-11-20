@@ -82,7 +82,11 @@
 	
 	var _customSelect2 = _interopRequireDefault(_customSelect);
 	
-	var _sendValidation = __webpack_require__(12);
+	var _inputSelection = __webpack_require__(12);
+	
+	var _inputSelection2 = _interopRequireDefault(_inputSelection);
+	
+	var _sendValidation = __webpack_require__(13);
 	
 	var _sendValidation2 = _interopRequireDefault(_sendValidation);
 	
@@ -98,6 +102,12 @@
 	    (0, _customSelect2.default)();
 	
 	    (0, _sendValidation2.default)();
+	
+	    $('.registration-form').find('[name="email"], [name="club"]').on('change', function () {
+	        var $item = $(this);
+	
+	        (0, _inputSelection2.default)($item);
+	    });
 	
 	    $('.shave').each(function (i, item) {
 	        (0, _shave2.default)(item, $(item).parent().height() * 0.6);
@@ -6070,6 +6080,28 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	exports.default = function (item) {
+	    var val = item.val();
+	
+	    if (val) item.parent().addClass('filled');else item.parent().removeClass('filled');
+	};
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _jquery = __webpack_require__(1);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	exports.default = function () {
 	    var names = ['distance', 'surname', 'name', 'gender', 'email', 'phone', 'country', 'city', 'tshirt_size', 'personal_data', 'event_rules'],
 	        errors = [];
@@ -6079,7 +6111,7 @@
 	        errorsChecker(errors);
 	    });
 	
-	    (0, _jquery2.default)('.registration-form').find('select, input').on('change', function () {
+	    (0, _jquery2.default)('.registration-form').find('select[required], input[required]').on('change', function () {
 	        var inputName = (0, _jquery2.default)(this).attr('name'),
 	            $item = (0, _jquery2.default)(this);
 	

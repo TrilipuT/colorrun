@@ -1,7 +1,19 @@
 .registration-form
-	.select,
-	.input-group,
-	.radio-group,
+	.select
+		&.error
+			border-bottom: 1px solid $error-clr
+	.input-group
+		&.error
+			input
+				border-bottom: 1px solid $error-clr
+			.bar:before,
+			.bar:after
+				background: $error-clr
+	.radio-group
+		&.error
+			.label
+				color: $error-clr
 	.checkbox-group
 		&.error
-			background: red
+			label
+				color: $error-clr

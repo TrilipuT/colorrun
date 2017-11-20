@@ -9,7 +9,7 @@ export default () => {
         errorsChecker(errors)
     });
 
-    $('.registration-form').find('select, input').on('change', function () {
+    $('.registration-form').find('select[required], input[required]').on('change', function () {
         let inputName = $(this).attr('name'),
             $item = $(this);
 
