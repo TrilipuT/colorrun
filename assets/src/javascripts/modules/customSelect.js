@@ -26,22 +26,21 @@ export default () => $('select').each(function(){
     $styledSelect.click(function(e) {
         e.stopPropagation();
         $('div.select-styled.active').not(this).each(function(){
-            $(this).removeClass('active').next('ul.select-options').hide();
+            $(this).removeClass('active').next('ul.select-options').hide('fast');
         });
-        $(this).toggleClass('active').next('ul.select-options').toggle();
+        $(this).toggleClass('active').next('ul.select-options').toggle('fast');
     });
 
     $listItems.click(function(e) {
         e.stopPropagation();
         $styledSelect.text($(this).text()).removeClass('active');
         $this.val($(this).attr('rel'));
-        $list.hide();
-        //console.log($this.val());
+        $list.hide('fast');
     });
 
     $(document).click(function() {
         $styledSelect.removeClass('active');
-        $list.hide();
+        $list.hide('fast');
     });
 
 });

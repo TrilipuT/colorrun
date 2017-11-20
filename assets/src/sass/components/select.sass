@@ -2,7 +2,7 @@
 	position: relative
 	display: block
 	margin-bottom: 28px
-	border-bottom: 1px solid $reg-bg
+	border-bottom: 1px solid $input-hr-clr
 	color: $placeholder-clr
 	font:
 		size: 14px
@@ -25,18 +25,20 @@
 			border-style: solid
 			border-width: 7px 7.5px 0 7.5px
 			border-color: $placeholder-clr transparent transparent transparent
+			transition: transform .3s ease
 		&.active
 			&:after
 				transform: translateY(-50%) rotate(180deg)
 	.select-options
 		display: none
 		position: absolute
-		top: 100%
+		top: 0
 		right: 0
 		left: 0
 		margin: 0
 		padding: 0
 		z-index: 999
+		transition: opacity .3s ease, transform .3s ease
 		li
 			padding: 5px 10px
 			border-bottom: 1px solid $reg-bg

@@ -36,27 +36,35 @@
                     <div class="step-row">
                         <h2 class="title">Форма заповнення даних</h2>
                         <div class="form-area">
-                            <form class="user-form">
-                                <select id="distance">
+                            <form class="registration-form">
+                                <select id="distance" name="distance" required>
                                     <option value="hide">Дистанція</option>
                                     <option value="42">42</option>
                                     <option value="21">21</option>
                                     <option value="10">10</option>
                                 </select>
-                                <input type="text" placeholder="Прізвище">
-                                <input type="text" placeholder="Ім'я">
+                                <div class="input-group">
+                                    <input type="text" name="surname" id="surname" required>
+                                    <span class="bar"></span>
+                                    <label>Прізвище</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" name="name" id="name" required>
+                                    <span class="bar"></span>
+                                    <label>Ім'я</label>
+                                </div>
                                 <div class="radio-group">
                                     <span class="label">Стать: </span>
                                     <div class="options">
                                         <label class="radio">
-                                            <input id="gender_male" type="radio" name="gender">
+                                            <input id="male" type="radio" name="gender" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             Чоловіча
                                         </label>
                                         <label class="radio">
-                                            <input id="gender_female" type="radio" name="gender">
+                                            <input id="female" type="radio" name="gender" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
@@ -64,44 +72,64 @@
                                         </label>
                                     </div>
                                 </div>
-                                <input type="email" placeholder="E-mail">
-                                <input type="text" placeholder="Моб. телефон">
-                                <input type="text" placeholder="Країна">
-                                <input type="text" placeholder="Місто">
-                                <input type="text" placeholder="Клуб">
+                                <div class="input-group">
+                                    <input type="email" id="email" name="email" required>
+                                    <span class="bar"></span>
+                                    <label>E-mail</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="phone" name="phone" required>
+                                    <span class="bar"></span>
+                                    <label>Моб. телефон</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="country" name="country" required>
+                                    <span class="bar"></span>
+                                    <label>Країна</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="city" name="city" required>
+                                    <span class="bar"></span>
+                                    <label>Місто</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="club" name="club">
+                                    <span class="bar"></span>
+                                    <label>Клуб</label>
+                                </div>
                                 <div class="radio-group">
                                     <span class="label">Розмір футболки: </span>
                                     <div class="options">
                                         <label class="radio">
-                                            <input id="xs" type="radio" name="tshirt-size">
+                                            <input id="xs" type="radio" name="tshirt_size" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             XS
                                         </label>
                                         <label class="radio">
-                                            <input id="s" type="radio" name="tshirt-size">
+                                            <input id="s" type="radio" name="tshirt_size" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             S
                                         </label>
                                         <label class="radio">
-                                            <input id="m" type="radio" name="tshirt-size">
+                                            <input id="m" type="radio" name="tshirt_size" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             M
                                         </label>
                                         <label class="radio">
-                                            <input id="l" type="radio" name="tshirt-size">
+                                            <input id="l" type="radio" name="tshirt_size" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             L
                                         </label>
                                         <label class="radio">
-                                            <input id="xl" type="radio" name="tshirt-size">
+                                            <input id="xl" type="radio" name="tshirt_size" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
@@ -110,13 +138,13 @@
                                     </div>
                                 </div>
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="personal_data" />
+                                    <input type="checkbox" id="personal_data" name="personal_data" required />
                                     <label for="personal_data">
                                         Так, я підтверджую, що вказані мною дані є вірними та актуальними. <strong>Згода на обробку персональних даних</strong>.
                                     </label>
                                 </div>
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="event_rules" />
+                                    <input type="checkbox" id="event_rules" name="event_rules" required />
                                     <label for="event_rules">
                                         Я ознайомлений/ознайомлена з <strong>Регламентом Заходу</strong>.
                                     </label>
@@ -124,7 +152,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="step-row">
+                    <div class="step-row" style="display: none">
                         <h2 class="title">Персональна інформація</h2>
                         <div class="personal-info">
                             <button class="edit-info">
@@ -157,7 +185,7 @@
                             </dl>
                         </div>
                     </div>
-                    <div class="step-row">
+                    <div class="step-row" style="display: none">
                         <h2 class="title">Підтвердження замовлення</h2>
                         <div class="personal-info">
                             <dl class="preliminary-price">
@@ -174,7 +202,7 @@
                             </dl>
                         </div>
                     </div>
-                    <div class="step-row">
+                    <div class="step-row" style="display: none">
                         <h2 class="title">Оплата реєстрації</h2>
                         <div class="personal-info">
                             <h3 class="user-name">Olga Andrushkevich</h3>
@@ -184,12 +212,28 @@
                     </div>
                 </div>
             </div>
-            <div class="navigation-buttons">
+            <div class="registration-buttons">
                 <button class="button back">НАЗАД</button>
-                <button class="button next disable">ПРОДОВЖИТИ</button>
+                <button class="button next">ПРОДОВЖИТИ</button>
             </div>
         </div>
     </section>
+    <div class="popup-wrapper">
+        <div class="popup">
+            <div class="container">
+                <div class="icon">
+                    <svg role="icon" class="sprite-icon sprite-icon-attention">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#attention"></use>
+                    </svg>
+
+                </div>
+                <div class="text-container">
+                    На жаль, час оплати вийшов. Замовлення анульоване. Будь ласка, створіть нове замовлення.
+                </div>
+            </div>
+            <a href="#" class="button">ПРОДОВЖИТИ</a>
+        </div>
+    </div>
 </div>
 
 @@include('includes/footer.html')

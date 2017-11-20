@@ -10,6 +10,8 @@ import accordion from './modules/accordionWidget';
 import burger from './modules/burgerToggler';
 import select from './modules/customSelect';
 
+import validation from './modules/validation';
+
 $( function ( $ ) {
     detectTouchSupport();
     gallery();
@@ -18,6 +20,8 @@ $( function ( $ ) {
     accordion();
     burger();
     select();
+
+    $('.registration-buttons').on('click', validation);
 
     $('.shave').each(function (i, item) {
         shave(item, $(item).parent().height() * 0.6);

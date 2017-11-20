@@ -82,6 +82,10 @@
 	
 	var _customSelect2 = _interopRequireDefault(_customSelect);
 	
+	var _validation = __webpack_require__(12);
+	
+	var _validation2 = _interopRequireDefault(_validation);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	(0, _jquery2.default)(function ($) {
@@ -92,6 +96,8 @@
 	    (0, _accordionWidget2.default)();
 	    (0, _burgerToggler2.default)();
 	    (0, _customSelect2.default)();
+	
+	    $('.registration-buttons').on('click', _validation2.default);
 	
 	    $('.shave').each(function (i, item) {
 	        (0, _shave2.default)(item, $(item).parent().height() * 0.6);
@@ -6029,23 +6035,75 @@
 	        $styledSelect.click(function (e) {
 	            e.stopPropagation();
 	            (0, _jquery2.default)('div.select-styled.active').not(this).each(function () {
-	                (0, _jquery2.default)(this).removeClass('active').next('ul.select-options').hide();
+	                (0, _jquery2.default)(this).removeClass('active').next('ul.select-options').hide('fast');
 	            });
-	            (0, _jquery2.default)(this).toggleClass('active').next('ul.select-options').toggle();
+	            (0, _jquery2.default)(this).toggleClass('active').next('ul.select-options').toggle('fast');
 	        });
 	
 	        $listItems.click(function (e) {
 	            e.stopPropagation();
 	            $styledSelect.text((0, _jquery2.default)(this).text()).removeClass('active');
 	            $this.val((0, _jquery2.default)(this).attr('rel'));
-	            $list.hide();
-	            //console.log($this.val());
+	            $list.hide('fast');
 	        });
 	
 	        (0, _jquery2.default)(document).click(function () {
 	            $styledSelect.removeClass('active');
-	            $list.hide();
+	            $list.hide('fast');
 	        });
+	    });
+	};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _jquery = __webpack_require__(1);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function () {
+	    var names = ['distance', 'surname', 'name', 'gender', 'email', 'phone', 'country', 'city', 'tshirt_size', 'personal_data', 'event_rules'];
+	
+	    names.forEach(function (name) {
+	        var $input = (0, _jquery2.default)('[name="' + name + '"]'),
+	            type = $input.attr('type'),
+	            $wrapper = void 0;
+	
+	        switch (type) {
+	
+	            case undefined:
+	                $wrapper = $input.parents('.select');
+	                break;
+	
+	            case 'radio':
+	                $wrapper = $input.parents('.radio-group');
+	                break;
+	
+	            case 'checkbox':
+	                $wrapper = $input.parents('.checkbox-group');
+	                break;
+	
+	            case 'text':
+	            case 'email':
+	            case 'number':
+	                $wrapper = $input.parents('.input-group');
+	                break;
+	        }
+	
+	        if (!type && $input.val() === 'hide') $wrapper.addClass('error');else if (!type && $input.val() !== 'hide') $wrapper.removeClass('error');
+	
+	        if ((type === 'radio' || type === 'checkbox') && !$input.filter(':checked').length) $wrapper.addClass('error');else if ((type === 'radio' || type === 'checkbox') && $input.filter(':checked').length > 0) $wrapper.removeClass('error');
+	
+	        if ((type === 'text' || type === 'email' || type === 'number') && !$input.val()) $wrapper.addClass('error');else if ((type === 'text' || type === 'email' || type === 'number') && $input.val()) $wrapper.removeClass('error');
 	    });
 	};
 
