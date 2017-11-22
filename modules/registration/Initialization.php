@@ -21,6 +21,13 @@ class Initialization extends AbstractInitialization {
 			return $participant->get_info();
 		} );
 
+
+	}
+
+	public function add_action_remove_registration( $id ) {
+//		if ( ( get_the_date( 'U', $id ) + ( 15 * MINUTE_IN_SECONDS ) ) >= time() ) {
+		return wp_delete_post( $id );
+//		}
 	}
 }
 

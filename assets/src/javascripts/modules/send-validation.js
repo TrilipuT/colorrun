@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 export default () => {
-    let names = ['distance', 'surname', 'name', 'gender', 'email', 'phone', 'country', 'city', 'tshirt_size', 'personal_data', 'event_rules'],
+    let names = ['lastname', 'firstname', 'gender', 'email','dateofbirth', 'info[phone]', 'country', 'city', 'info[tshirt_size]', 'personal_data', 'event_rules'],
         errors = [];
 
     $('.registration-buttons').on('click', function () {
@@ -82,10 +82,7 @@ export default () => {
     }
 
     function errorsChecker(array) {
-        if (array.length)
-            $('.registration-buttons .next').addClass('disable');
-        else
-            $('.registration-buttons .next').removeClass('disable');
+        $('.registration-buttons .next').prop('disabled', array.length > 0);
     }
 
     function removeItem(arr) {

@@ -22,10 +22,6 @@ class Initialization extends AbstractInitialization {
 	 */
 	private $post_type;
 
-	public function _add_action_add_meta_boxes() {
-		remove_meta_box( 'slugdiv', [ self::POST_TYPE ], 'normal' );
-	}
-
 	public function register_post_type() {
 		$post_type = new PostType( self::POST_TYPE, __( 'Participant', 'colorrun' ) );
 		$post_type->set_supports( [ 'title' ] );
@@ -84,7 +80,7 @@ class Initialization extends AbstractInitialization {
 		$meta->add_field( 'lastname', __( 'Last name', 'colorrun' ) );
 		$meta->add_field( 'email', __( 'Email', 'colorrun' ), 'Email' );
 		$meta->add_field( 'dateofbirth', __( 'Date of birth', 'colorrun' ), 'Date' );
-		$meta->add_field( 'sex', __( 'Sex', 'colorrun' ), function () {
+		$meta->add_field( 'gender', __( 'Gender', 'colorrun' ), function () {
 			$f = new Select();
 			$f->set_options( [
 				'male'   => __( 'Male', 'colorrun' ),
@@ -93,6 +89,8 @@ class Initialization extends AbstractInitialization {
 
 			return $f;
 		} );
+		$meta->add_field( 'country', __( 'Country', 'colorrun' ) );
+		$meta->add_field( 'city', __( 'City', 'colorrun' ) );
 		$meta->add_field( 'bib', __( 'Bib', 'colorrun' ), function () {
 			global $post;
 			if ( $event = Functions::get_event( $post->ID ) ) {

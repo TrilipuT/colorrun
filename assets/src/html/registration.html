@@ -33,23 +33,23 @@
                     </div>
                 </div>
                 <div class="step">
-                    <div class="step-row">
+                    <div class="step-row active">
                         <h2 class="title">Форма заповнення даних</h2>
                         <div class="form-area">
                             <form class="registration-form">
-                                <select id="distance" name="distance" required>
+                                <!--<select id="distance" name="distance" required>
                                     <option value="hide">Дистанція</option>
                                     <option value="42">42</option>
                                     <option value="21">21</option>
                                     <option value="10">10</option>
-                                </select>
+                                </select>-->
                                 <div class="input-group">
-                                    <input type="text" name="surname" id="surname" required>
+                                    <input type="text" name="lastname" id="lastname" required>
                                     <span class="bar"></span>
                                     <label>Прізвище</label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" name="name" id="name" required>
+                                    <input type="text" name="firstname" id="firstname" required>
                                     <span class="bar"></span>
                                     <label>Ім'я</label>
                                 </div>
@@ -78,7 +78,12 @@
                                     <label>E-mail</label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" id="phone" name="phone" required>
+                                    <input type="text" id="dateofbirth" name="dateofbirth" required>
+                                    <span class="bar"></span>
+                                    <label>Дата народження</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="phone" name="info[phone]" required>
                                     <span class="bar"></span>
                                     <label>Моб. телефон</label>
                                 </div>
@@ -93,7 +98,7 @@
                                     <label>Місто</label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" id="club" name="club">
+                                    <input type="text" id="club" name="info[club]">
                                     <span class="bar"></span>
                                     <label>Клуб</label>
                                 </div>
@@ -101,35 +106,35 @@
                                     <span class="label">Розмір футболки: </span>
                                     <div class="options">
                                         <label class="radio">
-                                            <input id="xs" type="radio" name="tshirt_size" required>
+                                            <input id="xs" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             XS
                                         </label>
                                         <label class="radio">
-                                            <input id="s" type="radio" name="tshirt_size" required>
+                                            <input id="s" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             S
                                         </label>
                                         <label class="radio">
-                                            <input id="m" type="radio" name="tshirt_size" required>
+                                            <input id="m" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             M
                                         </label>
                                         <label class="radio">
-                                            <input id="l" type="radio" name="tshirt_size" required>
+                                            <input id="l" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             L
                                         </label>
                                         <label class="radio">
-                                            <input id="xl" type="radio" name="tshirt_size" required>
+                                            <input id="xl" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
@@ -152,7 +157,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="step-row" style="display: none">
+                    <div class="step-row">
                         <h2 class="title">Персональна інформація</h2>
                         <div class="personal-info">
                             <button class="edit-info">
@@ -185,7 +190,7 @@
                             </dl>
                         </div>
                     </div>
-                    <div class="step-row" style="display: none">
+                    <div class="step-row">
                         <h2 class="title">Підтвердження замовлення</h2>
                         <div class="personal-info">
                             <dl class="preliminary-price">
@@ -202,7 +207,7 @@
                             </dl>
                         </div>
                     </div>
-                    <div class="step-row" style="display: none">
+                    <div class="step-row">
                         <h2 class="title">Оплата реєстрації</h2>
                         <div class="personal-info">
                             <h3 class="user-name">Olga Andrushkevich</h3>
@@ -213,7 +218,7 @@
                 </div>
             </div>
             <div class="registration-buttons">
-                <button class="button back">НАЗАД</button>
+                <button class="button back hide">НАЗАД</button>
                 <button class="button next">ПРОДОВЖИТИ</button>
             </div>
         </div>

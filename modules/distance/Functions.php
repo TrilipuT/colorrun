@@ -65,7 +65,18 @@ class Functions extends AbstractFunctions {
 	 *
 	 * @return int
 	 */
-	public static function get_slots( int $id = 0 ): int {
+	public static function get_total_slots( int $id = 0 ): int {
+		$id = self::get_id( $id );
+
+		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'slots' );
+	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return int
+	 */
+	public static function get_available_slots( int $id = 0 ): int {
 		$id = self::get_id( $id );
 
 		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'slots' );

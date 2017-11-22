@@ -66,7 +66,7 @@ class Functions extends AbstractFunctions {
 	 *
 	 * @return \WP_Query
 	 */
-	public static function get_registered_for_distance( int $distance_id ): \WP_Query {
+	public static function get_registered_for_distance( int $distance_id, int $status = 1 ): \WP_Query {
 		return new \WP_Query( [
 			'post_type'     => \modules\participant\Initialization::POST_TYPE,
 			'fields'        => 'ids',
@@ -84,5 +84,14 @@ class Functions extends AbstractFunctions {
 				],
 			],
 		] );
+	}
+
+	public static function start_registration( int $distance_id ): int {
+		$participant = Participant::create();
+		$participant->set_distance( $distance_id );
+		//schedule remove if not payed
+		wp_schedule_single_event( time() + 15 * MINUTE_IN_SECONDS, 'remove_registration', [ $participant->id ] );
+
+		return $participant->id;
 	}
 }

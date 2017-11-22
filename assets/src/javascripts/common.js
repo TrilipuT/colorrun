@@ -10,10 +10,11 @@ import accordion from './modules/accordionWidget';
 import burger from './modules/burgerToggler';
 import select from './modules/customSelect';
 import inputSelection from './modules/input-selection';
+import registration from './modules/registration';
 
 import sendValidation from './modules/send-validation';
 
-$( function ( $ ) {
+$(function ($) {
     detectTouchSupport();
     gallery();
     countdown();
@@ -23,16 +24,18 @@ $( function ( $ ) {
     select();
 
     sendValidation();
-
-    $('.registration-form').find('[name="email"], [name="club"]').on('change', function () {
-        let $item = $(this);
-
-        inputSelection($item);
-    });
+    $registration = $('.registration-form');
+    if ($registration.length) {
+        $registration.find('[name="email"], [name="club"]').on('change', function () {
+            let $item = $(this);
+            inputSelection($item);
+        });
+        registration();
+    }
 
     $('.shave').each(function (i, item) {
         shave(item, $(item).parent().height() * 0.6);
     });
 
-} );
+});
 

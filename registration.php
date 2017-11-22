@@ -6,13 +6,19 @@
  * Date: 11/19/17
  * Time: 23:18
  */
+if ( ! isset( $_GET['distance'] ) && ! $_GET['distance'] ) {
+	wp_redirect( home_url() );
+	exit();
+}
+$distance_id = (int) $_GET['distance'];
+$id = Registration::start_registration( $distance_id );
 get_header(); ?>
     <div class="hero-section registration" style="background-image: url('<?= Theme::get_background_image() ?>')">
         <div class="text-container">
             <h1 class="title"><?php the_title() ?></h1>
         </div>
     </div>
-    <section class="registration-section">
+    <section class="registration-section" data-participant="<?= $id ?>">
         <div class="wrapper-inner">
             <div class="registration-breadcrumbs">
                 <div class="item first active">
@@ -29,23 +35,23 @@ get_header(); ?>
                 <div class="registration-countdown" data-time="<?= time() ?>">
                     <time class="timer">15 : 00</time>
                     <div class="text-container">
-						<?php _ex( 'You have <strong> 15 minutes</strong><br> to complete your registration', 'У вас є <strong>15 хвилин</strong><br> щоб завершити реєстрацію', 'colorrun' ); ?>
+						<?php _ex( 'You have <strong>15 minutes</strong><br> to complete your registration', 'У вас є <strong>15 хвилин</strong><br> щоб завершити реєстрацію', 'colorrun' ); ?>
                     </div>
                 </div>
                 <div class="step">
-                    <div class="step-row">
+                    <div class="step-row active">
                         <h2 class="title"><?php _ex( 'Your information', 'Форма заповнення даних', 'colorrun' ) ?></h2>
                         <div class="form-area">
                             <form class="registration-form">
-                                <select id="distance" name="distance" required>
-                                    <option value="hide"><?php _e( 'Distance', 'colorrun' ) ?></option>
-									<?php $distances = Distance::get_distances();
+                                <!--<select id="distance" name="distance" required>
+                                    <option value="hide"><?php /*_e( 'Distance', 'colorrun' ) */ ?></option>
+									<?php /*$distances = Distance::get_distances();
 									while ( $distances->have_posts() ):
-										$distances->the_post(); ?>
-                                        <option value="<?php the_ID() ?>"><?php the_title() ?></option>
-									<?php endwhile;
-									wp_reset_postdata(); ?>
-                                </select>
+										$distances->the_post(); */ ?>
+                                        <option value="<?php /*the_ID() */ ?>"><?php /*the_title() */ ?></option>
+									<?php /*endwhile;
+									wp_reset_postdata(); */ ?>
+                                </select>-->
                                 <div class="input-group">
                                     <input type="text" name="firstname" id="firstname" required>
                                     <span class="bar"></span>
@@ -57,7 +63,7 @@ get_header(); ?>
                                     <label><?php _e( 'Last name', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="radio-group">
-                                    <span class="label"><?php _e( 'Sex:', 'colorrun' ) ?></span>
+                                    <span class="label"><?php _e( 'Gender:', 'colorrun' ) ?></span>
                                     <div class="options">
                                         <label class="radio">
                                             <input id="male" type="radio" name="gender" required>
@@ -81,7 +87,12 @@ get_header(); ?>
                                     <label><?php _e( 'E-mail', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" id="phone" name="phone" required>
+                                    <input type="text" id="dateofbirth" name="dateofbirth" required>
+                                    <span class="bar"></span>
+                                    <label><?php _e( 'Date of birth', 'colorrun' )   ?></label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="phone" name="info[phone]" required>
                                     <span class="bar"></span>
                                     <label><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></label>
                                 </div>
@@ -96,7 +107,7 @@ get_header(); ?>
                                     <label><?php _e( 'City', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" id="club" name="club">
+                                    <input type="text" id="club" name="info[club]">
                                     <span class="bar"></span>
                                     <label><?php _e( 'Club', 'colorrun' ) ?></label>
                                 </div>
@@ -104,35 +115,35 @@ get_header(); ?>
                                     <span class="label"><?php _e( 'T-shirt size:', 'colorrun' ) ?></span>
                                     <div class="options">
                                         <label class="radio">
-                                            <input id="xs" type="radio" name="tshirt_size" required>
+                                            <input id="xs" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             XS
                                         </label>
                                         <label class="radio">
-                                            <input id="s" type="radio" name="tshirt_size" required>
+                                            <input id="s" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             S
                                         </label>
                                         <label class="radio">
-                                            <input id="m" type="radio" name="tshirt_size" required>
+                                            <input id="m" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             M
                                         </label>
                                         <label class="radio">
-                                            <input id="l" type="radio" name="tshirt_size" required>
+                                            <input id="l" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             L
                                         </label>
                                         <label class="radio">
-                                            <input id="xl" type="radio" name="tshirt_size" required>
+                                            <input id="xl" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
@@ -141,21 +152,21 @@ get_header(); ?>
                                     </div>
                                 </div>
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="personal_data" name="personal_data" required />
+                                    <input type="checkbox" id="personal_data" name="personal_data" required/>
                                     <label for="personal_data">
-	                                    <?php printf( __( 'Так, я підтверджую, що вказані мною дані є вірними та актуальними. %sЗгода на обробку персональних даних%s.', 'colorrun' ), '<a href="" target="_blank"><strong>', '</strong></a>' ) ?>
+										<?php printf( __( 'Так, я підтверджую, що вказані мною дані є вірними та актуальними. %sЗгода на обробку персональних даних%s.', 'colorrun' ), '<a href="" target="_blank"><strong>', '</strong></a>' ) ?>
                                     </label>
                                 </div>
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="event_rules" name="event_rules" required />
+                                    <input type="checkbox" id="event_rules" name="event_rules" required/>
                                     <label for="event_rules">
-	                                    <?php printf( __( 'Я ознайомлений/ознайомлена з %sРегламентом Заходу%s.', 'colorrun' ), '<a href="" target="_blank"><strong>', '</strong></a>' ) ?>
+										<?php printf( __( 'Я ознайомлений/ознайомлена з %sРегламентом Заходу%s.', 'colorrun' ), '<a href="" target="_blank"><strong>', '</strong></a>' ) ?>
                                     </label>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div class="step-row" style="display: none">
+                    <div class="step-row">
                         <h2 class="title">Персональна інформація</h2>
                         <div class="personal-info">
                             <button class="edit-info">
@@ -188,7 +199,7 @@ get_header(); ?>
                             </dl>
                         </div>
                     </div>
-                    <div class="step-row" style="display: none">
+                    <div class="step-row">
                         <h2 class="title">Підтвердження замовлення</h2>
                         <div class="personal-info">
                             <dl class="preliminary-price">
@@ -205,7 +216,7 @@ get_header(); ?>
                             </dl>
                         </div>
                     </div>
-                    <div class="step-row" style="display: none">
+                    <div class="step-row">
                         <h2 class="title">Оплата реєстрації</h2>
                         <div class="personal-info">
                             <h3 class="user-name">Olga Andrushkevich</h3>
@@ -216,7 +227,7 @@ get_header(); ?>
                 </div>
             </div>
             <div class="registration-buttons">
-                <button class="button back">НАЗАД</button>
+                <button class="button back hide">НАЗАД</button>
                 <button class="button next">ПРОДОВЖИТИ</button>
             </div>
         </div>

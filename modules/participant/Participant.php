@@ -24,13 +24,15 @@ class Participant {
 	private $distance;
 	private $bib;
 	private $email;
-	private $status_code;
+	private $status;
 	private $additional_info;
 
 	/**
 	 * Participant constructor.
 	 *
 	 * @param int $id
+	 *
+	 * @return Participant
 	 */
 	public function __construct( int $id ) {
 		$this->id              = $id;
@@ -40,14 +42,8 @@ class Participant {
 		$this->lastname        = $this->get_meta( 'lastname' );
 		$this->firstname       = $this->get_meta( 'firstname' );
 		$this->dateofbirth     = $this->get_meta( 'dateofbirth' );
-		$this->status_code     = $this->get_meta( 'status' );
+		$this->status          = $this->get_meta( 'status' );
 		$this->additional_info = $this->get_additional_info();
-	}
-
-	public function get_amount_to_pay(): int {
-		$amount = \modules\distance\Functions::get_current_amount( $this->distance );
-
-		return (int) $amount;
 	}
 
 	/**
@@ -57,10 +53,6 @@ class Participant {
 	 */
 	private function get_meta( $name ): string {
 		return (string) MetaBox::get( $this->id, Initialization::POST_TYPE, $name );
-	}
-
-	public function get_payment_status() {
-		return $this->status_code;
 	}
 
 	/**
@@ -76,18 +68,62 @@ class Participant {
 	}
 
 	/**
+	 * Create new participant. Set status to NOT_PAYED
+	 * @return Participant
+	 */
+	public static function create(): Participant {
+		$participant_id = wp_insert_post( [ 'post_type' => Initialization::POST_TYPE ] );
+		$participant = new self( $participant_id );
+		$participant->set_status( \modules\payment\Initialization::STATUS['NOT_PAYED'] );
+
+		return $participant;
+	}
+
+	public function set_status( string $status ): Participant {
+		$this->status = $status;
+
+		return $this;
+	}
+
+	public function set_distance( int $id ): self {
+		$this->distance = $id;
+
+		return $this;
+	}
+
+	public function get_amount_to_pay(): int {
+		$amount = \modules\distance\Functions::get_current_amount( $this->distance );
+
+		return (int) $amount;
+	}
+
+	public function get_payment_status() {
+		return $this->status;
+	}
+
+	public function __get( $name ) {
+		return $this->$name;
+	}
+
+	public function __set( $name, $value ) {
+		$this->$name = $value;
+
+		return (bool) MetaBox::set( $this->id, Initialization::POST_TYPE, $name, $value );
+	}
+
+
+	/**
 	 * @return array
 	 */
 	public function get_info(): array {
 		return [
-			'ID'              => $this->id,
+			'id'              => $this->id,
 			'email'           => $this->email,
 			'firstname'       => $this->firstname,
 			'lastname'        => $this->lastname,
-			'status'          => Functions::get_statuses()[ $this->status_code ],
-			'status_code'     => $this->status_code,
+			'status_name'     => Functions::get_statuses()[ $this->status ],
+			'status'          => $this->status,
 			'additional_info' => $this->get_additional_info(),
 		];
 	}
-
 }

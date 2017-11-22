@@ -28,7 +28,7 @@
             <div class="text-container">
                 <div class="label"><?php _e( 'participants', 'colorrun' ); ?></div>
                 <div class="value"><?= Registration::get_registered_for_distance_count( get_the_ID() ) ?>
-                    /<?= Distance::get_slots() ?></div>
+                    /<?= Distance::get_total_slots() ?></div>
             </div>
         </div>
     </div>
