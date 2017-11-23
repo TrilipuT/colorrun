@@ -89,9 +89,9 @@ class Functions extends AbstractFunctions {
 	public static function start_registration( int $distance_id ): int {
 		$participant = Participant::create();
 		$participant->set_distance( $distance_id );
-		//schedule remove if not payed
-		wp_schedule_single_event( time() + 15 * MINUTE_IN_SECONDS, 'remove_registration', [ $participant->id ] );
+		//schedule remove if not payed in 15 minutes
+		wp_schedule_single_event( time() + 15 * MINUTE_IN_SECONDS, 'remove_registration', [ $participant->get_id() ] );
 
-		return $participant->id;
+		return $participant->get_id();
 	}
 }

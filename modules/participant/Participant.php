@@ -17,14 +17,7 @@ use WPKit\PostType\MetaBox;
  */
 class Participant {
 	private $id;
-	private $firstname;
-	private $lastname;
-	private $dateofbirth;
-
-	private $distance;
-	private $bib;
-	private $email;
-	private $status;
+	private $data = [];
 	private $additional_info;
 
 	/**
@@ -35,15 +28,15 @@ class Participant {
 	 * @return Participant
 	 */
 	public function __construct( int $id ) {
-		$this->id              = $id;
-		$this->bib             = $this->get_meta( 'bib' );
-		$this->email           = $this->get_meta( 'email' );
-		$this->distance        = $this->get_meta( 'distance' );
-		$this->lastname        = $this->get_meta( 'lastname' );
-		$this->firstname       = $this->get_meta( 'firstname' );
-		$this->dateofbirth     = $this->get_meta( 'dateofbirth' );
-		$this->status          = $this->get_meta( 'status' );
-		$this->additional_info = $this->get_additional_info();
+		$this->id                  = $id;
+		$this->data['bib']         = $this->get_meta( 'bib' );
+		$this->data['email']       = $this->get_meta( 'email' );
+		$this->data['distance']    = $this->get_meta( 'distance' );
+		$this->data['lastname']    = $this->get_meta( 'lastname' );
+		$this->data['firstname']   = $this->get_meta( 'firstname' );
+		$this->data['dateofbirth'] = $this->get_meta( 'dateofbirth' );
+		$this->data['status']      = $this->get_meta( 'status' );
+		$this->additional_info     = $this->get_additional_info();
 	}
 
 	/**
@@ -73,7 +66,7 @@ class Participant {
 	 */
 	public static function create(): Participant {
 		$participant_id = wp_insert_post( [ 'post_type' => Initialization::POST_TYPE ] );
-		$participant = new self( $participant_id );
+		$participant    = new Participant( $participant_id );
 		$participant->set_status( \modules\payment\Initialization::STATUS['NOT_PAYED'] );
 
 		return $participant;
@@ -83,6 +76,20 @@ class Participant {
 		$this->status = $status;
 
 		return $this;
+	}
+
+	public function get_id() {
+		return $this->id;
+	}
+
+	public function __get( $name ) {
+		return $this->data[ $name ];
+	}
+
+	public function __set( $name, $value ) {
+		$this->data[ $name ] = $value;
+
+		return (bool) MetaBox::set( $this->id, Initialization::POST_TYPE, $name, $value );
 	}
 
 	public function set_distance( int $id ): self {
@@ -101,17 +108,6 @@ class Participant {
 		return $this->status;
 	}
 
-	public function __get( $name ) {
-		return $this->$name;
-	}
-
-	public function __set( $name, $value ) {
-		$this->$name = $value;
-
-		return (bool) MetaBox::set( $this->id, Initialization::POST_TYPE, $name, $value );
-	}
-
-
 	/**
 	 * @return array
 	 */
@@ -125,5 +121,17 @@ class Participant {
 			'status'          => $this->status,
 			'additional_info' => $this->get_additional_info(),
 		];
+	}
+
+	public function set_info( array $info ) {
+		foreach ( $info as $key => $value ) {
+			$this->$key = $value;
+		}
+		if ( isset( $info['firstname'] ) && isset( $info['lastname'] ) ) {
+			wp_update_post( [
+				'ID'         => $this->id,
+				'post_title' => $info['firstname'] . ' ' . $info['lastname'],
+			] );
+		}
 	}
 }

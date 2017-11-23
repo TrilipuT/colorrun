@@ -6,7 +6,10 @@ export default () => {
 
     $('.registration-buttons').on('click', function () {
         sendValidation(names);
-        errorsChecker(errors)
+        errorsChecker(errors);
+        if(errors.length == 0){
+            $('.registration-form').submit();
+        }
     });
 
     $('.registration-form').find('select[required], input[required]').on('change', function () {

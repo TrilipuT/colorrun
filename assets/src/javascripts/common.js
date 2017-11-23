@@ -24,9 +24,9 @@ $(function ($) {
     select();
 
     sendValidation();
-    $registration = $('.registration-form');
+    let $registration = $('.registration-form');
     if ($registration.length) {
-        $registration.find('[name="email"], [name="club"]').on('change', function () {
+        $registration.find('[name="email"], [name="info[club]"]').on('change', function () {
             let $item = $(this);
             inputSelection($item);
         });

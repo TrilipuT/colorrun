@@ -2,6 +2,7 @@
 
 namespace modules\registration;
 
+use modules\participant\Participant;
 use Simple_REST_API\Router;
 use WPKit\Module\AbstractInitialization;
 
@@ -21,6 +22,17 @@ class Initialization extends AbstractInitialization {
 			return $participant->get_info();
 		} );
 
+		$router->post( 'updateInfo', function () {
+			if ( ! isset( $_POST['participant_id'] ) ) {
+				return 'empty';
+			}
+			$participant = new Participant( (int) $_POST['participant_id'] );
+			$participant->set_info( $_POST );
+
+			return $participant->get_info();
+
+			return $_POST;
+		} );
 
 	}
 

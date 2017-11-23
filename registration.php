@@ -10,15 +10,15 @@ if ( ! isset( $_GET['distance'] ) && ! $_GET['distance'] ) {
 	wp_redirect( home_url() );
 	exit();
 }
-$distance_id = (int) $_GET['distance'];
-$id = Registration::start_registration( $distance_id );
+$distance_id    = (int) $_GET['distance'];
+$participant_id = Registration::start_registration( $distance_id );
 get_header(); ?>
     <div class="hero-section registration" style="background-image: url('<?= Theme::get_background_image() ?>')">
         <div class="text-container">
             <h1 class="title"><?php the_title() ?></h1>
         </div>
     </div>
-    <section class="registration-section" data-participant="<?= $id ?>">
+    <section class="registration-section">
         <div class="wrapper-inner">
             <div class="registration-breadcrumbs">
                 <div class="item first active">
@@ -66,14 +66,14 @@ get_header(); ?>
                                     <span class="label"><?php _e( 'Gender:', 'colorrun' ) ?></span>
                                     <div class="options">
                                         <label class="radio">
-                                            <input id="male" type="radio" name="gender" required>
+                                            <input id="male" type="radio" name="gender" value="male" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
 											<?php _e( 'Male', 'colorrun' ) ?>
                                         </label>
                                         <label class="radio">
-                                            <input id="female" type="radio" name="gender" required>
+                                            <input id="female" type="radio" name="gender" value="female" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
@@ -115,35 +115,35 @@ get_header(); ?>
                                     <span class="label"><?php _e( 'T-shirt size:', 'colorrun' ) ?></span>
                                     <div class="options">
                                         <label class="radio">
-                                            <input id="xs" type="radio" name="info[tshirt_size]" required>
+                                            <input id="xs" value="xc" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             XS
                                         </label>
                                         <label class="radio">
-                                            <input id="s" type="radio" name="info[tshirt_size]" required>
+                                            <input id="s" value="s" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             S
                                         </label>
                                         <label class="radio">
-                                            <input id="m" type="radio" name="info[tshirt_size]" required>
+                                            <input id="m" value="m" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             M
                                         </label>
                                         <label class="radio">
-                                            <input id="l" type="radio" name="info[tshirt_size]" required>
+                                            <input id="l" value="l" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
                                             L
                                         </label>
                                         <label class="radio">
-                                            <input id="xl" type="radio" name="info[tshirt_size]" required>
+                                            <input id="xl" value="xl" type="radio" name="info[tshirt_size]" required>
                                             <span class="outer">
                                             <span class="inner"></span>
                                         </span>
@@ -152,17 +152,19 @@ get_header(); ?>
                                     </div>
                                 </div>
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="personal_data" name="personal_data" required/>
+                                    <input type="checkbox" id="personal_data" name="personal_data" value="1" required/>
                                     <label for="personal_data">
 										<?php printf( __( 'Так, я підтверджую, що вказані мною дані є вірними та актуальними. %sЗгода на обробку персональних даних%s.', 'colorrun' ), '<a href="" target="_blank"><strong>', '</strong></a>' ) ?>
                                     </label>
                                 </div>
                                 <div class="checkbox-group">
-                                    <input type="checkbox" id="event_rules" name="event_rules" required/>
+                                    <input type="checkbox" id="event_rules" name="event_rules" value="1" required/>
                                     <label for="event_rules">
 										<?php printf( __( 'Я ознайомлений/ознайомлена з %sРегламентом Заходу%s.', 'colorrun' ), '<a href="" target="_blank"><strong>', '</strong></a>' ) ?>
                                     </label>
                                 </div>
+                                <input type="hidden" name="participant_id" value="<?= $participant_id ?>">
+                                <button type="submit">send</button>
                             </form>
                         </div>
                     </div>
