@@ -43,15 +43,6 @@ get_header(); ?>
                         <h2 class="title"><?php _ex( 'Your information', 'Форма заповнення даних', 'colorrun' ) ?></h2>
                         <div class="form-area">
                             <form class="registration-form">
-                                <!--<select id="distance" name="distance" required>
-                                    <option value="hide"><?php /*_e( 'Distance', 'colorrun' ) */ ?></option>
-									<?php /*$distances = Distance::get_distances();
-									while ( $distances->have_posts() ):
-										$distances->the_post(); */ ?>
-                                        <option value="<?php /*the_ID() */ ?>"><?php /*the_title() */ ?></option>
-									<?php /*endwhile;
-									wp_reset_postdata(); */ ?>
-                                </select>-->
                                 <div class="input-group">
                                     <input type="text" name="firstname" id="firstname" required>
                                     <span class="bar"></span>
@@ -89,7 +80,7 @@ get_header(); ?>
                                 <div class="input-group">
                                     <input type="text" id="dateofbirth" name="dateofbirth" required>
                                     <span class="bar"></span>
-                                    <label><?php _e( 'Date of birth', 'colorrun' )   ?></label>
+                                    <label><?php _e( 'Date of birth', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" id="phone" name="info[phone]" required>

@@ -24,16 +24,29 @@ class Initialization extends AbstractInitialization {
 
 		$router->post( 'updateInfo', function () {
 			if ( ! isset( $_POST['participant_id'] ) ) {
-				return 'empty';
+				return $this->send_error( 'No participant id' );
 			}
 			$participant = new Participant( (int) $_POST['participant_id'] );
 			$participant->set_info( $_POST );
 
-			return $participant->get_info();
-
-			return $_POST;
+			return $this->send_success();
 		} );
 
+	}
+
+	private function send_error( string $error = '' ): array {
+		return [
+			'success' => false,
+			'message' => $error,
+		];
+	}
+
+	private function send_success( array $data = [] ): array {
+		unset( $data['success'] );
+
+		return array_merge( [
+			'success' => true,
+		], $data );
 	}
 
 	public function add_action_remove_registration( $id ) {
