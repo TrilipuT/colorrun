@@ -38,7 +38,7 @@
 	                <?php wp_nav_menu( [ 'theme_location' => 'primary', 'container' => 'ul' ] ) ?>
                 </div>
                 <a href="#" class="registration button">
-				    <?php _e( 'Register now', 'colorrun' ) ?>
+				    <?php _e( 'Register', 'colorrun' ) ?>
                 </a>
             </div>
         </div>

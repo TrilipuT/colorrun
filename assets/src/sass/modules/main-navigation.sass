@@ -119,14 +119,75 @@
 							content: '— '
 		a
 			color: $white
-	.page-template-registration
+	.registration
+		position: relative
 		margin-left: 50 / 1340 * 100%
+		padding: 15px 30px 15px 15px
 		width: 195px
 		box-sizing: border-box
 		+bodyclass(page-template-registration)
 			display: none
 		+breakpoint-max(767)
 			float: right
-			width: 140px
+			width: 160px
 			margin-left: 0
+			padding: 10px 20px 10px 5px
 			order: 1
+			font-size: 11px
+		&:after
+			content: ''
+			position: absolute
+			margin: auto
+			top: calc(50% - 2px)
+			right: 10px
+			width: 0
+			height: 0
+			border-left: 5px solid transparent
+			border-right: 5px solid transparent
+			border-top: 5px solid $yellow-warm
+			transition: border .3s ease
+		&:hover
+			opacity: 1
+			border-color: $orange
+			color: $orange
+			&:after
+				border-top: 5px solid $orange
+			.sub-menu
+				transform: translateY(100%)
+				opacity: 1
+				pointer-events: auto
+				+breakpoint-max(767)
+					transform: translateY(100%) translateX(-50%)
+		.sub-menu
+			min-width: 220px
+			max-width: 300px
+			position: absolute
+			padding-top: 15px
+			bottom: 0
+			right: 0
+			opacity: 0
+			transform: translateY(calc(100% - 15px))
+			pointer-events: none
+			transition: transform .3s ease, opacity .3s ease
+			+breakpoint-max(767)
+				left: 50%
+				right: auto
+				transform: translateY(calc(100% - 15px)) translateX(-50%)
+			.menu-item
+				display: block
+				max-width: none
+				margin:
+					right: 0
+					top: 0
+					bottom: 0
+				background: $white
+				color: $black-clr
+				text-align: left
+				font-weight: 400
+				+hover
+					color: $yellow-warm
+					background: $light-gray
+				a
+					display: block
+					padding: 10px 20px
+					color: inherit
