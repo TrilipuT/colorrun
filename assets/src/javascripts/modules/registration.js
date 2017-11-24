@@ -34,10 +34,13 @@ export default () => {
     }
 
     function infoFill(info) {
-        let $infoTable = $('.personal-info .info');
+        let $infoTable = $('.personal-info .info'),
+            $user = $('.user-name');
 
         for (let key in info) {
             $infoTable.find('[data-id="' + key + '"]').text(info[key])
         }
+
+        $user.text(info['firstname'] + ' ' + info['lastname']);
     }
 }
