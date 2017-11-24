@@ -1,14 +1,23 @@
 import $ from 'jquery';
+import Inputmask from 'inputmask';
 
 export default () => {
+    let dateBirth = document.getElementById('dateofbirth'),
+        im = new Inputmask();
+
+    im.mask(dateBirth);
+
+
     let names = ['lastname', 'firstname', 'gender', 'email','dateofbirth', 'info[phone]', 'country', 'city', 'info[tshirt_size]', 'personal_data', 'event_rules'],
         errors = [];
 
-    $('.registration-buttons').on('click', function () {
+    $('.registration-buttons .next').on('click', function (e) {
         sendValidation(names);
         errorsChecker(errors);
+
         if(errors.length == 0){
             $('.registration-form').submit();
+            goToNext(e);
         }
     });
 
@@ -19,6 +28,11 @@ export default () => {
         checkInputs(false, inputName, $item);
         errorsChecker(errors)
     });
+
+    function goToNext(e) {
+        e.preventDefault();
+        $('.steps-area').find('.active').removeClass('active').next().addClass('active');
+    }
 
     function sendValidation(array) {
         array.forEach(function (name) {
@@ -75,10 +89,26 @@ export default () => {
             removeItem(errors, itemName);
         }
 
-        if ((type === 'text' || type === 'email' || type === 'number') && !$input.val()) {
+        if (type === 'email' && !validEmail($input.val())) {
+            $wrapper.addClass('error');
+            errors.push(itemName);
+        } else if (type === 'email' && validEmail($input.val())) {
+            $wrapper.removeClass('error');
+            removeItem(errors, itemName);
+        }
+
+        if (type === 'text' && itemName === 'dateofbirth' && !validDate($input.val())) {
+            $wrapper.addClass('error');
+            errors.push(itemName);
+        } else if (type === 'text' && itemName === 'dateofbirth' && validDate($input.val())) {
+            $wrapper.removeClass('error');
+            removeItem(errors, itemName);
+        }
+
+        if ((type === 'text' || type === 'number') && !$input.val() && itemName !== 'dateofbirth') {
             $wrapper.addClass('error');
             errors.push(itemName)
-        } else if ((type === 'text' || type === 'email' || type === 'number') && $input.val()) {
+        } else if ((type === 'text' || type === 'number') && $input.val() && itemName !== 'dateofbirth') {
             $wrapper.removeClass('error');
             removeItem(errors, itemName);
         }
@@ -97,5 +127,19 @@ export default () => {
             }
         }
         return arr;
+    }
+    
+    function validEmail(value) {
+        let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        return reg.test(value)
+    }
+
+    function validDate(value) { {
+        let reg = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+
+        return reg.test(value)
+    }
+
     }
 }

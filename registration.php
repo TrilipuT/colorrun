@@ -78,12 +78,12 @@ get_header(); ?>
                                     <label><?php _e( 'E-mail', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" id="dateofbirth" name="dateofbirth" required>
+                                    <input type="text" id="dateofbirth" name="dateofbirth" data-inputmask="'alias': 'date'" required>
                                     <span class="bar"></span>
                                     <label><?php _e( 'Date of birth', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" id="phone" name="info[phone]" required>
+                                    <input type="number" id="phone" name="info[phone]" required>
                                     <span class="bar"></span>
                                     <label><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></label>
                                 </div>
@@ -170,25 +170,25 @@ get_header(); ?>
                                 <dt>Дистанція</dt>
                                 <dd><?= get_the_title($distance_id) ?></dd>
                                 <dt>Прізвище</dt>
-                                <dd>Andrushkevich</dd>
+                                <dd data-id="lastname"></dd>
                                 <dt>Ім’я</dt>
-                                <dd>Olga</dd>
+                                <dd data-id="firstname"></dd>
                                 <dt>Стать</dt>
-                                <dd>Жіноча</dd>
+                                <dd data-id="gender"></dd>
                                 <dt>E-mail</dt>
-                                <dd>o.andrushkevych@gmail.com</dd>
+                                <dd data-id="email"></dd>
                                 <dt>Моб. телефон</dt>
-                                <dd>+380930334567</dd>
+                                <dd data-id="info[phone]"></dd>
                                 <dt>Дата народження</dt>
-                                <dd>10/05/1992</dd>
+                                <dd data-id="dateofbirth"></dd>
                                 <dt>Країна</dt>
-                                <dd>Україна</dd>
+                                <dd data-id="country"></dd>
                                 <dt>Місто</dt>
-                                <dd>Київ</dd>
+                                <dd data-id="city"></dd>
                                 <dt>Клуб</dt>
-                                <dd>KM Runing Club</dd>
+                                <dd data-id="info[club]"></dd>
                                 <dt>Розмір футболки</dt>
-                                <dd>M</dd>
+                                <dd data-id="info[tshirt_size]"></dd>
                             </dl>
                         </div>
                     </div>
