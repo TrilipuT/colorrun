@@ -71,11 +71,11 @@ class Initialization extends AbstractInitialization {
 	}
 
 	private function add_metabox( MetaBox $metabox ) {
-		$post_ID = (int) $_GET['post'];
-		if ( empty ( $post_ID ) && get_post_type() == 'page' ) {
+		if ( ! isset( $_GET['post'] ) && ! $_GET['post'] && get_post_type() != 'page' ) {
 			return;
 		}
-		$pages = function_exists( 'pll_get_post_translations' ) ? array_values( pll_get_post_translations( (int) get_option( 'page_on_front' ) ) ) : [ get_option( 'page_on_front' ) ];
+		$post_ID = (int) $_GET['post'];
+		$pages   = function_exists( 'pll_get_post_translations' ) ? array_values( pll_get_post_translations( (int) get_option( 'page_on_front' ) ) ) : [ get_option( 'page_on_front' ) ];
 		if ( in_array( $post_ID, $pages ) ) {
 			$metabox->add_post_type( 'page' );
 		}

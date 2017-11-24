@@ -1,0 +1,147 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "ca899f2496937e39950931b3fa0920d8",
+    "packages": [
+        {
+            "name": "liqpay/liqpay",
+            "version": "v1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liqpay/sdk-php.git",
+                "reference": "43d8e690fe68a778d9743cfa1b8bf0061ab46538"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liqpay/sdk-php/zipball/43d8e690fe68a778d9743cfa1b8bf0061ab46538",
+                "reference": "43d8e690fe68a778d9743cfa1b8bf0061ab46538",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./LiqPay.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL 3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Liqpay",
+                    "email": "support@liqpay.ua",
+                    "homepage": "https://www.liqpay.ua/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "SDK for Liqpay",
+            "homepage": "https://github.com/liqpay/sdk-php",
+            "keywords": [
+                "liqpay",
+                "pay"
+            ],
+            "time": "2017-10-26T19:16:56+00:00"
+        },
+        {
+            "name": "redink-no/wpkit",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/redink-no/wpkit.git",
+                "reference": "7d5458ac1dc000b38b4b0bbe0f037ff686ba31f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/redink-no/wpkit/zipball/7d5458ac1dc000b38b4b0bbe0f037ff686ba31f8",
+                "reference": "7d5458ac1dc000b38b4b0bbe0f037ff686ba31f8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WPKit\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Oleksandr Strikha",
+                    "email": "alex@pingbull.no"
+                },
+                {
+                    "name": "Vitaly Nikolaev",
+                    "email": "vitaly@pingbull.no"
+                },
+                {
+                    "name": "Viktor Kuliebiakin",
+                    "email": "victor@pingbull.no"
+                }
+            ],
+            "description": "Object-oriented development framework for WordPress",
+            "keywords": [
+                "wordpress",
+                "wpkit"
+            ],
+            "time": "2017-11-15T12:41:36+00:00"
+        },
+        {
+            "name": "shtrihstr/simple-rest-api",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shtrihstr/simple-rest-api.git",
+                "reference": "e59c87a604065525729486de3081d4a44aa2468e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shtrihstr/simple-rest-api/zipball/e59c87a604065525729486de3081d4a44aa2468e",
+                "reference": "e59c87a604065525729486de3081d4a44aa2468e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5 || ^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Simple_REST_API\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple WordPress REST API Router",
+            "keywords": [
+                "api",
+                "rest",
+                "wordpress"
+            ],
+            "time": "2017-11-23T11:51:01+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "redink-no/wpkit": 20,
+        "shtrihstr/simple-rest-api": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

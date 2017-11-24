@@ -4,7 +4,6 @@
 .phpintel/
 .sass-cache
 node_modules
-composer.lock
 /vendor
 webpack
 assets/built
