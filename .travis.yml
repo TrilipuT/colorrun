@@ -11,6 +11,8 @@ script:
   - gulp build
 after_success:
   gulp deploy
+before_script:
+  - sudo apt-get install -qq sshpass
 deploy:
   provider: script
   skip_cleanup: true
