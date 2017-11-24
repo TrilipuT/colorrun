@@ -17,6 +17,11 @@ use WPKit\PostType\MetaBox;
  * @package modules\participant
  */
 class Participant {
+	/**
+	 * @var $coupon string
+	 */
+
+
 	private $id;
 	private $data = [];
 	private $additional_info;
@@ -101,9 +106,13 @@ class Participant {
 	}
 
 	public function get_amount_to_pay(): int {
-		$amount = \modules\distance\Functions::get_current_price( $this->distance );
+		$price = \modules\distance\Functions::get_current_price( $this->distance );
+		if ( $this->coupon ) {
+			$coupon = new Coupon( $this->coupon );
+			$price  = $coupon->apply_to_price( $price );
+		}
 
-		return (int) $amount;
+		return (int) $price;
 	}
 
 	public function get_payment_status() {
@@ -133,10 +142,11 @@ class Participant {
 	public function use_coupon( string $coupon_code ) {
 		$coupon = new Coupon( $coupon_code );
 		$price  = \modules\distance\Functions::get_current_price( $this->distance );
-		if ( ! $new_price = $coupon->use_coupon( $price ) ) {
+		if ( ! $coupon->use_coupon() ) {
 			return false;
 		}
 		$this->coupon = $coupon_code;
+		$new_price    = $coupon->apply_to_price( $price );
 
 		return $new_price;
 	}

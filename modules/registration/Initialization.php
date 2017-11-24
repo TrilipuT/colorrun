@@ -14,7 +14,7 @@ use WPKit\Module\AbstractInitialization;
 class Initialization extends AbstractInitialization {
 	public function register_api() {
 		$router = new Router( 'register' );
-		$router->post( 'checkUser', function () {
+		$router->post( '/checkUser', function () {
 			$email       = sanitize_email( $_POST['email'] );
 			$distance    = (int) $_POST['distance'];
 			$participant = Functions::get_participant( $email, $distance );
@@ -22,7 +22,7 @@ class Initialization extends AbstractInitialization {
 			return $this->send_success( $participant->get_info() );
 		} );
 
-		$router->post( 'updateInfo', function () {
+		$router->post( '/updateInfo', function () {
 			if ( ! isset( $_POST['participant_id'] ) ) {
 				return $this->send_error( 'No participant id' );
 			}
@@ -32,13 +32,9 @@ class Initialization extends AbstractInitialization {
 			return $this->send_success();
 		} );
 
-		$router->post( 'getDistancePrice', function () {
-			if ( ! isset( $_POST['participant_id'] ) ) {
-				return $this->send_error( 'No participant id' );
-			}
-			$participant_id = absint( $_POST['participant_id'] );
-			$participant    = new Participant( $participant_id );
-			$price          = \modules\distance\Functions::get_current_price( $participant->distance );
+		$router->get( '/getPaymentInfo/{participant_id}', function ( $participant_id ) {
+			$participant = new Participant( $participant_id );
+			$price       = \modules\distance\Functions::get_current_price( $participant->distance );
 			if ( isset( $_POST['coupon'] ) && ! $participant->coupon ) {
 				$coupon_code = $_POST['coupon'];
 				if ( ! $new_price = $participant->use_coupon( $coupon_code ) ) {
@@ -48,8 +44,11 @@ class Initialization extends AbstractInitialization {
 			}
 
 			return $this->send_success( [
-				'price' => $price
+				'price'       => $price,
+				'payment_url' => \modules\payment\Functions::get_payment_url( $participant_id )
 			] );
+		} )->convert( 'participant_id', function ( $participant_id ) {
+			return absint( $participant_id );
 		} );
 	}
 

@@ -45,7 +45,7 @@ class Initialization extends AbstractInitialization {
 
 	}
 
-	public function add_action_template_redirect() {
+	public function _add_action_template_redirect() {
 		$participant_id = get_query_var( 'participant_id' );
 		if ( $participant_id ) {
 			$participant = new Participant( $participant_id );
@@ -56,14 +56,57 @@ class Initialization extends AbstractInitialization {
 			$public_key  = Functions::get_public_key();
 			$private_key = Functions::get_private_key();
 			$liqpay      = new \LiqPay( $public_key, $private_key );
-			$html        = $liqpay->cnb_form( array(
+
+			$description = sprintf( 'Pay for order #%s paticipation in event %s.', $participant_id, get_the_title( $participant->distance ) );
+			if ( $participant->coupon ) {
+				$description .= ' ' . sprintf( 'Coupon %s applied', $participant->coupon );
+			}
+
+			/*$html = $liqpay->cnb_form( array(
 				'action'      => 'pay',
 				'amount'      => $participant->get_amount_to_pay(),
 				'currency'    => \LiqPay::CURRENCY_UAH,
-				'description' => sprintf( 'Pay for %s paticipation in event %s', $participant_id, get_the_title( $participant->get_info()['distance'] ) ),
-				'order_id'    => $participant_id,
-				'version'     => '3'
+				'description' => $description,
+				'order_id'    => 'participant_' . $participant_id,
+				'version'     => '3',
 			) );
+*/
+			$params = array(
+				'action'      => 'pay',
+				'amount'      => $participant->get_amount_to_pay(),
+				'currency'    => \LiqPay::CURRENCY_UAH,
+				'description' => $description,
+				'order_id'    => 'participant_' . $participant_id,
+				'version'     => '3',
+				'public_key'  => $public_key,
+				'private_key' => $private_key,
+			);
+//			$params    = $liqpay->cnb_signature($params);
+
+
+			$data      = base64_encode( json_encode( $params ) );
+			$signature = $liqpay->cnb_signature( $params );
+
+			$html = "<div id=\"liqpay_checkout\"></div>
+<script>
+    window.LiqPayCheckoutCallback = function() {
+    LiqPayCheckout.init({
+	data: \"{$data}\",
+	signature: \"{$signature}\",
+	embedTo: \"#liqpay_checkout\",
+	language: \"ru\",
+	mode: \"embed\" // embed || popup
+    }).on(\"liqpay.callback\", function(data){
+    	console.log(data.status);
+    	console.log(data);
+    }).on(\"liqpay.ready\", function(data){
+    	// ready
+    }).on(\"liqpay.close\", function(data){
+    	// close
+    });
+};
+</script>
+<script src=\"//static.liqpay.ua/libjs/checkout.js\" async></script>";
 			echo $html;
 		}
 	}

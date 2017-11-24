@@ -59,7 +59,7 @@ class Coupon {
 		return $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->table} WHERE code = %s", $code ), ARRAY_A );
 	}
 
-	public function use_coupon( int $price ) {
+	public function use_coupon() {
 		if ( $this->used == $this->count ) {
 			return false;
 		}
@@ -73,11 +73,7 @@ class Coupon {
 			return false;
 		}
 
-		if ( $this->type == self::TYPES['PERCENTAGE'] ) {
-			return floor( $price - ( $price * ( absint( $this->amount ) / 100 ) ) );
-		}
-
-		return floor( $price - $this->amount );
+		return true;
 	}
 
 	public function save() {
@@ -94,6 +90,14 @@ class Coupon {
 
 	public function set_data( array $data ) {
 		$this->data = array_merge( $this->data, $data );
+	}
+
+	public function apply_to_price( $price ) {
+		if ( $this->type == self::TYPES['PERCENTAGE'] ) {
+			return floor( $price - ( $price * ( absint( $this->amount ) / 100 ) ) );
+		}
+
+		return floor( $price - $this->amount );
 	}
 
 	public function __get( $key ) {

@@ -60,7 +60,7 @@ class Initialization extends AbstractInitialization {
 			global $post;
 
 			$status = MetaBox::get( $post->ID, Initialization::POST_TYPE, 'status' );
-			echo Functions::get_statuses()[ $status ];
+			echo isset( Functions::get_statuses()[ $status ] ) ? Functions::get_statuses()[ $status ] : '';
 		} );
 	}
 
