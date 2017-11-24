@@ -39,16 +39,6 @@ class Initialization extends AbstractInitialization {
 		$this->custom_info();
 	}
 
-	public function custom_info() {
-		$meta = new MetaBox( self::POST_TYPE . '_additional', __( 'Additional info', 'colorrun' ) );
-		foreach ( Functions::get_additional_fileds() as $key => $title ) {
-			$meta->add_field( $key, __( $title, 'colorrun' ) );
-		}
-		$meta->set_priority( 'high' );
-		$meta->add_post_type( $this->post_type );
-	}
-
-
 	public function setup_columns() {
 		$this->post_type->add_column( __( 'Distance', 'colorrun' ), function () {
 			global $post;
@@ -124,6 +114,13 @@ class Initialization extends AbstractInitialization {
 
 			return $f;
 		} );
+		$meta->add_field( 'coupon', __( 'Coupon', 'colorrun' ), function () {
+			$f = new Text();
+			$f->set_attribute( 'readonly', true );
+			$f->set_description( 'Only if used during order' );
+
+			return $f;
+		} );
 
 		$this->post_type->add_meta_box( $meta );
 	}
@@ -131,6 +128,15 @@ class Initialization extends AbstractInitialization {
 	public function payment_info() {
 		$meta = new MetaBox( 'payment', __( 'Payment', 'colorrun' ) );
 		$this->post_type->add_meta_box( $meta );
+	}
+
+	public function custom_info() {
+		$meta = new MetaBox( self::POST_TYPE . '_additional', __( 'Additional info', 'colorrun' ) );
+		foreach ( Functions::get_additional_fileds() as $key => $title ) {
+			$meta->add_field( $key, __( $title, 'colorrun' ) );
+		}
+		$meta->set_priority( 'high' );
+		$meta->add_post_type( $this->post_type );
 	}
 
 	public function admin_register_coupon_generator_page() {

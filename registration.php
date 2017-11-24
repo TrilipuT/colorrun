@@ -168,7 +168,7 @@ get_header(); ?>
                             </button>
                             <dl class="info">
                                 <dt>Дистанція</dt>
-                                <dd>Turkish airlines Color Run 6 km</dd>
+                                <dd><?= get_the_title($distance_id) ?></dd>
                                 <dt>Прізвище</dt>
                                 <dd>Andrushkevich</dd>
                                 <dt>Ім’я</dt>
@@ -196,7 +196,7 @@ get_header(); ?>
                         <h2 class="title">Підтвердження замовлення</h2>
                         <div class="personal-info">
                             <dl class="preliminary-price">
-                                <dt>Turkish airlines Color Run 6 km</dt>
+                                <dt><?= get_the_title($distance_id) ?></dt>
                                 <dd>150 грн.</dd>
                             </dl>
                             <div class="promo-group">
@@ -213,7 +213,7 @@ get_header(); ?>
                         <h2 class="title">Оплата реєстрації</h2>
                         <div class="personal-info">
                             <h3 class="user-name">Olga Andrushkevich</h3>
-                            <h3 class="distance">Turkish airlines Color Run 6 km</h3>
+                            <h3 class="distance"><?= get_the_title($distance_id) ?></h3>
                             <p class="price">Сума до сплати: <span class="amount">150 грн.</span></p>
                         </div>
                     </div>

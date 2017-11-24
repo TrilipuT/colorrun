@@ -9,7 +9,7 @@ use WPKit\PostType\MetaBoxRepeatable;
 /**
  * Class Functions
  *
- * @package modules\theme
+ * @package modules\distance
  */
 class Functions extends AbstractFunctions {
 
@@ -26,6 +26,18 @@ class Functions extends AbstractFunctions {
 
 	/**
 	 * @param int $id
+	 * @param string $format
+	 *
+	 * @return string
+	 */
+	public static function get_date( int $id = 0, string $format = 'd.m.Y' ): string {
+		$id = self::get_id( $id );
+
+		return date( $format, strtotime( MetaBox::get( $id, Initialization::POST_TYPE, 'date' ) ) );
+	}
+
+	/**
+	 * @param int $id
 	 *
 	 * @return int
 	 */
@@ -35,18 +47,6 @@ class Functions extends AbstractFunctions {
 		}
 
 		return (int) $id;
-	}
-
-	/**
-	 * @param int $id
-	 * @param string $format
-	 *
-	 * @return string
-	 */
-	public static function get_date( int $id = 0, string $format = 'd.m.Y' ): string {
-		$id = self::get_id( $id );
-
-		return date( $format, strtotime( MetaBox::get( $id, Initialization::POST_TYPE, 'date' ) ) );
 	}
 
 	/**
@@ -87,11 +87,20 @@ class Functions extends AbstractFunctions {
 	 *
 	 * @return int
 	 */
-	public static function get_current_amount( int $id = 0 ): int {
-		return (int) MetaBoxRepeatable::get( $id, Initialization::POST_TYPE, '_price' );
+	public static function get_current_price( int $id = 0 ): int {
+		$prices = self::get_prices( $id );
+		foreach ( $prices as $price ) {
+			if ( $price['active'] ) {
+				return (int) $price['fee'];
+			}
+		}
+
+		return 0;
 	}
 
 	/**
+	 * Get list of prices
+	 *
 	 * @param int $id
 	 *
 	 * @return array
@@ -106,7 +115,7 @@ class Functions extends AbstractFunctions {
 				$prices[] = [
 					'date'   => $date,
 					'fee'    => $fees[ $i ],
-					'active' => strtotime( $date ) > time() ? true : false,
+					'active' => strtotime( $date ) > time(),
 				];
 			}
 		}

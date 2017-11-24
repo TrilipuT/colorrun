@@ -86,6 +86,13 @@ class Functions extends AbstractFunctions {
 		] );
 	}
 
+	/**
+	 * Start registration for distance
+	 *
+	 * @param int $distance_id
+	 *
+	 * @return int
+	 */
 	public static function start_registration( int $distance_id ): int {
 		$participant = Participant::create();
 		$participant->set_distance( $distance_id );

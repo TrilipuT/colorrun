@@ -19,7 +19,7 @@ class Initialization extends AbstractInitialization {
 			$distance    = (int) $_POST['distance'];
 			$participant = Functions::get_participant( $email, $distance );
 
-			return $participant->get_info();
+			return $this->send_success( $participant->get_info() );
 		} );
 
 		$router->post( 'updateInfo', function () {
@@ -32,13 +32,25 @@ class Initialization extends AbstractInitialization {
 			return $this->send_success();
 		} );
 
-	}
+		$router->post( 'getDistancePrice', function () {
+			if ( ! isset( $_POST['participant_id'] ) ) {
+				return $this->send_error( 'No participant id' );
+			}
+			$participant_id = absint( $_POST['participant_id'] );
+			$participant    = new Participant( $participant_id );
+			$price          = \modules\distance\Functions::get_current_price( $participant->distance );
+			if ( isset( $_POST['coupon'] ) && ! $participant->coupon ) {
+				$coupon_code = $_POST['coupon'];
+				if ( ! $new_price = $participant->use_coupon( $coupon_code ) ) {
+					return $this->send_error( 'Cant use coupon' );
+				}
+				$price = $new_price;
+			}
 
-	private function send_error( string $error = '' ): array {
-		return [
-			'success' => false,
-			'message' => $error,
-		];
+			return $this->send_success( [
+				'price' => $price
+			] );
+		} );
 	}
 
 	private function send_success( array $data = [] ): array {
@@ -47,6 +59,13 @@ class Initialization extends AbstractInitialization {
 		return array_merge( [
 			'success' => true,
 		], $data );
+	}
+
+	private function send_error( string $error = '' ): array {
+		return [
+			'success' => false,
+			'message' => $error,
+		];
 	}
 
 	public function add_action_remove_registration( $id ) {

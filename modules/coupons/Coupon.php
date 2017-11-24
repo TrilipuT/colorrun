@@ -59,6 +59,27 @@ class Coupon {
 		return $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->table} WHERE code = %s", $code ), ARRAY_A );
 	}
 
+	public function use_coupon( int $price ) {
+		if ( $this->used == $this->count ) {
+			return false;
+		}
+
+		$this->set_data( [ 'used' => $this->used + 1 ] );
+		if ( $this->used == $this->count ) {
+			$this->set_data( [ 'status' => self::STATUS_USED ] );
+		}
+
+		if ( ! $this->save() ) {
+			return false;
+		}
+
+		if ( $this->type == self::TYPES['PERCENTAGE'] ) {
+			return floor( $price - ( $price * ( absint( $this->amount ) / 100 ) ) );
+		}
+
+		return floor( $price - $this->amount );
+	}
+
 	public function save() {
 		if ( ! $this->id ) {
 			return $this->wpdb->insert( $this->table, $this->get_data() );
@@ -72,7 +93,7 @@ class Coupon {
 	}
 
 	public function set_data( array $data ) {
-		$this->data = $data;
+		$this->data = array_merge( $this->data, $data );
 	}
 
 	public function __get( $key ) {
@@ -82,13 +103,13 @@ class Coupon {
 	public function set_active() {
 		$this->status = self::STATUS_ACTIVE;
 
-		return $this->wpdb->update( $this->table, [ 'status' => self::STATUS_ACTIVE ], [ 'code' => $this->code ] );
+		return $this->save();
 	}
 
 	public function set_used() {
 		$this->status = self::STATUS_USED;
 
-		return $this->wpdb->update( $this->table, [ 'status' => self::STATUS_USED ], [ 'code' => $this->code ] );
+		return $this->save();
 	}
 
 	public function get_status() {
@@ -119,30 +140,5 @@ class Coupon {
 			self::TYPES['PERCENTAGE'] => '%',
 			self::TYPES['FIXED']      => __( 'UAH', 'colorrun' )
 		];
-	}
-
-	public static function __use_coupon( string $code ): bool {
-		/** @var \WP_Post $coupon */
-		$coupon = get_page_by_title( $code, OBJECT, Initialization::POST_TYPE );
-		if ( $coupon == null ) {
-			return false;
-		}
-		$count = self::get_count( $coupon->ID );
-		$used  = self::get_used( $coupon->ID );
-		if ( $used == $count ) {
-			return false;
-		}
-		$used = $used ++;
-		if ( ! MetaBox::set( $coupon->ID, Initialization::POST_TYPE, 'used', $used ) ) {
-			return false;
-		}
-		if ( $used == $count ) {
-			wp_update_post([
-				'ID' => $coupon->ID,
-				'post_status' => ''
-			]);
-		}
-
-		return true;
 	}
 }

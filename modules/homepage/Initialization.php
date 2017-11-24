@@ -75,7 +75,8 @@ class Initialization extends AbstractInitialization {
 		if ( empty ( $post_ID ) && get_post_type() == 'page' ) {
 			return;
 		}
-		if ( in_array( $post_ID, array_values( pll_get_post_translations( (int) get_option( 'page_on_front' ) ) ) ) ) {
+		$pages = function_exists( 'pll_get_post_translations' ) ? array_values( pll_get_post_translations( (int) get_option( 'page_on_front' ) ) ) : [ get_option( 'page_on_front' ) ];
+		if ( in_array( $post_ID, $pages ) ) {
 			$metabox->add_post_type( 'page' );
 		}
 	}

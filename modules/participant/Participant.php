@@ -9,6 +9,7 @@
 namespace modules\participant;
 
 
+use modules\coupons\Coupon;
 use WPKit\PostType\MetaBox;
 
 /**
@@ -36,6 +37,7 @@ class Participant {
 		$this->data['firstname']   = $this->get_meta( 'firstname' );
 		$this->data['dateofbirth'] = $this->get_meta( 'dateofbirth' );
 		$this->data['status']      = $this->get_meta( 'status' );
+		$this->data['coupon']      = $this->get_meta( 'coupon' );
 		$this->additional_info     = $this->get_additional_info();
 	}
 
@@ -99,7 +101,7 @@ class Participant {
 	}
 
 	public function get_amount_to_pay(): int {
-		$amount = \modules\distance\Functions::get_current_amount( $this->distance );
+		$amount = \modules\distance\Functions::get_current_price( $this->distance );
 
 		return (int) $amount;
 	}
@@ -121,6 +123,22 @@ class Participant {
 			'status'          => $this->status,
 			'additional_info' => $this->get_additional_info(),
 		];
+	}
+
+	/**
+	 * @param string $coupon_code
+	 *
+	 * @return bool|float|int|mixed
+	 */
+	public function use_coupon( string $coupon_code ) {
+		$coupon = new Coupon( $coupon_code );
+		$price  = \modules\distance\Functions::get_current_price( $this->distance );
+		if ( ! $new_price = $coupon->use_coupon( $price ) ) {
+			return false;
+		}
+		$this->coupon = $coupon_code;
+
+		return $new_price;
 	}
 
 	public function set_info( array $info ) {
