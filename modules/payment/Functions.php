@@ -34,6 +34,7 @@ class Functions extends AbstractFunctions {
 			'description' => $description,
 			'order_id'    => 'participant_' . $participant_id,
 			'version'     => '3',
+			'sandbox'     => 1,
 			'public_key'  => $public_key,
 			'private_key' => $private_key,
 		);
