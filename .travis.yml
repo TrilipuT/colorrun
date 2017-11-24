@@ -11,3 +11,9 @@ script:
   - gulp build
 after_success:
   gulp deploy
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: sshpass -p $SSH_PASS rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR ${SSH_USER}@${SSH_HOST}:${SSH_PATH}
+  on:
+    branch: master
