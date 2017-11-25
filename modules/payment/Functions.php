@@ -41,7 +41,7 @@ class Functions extends AbstractFunctions {
 			'language'     => \modules\theme\Functions::get_current_language(),
 			'public_key'   => $public_key,
 			'private_key'  => $private_key,
-			'server_url'   => home_url( '/wp-json/registration/paymentSuccess' ),
+			'server_url'   => home_url( '/wp-json/register/paymentSuccess' ),
 			'result_url'   => home_url( '/' ),
 			'expired_date' => $participant->get_expired_time(),
 		);

@@ -45,6 +45,12 @@ class Initialization extends AbstractInitialization {
 
 	}
 
+	public function add_action_template_redirect() {
+		if ( isset( $_POST['data'] ) && isset( $_POST['signature'] ) && $_POST['data'] && $_POST['signature'] ) {
+			Functions::process_success( $_POST['data'], $_POST['signature'] );
+		}
+	}
+
 	public function _add_action_template_redirect() {
 		$participant_id = get_query_var( 'participant_id' );
 		if ( $participant_id ) {
