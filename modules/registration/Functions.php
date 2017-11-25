@@ -102,6 +102,19 @@ class Functions extends AbstractFunctions {
 		return $participant->get_id();
 	}
 
+	public static function finish_registration( int $participant_id ): bool {
+		$participant = new Participant( $participant_id );
+		if ( $participant->get_payment_status() == \modules\payment\Initialization::STATUS['PAYED'] ) {
+			return true;
+		}
+		$participant->finish_registration();
+		// Lets delete remove_registration schedule
+		$event_time = wp_next_scheduled( 'remove_registration', [ $participant->get_id() ] );
+		wp_unschedule_event( $event_time, 'remove_registration', [ $participant->get_id() ] );
+
+		return true;
+	}
+
 	public static function get_registration_url( int $distance ): string {
 		return \modules\theme\Functions::get_page_url_by_template( 'registration.php' ) . '?distance=' . $distance;
 	}

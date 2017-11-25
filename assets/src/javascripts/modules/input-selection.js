@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 export default (item) => {
     let val = item.val();
 

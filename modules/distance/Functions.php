@@ -164,8 +164,23 @@ class Functions extends AbstractFunctions {
 	}
 
 	/**
+	 * Return next one free bib for distance
 	 * @param int $distance
 	 *
+	 * @return int
+	 */
+	public static function get_next_free_bib( int $distance ): int {
+		$bibs = self::get_available_bib_list( $distance );
+		if ( ! $bibs ) {
+			return false;
+		}
+
+		return array_shift( $bibs );
+	}
+
+	/**
+	 * @param int $distance
+	 * @param int $limit
 	 *
 	 * @return array
 	 */

@@ -10,6 +10,7 @@ namespace modules\participant;
 
 
 use modules\coupons\Coupon;
+use modules\logger\Functions as Log;
 use WPKit\PostType\MetaBox;
 
 /**
@@ -20,8 +21,6 @@ class Participant {
 	/**
 	 * @var $coupon string
 	 */
-
-
 	private $id;
 	private $data = [];
 	private $additional_info;
@@ -83,6 +82,25 @@ class Participant {
 		$this->status = $status;
 
 		return $this;
+	}
+
+	public function finish_registration() {
+		$this->set_status( \modules\payment\Initialization::STATUS['PAYED'] );
+		wp_publish_post( $this->id );
+		$this->assign_bib();
+	}
+
+	private function assign_bib() {
+		$bib = \modules\distance\Functions::get_next_free_bib( $this->distance );
+		if ( ! $bib ) {
+			Log::error( 'No bib found' . $bib, $this->get_id() );
+
+			return false;
+		}
+		$this->bib = $bib;
+		Log::info( 'Assigned bib ' . $bib, $this->get_id() );
+
+		return true;
 	}
 
 	public function get_id() {

@@ -23,13 +23,13 @@ $(function ($) {
     burger();
     select();
 
-    sendValidation();
     let $registration = $('.registration-form');
     if ($registration.length) {
         $registration.find('[name="email"], [name="info[club]"]').on('change', function () {
             let $item = $(this);
             inputSelection($item);
         });
+        sendValidation();
         registration();
     }
 

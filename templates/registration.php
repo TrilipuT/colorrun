@@ -78,7 +78,8 @@ get_header(); ?>
                                     <label><?php _e( 'E-mail', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" id="dateofbirth" name="dateofbirth" data-inputmask="'alias': 'date'" required>
+                                    <input type="text" id="dateofbirth" name="dateofbirth"
+                                           data-inputmask="'alias': 'date'" required>
                                     <span class="bar"></span>
                                     <label><?php _e( 'Date of birth', 'colorrun' ) ?></label>
                                 </div>
@@ -160,15 +161,16 @@ get_header(); ?>
                         </div>
                     </div>
                     <div class="step-row">
-                        <h2 class="title">Персональна інформація</h2>
+                        <h2 class="title"><?php _e( 'Personal information', 'colorrun' ) ?></h2>
                         <div class="personal-info">
                             <button class="edit-info">
-                                <img src="<?= get_template_directory_uri() ?>/assets/built/images/fake/pencil.png" alt="">
+                                <img src="<?= get_template_directory_uri() ?>/assets/built/images/fake/pencil.png"
+                                     alt="">
                                 <span>РЕДАГУВАТИ</span>
                             </button>
                             <dl class="info">
                                 <dt>Дистанція</dt>
-                                <dd><?= get_the_title($distance_id) ?></dd>
+                                <dd><?= get_the_title( $distance_id ) ?></dd>
                                 <dt>Прізвище</dt>
                                 <dd data-id="lastname"></dd>
                                 <dt>Ім’я</dt>
@@ -196,16 +198,17 @@ get_header(); ?>
                         <h2 class="title">Підтвердження замовлення</h2>
                         <div class="personal-info">
                             <dl class="preliminary-price">
-                                <dt><?= get_the_title($distance_id) ?></dt>
-                                <dd><?= Distance::format_price(Distance::get_current_price($distance_id)) ?></dd>
+                                <dt><?= get_the_title( $distance_id ) ?></dt>
+                                <dd><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></dd>
                             </dl>
                             <div class="promo-group">
-                                <input type="text" class="promo-input" placeholder="Ввести промокод">
-                                <button class="promo-submit">ЗАСТОСУВАТИ</button>
+                                <input type="text" class="promo-input"
+                                       placeholder="<?php _e( 'Enter promocode', 'colorrun' ) ?>">
+                                <button class="promo-submit"><?php _e( 'Apply', 'colorrun' ) ?></button>
                             </div>
                             <dl class="final-price">
                                 <dt>Сума до сплати</dt>
-                                <dd class="price"><?= Distance::format_price(Distance::get_current_price($distance_id)) ?></dd>
+                                <dd class="price"><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></dd>
                             </dl>
                         </div>
                     </div>
@@ -213,16 +216,19 @@ get_header(); ?>
                         <h2 class="title">Оплата реєстрації</h2>
                         <div class="personal-info">
                             <h3 class="user-name">Olga Andrushkevich</h3>
-                            <h3 class="distance"><?= get_the_title($distance_id) ?></h3>
-                            <p class="price">Сума до сплати: <span class="amount price"><?= Distance::format_price(Distance::get_current_price($distance_id)) ?></span></p>
+                            <h3 class="distance"><?= get_the_title( $distance_id ) ?></h3>
+                            <p class="price">Сума до сплати: <span
+                                        class="amount price"><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="registration-buttons">
-                <button class="button back hide">НАЗАД</button>
-                <button class="button next">ПРОДОВЖИТИ</button>
-                <a class="button payment-button hide" href="">Сплатити</a>
+                <button class="button back hide"><?php _e( 'Back', 'colorrun' ) ?></button>
+                <button class="button next"><?php _e( 'Continue', 'colorrun' ) ?></button>
+                <a class="button payment-button hide"
+                   href="<?= \modules\payment\Functions::get_payment_url( $participant_id ) ?>"><?php _e( 'Pay', 'colorrun' ) ?></a>
             </div>
         </div>
     </section>
@@ -239,7 +245,7 @@ get_header(); ?>
                     На жаль, час оплати вийшов. Замовлення анульоване. Будь ласка, створіть нове замовлення.
                 </div>
             </div>
-            <a href="#" class="button">ПРОДОВЖИТИ</a>
+            <a href="<?php the_permalink() ?>" class="button"><?php _e( 'Continue', 'colorrun' ) ?></a>
         </div>
     </div>
 <?php get_footer();

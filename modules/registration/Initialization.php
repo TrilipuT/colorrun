@@ -52,8 +52,7 @@ class Initialization extends AbstractInitialization {
 		} );
 
 		$router->post( '/paymentSuccess', function () {
-			\modules\logger\Functions::log( json_encode( $_POST ) );
-			\modules\logger\Functions::log( json_encode( base64_decode( $_POST['data'] ) ) );
+			return \modules\payment\Functions::process_success( $_POST['data'], $_POST['signature'] );
 		} );
 	}
 
