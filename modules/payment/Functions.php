@@ -76,7 +76,7 @@ class Functions extends AbstractFunctions {
 			return false;
 		}
 
-		if ( in_array( $data->status, [ 'status', 'success' ] ) ) {
+		if ( in_array( $data->status, [ 'sandbox', 'success' ] ) ) {
 			Log::info( 'Success payment: ' . $data->payment_id );
 			$participant_id = (int) substr( $data->order_id, strlen( self::ORDER_PREFIX ) );
 			return \modules\registration\Functions::finish_registration($participant_id);
