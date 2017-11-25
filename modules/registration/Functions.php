@@ -101,4 +101,8 @@ class Functions extends AbstractFunctions {
 
 		return $participant->get_id();
 	}
+
+	public static function get_registration_url( int $distance ): string {
+		return \modules\theme\Functions::get_page_url_by_template( 'registration.php' ) . '?distance=' . $distance;
+	}
 }

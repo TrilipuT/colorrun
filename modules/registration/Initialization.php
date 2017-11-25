@@ -32,7 +32,7 @@ class Initialization extends AbstractInitialization {
 			return $this->send_success();
 		} );
 
-		$router->get( '/getPaymentInfo/{participant_id}', function ( $participant_id ) {
+		$router->post( '/getPaymentInfo/{participant_id}', function ( $participant_id ) {
 			$participant = new Participant( $participant_id );
 			$price       = \modules\distance\Functions::get_current_price( $participant->distance );
 			if ( isset( $_POST['coupon'] ) && ! $participant->coupon ) {
@@ -44,11 +44,16 @@ class Initialization extends AbstractInitialization {
 			}
 
 			return $this->send_success( [
-				'price'       => $price,
+				'price'       => \modules\distance\Functions::format_price( $price ),
 				'payment_url' => \modules\payment\Functions::get_payment_url( $participant_id )
 			] );
 		} )->convert( 'participant_id', function ( $participant_id ) {
 			return absint( $participant_id );
+		} );
+
+		$router->post( '/paymentSuccess', function () {
+			\modules\logger\Functions::log( json_encode( $_POST ) );
+			\modules\logger\Functions::log( json_encode( base64_decode( $_POST['data'] ) ) );
 		} );
 	}
 

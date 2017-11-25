@@ -15,9 +15,8 @@ export default () => {
         sendValidation(names);
         errorsChecker(errors);
 
-        if(errors.length == 0){
+        if(errors.length === 0){
             $('.registration-form').submit();
-            goToNext(e);
         }
     });
 
@@ -28,11 +27,6 @@ export default () => {
         checkInputs(false, inputName, $item);
         errorsChecker(errors)
     });
-
-    function goToNext(e) {
-        e.preventDefault();
-        $('.steps-area').find('.active').removeClass('active').next().addClass('active');
-    }
 
     function sendValidation(array) {
         array.forEach(function (name) {

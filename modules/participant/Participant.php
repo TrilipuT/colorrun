@@ -151,6 +151,18 @@ class Participant {
 		return $new_price;
 	}
 
+	/**
+	 * @param $format
+	 *
+	 * @return string
+	 */
+	public function get_expired_time( $format = 'Y-m-d H:i:s' ): string {
+		$start_time     = get_the_time( 'Y-m-d H:i:s', $this->id );
+		$start_time_utc = get_gmt_from_date( $start_time, 'U' );
+
+		return date( $format, $start_time_utc + ( 15 * MINUTE_IN_SECONDS ) );
+	}
+
 	public function set_info( array $info ) {
 		foreach ( $info as $key => $value ) {
 			$this->$key = $value;

@@ -28,15 +28,19 @@ class Functions extends AbstractFunctions {
 		}
 
 		$params = array(
-			'action'      => 'pay',
-			'amount'      => $participant->get_amount_to_pay(),
-			'currency'    => \LiqPay::CURRENCY_UAH,
-			'description' => $description,
-			'order_id'    => 'participant_' . $participant_id,
-			'version'     => '3',
-			'sandbox'     => 1,
-			'public_key'  => $public_key,
-			'private_key' => $private_key,
+			'action'       => 'pay',
+			'amount'       => $participant->get_amount_to_pay(),
+			'currency'     => \LiqPay::CURRENCY_UAH,
+			'description'  => $description,
+			'order_id'     => 'participant_' . $participant_id,
+			'version'      => '3',
+			'sandbox'      => 1,
+			'language'     => \modules\theme\Functions::get_current_language(),
+			'public_key'   => $public_key,
+			'private_key'  => $private_key,
+			'server_url'   => home_url( '/wp-json/registration/paymentSuccess' ),
+			'result_url'   => home_url( '/' ),
+			'expired_date' => $participant->get_expired_time(),
 		);
 
 		$query_params = [

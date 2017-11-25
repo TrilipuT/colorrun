@@ -163,7 +163,7 @@ get_header(); ?>
                         <h2 class="title">Персональна інформація</h2>
                         <div class="personal-info">
                             <button class="edit-info">
-                                <img src="../images/fake/pencil.png" alt="">
+                                <img src="<?= get_template_directory_uri() ?>/assets/built/images/fake/pencil.png" alt="">
                                 <span>РЕДАГУВАТИ</span>
                             </button>
                             <dl class="info">
@@ -197,7 +197,7 @@ get_header(); ?>
                         <div class="personal-info">
                             <dl class="preliminary-price">
                                 <dt><?= get_the_title($distance_id) ?></dt>
-                                <dd>150 грн.</dd>
+                                <dd><?= Distance::format_price(Distance::get_current_price($distance_id)) ?></dd>
                             </dl>
                             <div class="promo-group">
                                 <input type="text" class="promo-input" placeholder="Ввести промокод">
@@ -205,7 +205,7 @@ get_header(); ?>
                             </div>
                             <dl class="final-price">
                                 <dt>Сума до сплати</dt>
-                                <dd>150 грн.</dd>
+                                <dd class="price"><?= Distance::format_price(Distance::get_current_price($distance_id)) ?></dd>
                             </dl>
                         </div>
                     </div>
@@ -214,7 +214,7 @@ get_header(); ?>
                         <div class="personal-info">
                             <h3 class="user-name">Olga Andrushkevich</h3>
                             <h3 class="distance"><?= get_the_title($distance_id) ?></h3>
-                            <p class="price">Сума до сплати: <span class="amount">150 грн.</span></p>
+                            <p class="price">Сума до сплати: <span class="amount price"><?= Distance::format_price(Distance::get_current_price($distance_id)) ?></span></p>
                         </div>
                     </div>
                 </div>
@@ -222,6 +222,7 @@ get_header(); ?>
             <div class="registration-buttons">
                 <button class="button back hide">НАЗАД</button>
                 <button class="button next">ПРОДОВЖИТИ</button>
+                <a class="button payment-button hide" href="">Сплатити</a>
             </div>
         </div>
     </section>

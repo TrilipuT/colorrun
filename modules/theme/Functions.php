@@ -51,4 +51,15 @@ class Functions extends AbstractThemeFunctions {
 
 		return get_background_image();
 	}
+
+	/**
+	 * @return string
+	 */
+	public static function get_current_language(): string {
+		if ( function_exists( 'pll_current_language' ) ) {
+			return pll_current_language();
+		}
+
+		return 'uk';
+	}
 }

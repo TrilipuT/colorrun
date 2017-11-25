@@ -37,9 +37,19 @@
                     </div>
 	                <?php wp_nav_menu( [ 'theme_location' => 'primary', 'container' => 'ul' ] ) ?>
                 </div>
-                <a href="#" class="registration button">
+                <div href="#" class="registration button">
 				    <?php _e( 'Register', 'colorrun' ) ?>
-                </a>
+                    <ul class="sub-menu">
+	                    <?php $distances = Distance::get_current_distances();
+	                    if ( $distances->have_posts() ):
+		                    while ( $distances->have_posts() ):
+			                    $distances->the_post(); ?>
+                                <li class="menu-item"><a href="<?= Distance::get_registration_url() ?>"><?php the_title() ?></a></li>
+		                    <?php endwhile;
+	                    endif;
+	                    wp_reset_postdata(); ?>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>

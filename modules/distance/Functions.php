@@ -181,4 +181,16 @@ class Functions extends AbstractFunctions {
 		return array_diff( $range, $reserved_bibs );
 	}
 
+	/**
+	 * Get link to distance registration
+	 *
+	 * @param int $id
+	 *
+	 * @return string
+	 */
+	public static function get_registration_url( int $id = 0 ): string {
+		$id = self::get_id( $id );
+
+		return \modules\registration\Functions::get_registration_url( $id );
+	}
 }
