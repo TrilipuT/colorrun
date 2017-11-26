@@ -18,7 +18,7 @@ class Initialization extends AbstractInitialization {
 		$logger = new Logger( 'registration' );
 		$pdo    = new \PDO( 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD );
 
-		$mySQLHandler = new MySQLHandler( $pdo, "log", [ 'participant_id' ], \Monolog\Logger::INFO );
+		$mySQLHandler = new MySQLHandler( $pdo, "log", [ 'participant_id' ], Logger::INFO );
 		$logger->pushHandler( $mySQLHandler );
 	}
 }

@@ -43,7 +43,6 @@ class Functions extends AbstractFunctions {
 			'sandbox'      => 1,
 			'language'     => \modules\theme\Functions::get_current_language(),
 			'public_key'   => $public_key,
-			'private_key'  => $private_key,
 			'server_url'   => home_url( '/wp-json/register/paymentSuccess' ),
 			'result_url'   => home_url( '/' ),
 			'expired_date' => $participant->get_expired_time(),
@@ -71,20 +70,22 @@ class Functions extends AbstractFunctions {
 		return Option::get( 'liqpay_private_key' );
 	}
 
+	/**
+	 * @param $raw_data
+	 * @param $signature
+	 */
 	public static function process_success( $raw_data, $signature ) {
 		$data           = json_decode( base64_decode( $_POST['data'] ) );
 		$participant_id = (int) substr( $data->order_id, strlen( self::ORDER_PREFIX ) );
 		if ( ! self::is_valid_request( $raw_data, $signature ) ) {
 			Log::error( 'Not valid request: ' . $data->payment_id, $participant_id );
 
-			return false;
+			return;
 		}
 
 		if ( in_array( $data->status, [ 'sandbox', 'success' ] ) ) {
-			return \modules\registration\Functions::finish_registration( $participant_id, $data );
+			\modules\registration\Functions::finish_registration( $participant_id, $data );
 		}
-
-		return true;
 	}
 
 	private static function is_valid_request( string $data, string $signature ): bool {

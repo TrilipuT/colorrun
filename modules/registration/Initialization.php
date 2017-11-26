@@ -14,6 +14,7 @@ use WPKit\Module\AbstractInitialization;
 class Initialization extends AbstractInitialization {
 	public function register_api() {
 		$router = new Router( 'register' );
+
 		$router->post( '/checkUser', function () {
 			$email       = sanitize_email( $_POST['email'] );
 			$distance    = (int) $_POST['distance'];
@@ -24,24 +25,34 @@ class Initialization extends AbstractInitialization {
 
 		$router->post( '/updateInfo', function () {
 			if ( ! isset( $_POST['participant_id'] ) ) {
-				return $this->send_error( 'No participant id' );
+				return $this->send_error( 'No participant id', 'no_participant' );
 			}
 			$participant = new Participant( (int) $_POST['participant_id'] );
-			if ( (bool) Functions::get_participant( $_POST['email'], $participant->distance ) ) {
-				return $this->send_error( __( 'Email already registered for this distance', 'colorrun' ) );
+			if ( Functions::is_expired( $participant ) ) {
+				return $this->send_error( 'Time for registration expired', 'time_expired' );
 			}
-			$participant->set_info( $_POST );
+			if ( (bool) Functions::get_participant( $_POST['email'], $participant->distance ) ) {
+				return $this->send_error( __( 'Email already registered for this distance', 'colorrun' ), 'email_used' );
+			}
+			$data = $_POST;
+			unset( $data['event_rules'] );
+			unset( $data['personal_data'] );
+			unset( $data['participant_id'] );
+			$participant->set_info( $data );
 
 			return $this->send_success();
 		} );
 
 		$router->post( '/getPaymentInfo/{participant_id}', function ( $participant_id ) {
 			$participant = new Participant( $participant_id );
-			$price       = \modules\distance\Functions::get_current_price( $participant->distance );
+			if ( Functions::is_expired( $participant ) ) {
+				return $this->send_error( 'Time for registration expired', 'time_expired' );
+			}
+			$price = \modules\distance\Functions::get_current_price( $participant->distance );
 			if ( isset( $_POST['coupon'] ) && ! $participant->coupon ) {
 				$coupon_code = $_POST['coupon'];
 				if ( ! $new_price = $participant->use_coupon( $coupon_code ) ) {
-					return $this->send_error( __( 'Can\'t use coupon', 'colorrun' ) );
+					return $this->send_error( __( 'Can\'t use coupon', 'colorrun' ), 'wrong_coupon' );
 				}
 				$price = $new_price;
 			}
@@ -67,10 +78,11 @@ class Initialization extends AbstractInitialization {
 		], $data );
 	}
 
-	private function send_error( string $error = '' ): array {
+	private function send_error( string $error = '', string $type = '' ): array {
 		return [
 			'success' => false,
 			'message' => $error,
+			'type'    => $type,
 		];
 	}
 

@@ -23,14 +23,19 @@ export default () => {
             if (result.success) {
                 infoFill(participant);
                 goToNext(e);
-            } else if (!result.success) {
+            } else if (result.success === false) {
+                if (result.type === 'time_expired') {
+                    // If we have timeout - just display popup
+                    $('body').addClass('time-out');
+                    return;
+                }
                 let $formError = $('.form-error');
                 if ($formError.length) {
                     $formError.html(result.message);
                 } else {
                     $form.append('<p class="form-error">' + result.message + '</p>');
                 }
-                $form.append();
+
             }
         });
     });
@@ -48,6 +53,11 @@ export default () => {
                 $('.payment-button').prop('href', result.payment_url);
             } else if (!result.success) {
                 let $promoError = $('.promo-error');
+                if (result.type === 'time_expired') {
+                    // If we have timeout - just display popup
+                    $('body').addClass('time-out');
+                    return;
+                }
                 if ($promoError.length) {
                     $promoError.html(result.message);
                 } else {

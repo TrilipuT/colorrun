@@ -52,6 +52,20 @@ class Functions extends AbstractFunctions {
 	}
 
 	/**
+	 * Check if still valid timestamp
+	 *
+	 * @param Participant $participant
+	 *
+	 * @return bool
+	 */
+	public static function is_expired( Participant $participant ) {
+		$registration_end_time = get_the_time( 'U', $participant->get_id() ) + 15 * MINUTE_IN_SECONDS;
+		$current_time          = current_time( 'timestamp' );
+
+		return $current_time > $registration_end_time;
+	}
+
+	/**
 	 * @param int $distance_id
 	 *
 	 * @return int
@@ -103,18 +117,17 @@ class Functions extends AbstractFunctions {
 		return $participant->get_id();
 	}
 
-	public static function finish_registration( int $participant_id, array $data ): bool {
+	public static function finish_registration( int $participant_id, array $data ) {
 		$participant = new Participant( $participant_id );
 		if ( $participant->get_payment_status() == \modules\payment\Initialization::STATUS['PAYED'] ) {
-			return true;
+			return;
 		}
 		Log::info( 'Success payment: ' . $data->payment_id, $participant_id );
 		$participant->finish_registration();
+		$participant->payment = $data;
 		// Lets delete remove_registration schedule
 		$event_time = wp_next_scheduled( 'remove_registration', [ $participant->get_id() ] );
 		wp_unschedule_event( $event_time, 'remove_registration', [ $participant->get_id() ] );
-
-		return true;
 	}
 
 	public static function get_registration_url( int $distance ): string {
