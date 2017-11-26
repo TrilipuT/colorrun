@@ -28,12 +28,11 @@ class Functions extends AbstractFunctions {
 		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'distance' );
 	}
 
-	public static function get_additional_fileds() {
+	public static function get_additional_fields() {
 		return [
-			'tel'  => 'Telephone',
-			'club' => 'Club'
+			'phone'       => 'Telephone',
+			'club'        => 'Club',
+			'tshirt_size' => 'T-shirt size',
 		];
 	}
-
-
 }

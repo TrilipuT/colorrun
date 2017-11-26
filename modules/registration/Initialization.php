@@ -29,7 +29,7 @@ class Initialization extends AbstractInitialization {
 			$participant = new Participant( (int) $_POST['participant_id'] );
 			$participant->set_info( $_POST );
 
-			return $this->send_success();
+			return $this->send_success($_POST);
 		} );
 
 		$router->post( '/getPaymentInfo/{participant_id}', function ( $participant_id ) {

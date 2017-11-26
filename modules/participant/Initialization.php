@@ -129,8 +129,8 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function custom_info() {
-		$meta = new MetaBox( self::POST_TYPE . '_additional', __( 'Additional info', 'colorrun' ) );
-		foreach ( Functions::get_additional_fileds() as $key => $title ) {
+		$meta = new MetaBox( self::POST_TYPE . '_info', __( 'Additional info', 'colorrun' ) );
+		foreach ( Functions::get_additional_fields() as $key => $title ) {
 			$meta->add_field( $key, __( $title, 'colorrun' ) );
 		}
 		$meta->set_priority( 'high' );

@@ -59,7 +59,7 @@ class Participant {
 	 */
 	private function get_additional_info(): array {
 		$info = [];
-		foreach ( Functions::get_additional_fileds() as $key => $title ) {
+		foreach ( Functions::get_additional_fields() as $key => $title ) {
 			$info[ $key ] = MetaBox::get( $this->id, Initialization::POST_TYPE . '_additional', $key );
 		}
 
@@ -113,6 +113,10 @@ class Participant {
 
 	public function __set( $name, $value ) {
 		$this->data[ $name ] = $value;
+		if ( $name == 'dateofbirth' ) {
+			$v     = explode( '/', $value );
+			$value = $v[2] . '-' . $v[1] . '-' . $v[0];;
+		}
 
 		return (bool) MetaBox::set( $this->id, Initialization::POST_TYPE, $name, $value );
 	}
@@ -183,7 +187,13 @@ class Participant {
 
 	public function set_info( array $info ) {
 		foreach ( $info as $key => $value ) {
-			$this->$key = $value;
+			if ( $key == 'info' ) {
+				foreach ( $value as $k => $v ) {
+					MetaBox::set( $this->id, Initialization::POST_TYPE . '_info', $k, $v );
+				}
+			} else {
+				$this->$key = $value;
+			}
 		}
 		if ( isset( $info['firstname'] ) && isset( $info['lastname'] ) ) {
 			wp_update_post( [
