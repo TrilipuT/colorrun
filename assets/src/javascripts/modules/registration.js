@@ -3,10 +3,11 @@ import $ from 'jquery';
 export default () => {
     // Will be stored participant data
     let participant = {};
+    let $form = $('.registration-form');
 
     $('.edit-info').on('click', goToPrev);
 
-    $('.registration-form').on('submit', function (e) {
+    $form.on('submit', function (e) {
         e.preventDefault();
 
         let fd = new FormData(this);
@@ -22,6 +23,14 @@ export default () => {
             if (result.success) {
                 infoFill(participant);
                 goToNext(e);
+            } else if (!result.success) {
+                let $formError = $('.form-error');
+                if ($formError.length) {
+                    $formError.html(result.message);
+                } else {
+                    $form.append('<p class="form-error">' + result.message + '</p>');
+                }
+                $form.append();
             }
         });
     });
@@ -42,7 +51,7 @@ export default () => {
                 if ($promoError.length) {
                     $promoError.html(result.message);
                 } else {
-                    $promoError = $('.promo-group').after('<p class="promo-error">' + result.message + '</p>');
+                    $('.promo-group').after('<p class="promo-error">' + result.message + '</p>');
                 }
 
             }

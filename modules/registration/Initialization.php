@@ -27,9 +27,12 @@ class Initialization extends AbstractInitialization {
 				return $this->send_error( 'No participant id' );
 			}
 			$participant = new Participant( (int) $_POST['participant_id'] );
+			if ( (bool) Functions::get_participant( $_POST['email'], $participant->distance ) ) {
+				return $this->send_error( __( 'Email already registered for this distance', 'colorrun' ) );
+			}
 			$participant->set_info( $_POST );
 
-			return $this->send_success($_POST);
+			return $this->send_success();
 		} );
 
 		$router->post( '/getPaymentInfo/{participant_id}', function ( $participant_id ) {
@@ -38,7 +41,7 @@ class Initialization extends AbstractInitialization {
 			if ( isset( $_POST['coupon'] ) && ! $participant->coupon ) {
 				$coupon_code = $_POST['coupon'];
 				if ( ! $new_price = $participant->use_coupon( $coupon_code ) ) {
-					return $this->send_error( 'Cant use coupon' );
+					return $this->send_error( __( 'Can\'t use coupon', 'colorrun' ) );
 				}
 				$price = $new_price;
 			}
