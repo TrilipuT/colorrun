@@ -21,7 +21,9 @@ class Functions extends AbstractFunctions {
 			//TODO: redirect here
 			echo 'already payed.';
 		}
-		if ( ! $public_key = Functions::get_public_key() || ! $private_key = Functions::get_private_key() ) {
+		$public_key  = Functions::get_public_key();
+		$private_key = Functions::get_private_key();
+		if ( ! $private_key || ! $public_key ) {
 			throw new \Exception( 'You should enter liqpay keys' );
 		}
 		$liqpay = new \LiqPay( $public_key, $private_key );

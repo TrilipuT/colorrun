@@ -31,9 +31,11 @@ export default () => {
     let $regCount = $('.registration-countdown');
 
     let oldDate = new Date($regCount.data('time') * 1000);
-    let newDate = new Date(oldDate.getTime() + 15 * 60000);
+    let newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
 
     $regCount.countdown(newDate, function (event) {
         $(this).find('.timer').text(event.strftime('%M : %S'))
+    }).on('finish.countdown', function (event) {
+        $('body').addClass('time-out');
     });
 }
