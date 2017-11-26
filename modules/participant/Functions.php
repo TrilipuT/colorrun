@@ -24,8 +24,8 @@ class Functions extends AbstractFunctions {
 		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'bib' );
 	}
 
-	public static function get_event( $id ): int {
-		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'event' );
+	public static function get_distance( $id ): int {
+		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'distance' );
 	}
 
 	public static function get_additional_fileds() {

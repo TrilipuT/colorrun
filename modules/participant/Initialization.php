@@ -83,12 +83,10 @@ class Initialization extends AbstractInitialization {
 		$meta->add_field( 'city', __( 'City', 'colorrun' ) );
 		$meta->add_field( 'bib', __( 'Bib', 'colorrun' ), function () {
 			global $post;
-			if ( $event = Functions::get_event( $post->ID ) ) {
-
+			if ( $distance = Functions::get_distance( $post->ID ) ) {
 				$f    = new Select2();
-				$bibs = \modules\distance\Functions::get_available_bib_list( $event );
-
-				if ( $current_bib = Functions::get_bib( get_post()->ID ) ) {
+				$bibs = \modules\distance\Functions::get_available_bib_list( $distance );
+				if ( $current_bib = Functions::get_bib( $post->ID ) ) {
 					$bibs = array_merge( [ $current_bib => $current_bib ], $bibs );
 				}
 				$bibs = array_combine( $bibs, $bibs );
@@ -174,10 +172,7 @@ class Initialization extends AbstractInitialization {
 
 		add_filter( 'parse_query', function ( $query ) {
 			global $pagenow;
-			if ( isset( $_GET['post_type'] ) ) {
-				$type = $_GET['post_type'];
-			}
-			if ( self::POST_TYPE == $type && is_admin() && $pagenow == 'edit.php' && isset( $_GET['distance'] ) && $_GET['distance'] != '' ) {
+			if ( isset( $_GET['post_type'] ) && self::POST_TYPE == $_GET['post_type'] && is_admin() && $pagenow == 'edit.php' && isset( $_GET['distance'] ) && $_GET['distance'] != '' ) {
 				$query->query_vars['meta_key']   = self::POST_TYPE . '_distance';
 				$query->query_vars['meta_value'] = $_GET['distance'];
 			}

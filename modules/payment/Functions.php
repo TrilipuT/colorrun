@@ -21,9 +21,10 @@ class Functions extends AbstractFunctions {
 			//TODO: redirect here
 			echo 'already payed.';
 		}
-		$public_key  = Functions::get_public_key();
-		$private_key = Functions::get_private_key();
-		$liqpay      = new \LiqPay( $public_key, $private_key );
+		if ( ! $public_key = Functions::get_public_key() || ! $private_key = Functions::get_private_key() ) {
+			throw new \Exception( 'You should enter liqpay keys' );
+		}
+		$liqpay = new \LiqPay( $public_key, $private_key );
 
 		$description = sprintf( 'Pay for order #%s paticipation in event %s.', $participant_id, get_the_title( $participant->distance ) );
 		if ( $participant->coupon ) {
@@ -69,10 +70,10 @@ class Functions extends AbstractFunctions {
 	}
 
 	public static function process_success( $raw_data, $signature ) {
-		$data = json_decode( base64_decode( $_POST['data'] ) );
+		$data           = json_decode( base64_decode( $_POST['data'] ) );
 		$participant_id = (int) substr( $data->order_id, strlen( self::ORDER_PREFIX ) );
 		if ( ! self::is_valid_request( $raw_data, $signature ) ) {
-			Log::error( 'Not valid request: ' . $data->payment_id,$participant_id );
+			Log::error( 'Not valid request: ' . $data->payment_id, $participant_id );
 
 			return false;
 		}
