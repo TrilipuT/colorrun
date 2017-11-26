@@ -223,6 +223,7 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
+                <div class="loader"></div>
             </div>
             <div class="registration-buttons">
                 <button class="button back hide"><?php _e( 'Back', 'colorrun' ) ?></button>

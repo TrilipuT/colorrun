@@ -44,14 +44,23 @@
 				size: 14px
 				weight: 800
 			line-height: 20px
+			+breakpoint-max(767)
+				display: block
+				width: 100%
+				margin-bottom: 5px
 
 		dt
 			margin-right: 3%
 			color: $placeholder-clr
 			text-align: right
+			+breakpoint-max(767)
+				text-align: left
 
 		dd
 			color: $blue
+			+breakpoint-max(767)
+				padding-left: 50px
+				margin-bottom: 20px
 
 	.preliminary-price,
 	.final-price
@@ -81,6 +90,9 @@
 			box-sizing: border-box
 			+placeholder
 				color: $placeholder-clr
+			+breakpoint-max(767)
+				width: 150 / 280 * 100%
+				margin: 0
 
 		.promo-submit
 			position: relative
@@ -100,6 +112,8 @@
 			transition: background .3s ease
 			+hover
 				background: #5d53d8
+			+breakpoint-max(767)
+				width: 130 / 280 * 100%
 
 	.user-name,
 	.distance,
@@ -132,4 +146,15 @@
 		font:
 			size: 24px
 			weight: 800
+
+	.final-price
+		.price
+			text-align: left
+
+	.promo-error
+		position: relative
+		top: -20px
+		padding-left: 50px
+		color: $error-clr
+		font-size: 12px
 

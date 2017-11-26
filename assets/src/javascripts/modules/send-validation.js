@@ -16,6 +16,7 @@ export default () => {
         errorsChecker(errors);
 
         if(errors.length === 0){
+            $('.steps-area').addClass('loading');
             $('.registration-form').submit();
         }
     });

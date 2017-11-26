@@ -3,6 +3,17 @@
 	padding: 45px 50px
 	margin: 45px 0
 	background: $reg-bg
+	+breakpoint-max(767)
+		padding: 20px
+		margin: 20px 0
+
+	&.loading
+		.step-row.active
+			filter: blur(3px)
+			pointer-events: none
+		.loader
+			opacity: 1
+
 	.title
 		display: block
 		margin-bottom: 45px
@@ -11,13 +22,18 @@
 			size: 30px
 			weight: 800
 		line-height: 36px
+
 	.form-area
 		max-width: 375px
 		margin: 0 auto 40px
 		padding: 35px
 		border-radius: 10px
 		background: $white
+
 	.step-row
 		display: none
+		transition: filter .3s ease
+		pointer-events: auto
+
 		&.active
 			display: block

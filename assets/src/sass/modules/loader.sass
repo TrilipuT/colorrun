@@ -1,0 +1,30 @@
+.loader
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translateX(-50%) translateY(-50%)
+	width: 50px
+	height: 50px
+	border-radius: 50%
+	opacity: 0
+	pointer-events: none
+	transition: opacity .3s ease
+
+	&:before,
+	&:after
+		content: ""
+		position: absolute
+		top: -5px
+		left: -5px
+		width: 100%
+		height: 100%
+		border-radius: 50%
+		border: 5px solid transparent
+		border-top-color: $blue
+
+	&:before
+		z-index: 5
+		animation: spin 1s infinite
+
+	&:after
+		border: 5px solid $placeholder-clr

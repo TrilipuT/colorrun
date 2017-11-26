@@ -23,6 +23,7 @@ export default () => {
             if (result.success) {
                 infoFill(participant);
                 goToNext(e);
+                $('.steps-area').removeClass('loading');
             } else if (result.success === false) {
                 if (result.type === 'time_expired') {
                     // If we have timeout - just display popup
