@@ -70,16 +70,15 @@ class Functions extends AbstractFunctions {
 
 	public static function process_success( $raw_data, $signature ) {
 		$data = json_decode( base64_decode( $_POST['data'] ) );
+		$participant_id = (int) substr( $data->order_id, strlen( self::ORDER_PREFIX ) );
 		if ( ! self::is_valid_request( $raw_data, $signature ) ) {
-			Log::error( 'Not valid request: ' . $data->payment_id );
+			Log::error( 'Not valid request: ' . $data->payment_id,$participant_id );
 
 			return false;
 		}
 
 		if ( in_array( $data->status, [ 'sandbox', 'success' ] ) ) {
-			Log::info( 'Success payment: ' . $data->payment_id );
-			$participant_id = (int) substr( $data->order_id, strlen( self::ORDER_PREFIX ) );
-			return \modules\registration\Functions::finish_registration($participant_id);
+			return \modules\registration\Functions::finish_registration( $participant_id, $data );
 		}
 
 		return true;

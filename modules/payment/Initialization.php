@@ -30,8 +30,6 @@ class Initialization extends AbstractInitialization {
 
 			return $query_vars;
 		} );
-
-
 	}
 
 	public function register_options() {
@@ -42,7 +40,6 @@ class Initialization extends AbstractInitialization {
 			$options->add_field( 'liqpay_private_key', __( 'Private key', 'colorrun' ) );
 			$options->set_page( 'payment' );
 		}, 11 );
-
 	}
 
 	public function add_action_template_redirect() {
@@ -68,15 +65,6 @@ class Initialization extends AbstractInitialization {
 				$description .= ' ' . sprintf( 'Coupon %s applied', $participant->coupon );
 			}
 
-			/*$html = $liqpay->cnb_form( array(
-				'action'      => 'pay',
-				'amount'      => $participant->get_amount_to_pay(),
-				'currency'    => \LiqPay::CURRENCY_UAH,
-				'description' => $description,
-				'order_id'    => 'participant_' . $participant_id,
-				'version'     => '3',
-			) );
-*/
 			$params = array(
 				'action'      => 'pay',
 				'amount'      => $participant->get_amount_to_pay(),

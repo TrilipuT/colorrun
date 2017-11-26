@@ -2,6 +2,7 @@
 
 namespace modules\registration;
 
+use modules\logger\Functions as Log;
 use modules\participant\Participant;
 use WPKit\Module\AbstractFunctions;
 
@@ -102,11 +103,12 @@ class Functions extends AbstractFunctions {
 		return $participant->get_id();
 	}
 
-	public static function finish_registration( int $participant_id ): bool {
+	public static function finish_registration( int $participant_id, array $data ): bool {
 		$participant = new Participant( $participant_id );
 		if ( $participant->get_payment_status() == \modules\payment\Initialization::STATUS['PAYED'] ) {
 			return true;
 		}
+		Log::info( 'Success payment: ' . $data->payment_id, $participant_id );
 		$participant->finish_registration();
 		// Lets delete remove_registration schedule
 		$event_time = wp_next_scheduled( 'remove_registration', [ $participant->get_id() ] );

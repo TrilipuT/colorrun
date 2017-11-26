@@ -34,10 +34,11 @@ export default () => {
             data: {"coupon": $('.promo-input').val()},
         }).success(function (result) {
             if (result.success) {
+                $('.promo-error').remove();
                 $('.price').text(result.price);
                 $('.payment-button').prop('href', result.payment_url);
             } else if (!result.success) {
-                let $promoError = $('promo-error');
+                let $promoError = $('.promo-error');
                 if ($promoError.length) {
                     $promoError.html(result.message);
                 } else {
