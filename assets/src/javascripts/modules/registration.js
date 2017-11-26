@@ -57,6 +57,7 @@ export default () => {
             $('.payment-button').removeClass('hide');
             $('.registration-buttons button').addClass('hide');
         }
+        $("html, body").animate({scrollTop: 0}, "fast");
     }
 
     function goToPrev(e) {
@@ -66,6 +67,7 @@ export default () => {
         if ($current.prev().length === 0) {
             $('.registration-buttons .back').addClass('hide');
         }
+        $("html, body").animate({scrollTop: 0}, "fast");
     }
 
     function infoFill(info) {
