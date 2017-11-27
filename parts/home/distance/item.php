@@ -50,5 +50,5 @@
             </div>
 		<?php endforeach; ?>
     </div>
-    <a href="#" class="button"><?php _e( 'REGISTER NOW', 'colorrun' ); ?></a>
+    <a href="<?= Distance::get_registration_url() ?>" class="button"><?php _e( 'REGISTER NOW', 'colorrun' ); ?></a>
 </div>

@@ -35,7 +35,6 @@ class Initialization extends AbstractInitialization {
 		$this->post_type = $post_type;
 		$this->setup_columns();
 		$this->participant_info();
-		$this->payment_info();
 		$this->custom_info();
 	}
 
@@ -120,11 +119,6 @@ class Initialization extends AbstractInitialization {
 			return $f;
 		} );
 
-		$this->post_type->add_meta_box( $meta );
-	}
-
-	public function payment_info() {
-		$meta = new MetaBox( 'payment', __( 'Payment', 'colorrun' ) );
 		$this->post_type->add_meta_box( $meta );
 	}
 
