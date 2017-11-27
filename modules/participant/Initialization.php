@@ -2,7 +2,7 @@
 
 namespace modules\participant;
 
-`use WPKit\AdminPage\OptionPage;
+use WPKit\AdminPage\OptionPage;
 use WPKit\Fields\Select;
 use WPKit\Fields\Select2;
 use WPKit\Fields\Text;
