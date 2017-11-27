@@ -4,6 +4,7 @@ export default () => {
     // Will be stored participant data
     let participant = {};
     let $form = $('.registration-form');
+    let $stepsArea = $('.steps-area');
 
     $('.edit-info').on('click', goToPrev);
 
@@ -18,12 +19,16 @@ export default () => {
             url: '/wp-json/register/updateInfo', //TODO: set url from settings
             data: fd,
             processData: false,  // tell jQuery not to process the data
-            contentType: false   // tell jQuery not to set contentType
+            contentType: false,   // tell jQuery not to set contentType
+            beforeSend: function () {
+                $stepsArea.addClass('loading');
+            }
+        }).always(function () {
+            $stepsArea.removeClass('loading');
         }).success(function (result) {
             if (result.success) {
                 infoFill(participant);
                 goToNext(e);
-                $('.steps-area').removeClass('loading');
             } else if (result.success === false) {
                 if (result.type === 'time_expired') {
                     // If we have timeout - just display popup
@@ -43,10 +48,18 @@ export default () => {
 
     $('.promo-submit').on('click', function (e) {
         e.preventDefault();
-
+        let coupon = $('.promo-input').val();
+        if (coupon === '') {
+            return false;
+        }
         $.post({
             url: '/wp-json/register/getPaymentInfo/' + participant.participant_id, //TODO: set url from settings
-            data: {"coupon": $('.promo-input').val()},
+            data: {"coupon": coupon},
+            beforeSend: function () {
+                $stepsArea.addClass('loading');
+            }
+        }).always(function () {
+            $stepsArea.removeClass('loading');
         }).success(function (result) {
             if (result.success) {
                 $('.promo-error').remove();
@@ -95,7 +108,7 @@ export default () => {
             $user = $('.user-name');
 
         for (let key in info) {
-            $infoTable.find('[data-id="' + key + '"]').text(info[key])
+            $infoTable.find('[data-id="' + key + '"]').text(info[key]);
         }
 
         $user.text(info['firstname'] + ' ' + info['lastname']);
