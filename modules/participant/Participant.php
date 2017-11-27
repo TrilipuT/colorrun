@@ -99,12 +99,31 @@ class Participant {
 		}
 		$this->bib = $bib;
 		Log::info( 'Assigned bib ' . $bib, $this->get_id() );
+		$this->send_notification_email();
 
 		return true;
 	}
 
 	public function get_id() {
 		return $this->id;
+	}
+
+	private function send_notification_email() {
+		$subject = $this->replace_placeholders( Functions::get_email_subject() );
+		$message = $this->replace_placeholders( Functions::get_email_message() );
+
+		wp_mail( $this->email, $subject, $message, [ 'Content-Type: text/html; charset=UTF-8' ] );
+	}
+
+	private function replace_placeholders( $content ) {
+		$data             = (array) $this->data;
+		$data['distance'] = get_the_title( $this->distance );
+//		$data['name']     = $this->firstname . ' ' . $this->lastname;
+		foreach ( $this->data as $key => $value ) {
+			$content = str_replace( "{{{$key}}}", $value, $content );
+		}
+
+		return $content;
 	}
 
 	public function __get( $name ) {

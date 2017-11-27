@@ -3,6 +3,7 @@
 namespace modules\participant;
 
 use WPKit\Module\AbstractFunctions;
+use WPKit\Options\Option;
 use WPKit\PostType\MetaBox;
 
 /**
@@ -34,5 +35,13 @@ class Functions extends AbstractFunctions {
 			'club'        => 'Club',
 			'tshirt_size' => 'T-shirt size',
 		];
+	}
+
+	public static function get_email_subject() {
+		return Option::get( 'registration_subject_' . \modules\theme\Functions::get_current_language(), 'Registration for {{distance}}' );
+	}
+
+	public static function get_email_message() {
+		return Option::get( 'registration_message_' . \modules\theme\Functions::get_current_language(), 'Dear {{firstname}}! Thank you for registration on {{distance}}' );
 	}
 }

@@ -2,10 +2,13 @@
 
 namespace modules\participant;
 
+`use WPKit\AdminPage\OptionPage;
 use WPKit\Fields\Select;
 use WPKit\Fields\Select2;
 use WPKit\Fields\Text;
+use WPKit\Fields\WPEditor;
 use WPKit\Module\AbstractInitialization;
+use WPKit\Options\OptionBox;
 use WPKit\PostType\MetaBox;
 use WPKit\PostType\PostType;
 
@@ -21,6 +24,26 @@ class Initialization extends AbstractInitialization {
 	 * @var PostType
 	 */
 	private $post_type;
+
+	public function register_options() {
+		add_action( 'init', function () {
+			$settings = new OptionPage( 'registration', __( 'Registration', 'colorrun' ), 'theme_settings' ); //Запросити друга
+
+			$box = new OptionBox( \modules\theme\Functions::get_current_language() . '_template', __( 'New registration notification template', 'colorrun' ) ); //Шаблони
+			$box->add_field( 'registration_subject_' . \modules\theme\Functions::get_current_language(), __( 'Subject', 'colorrun' ) ); //Тема
+			$box->add_field( 'registration_message_' . \modules\theme\Functions::get_current_language(), __( 'Message', 'colorrun' ), function () { //Повідомлення
+				$f = new WPEditor();
+				$f->set_description( 'Можна використовувати наступні змінні: <br>
+									{{image}} - зображення<br>
+									{{name}} - ім"я<br>
+									{{race_name}} - назва дистанції<br>
+									{{button}} - кнопка "Реєструйся зараз"' );
+
+				return $f;
+			} );
+			$settings->add_box( $box );
+		}, 11 );
+	}
 
 	public function register_post_type() {
 		$post_type = new PostType( self::POST_TYPE, __( 'Participant', 'colorrun' ) );
