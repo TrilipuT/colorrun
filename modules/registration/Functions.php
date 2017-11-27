@@ -117,7 +117,7 @@ class Functions extends AbstractFunctions {
 		return $participant->get_id();
 	}
 
-	public static function finish_registration( int $participant_id, array $data ) {
+	public static function finish_registration( int $participant_id, \stdClass $data ) {
 		$participant = new Participant( $participant_id );
 		if ( $participant->get_payment_status() == \modules\payment\Initialization::STATUS['PAYED'] ) {
 			return;
