@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+
 module.exports = {
     output: {
         path: require("path").resolve("../assets/src/javascripts"),

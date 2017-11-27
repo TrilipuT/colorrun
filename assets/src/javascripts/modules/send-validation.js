@@ -3,10 +3,11 @@ import Inputmask from 'inputmask';
 
 export default () => {
     let dateBirth = document.getElementById('dateofbirth'),
+        phone = document.getElementById('phone'),
         im = new Inputmask();
 
     im.mask(dateBirth);
-
+    im.mask(phone);
 
     let names = ['lastname', 'firstname', 'gender', 'email','dateofbirth', 'info[phone]', 'country', 'city', 'info[tshirt_size]', 'personal_data', 'event_rules'],
         errors = [];
@@ -99,10 +100,18 @@ export default () => {
             removeItem(errors, itemName);
         }
 
-        if ((type === 'text' || type === 'number') && !$input.val() && itemName !== 'dateofbirth') {
+        if (type === 'text' && itemName === 'info[phone]' && !validPhone($input.val())) {
+            $wrapper.addClass('error');
+            errors.push(itemName);
+        } else if (type === 'text' && itemName === 'info[phone]' && validPhone($input.val())) {
+            $wrapper.removeClass('error');
+            removeItem(errors, itemName);
+        }
+
+        if ((type === 'text') && !$input.val() && itemName !== 'dateofbirth' && itemName !== 'info[phone]') {
             $wrapper.addClass('error');
             errors.push(itemName)
-        } else if ((type === 'text' || type === 'number') && $input.val() && itemName !== 'dateofbirth') {
+        } else if ((type === 'text') && $input.val() && itemName !== 'dateofbirth' && itemName !== 'info[phone]') {
             $wrapper.removeClass('error');
             removeItem(errors, itemName);
         }
@@ -129,11 +138,15 @@ export default () => {
         return reg.test(value)
     }
 
-    function validDate(value) { {
+    function validDate(value) {
         let reg = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 
         return reg.test(value)
     }
 
+    function validPhone(value) {
+        let reg = /\(\d{3}\)?\d{7}/;
+
+        return reg.test(value)
     }
 }

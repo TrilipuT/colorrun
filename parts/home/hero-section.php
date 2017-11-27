@@ -64,4 +64,5 @@
 			</div>
 		</div>
 	</div>
+    <a href="#about-section" class="arrow-bottom"></a>
 </section>

@@ -5,7 +5,7 @@
  * @author     vitaly
  *
  */ ?>
-<section class="about-section final">
+<section class="about-section final" id="about-section">
 	<div class="wrapper-outer">
 		<div class="description">
 			<?php the_content() ?>

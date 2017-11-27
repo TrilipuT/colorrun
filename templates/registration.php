@@ -84,7 +84,7 @@ get_header(); ?>
                                     <label><?php _e( 'Date of birth', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="number" id="phone" name="info[phone]" required>
+                                    <input type="text" id="phone" name="info[phone]" data-inputmask="'mask': '(999)9999999'" required>
                                     <span class="bar"></span>
                                     <label><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></label>
                                 </div>

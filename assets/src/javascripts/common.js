@@ -6,6 +6,7 @@ import gallery from "./modules/gallery";
 import countdown from "./modules/countdown";
 
 import dropdown from './modules/dropdownToggler';
+import smoothScroll from './modules/smooth-scroll';
 import accordion from './modules/accordionWidget';
 import burger from './modules/burgerToggler';
 import select from './modules/customSelect';
@@ -19,6 +20,7 @@ $(function ($) {
     gallery();
     countdown();
     dropdown();
+    smoothScroll();
     accordion();
     burger();
     select();
