@@ -12,18 +12,20 @@ export default () => $('a[href*="#"]')
             location.hostname == this.hostname
         ) {
             // Figure out element to scroll to
-            var target = $(this.hash);
+            let target = $(this.hash);
             target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
             // Does a scroll target exist?
             if (target.length) {
                 // Only prevent default if animation is actually gonna happen
                 event.preventDefault();
+                let headerOffset = $('#header').height();
+
                 $('html, body').animate({
-                    scrollTop: target.offset().top - 190
+                    scrollTop: target.offset().top - headerOffset
                 }, 1000, function() {
                     // Callback after animation
                     // Must change focus!
-                    var $target = $(target);
+                    let $target = $(target);
                     $target.focus();
                     if ($target.is(":focus")) { // Checking if the target was focused
                         return false;

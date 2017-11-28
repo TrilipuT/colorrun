@@ -84,23 +84,29 @@ export default () => {
 
     function goToNext(e) {
         e.preventDefault();
+
+        let headerOffset = $('#header').height();
         let $current = $('.steps-area, .registration-breadcrumbs').find('.active').removeClass('active').next().addClass('active');
+
         $('.registration-buttons .back').removeClass('hide');
         if ($current.next().length === 0) {
             $('.payment-button').removeClass('hide');
             $('.registration-buttons button').addClass('hide');
         }
-        $("html, body").animate({scrollTop: $(".steps-area").offset().top}, "fast");
+        $("html, body").animate({scrollTop: $(".steps-area").offset().top - headerOffset}, "fast");
     }
 
     function goToPrev(e) {
         e.preventDefault();
+
+        let headerOffset = $('#header').height();
         let $current = $('.steps-area, .registration-breadcrumbs').find('.active').removeClass('active').prev().addClass('active');
+
         $('.registration-buttons .next').removeClass('hide');
         if ($current.prev().length === 0) {
             $('.registration-buttons .back').addClass('hide');
         }
-        $("html, body").animate({scrollTop: $(".steps-area").offset().top}, "fast");
+        $("html, body").animate({scrollTop: $(".steps-area").offset().top - headerOffset}, "fast");
     }
 
     function infoFill(info) {

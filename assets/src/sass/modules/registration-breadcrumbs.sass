@@ -20,10 +20,14 @@
 			margin-bottom: 10px
 			&:last-of-type
 				margin-bottom: 0
+		+breakpoint-max(767)
+			display: none
 
 		&.active
 			background: $pink
 			color: $white
+			+breakpoint-max(767)
+				display: block
 
 		&.second
 
