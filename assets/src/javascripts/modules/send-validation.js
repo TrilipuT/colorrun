@@ -2,12 +2,11 @@ import $ from 'jquery';
 import Inputmask from 'inputmask';
 
 export default () => {
-    let dateBirth = document.getElementById('dateofbirth'),
-        phone = document.getElementById('phone'),
+    let phone = document.getElementById('phone'),
         im = new Inputmask();
 
-    im.mask(dateBirth);
     im.mask(phone);
+    $('#dateofbirth').inputmask();
 
     let names = ['lastname', 'firstname', 'gender', 'email','dateofbirth', 'info[phone]', 'country', 'city', 'info[tshirt_size]', 'personal_data', 'event_rules'],
         errors = [];

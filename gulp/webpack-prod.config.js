@@ -1,4 +1,9 @@
 const webpack = require("webpack");
+const path = require('path');
+
+function _path(p) {
+    return path.join(__dirname, p);
+}
 
 module.exports = {
     output: {

@@ -79,7 +79,9 @@ get_header(); ?>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" id="dateofbirth" name="dateofbirth"
-                                           data-inputmask="'alias': 'date'" required>
+                                           data-inputmask-alias="dd/mm/yyyy"
+                                           data-inputmask="'yearrange': { 'minyear': '1917', 'maxyear': '2016' }"
+                                           data-val="true" required>
                                     <span class="bar"></span>
                                     <label><?php _e( 'Date of birth', 'colorrun' ) ?></label>
                                 </div>
