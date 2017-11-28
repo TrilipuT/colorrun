@@ -50,7 +50,7 @@
             </div>
 		<?php endforeach; ?>
     </div>
-	<?php if ( Distance::is_open() ): ?>
-        <a href="<?= Distance::get_registration_url() ?>" class="button"><?php _e( 'REGISTER NOW', 'colorrun' ); ?></a>
-	<?php endif; ?>
 </div>
+<?php if ( Distance::is_open() ): ?>
+    <a href="<?= Distance::get_registration_url() ?>" class="button"><?php _e( 'REGISTER NOW', 'colorrun' ); ?></a>
+<?php endif; ?>
