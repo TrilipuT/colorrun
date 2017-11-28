@@ -33,11 +33,52 @@ class Initialization extends AbstractInitialization {
 			$box->add_field( 'registration_subject_' . \modules\theme\Functions::get_current_language(), __( 'Subject', 'colorrun' ) ); //Тема
 			$box->add_field( 'registration_message_' . \modules\theme\Functions::get_current_language(), __( 'Message', 'colorrun' ), function () { //Повідомлення
 				$f = new WPEditor();
-				$f->set_description( 'Можна використовувати наступні змінні: <br>
-									{{image}} - зображення<br>
-									{{name}} - ім"я<br>
-									{{race_name}} - назва дистанції<br>
-									{{button}} - кнопка "Реєструйся зараз"' );
+				$f->set_description( 'Participant variables: <br>
+									{{name}}, 
+									{{firstname}}, 
+									{{lastname}}, 
+									{{distance}}, 
+									{{event}}, 
+									{{bib}}, 
+									{{email}}, 
+									{{gender}}, 
+									{{dateofbirth}}, 
+									{{info_phone}}, 
+									{{info_club}}, 
+									{{nfo_tshirt_size}}, 
+									{{country}}, 
+									{{city}} <br>
+                                    Payment info:<br>
+                                    {{payment_action}},
+                                    {{payment_payment_id}},
+                                    {{payment_status}},
+                                    {{payment_version}},
+                                    {{payment_type}},
+                                    {{payment_paytype}},
+                                    {{payment_public_key}},
+                                    {{payment_acq_id}},
+                                    {{payment_order_id}},
+                                    {{payment_liqpay_order_id}},
+                                    {{payment_description}},
+                                    {{payment_ip}},
+                                    {{payment_amount}},
+                                    {{payment_currency}},
+                                    {{payment_sender_commission}},
+                                    {{payment_receiver_commission}},
+                                    {{payment_agent_commission}},
+                                    {{payment_amount_debit}},
+                                    {{payment_amount_credit}},
+                                    {{payment_commission_debit}},
+                                    {{payment_commission_credit}},
+                                    {{payment_currency_debit}},
+                                    {{payment_currency_credit}},
+                                    {{payment_sender_bonus}},
+                                    {{payment_amount_bonus}},
+                                    {{payment_mpi_eci}},
+                                    {{payment_is_3ds}}, 
+                                    {{payment_create_date}},
+                                    {{payment_end_date}},
+                                    {{payment_transaction_id}}' );
 
 				return $f;
 			} );

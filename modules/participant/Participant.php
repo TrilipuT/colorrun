@@ -42,6 +42,7 @@ class Participant {
 		$this->data['dateofbirth'] = $this->get_meta( 'dateofbirth' );
 		$this->data['status']      = $this->get_meta( 'status' );
 		$this->data['coupon']      = $this->get_meta( 'coupon' );
+		$this->data['payment']     = $this->get_meta( 'payment' );
 		$this->additional_info     = $this->get_additional_info();
 	}
 
@@ -50,8 +51,8 @@ class Participant {
 	 *
 	 * @return string
 	 */
-	private function get_meta( $name ): string {
-		return (string) MetaBox::get( $this->id, Initialization::POST_TYPE, $name );
+	private function get_meta( $name ) {
+		return MetaBox::get( $this->id, Initialization::POST_TYPE, $name );
 	}
 
 	/**
@@ -118,12 +119,21 @@ class Participant {
 	private function replace_placeholders( $content ) {
 		$data             = (array) $this->data;
 		$data['distance'] = get_the_title( $this->distance );
-//		$data['name']     = $this->firstname . ' ' . $this->lastname;
-		foreach ( $this->data as $key => $value ) {
+		$data['event']    = get_the_title( \modules\event\Functions::get_current_event()->post );
+		$data['status']   = Functions::get_statuses()[ $data['status'] ];
+		foreach ( $this->payment as $key => $value ) {
+			$data[ 'payment_' . $key ] = $value;
+			if ( in_array( $key, [ 'create_date', 'end_date' ] ) ) {
+				$data[ 'payment_' . $key ] = get_date_from_gmt( date( 'Y-m-d H:i:s', (int) $value / 1000 ) );
+			}
+		}
+		unset( $data['payment'] );
+		$data['name'] = $this->firstname . ' ' . $this->lastname;
+		foreach ( $data as $key => $value ) {
 			$content = str_replace( "{{{$key}}}", $value, $content );
 		}
 
-		return $content;
+		return nl2br( $content );
 	}
 
 	public function __get( $name ) {
