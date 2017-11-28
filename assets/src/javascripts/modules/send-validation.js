@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import '../plugins/jquery.inputmask.bundle';
 import Inputmask from 'inputmask';
 
 export default () => {

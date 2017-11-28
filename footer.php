@@ -20,7 +20,6 @@
 
 
 <?php wp_footer(); ?>
-<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 </div>
 </body>
 </html>
