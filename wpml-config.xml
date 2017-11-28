@@ -7,5 +7,12 @@
         <custom-field action="translate">home_corporate_text_left</custom-field>
         <custom-field action="translate">home_corporate_text_right</custom-field>
         <custom-field action="copy">home_distances_image</custom-field>
+        <custom-field action="copy">distance_date</custom-field>
+        <custom-field action="copy-once">distance_distance</custom-field>
+        <custom-field action="copy">distance_slots</custom-field>
+        <custom-field action="copy">distance_bib_from</custom-field>
+        <custom-field action="copy">distance_event</custom-field>
+        <custom-field action="copy">distance_price_fee</custom-field>
+        <custom-field action="copy">distance_price_date</custom-field>
     </custom-fields>
 </wpml-config>

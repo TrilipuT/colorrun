@@ -31,6 +31,7 @@ class Initialization extends AbstractInitialization {
 		$post_type->set_rewrite( false );
 		$post_type->set_use_archive( false );
 		$post_type->set_public( false );
+		$post_type->set_exclude_from_search( true );
 		$post_type->set_show_in_nav_menus( false );
 		$post_type->set_menu_position( 8 );
 		$this->post_type = $post_type;
@@ -84,6 +85,14 @@ class Initialization extends AbstractInitialization {
 		$meta->add_field( 'fee', __( 'Price in this period', 'colorrun' ), 'Number' );
 		$meta->set_priority( 'high' );
 		$meta->add_post_type( $this->post_type );
+	}
+
+	public function add_filter_pll_get_post_types( $post_types, $is_settings ) {
+		if ( ! $is_settings ) {
+			$post_types[ self::POST_TYPE ] = self::POST_TYPE;
+		}
+
+		return $post_types;
 	}
 
 	/**
