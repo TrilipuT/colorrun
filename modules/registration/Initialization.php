@@ -31,7 +31,7 @@ class Initialization extends AbstractInitialization {
 			if ( Functions::is_expired( $participant ) ) {
 				return $this->send_error( 'Time for registration expired', 'time_expired' );
 			}
-			if ( (bool) Functions::get_participant( $_POST['email'], $participant->distance ) ) {
+			if ( (bool) Functions::get_participant( strtolower($_POST['email']), $participant->distance ) ) {
 				return $this->send_error( __( 'Email already registered for this distance', 'colorrun' ), 'email_used' );
 			}
 			$data = $_POST;

@@ -71,7 +71,7 @@ class Initialization extends AbstractInitialization {
 	}
 
 	private function add_metabox( MetaBox $metabox ) {
-		if ( ! isset( $_GET['post'] ) || ! $_GET['post'] || get_post_type() != 'page' ) {
+		if ( ! isset( $_GET['post'] ) || ! $_GET['post']  ) {
 			return;
 		}
 		$post_ID = (int) $_GET['post'];

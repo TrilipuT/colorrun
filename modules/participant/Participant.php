@@ -35,7 +35,7 @@ class Participant {
 	public function __construct( int $id ) {
 		$this->id                  = $id;
 		$this->data['bib']         = $this->get_meta( 'bib' );
-		$this->data['email']       = $this->get_meta( 'email' );
+		$this->data['email']       = strtolower( $this->get_meta( 'email' ) );
 		$this->data['distance']    = $this->get_meta( 'distance' );
 		$this->data['lastname']    = $this->get_meta( 'lastname' );
 		$this->data['firstname']   = $this->get_meta( 'firstname' );
@@ -145,6 +145,9 @@ class Participant {
 		if ( $name == 'dateofbirth' ) {
 			$v     = explode( '/', $value );
 			$value = $v[2] . '-' . $v[1] . '-' . $v[0];;
+		} elseif ( $name == 'email' ) {
+			$value               = strtolower( $value );
+			$this->data[ $name ] = $value;
 		}
 
 		return (bool) MetaBox::set( $this->id, Initialization::POST_TYPE, $name, $value );
