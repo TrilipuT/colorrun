@@ -22,12 +22,17 @@ class Functions extends AbstractFunctions {
 	}
 
 	private static function get_events( $count ): \WP_Query {
-		return new \WP_Query( [
-			'post_type'      => Initialization::POST_TYPE,
-			'posts_per_page' => $count,
-			'orderby'        => 'meta_value',
-			'meta_key'       => Initialization::POST_TYPE . '_date',
-		] );
+		if ( ! $events = wp_cache_get( 'get_events_' . $count, 'event' ) ) {
+			$events = new \WP_Query( [
+				'post_type'      => Initialization::POST_TYPE,
+				'posts_per_page' => $count,
+				'orderby'        => 'meta_value',
+				'meta_key'       => Initialization::POST_TYPE . '_date',
+			] );
+			wp_cache_add( 'get_events_' . $count, $events, 'event' );
+		}
+
+		return $events;
 	}
 
 	/**

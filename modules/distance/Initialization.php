@@ -48,7 +48,7 @@ class Initialization extends AbstractInitialization {
 
 		$this->post_type->add_column( __( 'Slots', 'colorrun' ), function () {
 			global $post;
-			$registered = \modules\registration\Functions::get_registered_for_distance_count( $post->ID );
+			$registered = \modules\distance\Functions::get_registered_for_distance_count( $post->ID );
 			$slots      = Functions::get_total_slots( $post->ID );
 			echo "{$registered} / {$slots}";
 		} );

@@ -27,7 +27,7 @@
             </i>
             <div class="text-container">
                 <div class="label"><?php _e( 'participants', 'colorrun' ); ?></div>
-                <div class="value"><?= Registration::get_registered_for_distance_count( get_the_ID() ) ?>
+                <div class="value"><?= Distance::get_registered_for_distance_count( get_the_ID() ) ?>
                     /<?= Distance::get_total_slots() ?></div>
             </div>
         </div>
@@ -50,5 +50,7 @@
             </div>
 		<?php endforeach; ?>
     </div>
-    <a href="<?= Distance::get_registration_url() ?>" class="button"><?php _e( 'REGISTER NOW', 'colorrun' ); ?></a>
+	<?php if ( Distance::is_open() ): ?>
+        <a href="<?= Distance::get_registration_url() ?>" class="button"><?php _e( 'REGISTER NOW', 'colorrun' ); ?></a>
+	<?php endif; ?>
 </div>

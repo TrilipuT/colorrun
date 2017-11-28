@@ -88,7 +88,7 @@ class Initialization extends AbstractInitialization {
 
 	public function add_action_remove_registration( $id ) {
 //		if ( ( get_the_date( 'U', $id ) + ( 15 * MINUTE_IN_SECONDS ) ) >= time() ) {
-		return wp_delete_post( $id );
+		return wp_trash_post( $id );
 //		}
 	}
 }

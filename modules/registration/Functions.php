@@ -66,42 +66,6 @@ class Functions extends AbstractFunctions {
 	}
 
 	/**
-	 * @param int $distance_id
-	 *
-	 * @return int
-	 */
-	public static function get_registered_for_distance_count( int $distance_id ): int {
-		$participants = self::get_registered_for_distance( $distance_id );
-
-		return $participants->post_count;
-	}
-
-	/**
-	 * @param int $distance_id
-	 *
-	 * @return \WP_Query
-	 */
-	public static function get_registered_for_distance( int $distance_id, int $status = 1 ): \WP_Query {
-		return new \WP_Query( [
-			'post_type'     => \modules\participant\Initialization::POST_TYPE,
-			'fields'        => 'ids',
-			'no_found_rows' => true,
-			'meta_query'    => [
-				[
-					'key'   => \modules\participant\Initialization::POST_TYPE . '_distance',
-					'value' => $distance_id,
-				],
-				[
-					'key'     => \modules\participant\Initialization::POST_TYPE . '_bib',
-					'value'   => 0,
-					'type'    => 'numeric',
-					'compare' => '>',
-				],
-			],
-		] );
-	}
-
-	/**
 	 * Start registration for distance
 	 *
 	 * @param int $distance_id

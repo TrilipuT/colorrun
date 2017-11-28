@@ -60,6 +60,32 @@ class Functions extends AbstractFunctions {
 		return (string) MetaBox::get( $id, Initialization::POST_TYPE, 'distance' );
 	}
 
+	public static function is_open( int $id = 0 ): bool {
+		$id = self::get_id( $id );
+		if ( ! $is_open = wp_cache_get( 'is_open_' . $id, 'distance' ) ) {
+			$total      = self::get_total_slots( $id );
+			$registered = self::get_registered_for_distance_count( $id );
+			if ( $registered < $total ) {
+				wp_cache_add( 'is_open_' . $id, true, 'distance' );
+
+				return true;
+			}
+
+			$distance_start_time = MetaBox::get( $id, Initialization::POST_TYPE, 'date' );
+			$now                 = current_time( 'mysql' );
+			if ( $now < $distance_start_time ) {
+				wp_cache_add( 'is_open_' . $id, true, 'distance' );
+
+				return true;
+			}
+			wp_cache_add( 'is_open_' . $id, false, 'distance' );
+
+			return false;
+		}
+
+		return $is_open;
+	}
+
 	/**
 	 * @param int $id
 	 *
@@ -76,10 +102,51 @@ class Functions extends AbstractFunctions {
 	 *
 	 * @return int
 	 */
-	public static function get_available_slots( int $id = 0 ): int {
+	public static function get_registered_for_distance_count( int $id = 0 ): int {
 		$id = self::get_id( $id );
+		if ( ! $count = wp_cache_get( 'registered_for_distance_count_' . $id, 'distance' ) ) {
+			$registered = new \WP_Query( [
+				'post_type'     => \modules\participant\Initialization::POST_TYPE,
+				'fields'        => 'ids',
+				'no_found_rows' => true,
+				'post_status'   => 'any',
+				'meta_query'    => [
+					[
+						'key'   => \modules\participant\Initialization::POST_TYPE . '_distance',
+						'value' => $id,
+					]
+				],
+			] );
+			$count      = $registered->post_count;
+			wp_cache_add( 'registered_for_distance_count_' . $id, $count, 'distance' );
+		}
 
-		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'slots' );
+		return $count;
+	}
+
+	/**
+	 * @param int $distance_id
+	 *
+	 * @return \WP_Query
+	 */
+	public static function get_registered_for_distance( int $distance_id, int $status = 1 ): \WP_Query {
+		return new \WP_Query( [
+			'post_type'     => \modules\participant\Initialization::POST_TYPE,
+			'fields'        => 'ids',
+			'no_found_rows' => true,
+			'meta_query'    => [
+				[
+					'key'   => \modules\participant\Initialization::POST_TYPE . '_distance',
+					'value' => $distance_id,
+				],
+				[
+					'key'     => \modules\participant\Initialization::POST_TYPE . '_bib',
+					'value'   => 0,
+					'type'    => 'numeric',
+					'compare' => '>',
+				],
+			],
+		] );
 	}
 
 	/**
@@ -150,17 +217,23 @@ class Functions extends AbstractFunctions {
 	 * @return \WP_Query
 	 */
 	public static function get_current_distances(): \WP_Query {
-		return new \WP_Query( [
-			'posts_per_page' => - 1,
-			'orderby'        => 'title',
-			'post_type'      => Initialization::POST_TYPE,
-			'meta_query'     => [
-				[
-					'key'   => Initialization::POST_TYPE . '_event',
-					'value' => \modules\event\Functions::get_current_event()->post->ID,
+		$current_event = \modules\event\Functions::get_current_event()->post->ID;
+		if ( ! $current_distances = wp_cache_get( 'get_current_distances_' . $current_event, 'distance' ) ) {
+			$current_distances = new \WP_Query( [
+				'posts_per_page' => - 1,
+				'orderby'        => 'title',
+				'post_type'      => Initialization::POST_TYPE,
+				'meta_query'     => [
+					[
+						'key'   => Initialization::POST_TYPE . '_event',
+						'value' => $current_event,
+					],
 				],
-			],
-		] );
+			] );
+			wp_cache_add( 'get_current_distances_' . $current_event, $current_distances, 'distance', 600 );
+		}
+
+		return $current_distances;
 	}
 
 	/**
