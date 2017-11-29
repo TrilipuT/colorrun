@@ -96,8 +96,8 @@ class Functions extends AbstractFunctions {
 			return;
 		}
 		Log::info( 'Success payment: ' . $data->payment_id, $participant_id );
-		$participant->finish_registration();
 		$participant->payment = $data;
+		$participant->finish_registration();
 		// Lets delete remove_registration schedule
 		$event_time = wp_next_scheduled( 'remove_registration', [ $participant->get_id() ] );
 		wp_unschedule_event( $event_time, 'remove_registration', [ $participant->get_id() ] );
