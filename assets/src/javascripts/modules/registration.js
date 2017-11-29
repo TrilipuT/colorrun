@@ -5,6 +5,7 @@ export default () => {
     let participant = {};
     let $form = $('.registration-form');
     let $stepsArea = $('.steps-area');
+    let names = ['lastname', 'firstname', 'gender', 'email','dateofbirth', 'info[phone]', 'country', 'city', 'info[tshirt_size]', 'personal_data', 'event_rules'];
 
     $('.edit-info').on('click', goToPrev);
 
@@ -12,9 +13,21 @@ export default () => {
         e.preventDefault();
 
         let fd = new FormData(this);
-        for (const [key, value]  of fd.entries()) {
-            participant[key] = value;
-        }
+
+        // for (const [key, value]  of fd.entries()) {
+        //     participant[key] = value;
+        // }
+        names.forEach(function (name) {
+            let $input = $form.find('[name="' + name + '"]'),
+                value;
+
+            if ($input.attr('type') === 'radio')
+                value = $input.filter(':checked').val();
+            else
+                value = $input.val();
+
+            participant[name] = value
+        });
         $.post({
             url: '/wp-json/register/updateInfo', //TODO: set url from settings
             data: fd,
