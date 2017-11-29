@@ -2,13 +2,10 @@
 
 namespace modules\participant;
 
-use WPKit\AdminPage\OptionPage;
 use WPKit\Fields\Select;
 use WPKit\Fields\Select2;
 use WPKit\Fields\Text;
-use WPKit\Fields\WPEditor;
 use WPKit\Module\AbstractInitialization;
-use WPKit\Options\OptionBox;
 use WPKit\PostType\MetaBox;
 use WPKit\PostType\PostType;
 
@@ -175,6 +172,16 @@ class Initialization extends AbstractInitialization {
 			}
 		} );
 
+	}
+
+	/**
+	 * @param $wp_query \WP_Query
+	 */
+	public function add_filter_pre_get_posts( $wp_query ) {
+		if ( $wp_query->is_main_query() && is_admin() && ! isset( $_GET['orderby'] ) && $wp_query->get( 'post_type' ) == self::POST_TYPE ) {
+			$wp_query->set( 'orderby', 'date' );
+			$wp_query->set( 'order', 'DESC' );
+		}
 	}
 
 }

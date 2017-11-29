@@ -4,6 +4,7 @@ namespace modules\payment;
 
 use modules\participant\Participant;
 use WPKit\AdminPage\OptionPage;
+use WPKit\Fields\Select2;
 use WPKit\Module\AbstractInitialization;
 use WPKit\Options\OptionBox;
 
@@ -38,6 +39,15 @@ class Initialization extends AbstractInitialization {
 			$options = new OptionBox( 'liqpay_options', __( 'LiqPay', 'colorrun' ) );
 			$options->add_field( 'liqpay_public_key', __( 'Public key', 'colorrun' ) );
 			$options->add_field( 'liqpay_private_key', __( 'Private key', 'colorrun' ) );
+			$options->add_field( 'liqpay_sandbox', __( 'Private key', 'colorrun' ), 'Checkbox' );
+			$pages = function () {
+				$f = new Select2();
+				$f->set_options( wp_list_pluck( get_pages(), 'post_title', 'ID' ) );
+				$f->set_placeholder( 'Select page' );
+
+				return $f;
+			};
+			$options->add_field( 'liqpay_result_page', __( 'Result page', 'colorrun' ), $pages );
 			$options->set_page( 'payment' );
 		}, 11 );
 	}

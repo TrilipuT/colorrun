@@ -18,17 +18,16 @@ class Functions extends AbstractFunctions {
 	public static function get_payment_url( int $participant_id ): string {
 		$participant = new Participant( $participant_id );
 		if ( $participant->get_payment_status() == Initialization::STATUS['PAYED'] ) {
-			//TODO: redirect here
-			echo 'already payed.';
+			return '';
 		}
 		$public_key  = Functions::get_public_key();
 		$private_key = Functions::get_private_key();
 		if ( ! $private_key || ! $public_key ) {
-			throw new \Exception( 'You should enter liqpay keys' );
+			throw new \Exception( 'You should enter LiqPay keys' );
 		}
 		$liqpay = new \LiqPay( $public_key, $private_key );
 
-		$description = sprintf( 'Pay for order #%s paticipation in event %s.', $participant_id, get_the_title( $participant->distance ) );
+		$description = sprintf( 'Pay for order #%s participation in event %s.', $participant_id, get_the_title( $participant->distance ) );
 		if ( $participant->coupon ) {
 			$description .= ' ' . sprintf( 'Coupon %s applied', $participant->coupon );
 		}
@@ -40,13 +39,17 @@ class Functions extends AbstractFunctions {
 			'description'  => $description,
 			'order_id'     => self::ORDER_PREFIX . $participant_id,
 			'version'      => '3',
-			'sandbox'      => 1,
 			'language'     => \modules\theme\Functions::get_current_language(),
 			'public_key'   => $public_key,
 			'server_url'   => home_url( '/wp-json/register/paymentSuccess' ),
-			'result_url'   => home_url( '/' ),
 			'expired_date' => $participant->get_expired_time(),
 		);
+		if ( self::is_sandbox() ) {
+			$params['sandbox'] = 1;
+		}
+		if ( $result_url = self::get_result_url() ) {
+			$params['result_url'] = $result_url;
+		}
 
 		$query_params = [
 			'data'      => base64_encode( json_encode( $params ) ),
@@ -68,6 +71,20 @@ class Functions extends AbstractFunctions {
 	 */
 	public static function get_private_key(): string {
 		return Option::get( 'liqpay_private_key' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function is_sandbox(): bool {
+		return (bool) Option::get( 'liqpay_sandbox' );
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function get_result_url(): string {
+		return get_permalink( (int) Option::get( 'liqpay_result_page' ) );
 	}
 
 	/**
