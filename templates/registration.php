@@ -92,9 +92,13 @@ get_header(); ?>
                                     <label><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" id="country" name="country" required>
+                                    <select id="country" name="country" required>
+                                        <option><?php _e( 'Country', 'colorrun' ) ?></option>
+										<?php foreach ( Registration::get_country_list() as $code => $country ): ?>
+                                            <option value="<?= $code ?>"><?= $country ?></option>
+										<?php endforeach; ?>
+                                    </select>
                                     <span class="bar"></span>
-                                    <label><?php _e( 'Country', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" id="city" name="city" required>

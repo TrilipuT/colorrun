@@ -25,7 +25,7 @@ class Initialization extends AbstractInitialization {
 
 	public function register_post_type() {
 		$post_type = new PostType( self::POST_TYPE, __( 'Distance', 'colorrun' ) );
-		$post_type->set_supports( [ 'title', 'editor' ] );
+		$post_type->set_supports( [ 'title' ] );
 		$post_type->set_menu_icon( 'dashicons-location-alt' );
 		$post_type->set_publicly_queryable( false );
 		$post_type->set_rewrite( false );
@@ -70,6 +70,10 @@ class Initialization extends AbstractInitialization {
 		} );
 
 		$this->post_type->add_meta_box( $meta );
+
+		$m = new MetaBox( self::POST_TYPE . '_' . \modules\theme\Functions::get_current_language(), __( 'Content', 'colorrun' ) );
+		$m->add_field( 'content', __( 'Content', 'colorrun' ), 'WPEditor' );
+		$m->add_post_type( $this->post_type );
 	}
 
 	public function distance_price() {
@@ -87,13 +91,13 @@ class Initialization extends AbstractInitialization {
 		$meta->add_post_type( $this->post_type );
 	}
 
-	public function add_filter_pll_get_post_types( $post_types, $is_settings ) {
+	/*public function add_filter_pll_get_post_types( $post_types, $is_settings ) {
 		if ( ! $is_settings ) {
 			$post_types[ self::POST_TYPE ] = self::POST_TYPE;
 		}
 
 		return $post_types;
-	}
+	}*/
 
 	/**
 	 * @param $wp_query \WP_Query

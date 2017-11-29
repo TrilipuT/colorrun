@@ -60,6 +60,12 @@ class Functions extends AbstractFunctions {
 		return (string) MetaBox::get( $id, Initialization::POST_TYPE, 'distance' );
 	}
 
+	public static function get_content( int $id = 0 ): string {
+		$id = self::get_id( $id );
+
+		return apply_filters( 'the_content', MetaBox::get( $id, Initialization::POST_TYPE . '_' . \modules\theme\Functions::get_current_language(), 'content' ) );
+	}
+
 	public static function is_open( int $id = 0 ): bool {
 		$id = self::get_id( $id );
 		if ( ! $is_open = wp_cache_get( 'is_open_' . $id, 'distance' ) ) {

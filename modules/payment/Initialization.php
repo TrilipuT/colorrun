@@ -55,6 +55,15 @@ class Initialization extends AbstractInitialization {
 	public function add_action_template_redirect() {
 		if ( isset( $_POST['data'] ) && isset( $_POST['signature'] ) && $_POST['data'] && $_POST['signature'] ) {
 			Functions::process_success( $_POST['data'], $_POST['signature'] );
+
+			$data = json_decode( base64_decode( $_POST['data'] ) );
+			add_filter( 'the_content', function ( $content ) use ( $data ) {
+				foreach ( $data as $key => $value ) {
+					$content = str_replace( "{{{$key}}}", $value, $content );
+				}
+
+				return $content;
+			} );
 		}
 	}
 

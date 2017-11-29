@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-	<?php the_content() ?>
+	<?= Distance::get_content(); ?>
     <div class="prices">
 		<?php $prices = Distance::get_prices();
 		foreach ( $prices as $price ):

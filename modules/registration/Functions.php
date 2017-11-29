@@ -90,6 +90,12 @@ class Functions extends AbstractFunctions {
 		return $participant->get_id();
 	}
 
+	public static function get_country_list() {
+		$countries = include 'countries/' . \modules\theme\Functions::get_current_language() . '.php';
+
+		return $countries;
+	}
+
 	public static function finish_registration( int $participant_id, \stdClass $data ) {
 		$participant = new Participant( $participant_id );
 		if ( $participant->get_payment_status() == \modules\payment\Initialization::STATUS['PAYED'] ) {
