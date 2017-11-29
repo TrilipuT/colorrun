@@ -111,7 +111,7 @@ get_header(); ?>
                                     <label><?php _e( 'Club', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="radio-group">
-                                    <span class="label"><?php _e( 'T-shirt size:', 'colorrun' ) ?></span>
+                                    <span class="label"><?php _e( 'T-shirt size', 'colorrun' ) ?>:</span>
                                     <div class="options">
                                         <label class="radio">
                                             <input id="xs" value="xc" type="radio" name="info[tshirt_size]" required>
@@ -153,17 +153,16 @@ get_header(); ?>
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="personal_data" name="personal_data" value="1" required/>
                                     <label for="personal_data">
-										<?php printf( __( 'Так, я підтверджую, що вказані мною дані є вірними та актуальними. %sЗгода на обробку персональних даних%s.', 'colorrun' ), '<a href="' . Registration::get_personal_data_link() . '" target="_blank"><strong>', '</strong></a>' ) ?>
+										<?php printf( __( 'Yes, I confirm that the data I provided is accurate and up-to-date. %sAgreement to personal data processing%s', 'colorrun' ), '<a href="' . Registration::get_personal_data_link() . '" target="_blank"><strong>', '</strong></a>' ) ?>
                                     </label>
                                 </div>
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="event_rules" name="event_rules" value="1" required/>
                                     <label for="event_rules">
-										<?php printf( __( 'Я ознайомлений/ознайомлена з %sРегламентом Заходу%s.', 'colorrun' ), '<a href="' . Registration::get_event_rules_link() . '" target="_blank"><strong>', '</strong></a>' ) ?>
+										<?php printf( __( 'I have read the %sEvent Regulations%s', 'colorrun' ), '<a href="' . Registration::get_event_rules_link() . '" target="_blank"><strong>', '</strong></a>' ) ?>
                                     </label>
                                 </div>
                                 <input type="hidden" name="participant_id" value="<?= $participant_id ?>">
-                                <button type="submit">send</button>
                             </form>
                         </div>
                     </div>
@@ -173,36 +172,36 @@ get_header(); ?>
                             <button class="edit-info">
                                 <img src="<?= get_template_directory_uri() ?>/assets/built/images/fake/pencil.png"
                                      alt="">
-                                <span>РЕДАГУВАТИ</span>
+                                <span><?php _e( 'Edit', 'colorrun' ) ?></span>
                             </button>
                             <dl class="info">
-                                <dt>Дистанція</dt>
+                                <dt><?php _e( 'Distance', 'colorrun' ) ?></dt>
                                 <dd><?= get_the_title( $distance_id ) ?></dd>
-                                <dt>Прізвище</dt>
+                                <dt><?php _e( 'Last name', 'colorrun' ) ?></dt>
                                 <dd data-id="lastname"></dd>
-                                <dt>Ім’я</dt>
+                                <dt><?php _e( 'First name', 'colorrun' ) ?></dt>
                                 <dd data-id="firstname"></dd>
-                                <dt>Стать</dt>
+                                <dt><?php _e( 'Gender:', 'colorrun' ) ?></dt>
                                 <dd data-id="gender"></dd>
-                                <dt>E-mail</dt>
+                                <dt><?php _e( 'E-mail', 'colorrun' ) ?></dt>
                                 <dd data-id="email"></dd>
-                                <dt>Моб. телефон</dt>
+                                <dt><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></dt>
                                 <dd data-id="info[phone]"></dd>
-                                <dt>Дата народження</dt>
+                                <dt><?php _e( 'Date of birth', 'colorrun' ) ?></dt>
                                 <dd data-id="dateofbirth"></dd>
-                                <dt>Країна</dt>
+                                <dt><?php _e( 'Country', 'colorrun' ) ?></dt>
                                 <dd data-id="country"></dd>
-                                <dt>Місто</dt>
+                                <dt><?php _e( 'City', 'colorrun' ) ?></dt>
                                 <dd data-id="city"></dd>
-                                <dt>Клуб</dt>
+                                <dt><?php _e( 'Club', 'colorrun' ) ?></dt>
                                 <dd data-id="info[club]"></dd>
-                                <dt>Розмір футболки</dt>
+                                <dt><?php _e( 'T-shirt size:', 'colorrun' ) ?></dt>
                                 <dd data-id="info[tshirt_size]"></dd>
                             </dl>
                         </div>
                     </div>
                     <div class="step-row">
-                        <h2 class="title">Підтвердження замовлення</h2>
+                        <h2 class="title"><?php _e( 'Order confirmation', 'colorrun' ) ?></h2>
                         <div class="personal-info">
                             <dl class="preliminary-price">
                                 <dt><?= get_the_title( $distance_id ) ?></dt>
@@ -214,17 +213,17 @@ get_header(); ?>
                                 <button class="promo-submit"><?php _e( 'Apply', 'colorrun' ) ?></button>
                             </div>
                             <dl class="final-price">
-                                <dt>Сума до сплати</dt>
+                                <dt><?php _e( 'Amount to pay', 'colorrun' ) ?></dt>
                                 <dd class="price"><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></dd>
                             </dl>
                         </div>
                     </div>
                     <div class="step-row">
-                        <h2 class="title">Оплата реєстрації</h2>
+                        <h2 class="title"><?php _e( 'Payment for registration', 'colorrun' ) ?></h2>
                         <div class="personal-info">
                             <h3 class="user-name"></h3>
                             <h3 class="distance"><?= get_the_title( $distance_id ) ?></h3>
-                            <p class="price">Сума до сплати: <span
+                            <p class="price"><?php _e( 'Amount to pay', 'colorrun' ) ?>: <span
                                         class="amount price"><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></span>
                             </p>
                         </div>
@@ -250,7 +249,7 @@ get_header(); ?>
 
                 </div>
                 <div class="text-container">
-                    На жаль, час оплати вийшов. Замовлення анульоване. Будь ласка, створіть нове замовлення.
+	                <?php _e( 'Unfortunately, the payment time has expired. You order has been cancelled. Please, place a new order.', 'colorrun' ) ?>
                 </div>
             </div>
             <a href="<?php the_permalink() ?>" class="button"><?php _e( 'Continue', 'colorrun' ) ?></a>
