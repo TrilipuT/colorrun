@@ -4,7 +4,11 @@ namespace modules\registration;
 
 use modules\participant\Participant;
 use Simple_REST_API\Router;
+use WPKit\AdminPage\OptionPage;
+use WPKit\Fields\Select2;
+use WPKit\Fields\WPEditor;
 use WPKit\Module\AbstractInitialization;
+use WPKit\Options\OptionBox;
 
 /**
  * Class Initialization
@@ -31,7 +35,7 @@ class Initialization extends AbstractInitialization {
 			if ( Functions::is_expired( $participant ) ) {
 				return $this->send_error( 'Time for registration expired', 'time_expired' );
 			}
-			if ( (bool) Functions::get_participant( strtolower($_POST['email']), $participant->distance ) ) {
+			if ( (bool) Functions::get_participant( strtolower( $_POST['email'] ), $participant->distance ) ) {
 				return $this->send_error( __( 'Email already registered for this distance', 'colorrun' ), 'email_used' );
 			}
 			$data = $_POST;
@@ -90,6 +94,79 @@ class Initialization extends AbstractInitialization {
 //		if ( ( get_the_date( 'U', $id ) + ( 15 * MINUTE_IN_SECONDS ) ) >= time() ) {
 		return wp_trash_post( $id );
 //		}
+	}
+
+	public function register_options() {
+		add_action( 'init', function () {
+			$settings = new OptionPage( 'registration', __( 'Registration', 'colorrun' ), 'theme_settings' ); //Запросити друга
+
+			$box = new OptionBox( 'template', __( 'New registration notification template', 'colorrun' ) ); //Шаблони
+			$box->add_field( 'registration_subject_' . \modules\theme\Functions::get_current_language(), __( 'Subject', 'colorrun' ) ); //Тема
+			$box->add_field( 'registration_message_' . \modules\theme\Functions::get_current_language(), __( 'Message', 'colorrun' ), function () { //Повідомлення
+				$f = new WPEditor();
+				$f->set_description( 'Participant variables: <br>
+									{{name}}, 
+									{{firstname}}, 
+									{{lastname}}, 
+									{{distance}}, 
+									{{event}}, 
+									{{bib}}, 
+									{{email}}, 
+									{{gender}}, 
+									{{dateofbirth}}, 
+									{{info_phone}}, 
+									{{info_club}}, 
+									{{nfo_tshirt_size}}, 
+									{{country}}, 
+									{{city}} <br>
+                                    Payment info:<br>
+                                    {{payment_action}},
+                                    {{payment_payment_id}},
+                                    {{payment_status}},
+                                    {{payment_version}},
+                                    {{payment_type}},
+                                    {{payment_paytype}},
+                                    {{payment_public_key}},
+                                    {{payment_acq_id}},
+                                    {{payment_order_id}},
+                                    {{payment_liqpay_order_id}},
+                                    {{payment_description}},
+                                    {{payment_ip}},
+                                    {{payment_amount}},
+                                    {{payment_currency}},
+                                    {{payment_sender_commission}},
+                                    {{payment_receiver_commission}},
+                                    {{payment_agent_commission}},
+                                    {{payment_amount_debit}},
+                                    {{payment_amount_credit}},
+                                    {{payment_commission_debit}},
+                                    {{payment_commission_credit}},
+                                    {{payment_currency_debit}},
+                                    {{payment_currency_credit}},
+                                    {{payment_sender_bonus}},
+                                    {{payment_amount_bonus}},
+                                    {{payment_mpi_eci}},
+                                    {{payment_is_3ds}}, 
+                                    {{payment_create_date}},
+                                    {{payment_end_date}},
+                                    {{payment_transaction_id}}' );
+
+				return $f;
+			} );
+			$settings->add_box( $box );
+
+			$reg   = new OptionBox( 'registration', __( '', 'colorrun' ) );
+			$pages = function () {
+				$f = new Select2();
+				$f->set_options( wp_list_pluck( get_pages(), 'post_title', 'ID' ) );
+				$f->set_placeholder( 'Select page' );
+
+				return $f;
+			};
+			$reg->add_field( 'registration_personal_data', __( 'Personal data page', 'colorrun' ), $pages );
+			$reg->add_field( 'registration_event_rules', __( 'Event rules page', 'colorrun' ), $pages );
+			$settings->add_box( $reg );
+		}, 11 );
 	}
 }
 

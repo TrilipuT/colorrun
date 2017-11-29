@@ -25,67 +25,6 @@ class Initialization extends AbstractInitialization {
 	 */
 	private $post_type;
 
-	public function register_options() {
-		add_action( 'init', function () {
-			$settings = new OptionPage( 'registration', __( 'Registration', 'colorrun' ), 'theme_settings' ); //Запросити друга
-
-			$box = new OptionBox( \modules\theme\Functions::get_current_language() . '_template', __( 'New registration notification template', 'colorrun' ) ); //Шаблони
-			$box->add_field( 'registration_subject_' . \modules\theme\Functions::get_current_language(), __( 'Subject', 'colorrun' ) ); //Тема
-			$box->add_field( 'registration_message_' . \modules\theme\Functions::get_current_language(), __( 'Message', 'colorrun' ), function () { //Повідомлення
-				$f = new WPEditor();
-				$f->set_description( 'Participant variables: <br>
-									{{name}}, 
-									{{firstname}}, 
-									{{lastname}}, 
-									{{distance}}, 
-									{{event}}, 
-									{{bib}}, 
-									{{email}}, 
-									{{gender}}, 
-									{{dateofbirth}}, 
-									{{info_phone}}, 
-									{{info_club}}, 
-									{{nfo_tshirt_size}}, 
-									{{country}}, 
-									{{city}} <br>
-                                    Payment info:<br>
-                                    {{payment_action}},
-                                    {{payment_payment_id}},
-                                    {{payment_status}},
-                                    {{payment_version}},
-                                    {{payment_type}},
-                                    {{payment_paytype}},
-                                    {{payment_public_key}},
-                                    {{payment_acq_id}},
-                                    {{payment_order_id}},
-                                    {{payment_liqpay_order_id}},
-                                    {{payment_description}},
-                                    {{payment_ip}},
-                                    {{payment_amount}},
-                                    {{payment_currency}},
-                                    {{payment_sender_commission}},
-                                    {{payment_receiver_commission}},
-                                    {{payment_agent_commission}},
-                                    {{payment_amount_debit}},
-                                    {{payment_amount_credit}},
-                                    {{payment_commission_debit}},
-                                    {{payment_commission_credit}},
-                                    {{payment_currency_debit}},
-                                    {{payment_currency_credit}},
-                                    {{payment_sender_bonus}},
-                                    {{payment_amount_bonus}},
-                                    {{payment_mpi_eci}},
-                                    {{payment_is_3ds}}, 
-                                    {{payment_create_date}},
-                                    {{payment_end_date}},
-                                    {{payment_transaction_id}}' );
-
-				return $f;
-			} );
-			$settings->add_box( $box );
-		}, 11 );
-	}
-
 	public function register_post_type() {
 		$post_type = new PostType( self::POST_TYPE, __( 'Participant', 'colorrun' ) );
 		$post_type->set_supports( [ 'title' ] );

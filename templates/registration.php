@@ -86,7 +86,8 @@ get_header(); ?>
                                     <label><?php _e( 'Date of birth', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" id="phone" name="info[phone]" data-inputmask="'mask': '(999)9999999'" required>
+                                    <input type="text" id="phone" name="info[phone]"
+                                           data-inputmask="'mask': '(999)9999999'" required>
                                     <span class="bar"></span>
                                     <label><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></label>
                                 </div>
@@ -148,13 +149,13 @@ get_header(); ?>
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="personal_data" name="personal_data" value="1" required/>
                                     <label for="personal_data">
-										<?php printf( __( 'Так, я підтверджую, що вказані мною дані є вірними та актуальними. %sЗгода на обробку персональних даних%s.', 'colorrun' ), '<a href="" target="_blank"><strong>', '</strong></a>' ) ?>
+										<?php printf( __( 'Так, я підтверджую, що вказані мною дані є вірними та актуальними. %sЗгода на обробку персональних даних%s.', 'colorrun' ), '<a href="' . Registration::get_personal_data_link() . '" target="_blank"><strong>', '</strong></a>' ) ?>
                                     </label>
                                 </div>
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="event_rules" name="event_rules" value="1" required/>
                                     <label for="event_rules">
-										<?php printf( __( 'Я ознайомлений/ознайомлена з %sРегламентом Заходу%s.', 'colorrun' ), '<a href="" target="_blank"><strong>', '</strong></a>' ) ?>
+										<?php printf( __( 'Я ознайомлений/ознайомлена з %sРегламентом Заходу%s.', 'colorrun' ), '<a href="' . Registration::get_event_rules_link() . '" target="_blank"><strong>', '</strong></a>' ) ?>
                                     </label>
                                 </div>
                                 <input type="hidden" name="participant_id" value="<?= $participant_id ?>">
@@ -217,7 +218,7 @@ get_header(); ?>
                     <div class="step-row">
                         <h2 class="title">Оплата реєстрації</h2>
                         <div class="personal-info">
-                            <h3 class="user-name">Olga Andrushkevich</h3>
+                            <h3 class="user-name"></h3>
                             <h3 class="distance"><?= get_the_title( $distance_id ) ?></h3>
                             <p class="price">Сума до сплати: <span
                                         class="amount price"><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></span>

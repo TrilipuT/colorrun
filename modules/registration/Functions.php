@@ -5,6 +5,7 @@ namespace modules\registration;
 use modules\logger\Functions as Log;
 use modules\participant\Participant;
 use WPKit\Module\AbstractFunctions;
+use WPKit\Options\Option;
 
 /**
  * Class Functions
@@ -49,6 +50,14 @@ class Functions extends AbstractFunctions {
 				],
 			],
 		] );
+	}
+
+	public static function get_personal_data_link(): string {
+		return get_permalink( Option::get( 'registration_personal_data' ) );
+	}
+
+	public static function get_event_rules_link(): string {
+		return get_permalink( Option::get( 'registration_event_rules' ) );
 	}
 
 	/**
