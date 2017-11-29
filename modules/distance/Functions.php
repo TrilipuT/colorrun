@@ -220,8 +220,7 @@ class Functions extends AbstractFunctions {
 		$current_event = \modules\event\Functions::get_current_event()->post->ID;
 		if ( ! $current_distances = wp_cache_get( 'get_current_distances_' . $current_event, 'distance' ) ) {
 			$current_distances = new \WP_Query( [
-				'posts_per_page' => - 1,
-				'orderby'        => 'title',
+				'posts_per_page' => 10,
 				'post_type'      => Initialization::POST_TYPE,
 				'meta_query'     => [
 					[
