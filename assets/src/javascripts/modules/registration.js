@@ -57,7 +57,16 @@ export default () => {
             }
         });
     });
-
+    $('.promo-input').on('change, input, keyup', function () {
+        let $this = $(this),
+            value = $this.val();
+        if (value === '') {
+            $this.addClass('empty');
+        } else {
+            $this.removeClass('empty');
+        }
+        $('.promo-submit').prop('disabled', value === '');
+    });
     $('.promo-submit').on('click', function (e) {
         e.preventDefault();
         let coupon = $('.promo-input').val();

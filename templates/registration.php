@@ -208,9 +208,10 @@ get_header(); ?>
                                 <dd><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></dd>
                             </dl>
                             <div class="promo-group">
-                                <input type="text" class="promo-input"
+                                <p><?php _e( 'Do you have a promocode?', 'colorrun' ) ?></p>
+                                <input type="text" class="promo-input empty"
                                        placeholder="<?php _e( 'Enter promocode', 'colorrun' ) ?>">
-                                <button class="promo-submit"><?php _e( 'Apply', 'colorrun' ) ?></button>
+                                <button class="promo-submit" disabled><?php _ex( 'Apply', 'Промокод', 'colorrun' ) ?></button>
                             </div>
                             <dl class="final-price">
                                 <dt><?php _e( 'Amount to pay', 'colorrun' ) ?></dt>
@@ -249,7 +250,7 @@ get_header(); ?>
 
                 </div>
                 <div class="text-container">
-	                <?php _e( 'Unfortunately, the payment time has expired. You order has been cancelled. Please, place a new order.', 'colorrun' ) ?>
+					<?php _e( 'Unfortunately, the payment time has expired. You order has been cancelled. Please, place a new order.', 'colorrun' ) ?>
                 </div>
             </div>
             <a href="<?php the_permalink() ?>" class="button"><?php _e( 'Continue', 'colorrun' ) ?></a>

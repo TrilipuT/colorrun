@@ -72,7 +72,11 @@
 	.promo-group
 		margin-bottom: 20px
 		+clearfix
-
+		p
+			margin-left: 50px
+			margin-bottom: 10px
+			+breakpoint-max(767)
+				margin-left: 0
 		.promo-input
 			width: 200px
 			float: left
@@ -88,6 +92,8 @@
 				size: 14px
 			line-height: 20px
 			box-sizing: border-box
+			&.empty
+				border-color: $input-hr-clr
 			+placeholder
 				color: $placeholder-clr
 			+breakpoint-max(767)
@@ -110,6 +116,11 @@
 			text-transform: uppercase
 			cursor: pointer
 			transition: background .3s ease
+			&[disabled]
+				background: $input-hr-clr
+                cursor: default
+				+hover
+            		background: $input-hr-clr
 			+hover
 				background: #5d53d8
 			+breakpoint-max(767)
