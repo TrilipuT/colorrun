@@ -30,7 +30,6 @@ class Participant {
 	 *
 	 * @param int $id
 	 *
-	 * @return Participant
 	 */
 	public function __construct( int $id ) {
 		$this->id                  = $id;
@@ -77,6 +76,7 @@ class Participant {
 	public static function create(): Participant {
 		$participant_id = wp_insert_post( [ 'post_type' => Initialization::POST_TYPE ] );
 		$participant    = new Participant( $participant_id );
+		Log::info( 'New participant registered', $participant_id );
 		$participant->set_status( \modules\payment\Initialization::STATUS['NOT_PAYED'] );
 
 		return $participant;
@@ -208,6 +208,7 @@ class Participant {
 		}
 		$this->coupon = $coupon_code;
 		$new_price    = $coupon->apply_to_price( $price );
+		Log::info( "Coupon used {$coupon_code} for {$coupon->get_amount_string()}", $this->get_id() );
 
 		return $new_price;
 	}

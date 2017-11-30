@@ -2,6 +2,7 @@
 
 namespace modules\registration;
 
+use modules\logger\Functions as Log;
 use modules\participant\Participant;
 use Simple_REST_API\Router;
 use WPKit\AdminPage\OptionPage;
@@ -29,15 +30,19 @@ class Initialization extends AbstractInitialization {
 
 		$router->post( '/startRegistration', function () {
 			if ( ! isset( $_POST['distance'] ) && ! $_POST['distance'] ) {
-				return $this->send_error( 'No participant id', 'no_participant' );
+				return $this->send_error( 'No distance id', 'no_distance' );
 			}
 			$id = Functions::start_registration( $_POST['distance'] );
 
 			$participant = new Participant( $id );
 			if ( Functions::is_expired( $participant ) ) {
+				Log::error( 'Time for registration expired', $id );
+
 				return $this->send_error( 'Time for registration expired', 'time_expired' );
 			}
 			if ( (bool) Functions::get_participant( strtolower( $_POST['email'] ), $participant->distance ) ) {
+				Log::error( 'Email already registered for this distance ' . strtolower( $_POST['email'] ), $id );
+
 				return $this->send_error( __( 'Email already registered for this distance', 'colorrun' ), 'email_used' );
 			}
 			$data = $_POST;
@@ -54,9 +59,13 @@ class Initialization extends AbstractInitialization {
 			}
 			$participant = new Participant( (int) $_POST['participant_id'] );
 			if ( Functions::is_expired( $participant ) ) {
+				Log::error( 'Time for registration expired', $participant->get_id() );
+
 				return $this->send_error( 'Time for registration expired', 'time_expired' );
 			}
 			if ( (bool) Functions::get_participant( strtolower( $_POST['email'] ), $participant->distance ) ) {
+				Log::error( 'Email already registered for this distance ' . strtolower( $_POST['email'] ), $participant->get_id() );
+
 				return $this->send_error( __( 'Email already registered for this distance', 'colorrun' ), 'email_used' );
 			}
 			$data = $_POST;
@@ -71,6 +80,8 @@ class Initialization extends AbstractInitialization {
 		$router->post( '/getPaymentInfo/{participant_id}', function ( $participant_id ) {
 			$participant = new Participant( $participant_id );
 			if ( Functions::is_expired( $participant ) ) {
+				Log::error( 'Time for registration expired', $participant->get_id() );
+
 				return $this->send_error( 'Time for registration expired', 'time_expired' );
 			}
 			$price = \modules\distance\Functions::get_current_price( $participant->distance );
