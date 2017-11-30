@@ -124,7 +124,6 @@ class Participant {
 		foreach ( $this->additional_info as $key => $value ) {
 			$data[ 'info_' . $key ] = $value;
 		}
-		var_dump( $data );
 		$data['distance'] = get_the_title( $this->distance );
 		$data['event']    = get_the_title( \modules\event\Functions::get_current_event()->post );
 		$data['status']   = Functions::get_statuses()[ $data['status'] ];
