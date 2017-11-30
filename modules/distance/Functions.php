@@ -26,14 +26,13 @@ class Functions extends AbstractFunctions {
 
 	/**
 	 * @param int $id
-	 * @param string $format
 	 *
 	 * @return string
 	 */
-	public static function get_date( int $id = 0, string $format = 'd.m.Y' ): string {
+	public static function get_distance( int $id = 0 ): string {
 		$id = self::get_id( $id );
 
-		return date( $format, strtotime( MetaBox::get( $id, Initialization::POST_TYPE, 'date' ) ) );
+		return (string) MetaBox::get( $id, Initialization::POST_TYPE, 'distance' );
 	}
 
 	/**
@@ -49,27 +48,30 @@ class Functions extends AbstractFunctions {
 		return (int) $id;
 	}
 
-	/**
-	 * @param int $id
-	 *
-	 * @return string
-	 */
-	public static function get_distance( int $id = 0 ): string {
-		$id = self::get_id( $id );
-
-		return (string) MetaBox::get( $id, Initialization::POST_TYPE, 'distance' );
-	}
-
 	public static function get_content( int $id = 0 ): string {
 		$id = self::get_id( $id );
 
 		return apply_filters( 'the_content', MetaBox::get( $id, Initialization::POST_TYPE . '_' . \modules\theme\Functions::get_current_language(), 'content' ) );
 	}
 
-	public static function get_age( int $id = 0 ): int {
+	public static function get_age( int $id = 0 ): string {
+		$id         = self::get_id( $id );
+		$age        = MetaBox::get( $id, Initialization::POST_TYPE, 'min_age' );
+		$start_date = strtotime( "- {$age} years", self::get_date( $id, 'U' ) );
+
+		return date( 'd/m/Y', $start_date );
+	}
+
+	/**
+	 * @param int $id
+	 * @param string $format
+	 *
+	 * @return string
+	 */
+	public static function get_date( int $id = 0, string $format = 'd.m.Y' ): string {
 		$id = self::get_id( $id );
 
-		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'min_age' );
+		return date( $format, strtotime( MetaBox::get( $id, Initialization::POST_TYPE, 'date' ) ) );
 	}
 
 	public static function is_open( int $id = 0 ): bool {
