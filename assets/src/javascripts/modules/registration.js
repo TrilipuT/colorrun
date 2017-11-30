@@ -126,7 +126,13 @@ export default () => {
             $user = $('.user-name');
 
         for (let key in info) {
-            $infoTable.find('[data-id="' + key + '"]').text(info[key]);
+            let value = info[key];
+            if (key === 'gender') {
+                value = $('[value="' + value + '"]').parent().text().trim();
+            } else if (key === 'country') {
+                value = $('[value="' + value + '"]').text().trim();
+            }
+            $infoTable.find('[data-id="' + key + '"]').text(value);
         }
 
         $user.text(info['firstname'] + ' ' + info['lastname']);
