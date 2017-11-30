@@ -8,7 +8,7 @@ export default () => $('select').each(function(){
     $this.after('<div class="select-styled"></div>');
 
     var $styledSelect = $this.next('div.select-styled');
-    $styledSelect.text($this.children('option').eq(0).text());
+    $styledSelect.text($this.children('option:selected').text());
 
     var $list = $('<ul />', {
         'class': 'select-options'
@@ -22,6 +22,7 @@ export default () => $('select').each(function(){
     }
 
     var $listItems = $list.children('li');
+
 
     $styledSelect.click(function(e) {
         e.stopPropagation();
