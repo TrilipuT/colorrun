@@ -59,6 +59,7 @@ class Initialization extends AbstractInitialization {
 		$meta->set_context( 'side' );
 		$meta->add_field( 'date', __( 'Start date', 'colorrun' ), 'Datetime' );
 		$meta->add_field( 'distance', __( 'Distance', 'colorrun' ) );
+		$meta->add_field( 'min_age', __( 'Age limit', 'colorrun' ) );
 		$meta->add_field( 'slots', __( 'Count of slots', 'colorrun' ), 'Number' );
 		$meta->add_field( 'bib_from', __( 'Bib start', 'colorrun' ), 'Number' );
 		$meta->add_field( 'event', __( 'Event', 'colorrun' ), function () {

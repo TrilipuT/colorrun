@@ -4,7 +4,8 @@ import Inputmask from 'inputmask';
 
 export default () => {
     let phone = document.getElementById('phone'),
-        im = new Inputmask();
+        im = new Inputmask(),
+        $distance = $('select#distance');
 
     im.mask(phone);
     $('#dateofbirth').inputmask();
@@ -92,10 +93,10 @@ export default () => {
             removeItem(errors, itemName);
         }
 
-        if (type === 'text' && itemName === 'dateofbirth' && !validDate($input.val())) {
+        if (type === 'text' && itemName === 'dateofbirth' && (!validDate($input.val()) || !validAge($input.val(), $distance.find('option:selected').data('age')))) {
             $wrapper.addClass('error');
             errors.push(itemName);
-        } else if (type === 'text' && itemName === 'dateofbirth' && validDate($input.val())) {
+        } else if (type === 'text' && itemName === 'dateofbirth' && validDate($input.val()) && validAge($input.val(), $distance.find('option:selected').data('age'))) {
             $wrapper.removeClass('error');
             removeItem(errors, itemName);
         }
@@ -142,6 +143,13 @@ export default () => {
         let reg = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 
         return reg.test(value)
+    }
+
+    function validAge(value, age_limit) {
+        let date = value.split('/');
+        let entered = new Date(date[2], date[1] - 1, date[0]);
+        let limit = new Date((new Date()).getFullYear() - age_limit, date[1] - 1, date[0]);
+        return entered < limit;
     }
 
     function validPhone(value) {

@@ -48,7 +48,8 @@ get_header(); ?>
 										while ( $distances->have_posts() ):
 											$distances->the_post(); ?>
                                             <option
-												<?= selected( get_the_ID(), $distance_id ) ?>value="<?php the_ID() ?>"><?php the_title() ?></option>
+												<?= selected( get_the_ID(), $distance_id ) ?>value="<?php the_ID() ?>"
+                                                data-age="<?= Distance::get_age() ?>"><?php the_title() ?></option>
 										<?php endwhile;
 										wp_reset_postdata(); ?>
                                     </select>
@@ -90,7 +91,7 @@ get_header(); ?>
                                 <div class="input-group">
                                     <input type="text" id="dateofbirth" name="dateofbirth"
                                            data-inputmask-alias="dd/mm/yyyy"
-                                           data-inputmask="'yearrange': { 'minyear': '1917', 'maxyear': '2016' }"
+                                           data-inputmask="'yearrange': { 'minyear': '1917', 'maxyear': '<?= date( 'Y' ) ?>' }"
                                            data-val="true" required>
                                     <span class="bar"></span>
                                     <label><?php _e( 'Date of birth', 'colorrun' ) ?></label>
