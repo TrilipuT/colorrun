@@ -41,6 +41,9 @@ class Participant {
 		$this->data['firstname']   = $this->get_meta( 'firstname' );
 		$this->data['dateofbirth'] = $this->get_meta( 'dateofbirth' );
 		$this->data['status']      = $this->get_meta( 'status' );
+		$this->data['gender']      = $this->get_meta( 'gender' );
+		$this->data['country']     = $this->get_meta( 'country' );
+		$this->data['city']        = $this->get_meta( 'city' );
 		$this->data['coupon']      = $this->get_meta( 'coupon' );
 		$this->data['payment']     = $this->get_meta( 'payment' );
 		$this->additional_info     = $this->get_additional_info();
@@ -61,7 +64,7 @@ class Participant {
 	private function get_additional_info(): array {
 		$info = [];
 		foreach ( Functions::get_additional_fields() as $key => $title ) {
-			$info[ $key ] = MetaBox::get( $this->id, Initialization::POST_TYPE . '_additional', $key );
+			$info[ $key ] = MetaBox::get( $this->id, Initialization::POST_TYPE . '_info', $key );
 		}
 
 		return $info;
@@ -116,8 +119,12 @@ class Participant {
 		wp_mail( $this->email, $subject, $message, [ 'Content-Type: text/html; charset=UTF-8' ] );
 	}
 
-	private function replace_placeholders( $content ) {
-		$data             = (array) $this->data;
+	public function replace_placeholders( $content ) {
+		$data = (array) $this->data;
+		foreach ( $this->additional_info as $key => $value ) {
+			$data[ 'info_' . $key ] = $value;
+		}
+		var_dump( $data );
 		$data['distance'] = get_the_title( $this->distance );
 		$data['event']    = get_the_title( \modules\event\Functions::get_current_event()->post );
 		$data['status']   = Functions::get_statuses()[ $data['status'] ];
@@ -129,6 +136,7 @@ class Participant {
 		}
 		unset( $data['payment'] );
 		$data['name'] = $this->firstname . ' ' . $this->lastname;
+
 		foreach ( $data as $key => $value ) {
 			$content = str_replace( "{{{$key}}}", $value, $content );
 		}

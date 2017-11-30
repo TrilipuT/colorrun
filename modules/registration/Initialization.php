@@ -116,17 +116,15 @@ class Initialization extends AbstractInitialization {
 									{{dateofbirth}}, 
 									{{info_phone}}, 
 									{{info_club}}, 
-									{{nfo_tshirt_size}}, 
+									{{info_tshirt_size}}, 
 									{{country}}, 
 									{{city}} <br>
                                     Payment info:<br>
-                                    {{payment_action}},
                                     {{payment_payment_id}},
                                     {{payment_status}},
                                     {{payment_version}},
                                     {{payment_type}},
                                     {{payment_paytype}},
-                                    {{payment_public_key}},
                                     {{payment_acq_id}},
                                     {{payment_order_id}},
                                     {{payment_liqpay_order_id}},
