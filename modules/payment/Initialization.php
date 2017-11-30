@@ -39,7 +39,7 @@ class Initialization extends AbstractInitialization {
 			$options = new OptionBox( 'liqpay_options', __( 'LiqPay', 'colorrun' ) );
 			$options->add_field( 'liqpay_public_key', __( 'Public key', 'colorrun' ) );
 			$options->add_field( 'liqpay_private_key', __( 'Private key', 'colorrun' ) );
-			$options->add_field( 'liqpay_sandbox', __( 'Private key', 'colorrun' ), 'Checkbox' );
+			$options->add_field( 'liqpay_sandbox', __( 'Sandbox', 'colorrun' ), 'Checkbox' );
 			$pages = function () {
 				$f = new Select2();
 				$f->set_options( wp_list_pluck( get_pages(), 'post_title', 'ID' ) );
