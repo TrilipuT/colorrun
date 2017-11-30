@@ -6,12 +6,10 @@
  * Date: 11/19/17
  * Time: 23:18
  */
-if ( ! isset( $_GET['distance'] ) && ! $_GET['distance'] ) {
-	wp_redirect( home_url() );
-	exit();
+$distance_id = 0;
+if ( isset( $_GET['distance'] ) && $_GET['distance'] ) {
+	$distance_id = (int) $_GET['distance'];
 }
-$distance_id    = (int) $_GET['distance'];
-$participant_id = Registration::start_registration( $distance_id );
 get_header(); ?>
     <div class="hero-section registration" style="background-image: url('<?= Theme::get_background_image() ?>')">
         <div class="text-container">
@@ -43,6 +41,18 @@ get_header(); ?>
                         <h2 class="title"><?php _ex( 'Your information', 'Форма заповнення даних', 'colorrun' ) ?></h2>
                         <div class="form-area">
                             <form class="registration-form">
+                                <div class="input-group">
+                                    <select id="distance" name="distance" required>
+                                        <option value="hide"><?php _e( 'Distance', 'colorrun' ) ?></option>
+										<?php $distances = Distance::get_distances();
+										while ( $distances->have_posts() ):
+											$distances->the_post(); ?>
+                                            <option
+												<?= selected( get_the_ID(), $distance_id ) ?>value="<?php the_ID() ?>"><?php the_title() ?></option>
+										<?php endwhile;
+										wp_reset_postdata(); ?>
+                                    </select>
+                                </div>
                                 <div class="input-group">
                                     <input type="text" name="firstname" id="firstname" required>
                                     <span class="bar"></span>
@@ -162,7 +172,7 @@ get_header(); ?>
 										<?php printf( __( 'I have read the %sEvent Regulations%s', 'colorrun' ), '<a href="' . Registration::get_event_rules_link() . '" target="_blank"><strong>', '</strong></a>' ) ?>
                                     </label>
                                 </div>
-                                <input type="hidden" name="participant_id" value="<?= $participant_id ?>">
+                                <input type="hidden" name="participant_id" value="">
                             </form>
                         </div>
                     </div>
@@ -211,7 +221,8 @@ get_header(); ?>
                                 <p><?php _e( 'Do you have a promocode?', 'colorrun' ) ?></p>
                                 <input type="text" class="promo-input empty"
                                        placeholder="<?php _e( 'Enter promocode', 'colorrun' ) ?>">
-                                <button class="promo-submit" disabled><?php _ex( 'Apply', 'Промокод', 'colorrun' ) ?></button>
+                                <button class="promo-submit"
+                                        disabled><?php _ex( 'Apply', 'Промокод', 'colorrun' ) ?></button>
                             </div>
                             <dl class="final-price">
                                 <dt><?php _e( 'Amount to pay', 'colorrun' ) ?></dt>
@@ -236,7 +247,7 @@ get_header(); ?>
                 <button class="button back hide"><?php _e( 'Back', 'colorrun' ) ?></button>
                 <button class="button next"><?php _e( 'Continue', 'colorrun' ) ?></button>
                 <a class="button payment-button hide"
-                   href="<?= \modules\payment\Functions::get_payment_url( $participant_id ) ?>"><?php _e( 'Pay', 'colorrun' ) ?></a>
+                   href=""><?php _e( 'Pay', 'colorrun' ) ?></a>
             </div>
         </div>
     </section>

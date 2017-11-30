@@ -79,7 +79,7 @@ class Functions extends AbstractFunctions {
 	 *
 	 * @param int $distance_id
 	 *
-	 * @return int
+	 * @return int Created participant id
 	 */
 	public static function start_registration( int $distance_id ): int {
 		$participant = Participant::create();

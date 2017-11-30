@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import 'jquery-countdown'
+import 'jquery-countdown';
 
 export default () => {
     let $countdown = $('.countdown');
@@ -26,16 +26,5 @@ export default () => {
         }
         $seconds.find('.pie-wrapper')[0].className = 'pie-wrapper progress-' + ~~(event.offset.seconds * 100 / 60);
         $seconds.find('.value').text(event.offset.seconds);
-    });
-
-    let $regCount = $('.registration-countdown');
-
-    let oldDate = new Date($regCount.data('time') * 1000);
-    let newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
-
-    $regCount.countdown(newDate, function (event) {
-        $(this).find('.timer').text(event.strftime('%M : %S'))
-    }).on('finish.countdown', function (event) {
-        $('body').addClass('time-out');
     });
 }

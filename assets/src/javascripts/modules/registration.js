@@ -1,10 +1,13 @@
 import $ from 'jquery';
+import 'jquery-countdown';
 
 export default () => {
     // Will be stored participant data
     let participant = {};
     let $form = $('.registration-form');
     let $stepsArea = $('.steps-area');
+    let started = false;
+    let $paymentButton = $('.payment-button');
 
     $('.edit-info').on('click', goToPrev);
 
@@ -26,9 +29,12 @@ export default () => {
                 participant[$input.attr('name')] = value
             }
         });
-
+        let url = '/wp-json/register/startRegistration';
+        if (participant.hasOwnProperty('participant_id') && participant.participant_id !== '') {
+            url = '/wp-json/register/updateInfo';
+        }
         $.post({
-            url: '/wp-json/register/updateInfo', //TODO: set url from settings
+            url: url, //TODO: set url from settings
             data: fd,
             processData: false,  // tell jQuery not to process the data
             contentType: false,   // tell jQuery not to set contentType
@@ -39,7 +45,12 @@ export default () => {
             $stepsArea.removeClass('loading');
         }).success(function (result) {
             if (result.success) {
+                if (result.hasOwnProperty('participant_id')) {
+                    participant.participant_id = result.participant_id;
+                    $form.find('[name="participant_id"]').val(result.participant_id);
+                }
                 infoFill(participant);
+                countdownStart();
                 goToNext(e);
             } else if (result.success === false) {
                 if (result.type === 'time_expired') {
@@ -70,9 +81,7 @@ export default () => {
     $('.promo-submit').on('click', function (e) {
         e.preventDefault();
         let coupon = $('.promo-input').val();
-        if (coupon === '') {
-            return false;
-        }
+
         $.post({
             url: '/wp-json/register/getPaymentInfo/' + participant.participant_id, //TODO: set url from settings
             data: {"coupon": coupon},
@@ -85,7 +94,7 @@ export default () => {
             if (result.success) {
                 $('.promo-error').remove();
                 $('.price').text(result.price);
-                $('.payment-button').prop('href', result.payment_url);
+                $paymentButton.prop('href', result.payment_url);
             } else if (!result.success) {
                 let $promoError = $('.promo-error');
                 if (result.type === 'time_expired') {
@@ -111,7 +120,10 @@ export default () => {
 
         $('.registration-buttons .back').removeClass('hide');
         if ($current.next().length === 0) {
-            $('.payment-button').removeClass('hide');
+            if ($paymentButton.prop('href') === '') {
+                $('.promo-submit').click();
+            }
+            $paymentButton.removeClass('hide');
             $('.registration-buttons button').addClass('hide');
         }
         $("html, body").animate({scrollTop: $(".steps-area").offset().top - headerOffset}, "fast");
@@ -145,5 +157,20 @@ export default () => {
         }
 
         $user.text(info['firstname'] + ' ' + info['lastname']);
+    }
+
+    function countdownStart() {
+        if (!started) {
+            let $regCount = $('.registration-countdown');
+            let oldDate = new Date();
+            let newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
+
+            $regCount.fadeIn(500).countdown(newDate, function (event) {
+                $(this).find('.timer').text(event.strftime('%M : %S'))
+            }).on('finish.countdown', function (event) {
+                $('body').addClass('time-out');
+            });
+            started = true;
+        }
     }
 }

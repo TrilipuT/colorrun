@@ -9,14 +9,14 @@ export default () => {
     im.mask(phone);
     $('#dateofbirth').inputmask();
 
-    let names = ['lastname', 'firstname', 'gender', 'email','dateofbirth', 'info[phone]', 'country', 'city', 'info[tshirt_size]', 'personal_data', 'event_rules'],
+    let names = ['lastname', 'firstname', 'gender', 'email', 'dateofbirth', 'info[phone]', 'country', 'city', 'info[tshirt_size]', 'personal_data', 'event_rules'],
         errors = [];
 
     $('.registration-buttons .next').on('click', function (e) {
         sendValidation(names);
         errorsChecker(errors);
 
-        if(errors.length === 0){
+        if (errors.length === 0) {
             $('.registration-form').submit();
         }
     });
@@ -125,13 +125,13 @@ export default () => {
         let what, a = arguments, L = a.length, ax;
         while (L > 1 && arr.length) {
             what = a[--L];
-            while ((ax= arr.indexOf(what)) !== -1) {
+            while ((ax = arr.indexOf(what)) !== -1) {
                 arr.splice(ax, 1);
             }
         }
         return arr;
     }
-    
+
     function validEmail(value) {
         let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

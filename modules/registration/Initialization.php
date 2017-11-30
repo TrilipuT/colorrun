@@ -27,8 +27,29 @@ class Initialization extends AbstractInitialization {
 			return $this->send_success( $participant->get_info() );
 		} );
 
+		$router->post( '/startRegistration', function () {
+			if ( ! isset( $_POST['distance'] ) && ! $_POST['distance'] ) {
+				return $this->send_error( 'No participant id', 'no_participant' );
+			}
+			$id = Functions::start_registration( $_POST['distance'] );
+
+			$participant = new Participant( $id );
+			if ( Functions::is_expired( $participant ) ) {
+				return $this->send_error( 'Time for registration expired', 'time_expired' );
+			}
+			if ( (bool) Functions::get_participant( strtolower( $_POST['email'] ), $participant->distance ) ) {
+				return $this->send_error( __( 'Email already registered for this distance', 'colorrun' ), 'email_used' );
+			}
+			$data = $_POST;
+			unset( $data['event_rules'] );
+			unset( $data['personal_data'] );
+			$participant->set_info( $data );
+
+			return $this->send_success( [ 'participant_id' => $id ] );
+		} );
+
 		$router->post( '/updateInfo', function () {
-			if ( ! isset( $_POST['participant_id'] ) ) {
+			if ( ! isset( $_POST['participant_id'] ) && ! $_POST['participant_id'] ) {
 				return $this->send_error( 'No participant id', 'no_participant' );
 			}
 			$participant = new Participant( (int) $_POST['participant_id'] );
@@ -53,7 +74,7 @@ class Initialization extends AbstractInitialization {
 				return $this->send_error( 'Time for registration expired', 'time_expired' );
 			}
 			$price = \modules\distance\Functions::get_current_price( $participant->distance );
-			if ( isset( $_POST['coupon'] ) && ! $participant->coupon ) {
+			if ( isset( $_POST['coupon'] ) && $_POST['coupon'] && ! $participant->coupon ) {
 				$coupon_code = $_POST['coupon'];
 				if ( ! $new_price = $participant->use_coupon( $coupon_code ) ) {
 					return $this->send_error( __( 'Can\'t use coupon', 'colorrun' ), 'wrong_coupon' );
