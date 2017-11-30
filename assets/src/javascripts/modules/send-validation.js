@@ -148,7 +148,8 @@ export default () => {
     function validAge(value, age_limit) {
         let date = value.split('/');
         let entered = new Date(date[2], date[1] - 1, date[0]);
-        let limit = new Date((new Date()).getFullYear() - age_limit, date[1] - 1, date[0]);
+        let start_date = age_limit.split('/');
+        let limit = new Date(start_date[2], start_date[1] - 1, start_date[0]);
         return entered < limit;
     }
 
