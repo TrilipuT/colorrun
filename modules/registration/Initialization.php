@@ -120,6 +120,8 @@ class Initialization extends AbstractInitialization {
 
 	public function add_action_remove_registration( $id ) {
 //		if ( ( get_the_date( 'U', $id ) + ( 15 * MINUTE_IN_SECONDS ) ) >= time() ) {
+		Log::info( 'Registration timed out. Participant moved to trash.', $id );
+
 		return wp_trash_post( $id );
 //		}
 	}
