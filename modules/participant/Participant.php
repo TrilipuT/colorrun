@@ -115,8 +115,11 @@ class Participant {
 	private function send_notification_email() {
 		$subject = $this->replace_placeholders( Functions::get_email_subject() );
 		$message = $this->replace_placeholders( Functions::get_email_message() );
-
-		wp_mail( $this->email, $subject, $message, [ 'Content-Type: text/html; charset=UTF-8' ] );
+		$headers = [
+			'Content-Type: text/html; charset=UTF-8',
+			'From: ' . get_option( 'blogname' ) . ' <' . get_option( 'admin_email' ) . '>',
+		];
+		wp_mail( $this->email, $subject, $message, $headers );
 	}
 
 	public function replace_placeholders( $content ) {
