@@ -32,19 +32,15 @@ class Initialization extends AbstractInitialization {
 			if ( ! isset( $_POST['distance'] ) && ! $_POST['distance'] ) {
 				return $this->send_error( 'No distance id', 'no_distance' );
 			}
-			$id = Functions::start_registration( $_POST['distance'] );
-
-			$participant = new Participant( $id );
-			if ( Functions::is_expired( $participant ) ) {
-				Log::error( 'Time for registration expired', $id );
-
-				return $this->send_error( 'Time for registration expired', 'time_expired' );
-			}
-			if ( (bool) Functions::get_participant( strtolower( $_POST['email'] ), $participant->distance ) ) {
-				Log::error( 'Email already registered for this distance ' . strtolower( $_POST['email'] ), $id );
+			if ( (bool) Functions::get_participant( strtolower( $_POST['email'] ), $_POST['distance'] ) ) {
+				Log::error( 'Email already registered for this distance ' . strtolower( $_POST['email'] ) );
 
 				return $this->send_error( __( 'Email already registered for this distance', 'colorrun' ), 'email_used' );
 			}
+
+			$id          = Functions::start_registration( $_POST['distance'] );
+			$participant = new Participant( $id );
+
 			$data = $_POST;
 			unset( $data['event_rules'] );
 			unset( $data['personal_data'] );
