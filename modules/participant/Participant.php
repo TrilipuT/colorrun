@@ -114,7 +114,7 @@ class Participant {
 
 	private function send_notification_email() {
 		$subject = $this->replace_placeholders( Functions::get_email_subject() );
-		$message = $this->replace_placeholders( Functions::get_email_message() );
+		$message = nl2br( $this->replace_placeholders( Functions::get_email_message() ) );
 		$headers = [
 			'Content-Type: text/html; charset=UTF-8',
 			'From: ' . get_option( 'blogname' ) . ' <' . get_option( 'admin_email' ) . '>',
@@ -143,7 +143,7 @@ class Participant {
 			$content = str_replace( "{{{$key}}}", $value, $content );
 		}
 
-		return nl2br( $content );
+		return $content;
 	}
 
 	public function __get( $name ) {
