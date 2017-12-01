@@ -247,8 +247,7 @@ get_header(); ?>
             <div class="registration-buttons">
                 <button class="button back hide"><?php _e( 'Back', 'colorrun' ) ?></button>
                 <button class="button next"><?php _e( 'Continue', 'colorrun' ) ?></button>
-                <a class="button payment-button hide"
-                   href=""><?php _e( 'Pay', 'colorrun' ) ?></a>
+                <a class="button payment-button hide"><?php _e( 'Pay', 'colorrun' ) ?></a>
             </div>
         </div>
     </section>
