@@ -35,6 +35,7 @@ class Initialization extends AbstractInitialization {
 		$this->post_type = $post_type;
 		$this->setup_columns();
 		$this->participant_info();
+		$this->payment_info();
 		$this->custom_info();
 	}
 
@@ -120,6 +121,35 @@ class Initialization extends AbstractInitialization {
 		} );
 
 		$this->post_type->add_meta_box( $meta );
+	}
+
+	public function payment_info() {
+		$meta = new MetaBox( self::POST_TYPE . '_payment', __( 'Payment', 'colorrun' ) );
+		$meta->set_context( 'side' );
+		$meta->add_field( 'event', __( 'Log', 'colorrun' ), function () {
+			$f = new Text();
+			$f->set_attribute( 'style', 'display: none;' );
+			$info = \modules\logger\Functions::get_log_by_participant( get_the_ID() );
+			$text = '';
+			foreach ( $info as $row ) {
+				$time = date_i18n( 'd.m.Y H:i', $row['time'] );
+				$text .= "{$time}: <b>{$row['message']}</b><br>";
+			}
+			$p    = new Participant( get_the_ID() );
+			$text .= '<hr><b>Payment details</b><br><br>';
+			foreach ( $p->payment as $key => $value ) {
+				$text .= "{$key}: <b>{$value}</b><br>";
+			}
+			$f->set_description( $text );
+
+			return $f;
+		} );
+
+		$this->post_type->add_meta_box( $meta );
+
+		$m = new MetaBox( self::POST_TYPE . '_' . \modules\theme\Functions::get_current_language(), __( 'Content', 'colorrun' ) );
+		$m->add_field( 'content', __( 'Content', 'colorrun' ), 'WPEditor' );
+		$m->add_post_type( $this->post_type );
 	}
 
 	public function custom_info() {

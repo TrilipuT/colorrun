@@ -13,7 +13,7 @@ use WPKit\Module\AbstractFunctions;
 class Functions extends AbstractFunctions {
 
 	public static function info( string $message, int $participant_id = 0 ) {
-		self::get_logger()->info( $message, self::get_context( $participant_id ) );
+		self::get_logger()->info( $message, self::set_context( $participant_id ) );
 	}
 
 	private static function get_logger() {
@@ -23,7 +23,7 @@ class Functions extends AbstractFunctions {
 		return $logger;
 	}
 
-	private static function get_context( int $participant_id = 0 ) {
+	private static function set_context( int $participant_id = 0 ) {
 		$context = [];
 		if ( $participant_id ) {
 			$context = [ 'participant_id' => $participant_id ];
@@ -33,6 +33,13 @@ class Functions extends AbstractFunctions {
 	}
 
 	public static function error( string $message, int $participant_id = 0 ) {
-		self::get_logger()->error( $message, self::get_context( $participant_id ) );
+		self::get_logger()->error( $message, self::set_context( $participant_id ) );
+	}
+
+	public static function get_log_by_participant( int $id ) {
+		global $wpdb;
+		$table = Initialization::TABLE_NAME;
+
+		return $wpdb->get_results( $wpdb->prepare( "SELECT message, time FROM {$table} WHERE participant_id = %d ORDER BY id DESC", [ $id ] ), ARRAY_A );
 	}
 }
