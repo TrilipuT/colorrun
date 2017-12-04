@@ -99,7 +99,7 @@ class Functions extends AbstractFunctions {
 
 			return;
 		}
-		Log::info( 'Payment info received: ' . json_encode( $data ) );
+		Log::info( 'Payment info received: ' . json_encode( $data ), $participant_id );
 		if ( in_array( $data->status, [ 'sandbox', 'success', 'hold_wait', 'wait_lc', 'wait_accept' ] ) ) {
 			\modules\registration\Functions::finish_registration( $participant_id, $data );
 		}
