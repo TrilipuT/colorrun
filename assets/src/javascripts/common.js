@@ -12,6 +12,7 @@ import burger from './modules/burgerToggler';
 import select from './modules/customSelect';
 import inputSelection from './modules/input-selection';
 import registration from './modules/registration';
+import datatables from './modules/datatables';
 
 import sendValidation from './modules/send-validation';
 
@@ -39,5 +40,8 @@ $(function ($) {
         shave(item, $(item).parent().height() * 0.6);
     });
 
+    // if ($('#datatable').length) {
+        datatables();
+    // }
 });
 

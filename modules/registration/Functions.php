@@ -52,6 +52,36 @@ class Functions extends AbstractFunctions {
 		] );
 	}
 
+	public static function get_registered_participants( int $distance_id ): array {
+		$participants = new \WP_Query( [
+			'post_type'      => \modules\participant\Initialization::POST_TYPE,
+			'no_found_rows'  => true,
+			'posts_per_page' => - 1,
+			'meta_query'     => [
+				[
+					'key'   => \modules\participant\Initialization::POST_TYPE . '_distance',
+					'value' => $distance_id,
+				]
+			],
+		] );
+		$result       = [];
+		foreach ( $participants->posts as $post ) {
+			$p        = new Participant( $post->ID );
+			$result[] = [
+				'name'        => $p->firstname . ' ' . $p->lastname,
+				'gender'      => $p->gender,
+				'bib'         => $p->bib,
+				'dateofbirth' => $p->dateofbirth,
+				'club'        => $p->get_additional_info( 'club' ),
+				'country_id'  => $p->country,
+				'country'     => isset(self::get_country_list()[$p->country]) ? self::get_country_list()[$p->country] : $p->country,
+				'city'        => $p->city,
+			];
+		}
+
+		return $result;
+	}
+
 	public static function get_personal_data_link(): string {
 		return get_permalink( Option::get( 'registration_personal_data' ) );
 	}

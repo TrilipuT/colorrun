@@ -37,6 +37,7 @@
     "remove-svg-properties": "^0.3.3"
   },
   "dependencies": {
+    "datatables.net": "^1.10.16",
     "jquery": "^3.2.1",
     "jquery-countdown": "^2.2.0",
     "shave": "^2.1.3",

@@ -196,5 +196,75 @@ class Initialization extends AbstractInitialization {
 			$settings->add_box( $reg );
 		}, 11 );
 	}
+
+	public function register_participants_list() {
+		add_action( 'wp_enqueue_scripts', function () {
+			$settings = [
+				'language' => [
+					"sEmptyTable"     => __( "No data available in table", 'colorrun' ),
+					"sInfo"           => __( "Showing _START_ to _END_ of _TOTAL_ entries", 'colorrun' ),
+					"sInfoEmpty"      => __( "Showing 0 to 0 of 0 entries", 'colorrun' ),
+					"sInfoFiltered"   => __( "(filtered from _MAX_ total entries)", 'colorrun' ),
+					"sInfoPostFix"    => "",
+					"sInfoThousands"  => _x( ",", 'datatables thousands separator', 'colorrun' ),
+					"sLengthMenu"     => __( "Show _MENU_ entries", 'colorrun' ),
+					"sLoadingRecords" => __( "Loading...", 'colorrun' ),
+					"sProcessing"     => __( "Processing...", 'colorrun' ),
+					"sSearch"         => __( "Search:", 'colorrun' ),
+					"sZeroRecords"    => __( "No matching records found", 'colorrun' ),
+					"oPaginate"       => [
+						"sFirst"    => __( "First", 'colorrun' ),
+						"sLast"     => __( "Last", 'colorrun' ),
+						"sNext"     => __( "Next", 'colorrun' ),
+						"sPrevious" => __( "Previous", 'colorrun' )
+					],
+					"oAria"           => [
+						"sSortAscending"  => __( ": activate to sort column ascending", 'colorrun' ),
+						"sSortDescending" => __( ": activate to sort column descending", 'colorrun' )
+					]
+				],
+				'fields'   => [
+					'gender' => [
+						'1'      => __( 'M', 'colorrun' ),
+						'male'   => __( 'Male', 'colorrun' ),
+						'2'      => __( 'F', 'colorrun' ),
+						'female' => __( 'Female', 'colorrun' ),
+					]
+				],
+				'search'   => isset( $_GET['search'] ) ? $_GET['search'] : '',
+				'titles'   => [
+					'name'            => __( "Name", 'colorrun' ), //Ім'я Прізвище
+					'gender'          => __( "Sex", 'colorrun' ), //Стать
+					'bib'             => __( "BIB", 'colorrun' ), //Стартовий номер
+					'dateofbirth'     => __( "Year of birth", 'colorrun' ), //Рік народження
+					'age_group'       => __( "Age group", 'colorrun' ), //Вікова група
+					'club'            => __( "Club", 'colorrun' ), //Клуб
+					'team'            => __( "Team", 'colorrun' ), //Команда
+					'city'            => __( "City", 'colorrun' ), //Місто
+					'country'         => __( "Country", 'colorrun' ), //Країнаб
+					'category'        => __( "Category", 'colorrun' ), //Країнаб
+					'place'           => __( "Place", 'colorrun' ),
+					'age_group_place' => __( "AG place", 'colorrun' ),
+					'net_time'        => __( "Net time", 'colorrun' ),
+					'gross_time'      => __( "Gross time", 'colorrun' ),
+					'km5'             => __( "5 km", 'colorrun' ),
+					'km10'            => __( "10 km", 'colorrun' ),
+					'km15'            => __( "15 km", 'colorrun' ),
+					'km20'            => __( "20 km", 'colorrun' ),
+					'km21'            => __( "21 km", 'colorrun' ),
+					'km30'            => __( "30 km", 'colorrun' ),
+				]
+			];
+
+		$distances = $dist = \modules\distance\Functions::get_distances();
+		$id        = isset( $_GET['id'] ) ? (int) $_GET['id'] : (int) $distances->post->ID;
+//		if ( isset( $distances[ $id ] ) ) {
+//			$settings['distance'] = $distances[ $id ];
+//		}
+			$settings['data'] = Functions::get_registered_participants( $id );
+
+			wp_localize_script( 'theme', 'table_settings', $settings );
+		}, 11 );
+	}
 }
 

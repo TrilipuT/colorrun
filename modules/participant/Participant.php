@@ -45,7 +45,7 @@ class Participant {
 		$this->data['city']        = $this->get_meta( 'city' );
 		$this->data['coupon']      = $this->get_meta( 'coupon' );
 		$this->data['payment']     = $this->get_meta( 'payment' );
-		$this->additional_info     = $this->get_additional_info();
+		$this->additional_info     = $this->fill_additional_info();
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Participant {
 	/**
 	 * @return array
 	 */
-	private function get_additional_info(): array {
+	private function fill_additional_info(): array {
 		$info = [];
 		foreach ( Functions::get_additional_fields() as $key => $title ) {
 			$info[ $key ] = MetaBox::get( $this->id, Initialization::POST_TYPE . '_info', $key );
@@ -86,6 +86,10 @@ class Participant {
 		$this->status = $status;
 
 		return $this;
+	}
+
+	public function get_additional_info( string $name ) {
+		return isset( $this->additional_info[ $name ] ) ? $this->additional_info[ $name ] : '';
 	}
 
 	public function finish_registration() {
@@ -194,7 +198,7 @@ class Participant {
 			'lastname'        => $this->lastname,
 			'status_name'     => Functions::get_statuses()[ $this->status ],
 			'status'          => $this->status,
-			'additional_info' => $this->get_additional_info(),
+			'additional_info' => $this->fill_additional_info(),
 		];
 	}
 
