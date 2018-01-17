@@ -96,6 +96,7 @@ class Participant {
 		$this->set_status( \modules\payment\Initialization::STATUS['PAYED'] );
 		wp_publish_post( $this->id );
 		$this->assign_bib();
+		wp_cache_delete( 'registered_for_distance_count_' . $this->distance, 'distance' );
 	}
 
 	private function assign_bib() {
