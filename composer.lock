@@ -180,12 +180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/redink-no/wpkit.git",
-                "reference": "7d5458ac1dc000b38b4b0bbe0f037ff686ba31f8"
+                "reference": "eeb748cd4f07ce982865aeb6bda97e061b563eeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/redink-no/wpkit/zipball/7d5458ac1dc000b38b4b0bbe0f037ff686ba31f8",
-                "reference": "7d5458ac1dc000b38b4b0bbe0f037ff686ba31f8",
+                "url": "https://api.github.com/repos/redink-no/wpkit/zipball/eeb748cd4f07ce982865aeb6bda97e061b563eeb",
+                "reference": "eeb748cd4f07ce982865aeb6bda97e061b563eeb",
                 "shasum": ""
             },
             "require": {
@@ -220,7 +220,7 @@
                 "wordpress",
                 "wpkit"
             ],
-            "time": "2017-11-15T12:41:36+00:00"
+            "time": "2017-12-21T15:02:19+00:00"
         },
         {
             "name": "shtrihstr/simple-rest-api",

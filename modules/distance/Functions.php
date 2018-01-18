@@ -120,11 +120,12 @@ class Functions extends AbstractFunctions {
 		$id = self::get_id( $id );
 		if ( ! $count = wp_cache_get( 'registered_for_distance_count_' . $id, 'distance' ) ) {
 			$registered = new \WP_Query( [
-				'post_type'     => \modules\participant\Initialization::POST_TYPE,
-				'fields'        => 'ids',
-				'no_found_rows' => true,
-				'post_status'   => 'any',
-				'meta_query'    => [
+				'post_type'      => \modules\participant\Initialization::POST_TYPE,
+				'posts_per_page' => '-1',
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+				'post_status'    => 'any',
+				'meta_query'     => [
 					[
 						'key'   => \modules\participant\Initialization::POST_TYPE . '_distance',
 						'value' => $id,
