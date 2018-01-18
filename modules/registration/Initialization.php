@@ -119,11 +119,16 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function add_action_remove_registration( $id ) {
-//		if ( ( get_the_date( 'U', $id ) + ( 15 * MINUTE_IN_SECONDS ) ) >= time() ) {
-		Log::info( 'Registration timed out. Participant moved to trash.', $id );
+		$participant = new Participant( $id );
+		if ( ! $participant->bib && $participant->get_payment_status() != \modules\payment\Initialization::STATUS['PAYED'] ) {
+			Log::info( 'Registration timed out. Participant moved to trash.', $id );
 
-		return wp_trash_post( $id );
-//		}
+			return wp_trash_post( $id );
+		} else {
+			Log::error( 'False registration deletion. Payed and bib already assigned.', $id );
+
+			return true;
+		}
 	}
 
 	public function register_options() {
@@ -256,8 +261,8 @@ class Initialization extends AbstractInitialization {
 				]
 			];
 
-		$distances = $dist = \modules\distance\Functions::get_distances();
-		$id        = isset( $_GET['id'] ) ? (int) $_GET['id'] : (int) $distances->post->ID;
+			$distances = $dist = \modules\distance\Functions::get_distances();
+			$id        = isset( $_GET['id'] ) ? (int) $_GET['id'] : (int) $distances->post->ID;
 //		if ( isset( $distances[ $id ] ) ) {
 //			$settings['distance'] = $distances[ $id ];
 //		}
