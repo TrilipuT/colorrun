@@ -9,7 +9,7 @@ export default () => {
     let started = false;
     let $paymentButton = $('.payment-button');
 
-    $('.edit-info').on('click', goToPrev);
+    $('.edit-info, .registration-buttons .back').on('click', goToPrev);
 
     $form.on('submit', function (e) {
         e.preventDefault();

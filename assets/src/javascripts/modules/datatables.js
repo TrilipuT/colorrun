@@ -6,7 +6,9 @@ export default () => {
     let $body = $('body');
     let $datatables = $('#datatable');
     let $distance_select = $('select#distance');
-
+    if (!$datatables.length) {
+        return;
+    }
     $distance_select.change(function () {
         $(this).parents('form').submit();
     });
