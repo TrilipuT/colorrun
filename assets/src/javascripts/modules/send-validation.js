@@ -7,11 +7,20 @@ export default () => {
         im = new Inputmask(),
         $distance = $('select#distance');
 
-    im.mask(phone);
+    if (phone) {
+        im.mask(phone);
+    }
     $('#dateofbirth').inputmask();
 
-    let names = ['lastname', 'firstname', 'gender', 'email', 'dateofbirth', 'info[phone]', 'country', 'city', 'info[tshirt_size]', 'personal_data', 'event_rules'],
+    // let names = ['lastname', 'firstname', 'gender', 'email', 'dateofbirth', 'info[phone]', 'country', 'city', 'info[tshirt_size]', 'personal_data', 'event_rules'],
+    let names = [],
         errors = [];
+
+    $('form').find('[required]').each(function (i, m) {
+        if (!names.includes(m.name)) {
+            names.push(m.name);
+        }
+    });
 
     $('.registration-buttons .next').on('click', function (e) {
         sendValidation(names);

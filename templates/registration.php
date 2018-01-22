@@ -95,12 +95,14 @@ get_header(); ?>
                                     <span class="bar"></span>
                                     <label><?php _e( 'Date of birth', 'colorrun' ) ?></label>
                                 </div>
-                                <div class="input-group">
-                                    <input type="text" id="phone" name="info[phone]"
-                                           data-inputmask="'mask': '(999)9999999'" required>
-                                    <span class="bar"></span>
-                                    <label><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></label>
-                                </div>
+								<?php if ( Registration::is_active_field( 'phone' ) ): ?>
+                                    <div class="input-group">
+                                        <input type="text" id="phone" name="info[phone]"
+                                               data-inputmask="'mask': '(999)9999999'" required>
+                                        <span class="bar"></span>
+                                        <label><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></label>
+                                    </div>
+								<?php endif; ?>
                                 <div class="input-group">
                                     <select id="country" name="country" required>
                                         <option><?php _e( 'Country', 'colorrun' ) ?></option>
@@ -115,51 +117,49 @@ get_header(); ?>
                                     <span class="bar"></span>
                                     <label><?php _e( 'City', 'colorrun' ) ?></label>
                                 </div>
-                                <div class="input-group">
-                                    <input type="text" id="club" name="info[club]">
-                                    <span class="bar"></span>
-                                    <label><?php _e( 'Club', 'colorrun' ) ?></label>
-                                </div>
-                                <div class="radio-group">
-                                    <span class="label"><?php _e( 'T-shirt size', 'colorrun' ) ?>:</span>
-                                    <div class="options">
-                                        <label class="radio">
-                                            <input id="xs" value="xc" type="radio" name="info[tshirt_size]" required>
-                                            <span class="outer">
-                                            <span class="inner"></span>
-                                        </span>
-                                            XS
-                                        </label>
-                                        <label class="radio">
-                                            <input id="s" value="s" type="radio" name="info[tshirt_size]" required>
-                                            <span class="outer">
-                                            <span class="inner"></span>
-                                        </span>
-                                            S
-                                        </label>
-                                        <label class="radio">
-                                            <input id="m" value="m" type="radio" name="info[tshirt_size]" required>
-                                            <span class="outer">
-                                            <span class="inner"></span>
-                                        </span>
-                                            M
-                                        </label>
-                                        <label class="radio">
-                                            <input id="l" value="l" type="radio" name="info[tshirt_size]" required>
-                                            <span class="outer">
-                                            <span class="inner"></span>
-                                        </span>
-                                            L
-                                        </label>
-                                        <label class="radio">
-                                            <input id="xl" value="xl" type="radio" name="info[tshirt_size]" required>
-                                            <span class="outer">
-                                            <span class="inner"></span>
-                                        </span>
-                                            XL
-                                        </label>
+								<?php if ( Registration::is_active_field( 'club' ) ): ?>
+                                    <div class="input-group">
+                                        <input type="text" id="club" name="info[club]">
+                                        <span class="bar"></span>
+                                        <label><?php _e( 'Club', 'colorrun' ) ?></label>
                                     </div>
-                                </div>
+								<?php endif; ?>
+								<?php if ( Registration::is_active_field( 'tshirt_size' ) ): ?>
+
+                                    <div class="radio-group">
+                                        <span class="label"><?php _e( 'T-shirt size', 'colorrun' ) ?>:</span>
+                                        <div class="options">
+                                            <label class="radio">
+                                                <input id="xs" value="xc" type="radio" name="info[tshirt_size]"
+                                                       required>
+                                                <span class="outer"><span class="inner"></span></span>
+                                                XS
+                                            </label>
+                                            <label class="radio">
+                                                <input id="s" value="s" type="radio" name="info[tshirt_size]" required>
+                                                <span class="outer"><span class="inner"></span></span>
+                                                S
+                                            </label>
+                                            <label class="radio">
+                                                <input id="m" value="m" type="radio" name="info[tshirt_size]" required>
+                                                <span class="outer"><span class="inner"></span></span>
+                                                M
+                                            </label>
+                                            <label class="radio">
+                                                <input id="l" value="l" type="radio" name="info[tshirt_size]" required>
+                                                <span class="outer"><span class="inner"></span></span>
+                                                L
+                                            </label>
+                                            <label class="radio">
+                                                <input id="xl" value="xl" type="radio" name="info[tshirt_size]"
+                                                       required>
+                                                <span class="outer"><span class="inner"></span></span>
+                                                XL
+                                            </label>
+                                        </div>
+                                    </div>
+								<?php endif; ?>
+
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="personal_data" name="personal_data" value="1" required/>
                                     <label for="personal_data">
@@ -195,18 +195,24 @@ get_header(); ?>
                                 <dd data-id="gender"></dd>
                                 <dt><?php _e( 'E-mail', 'colorrun' ) ?></dt>
                                 <dd data-id="email"></dd>
-                                <dt><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></dt>
-                                <dd data-id="info[phone]"></dd>
+								<?php if ( Registration::is_active_field( 'phone' ) ): ?>
+                                    <dt><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></dt>
+                                    <dd data-id="info[phone]"></dd>
+								<?php endif; ?>
                                 <dt><?php _e( 'Date of birth', 'colorrun' ) ?></dt>
                                 <dd data-id="dateofbirth"></dd>
                                 <dt><?php _e( 'Country', 'colorrun' ) ?></dt>
                                 <dd data-id="country"></dd>
                                 <dt><?php _e( 'City', 'colorrun' ) ?></dt>
                                 <dd data-id="city"></dd>
-                                <dt><?php _e( 'Club', 'colorrun' ) ?></dt>
-                                <dd data-id="info[club]"></dd>
-                                <dt><?php _e( 'T-shirt size:', 'colorrun' ) ?></dt>
-                                <dd data-id="info[tshirt_size]"></dd>
+								<?php if ( Registration::is_active_field( 'club' ) ): ?>
+                                    <dt><?php _e( 'Club', 'colorrun' ) ?></dt>
+                                    <dd data-id="info[club]"></dd>
+								<?php endif; ?>
+								<?php if ( Registration::is_active_field( 'tshirt_size' ) ): ?>
+                                    <dt><?php _e( 'T-shirt size:', 'colorrun' ) ?></dt>
+                                    <dd data-id="info[tshirt_size]"></dd>
+								<?php endif; ?>
                             </dl>
                         </div>
                     </div>

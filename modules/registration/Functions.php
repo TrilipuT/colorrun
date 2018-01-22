@@ -74,12 +74,18 @@ class Functions extends AbstractFunctions {
 				'dateofbirth' => $p->dateofbirth,
 				'club'        => $p->get_additional_info( 'club' ),
 				'country_id'  => $p->country,
-				'country'     => isset(self::get_country_list()[$p->country]) ? self::get_country_list()[$p->country] : $p->country,
+				'country'     => isset( self::get_country_list()[ $p->country ] ) ? self::get_country_list()[ $p->country ] : $p->country,
 				'city'        => $p->city,
 			];
 		}
 
 		return $result;
+	}
+
+	public static function get_country_list() {
+		$countries = include 'countries/' . \modules\theme\Functions::get_current_language() . '.php';
+
+		return $countries;
 	}
 
 	public static function get_personal_data_link(): string {
@@ -120,12 +126,6 @@ class Functions extends AbstractFunctions {
 		return $participant->get_id();
 	}
 
-	public static function get_country_list() {
-		$countries = include 'countries/' . \modules\theme\Functions::get_current_language() . '.php';
-
-		return $countries;
-	}
-
 	public static function finish_registration( int $participant_id, \stdClass $data ) {
 		$participant = new Participant( $participant_id );
 		if ( $participant->get_payment_status() == \modules\payment\Initialization::STATUS['PAYED'] ) {
@@ -141,5 +141,13 @@ class Functions extends AbstractFunctions {
 
 	public static function get_registration_url( int $distance ): string {
 		return \modules\theme\Functions::get_page_url_by_template( 'registration.php' ) . '?distance=' . $distance;
+	}
+
+	public static function is_active_field( string $name ): bool {
+		return in_array( $name, self::get_active_additional_fields() );
+	}
+
+	public static function get_active_additional_fields(): array {
+		return Option::get( 'registration_additional_fields' ) ?: [];
 	}
 }

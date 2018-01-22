@@ -6,6 +6,7 @@ use modules\logger\Functions as Log;
 use modules\participant\Participant;
 use Simple_REST_API\Router;
 use WPKit\AdminPage\OptionPage;
+use WPKit\Fields\Select;
 use WPKit\Fields\Select2;
 use WPKit\Fields\WPEditor;
 use WPKit\Module\AbstractInitialization;
@@ -188,7 +189,7 @@ class Initialization extends AbstractInitialization {
 			} );
 			$settings->add_box( $box );
 
-			$reg   = new OptionBox( 'registration', __( '', 'colorrun' ) );
+			$reg   = new OptionBox( 'registration', __( 'Form settings', 'colorrun' ) );
 			$pages = function () {
 				$f = new Select2();
 				$f->set_options( wp_list_pluck( get_pages(), 'post_title', 'ID' ) );
@@ -198,6 +199,13 @@ class Initialization extends AbstractInitialization {
 			};
 			$reg->add_field( 'registration_personal_data', __( 'Personal data page', 'colorrun' ), $pages );
 			$reg->add_field( 'registration_event_rules', __( 'Event rules page', 'colorrun' ), $pages );
+			$reg->add_field( 'registration_additional_fields', __( 'Additional form fields', 'colorrun' ), function () {
+				$f = new Select();
+				$f->set_multiple( true );
+				$f->set_options( \modules\participant\Functions::get_additional_fields() );
+
+				return $f;
+			} );
 			$settings->add_box( $reg );
 		}, 11 );
 	}
