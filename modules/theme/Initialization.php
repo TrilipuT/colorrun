@@ -243,13 +243,15 @@ class Initialization extends AbstractThemeInitialization {
 	protected function _enqueue_styles() {
 		wp_enqueue_style(
 			'theme',
-			$this->get_theme_assets_url() . "/built/stylesheets/screen.css"
+			$this->get_theme_assets_url() . "/built/stylesheets/screen.css",
+			[],
+			wp_get_theme()->get( 'Version' )
 		);
 		wp_enqueue_style(
 			'theme-print',
 			$this->get_theme_assets_url() . "/built/stylesheets/print.css",
 			[],
-			null,
+			wp_get_theme()->get( 'Version' ),
 			'print'
 		);
 	}
@@ -259,7 +261,7 @@ class Initialization extends AbstractThemeInitialization {
 			'theme',
 			$this->get_theme_assets_url() . '/built/javascripts/common.js',
 			[ 'jquery', ],
-			null,
+			wp_get_theme()->get( 'Version' ),
 			true
 		);
 //		wp_localize_script('theme', 'theme_settings', []);
@@ -283,7 +285,7 @@ class Initialization extends AbstractThemeInitialization {
 	}
 
 	public function add_action_login_enqueue_scripts() {
-		wp_enqueue_style( 'theme-login', $this->get_theme_assets_url() . '/built/stylesheets/login.css' );
+		wp_enqueue_style( 'theme-login', $this->get_theme_assets_url() . '/built/stylesheets/login.css', [], wp_get_theme()->get( 'Version' ) );
 	}
 
 	public function add_action_admin_init() {
@@ -298,7 +300,7 @@ class Initialization extends AbstractThemeInitialization {
 		remove_submenu_page( 'options-general.php', 'options-discussion.php' );
 		remove_submenu_page( 'edit-comments.php', 'edit-comments.php' );
 		remove_menu_page( 'edit-comments.php' );
-		if ( ! current_user_can('manage_options') ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			remove_menu_page( 'plugins.php' );
 			remove_menu_page( 'tools.php' );
 			remove_submenu_page( 'themes.php', 'themes.php' );
