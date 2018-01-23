@@ -43,7 +43,16 @@ class Coupon {
 		$this->wpdb  = $wpdb;
 		$this->table = $wpdb->prefix . self::TABLE;
 		if ( is_array( $data ) ) {
-			$this->data = $data;
+			$this->data = array_intersect_key( $data, array_flip( [
+				'id',
+				'code',
+				'amount',
+				'used',
+				'count',
+				'type',
+				'status',
+				'created',
+			] ) );
 		} else if ( is_int( $data ) ) {
 			$this->data = $this->get_by_id( $data );
 		} else if ( is_string( $data ) ) {
