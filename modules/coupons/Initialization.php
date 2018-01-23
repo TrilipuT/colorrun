@@ -3,10 +3,7 @@
 namespace modules\coupons;
 
 use WPKit\AdminPage\TablePage;
-use WPKit\Fields\Number;
-use WPKit\Fields\Radio;
 use WPKit\Module\AbstractInitialization;
-use WPKit\PostType\MetaBox;
 use WPKit\PostType\PostType;
 use WPKit\Table\Table;
 
@@ -27,6 +24,20 @@ class Initialization extends AbstractInitialization {
 
 
 	public function admin_register_coupons_table() {
+		global $wpdb;
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		dbDelta( 'CREATE TABLE `'.$wpdb->prefix.'coupons` (
+							`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+							`code` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',
+							`amount` tinyint(4) DEFAULT NULL,
+							`used` int(11) DEFAULT \'0\',
+							`count` int(11) DEFAULT \'1\',
+							`type` tinyint(1) DEFAULT \'0\',
+							`status` tinyint(1) DEFAULT \'1\',
+							`created` datetime DEFAULT \'0000-00-00 00:00:00\',
+							PRIMARY KEY (`code`),
+							KEY `id` (`id`)
+						) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;' );
 
 		$table = new TablePage( 'coupons', 'Coupons' );
 		$table->set_menu_position(9);
