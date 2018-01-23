@@ -10,6 +10,7 @@ $distance_id = 0;
 if ( isset( $_GET['distance'] ) && $_GET['distance'] ) {
 	$distance_id = (int) $_GET['distance'];
 }
+$price = Distance::get_current_price( $distance_id );
 get_header(); ?>
     <div class="hero-section registration" style="background-image: url('<?= Theme::get_background_image() ?>')">
         <div class="text-container">
@@ -49,7 +50,8 @@ get_header(); ?>
 											$distances->the_post(); ?>
                                             <option
 												<?= selected( get_the_ID(), $distance_id ) ?>value="<?php the_ID() ?>"
-                                                data-age="<?= Distance::get_age() ?>"><?php the_title() ?></option>
+                                                data-age="<?= Distance::get_age() ?>"
+                                                data-price="<?= Distance::format_price( Distance::get_current_price() ) ?>"><?php the_title() ?></option>
 										<?php endwhile;
 										wp_reset_postdata(); ?>
                                     </select>
@@ -186,7 +188,7 @@ get_header(); ?>
                             </button>
                             <dl class="info">
                                 <dt><?php _e( 'Distance', 'colorrun' ) ?></dt>
-                                <dd><?= get_the_title( $distance_id ) ?></dd>
+                                <dd data-distance-title><?= get_the_title( $distance_id ) ?></dd>
                                 <dt><?php _e( 'Last name', 'colorrun' ) ?></dt>
                                 <dd data-id="lastname"></dd>
                                 <dt><?php _e( 'First name', 'colorrun' ) ?></dt>
@@ -220,8 +222,8 @@ get_header(); ?>
                         <h2 class="title"><?php _e( 'Order confirmation', 'colorrun' ) ?></h2>
                         <div class="personal-info">
                             <dl class="preliminary-price">
-                                <dt><?= get_the_title( $distance_id ) ?></dt>
-                                <dd><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></dd>
+                                <dt data-distance-title><?= get_the_title( $distance_id ) ?></dt>
+                                <dd data-distance-price><?= Distance::format_price( $price ) ?></dd>
                             </dl>
                             <div class="promo-group">
                                 <p><?php _e( 'Do you have a promocode?', 'colorrun' ) ?></p>
@@ -232,7 +234,7 @@ get_header(); ?>
                             </div>
                             <dl class="final-price">
                                 <dt><?php _e( 'Amount to pay', 'colorrun' ) ?></dt>
-                                <dd class="price"><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></dd>
+                                <dd class="price" data-distance-price><?= Distance::format_price( $price ) ?></dd>
                             </dl>
                         </div>
                     </div>
@@ -240,9 +242,10 @@ get_header(); ?>
                         <h2 class="title"><?php _e( 'Payment for registration', 'colorrun' ) ?></h2>
                         <div class="personal-info">
                             <h3 class="user-name"></h3>
-                            <h3 class="distance"><?= get_the_title( $distance_id ) ?></h3>
+                            <h3 class="distance" data-distance-title><?= get_the_title( $distance_id ) ?></h3>
                             <p class="price"><?php _e( 'Amount to pay', 'colorrun' ) ?>: <span
-                                        class="amount price"><?= Distance::format_price( Distance::get_current_price( $distance_id ) ) ?></span>
+                                        class="amount price"
+                                        data-distance-price><?= Distance::format_price( $price ) ?></span>
                             </p>
                         </div>
                     </div>
@@ -252,7 +255,8 @@ get_header(); ?>
             <div class="registration-buttons">
                 <button class="button back hide"><?php _e( 'Back', 'colorrun' ) ?></button>
                 <button class="button next"><?php _e( 'Continue', 'colorrun' ) ?></button>
-                <a class="button payment-button hide"><?php _e( 'Pay', 'colorrun' ) ?></a>
+                <a class="button payment-button hide" data-free="<?php _e( 'Register', 'colorrun' ) ?>"
+                   data-pay="<?php _e( 'Pay', 'colorrun' ) ?>"><?php $price == 0 ? _e( 'Register', 'colorrun' ) : _e( 'Pay', 'colorrun' ) ?></a>
             </div>
         </div>
     </section>

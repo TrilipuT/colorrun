@@ -17,8 +17,13 @@ class Functions extends AbstractFunctions {
 
 	public static function get_payment_url( int $participant_id ): string {
 		$participant = new Participant( $participant_id );
+		// If already payed - return empty
 		if ( $participant->get_payment_status() == Initialization::STATUS['PAYED'] ) {
 			return '';
+		}
+		// If we have free registration - return direct registration link
+		if ( $participant->get_amount_to_pay() == 0 ) {
+			return home_url( '/wp-json/register/registerFree/' . $participant->get_id() );
 		}
 		$public_key  = Functions::get_public_key();
 		$private_key = Functions::get_private_key();

@@ -101,6 +101,13 @@ class Initialization extends AbstractInitialization {
 		$router->post( '/paymentSuccess', function () {
 			return \modules\payment\Functions::process_success( $_POST['data'], $_POST['signature'] );
 		} );
+
+		$router->get( '/registerFree/{participant_id}', function ( $participant_id ) {
+			Functions::finish_registration( $participant_id, (object) [ 'payment_id' => 'free' ] );
+			wp_redirect( Functions::get_result_url() . '?participant=' . $participant_id );
+		} )->convert( 'participant_id', function ( $participant_id ) {
+			return absint( $participant_id );
+		} );
 	}
 
 	private function send_success( array $data = [] ): array {
@@ -197,6 +204,7 @@ class Initialization extends AbstractInitialization {
 
 				return $f;
 			};
+			$reg->add_field( 'registration_free_result', __( 'Free registration result page', 'colorrun' ), $pages );
 			$reg->add_field( 'registration_personal_data', __( 'Personal data page', 'colorrun' ), $pages );
 			$reg->add_field( 'registration_event_rules', __( 'Event rules page', 'colorrun' ), $pages );
 			$reg->add_field( 'registration_additional_fields', __( 'Additional form fields', 'colorrun' ), function () {

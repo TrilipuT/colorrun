@@ -52,6 +52,15 @@ class Functions extends AbstractFunctions {
 		] );
 	}
 
+	public static function get_result_url() {
+		$page_id = Option::get( 'registration_free_result' );
+		if ( ! $page_id ) {
+			return \modules\payment\Functions::get_result_url();
+		}
+
+		return get_permalink( (int) $page_id );
+	}
+
 	public static function get_registered_participants( int $distance_id ): array {
 		$participants = new \WP_Query( [
 			'post_type'      => \modules\participant\Initialization::POST_TYPE,

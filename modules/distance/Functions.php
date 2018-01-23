@@ -56,7 +56,7 @@ class Functions extends AbstractFunctions {
 
 	public static function get_age( int $id = 0 ): string {
 		$id         = self::get_id( $id );
-		$age        = MetaBox::get( $id, Initialization::POST_TYPE, 'min_age' );
+		$age        = MetaBox::get( $id, Initialization::POST_TYPE, 'min_age' ) ?: 0;
 		$start_date = strtotime( "- {$age} years", self::get_date( $id, 'U' ) );
 
 		return date( 'd/m/Y', $start_date );

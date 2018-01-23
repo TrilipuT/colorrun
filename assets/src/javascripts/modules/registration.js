@@ -68,6 +68,21 @@ export default () => {
             }
         });
     });
+    $form.find('#distance').on('change', function () {
+        let $distance = $form.find('#distance').find("option:selected"),
+            $paymentButton = $('.payment-button');
+
+        $stepsArea.find('[data-distance-title]').text($distance.text());
+        $stepsArea.find('[data-distance-price]').text($distance.data('price'));
+        let free = parseInt($distance.data('price')) == 0;
+        $('.final-price, .promo-group').toggleClass('hide', free);
+        if (free) {
+            $paymentButton.text($paymentButton.data('free'));
+        } else {
+            $paymentButton.text($paymentButton.data('pay'));
+        }
+
+    });
     $('.promo-input').on('change, input, keyup', function () {
         let $this = $(this),
             value = $this.val();

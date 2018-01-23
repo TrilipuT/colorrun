@@ -64,7 +64,13 @@ class Initialization extends AbstractInitialization {
 
 				return $content;
 			} );
+		} elseif ( isset( $_GET['participant'] ) && $_GET['participant'] ) {
+			$participant = new Participant( (int) $_GET['participant'] );
+			add_filter( 'the_content', function ( $content ) use ( $participant ) {
+				$content = $participant->replace_placeholders( $content );
+
+				return $content;
+			} );
 		}
 	}
 }
-
