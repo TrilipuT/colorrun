@@ -84,7 +84,8 @@ class Initialization extends AbstractInitialization {
 			$price = \modules\distance\Functions::get_current_price( $participant->distance );
 			if ( isset( $_POST['coupon'] ) && $_POST['coupon'] && ! $participant->coupon ) {
 				$coupon_code = $_POST['coupon'];
-				if ( ! $new_price = $participant->use_coupon( $coupon_code ) ) {
+				$new_price = $participant->use_coupon( $coupon_code );
+				if ( $new_price === false ) {
 					return $this->send_error( __( 'Can\'t use coupon', 'colorrun' ), 'wrong_coupon' );
 				}
 				$price = $new_price;

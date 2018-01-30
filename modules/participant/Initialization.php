@@ -40,23 +40,23 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function setup_columns() {
-		$this->post_type->add_column( __( 'Distance', 'colorrun' ), function () {
+		$this->post_type->add_column( [ 'distance', __( 'Distance', 'colorrun' ) ], function () {
 			global $post;
 
 			$distance = MetaBox::get( $post->ID, Initialization::POST_TYPE, 'distance' );
 			echo get_the_title( $distance );
 		} );
-		$this->post_type->add_column( __( 'Bib', 'colorrun' ), function () {
+		$this->post_type->add_column( [ 'bib', __( 'Bib', 'colorrun' ) ], function () {
 			global $post;
 
 			echo MetaBox::get( $post->ID, Initialization::POST_TYPE, 'bib' );
 		} );
-		$this->post_type->add_column( __( 'Email', 'colorrun' ), function () {
+		$this->post_type->add_column( [ 'email', __( 'Email', 'colorrun' ) ], function () {
 			global $post;
 
 			echo MetaBox::get( $post->ID, Initialization::POST_TYPE, 'email' );
 		} );
-		$this->post_type->add_column( __( 'Status', 'colorrun' ), function () {
+		$this->post_type->add_column( [ 'status', __( 'Status', 'colorrun' ) ], function () {
 			global $post;
 
 			$status = MetaBox::get( $post->ID, Initialization::POST_TYPE, 'status' );

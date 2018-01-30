@@ -42,7 +42,7 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function setup_columns() {
-		$this->post_type->add_column( __( 'Event Date', 'colorrun' ), function () {
+		$this->post_type->add_column( [ 'date', __( 'Event Date', 'colorrun' ) ], function () {
 			global $post;
 			echo MetaBox::get( $post->ID, Initialization::POST_TYPE, 'date' );
 

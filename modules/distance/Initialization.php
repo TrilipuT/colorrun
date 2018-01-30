@@ -41,12 +41,12 @@ class Initialization extends AbstractInitialization {
 	}
 
 	public function setup_columns() {
-		$this->post_type->add_column( __( 'Event Date', 'colorrun' ), function () {
+		$this->post_type->add_column( [ 'date', __( 'Event Date', 'colorrun' ) ], function () {
 			global $post;
 			echo MetaBox::get( $post->ID, Initialization::POST_TYPE, 'date' );
 		}, true, 2 );
 
-		$this->post_type->add_column( __( 'Slots', 'colorrun' ), function () {
+		$this->post_type->add_column( [ 'slots', __( 'Slots', 'colorrun' ) ], function () {
 			global $post;
 			$registered = \modules\distance\Functions::get_registered_for_distance_count( $post->ID );
 			$slots      = Functions::get_total_slots( $post->ID );
