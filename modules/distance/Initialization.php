@@ -79,7 +79,8 @@ class Initialization extends AbstractInitialization {
 
 	public function distance_price() {
 		$meta = new MetaBoxRepeatable( Initialization::POST_TYPE . '_price', __( 'Price', 'colorrun' ) );
-		$meta->add_field( 'date', __( 'Period end date', 'colorrun' ), function () {
+		$meta->add_field( 'fee', __( 'Price', 'colorrun' ), 'Number' );
+		$meta->add_field( 'date', __( 'Last day of price (including)', 'colorrun' ), function () {
 			$f = new DateTime();
 			$f->set_attribute( 'data-format', 'yyyy-mm-dd' );
 			$f->set_attribute( 'data-pick-time', 'false' );
@@ -87,7 +88,6 @@ class Initialization extends AbstractInitialization {
 
 			return $f;
 		} );
-		$meta->add_field( 'fee', __( 'Price in this period', 'colorrun' ), 'Number' );
 		$meta->set_priority( 'high' );
 		$meta->add_post_type( $this->post_type );
 	}

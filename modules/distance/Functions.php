@@ -197,7 +197,7 @@ class Functions extends AbstractFunctions {
 				$prices[] = [
 					'date'   => $date,
 					'fee'    => $fees[ $i ],
-					'active' => strtotime( $date ) > time(),
+					'active' => strtotime( $date . ' 23:59' ) > time(),
 				];
 			}
 		}
