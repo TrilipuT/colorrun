@@ -55,7 +55,7 @@ export default () => {
             } else if (result.success === false) {
                 if (result.type === 'time_expired') {
                     // If we have timeout - just display popup
-                    $('body').addClass('time-out');
+                    show_timeout();
                     return;
                 }
                 let $formError = $('.form-error');
@@ -109,12 +109,13 @@ export default () => {
             if (result.success) {
                 $('.promo-error').remove();
                 $('.price').text(result.price);
+                $('.promo-submit').prop('disabled', true);
                 $paymentButton.prop('href', result.payment_url);
             } else if (!result.success) {
                 let $promoError = $('.promo-error');
                 if (result.type === 'time_expired') {
                     // If we have timeout - just display popup
-                    $('body').addClass('time-out');
+                    show_timeout();
                     return;
                 }
                 if ($promoError.length) {
@@ -183,9 +184,13 @@ export default () => {
             $regCount.fadeIn(500).countdown(newDate, function (event) {
                 $(this).find('.timer').text(event.strftime('%M : %S'))
             }).on('finish.countdown', function (event) {
-                $('body').addClass('time-out');
+                show_timeout();
             });
             started = true;
         }
+    }
+
+    function show_timeout() {
+        $('body').addClass('time-out');
     }
 }

@@ -81,18 +81,19 @@ class Initialization extends AbstractInitialization {
 
 				return $this->send_error( 'Time for registration expired', 'time_expired' );
 			}
-			$price = \modules\distance\Functions::get_current_price( $participant->distance );
+			if ( $participant->coupon ) {
+				return $this->send_error( __( 'You have successfully used the promo code. Please, pay the registration fee.', 'colorrun' ), 'coupon_exist' );
+			}
 			if ( isset( $_POST['coupon'] ) && $_POST['coupon'] && ! $participant->coupon ) {
 				$coupon_code = $_POST['coupon'];
-				$new_price = $participant->use_coupon( $coupon_code );
+				$new_price   = $participant->use_coupon( $coupon_code );
 				if ( $new_price === false ) {
 					return $this->send_error( __( 'Can\'t use coupon', 'colorrun' ), 'wrong_coupon' );
 				}
-				$price = $new_price;
 			}
 
 			return $this->send_success( [
-				'price'       => \modules\distance\Functions::format_price( $price ),
+				'price'       => \modules\distance\Functions::format_price( $participant->get_amount_to_pay() ),
 				'payment_url' => \modules\payment\Functions::get_payment_url( $participant_id )
 			] );
 		} )->convert( 'participant_id', function ( $participant_id ) {

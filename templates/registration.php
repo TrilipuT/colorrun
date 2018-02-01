@@ -232,6 +232,9 @@ get_header(); ?>
                                 <button class="promo-submit"
                                         disabled><?php _ex( 'Apply', 'Промокод', 'colorrun' ) ?></button>
                             </div>
+                            <p class="promo-info">
+		                        <?php _e( 'Please, notice! The promo code may be used only one time. If you have entered the promo code but failed to pay the registration fee, your promo code will not be valid for the next attempt!', 'colorrun' ) ?>
+                            </p>
                             <dl class="final-price">
                                 <dt><?php _e( 'Amount to pay', 'colorrun' ) ?></dt>
                                 <dd class="price" data-distance-price><?= Distance::format_price( $price ) ?></dd>
