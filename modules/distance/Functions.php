@@ -148,10 +148,11 @@ class Functions extends AbstractFunctions {
 	 */
 	public static function get_registered_for_distance( int $distance_id, int $status = 1 ): \WP_Query {
 		return new \WP_Query( [
-			'post_type'     => \modules\participant\Initialization::POST_TYPE,
-			'fields'        => 'ids',
-			'no_found_rows' => true,
-			'meta_query'    => [
+			'post_type'      => \modules\participant\Initialization::POST_TYPE,
+			'fields'         => 'ids',
+			'no_found_rows'  => true,
+			'posts_per_page' => - 1,
+			'meta_query'     => [
 				[
 					'key'   => \modules\participant\Initialization::POST_TYPE . '_distance',
 					'value' => $distance_id,
@@ -223,6 +224,7 @@ class Functions extends AbstractFunctions {
 	/**
 	 * Get distances.
 	 * If $event_id specifiend will return only distances from selected event
+	 *
 	 * @param int $event_id
 	 *
 	 * @return \WP_Query
