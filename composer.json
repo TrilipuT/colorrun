@@ -4,6 +4,7 @@
         "shtrihstr/simple-rest-api": "dev-master",
         "liqpay/liqpay": "^1.2",
         "monolog/monolog": "^1.23",
-        "wazaari/monolog-mysql": "^1.0"
+        "wazaari/monolog-mysql": "^1.0",
+        "faisalman/simple-excel-php": "^0.3.15"
     }
 }

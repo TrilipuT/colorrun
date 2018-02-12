@@ -13,14 +13,6 @@ use WPKit\PostType\MetaBox;
  */
 class Functions extends AbstractFunctions {
 
-	public static function get_statuses(): array {
-		return [
-			\modules\payment\Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', 'colorrun' ),
-			\modules\payment\Initialization::STATUS['AWAITING_PAYMENT'] => __( 'Awaiting Payment', 'colorrun' ),
-			\modules\payment\Initialization::STATUS['PAYED']            => __( 'Payed', 'colorrun' ),
-		];
-	}
-
 	public static function get_bib( $id ): int {
 		return (int) MetaBox::get( $id, Initialization::POST_TYPE, 'bib' );
 	}

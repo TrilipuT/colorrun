@@ -2,6 +2,7 @@
 
 namespace modules\distance;
 
+use modules\participant\Participant;
 use WPKit\Module\AbstractFunctions;
 use WPKit\PostType\MetaBox;
 use WPKit\PostType\MetaBoxRepeatable;
@@ -13,16 +14,6 @@ use WPKit\PostType\MetaBoxRepeatable;
  */
 class Functions extends AbstractFunctions {
 
-	/**
-	 * @return array
-	 */
-	public static function get_statuses(): array {
-		return [
-			\modules\payment\Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', 'colorrun' ),
-			\modules\payment\Initialization::STATUS['AWAITING_PAYMENT'] => __( 'Awaiting Payment', 'colorrun' ),
-			\modules\payment\Initialization::STATUS['PAYED']            => __( 'Payed', 'colorrun' ),
-		];
-	}
 
 	/**
 	 * @param int $id
@@ -139,6 +130,17 @@ class Functions extends AbstractFunctions {
 		return $count;
 	}
 
+	public static function get_participants( int $distance_id ) {
+		$participants = self::get_registered_for_distance( $distance_id );
+		$result       = [];
+		foreach ( $participants->posts as $id ) {
+			$p        = new Participant( $id );
+			$result[] = $p->get_data_for_export();
+		}
+
+		return $result;
+	}
+
 	/**
 	 * @param int $distance_id
 	 *
@@ -219,13 +221,27 @@ class Functions extends AbstractFunctions {
 	}
 
 	/**
+	 * Get distances.
+	 * If $event_id specifiend will return only distances from selected event
+	 * @param int $event_id
+	 *
 	 * @return \WP_Query
 	 */
-	public static function get_distances(): \WP_Query {
-		return new \WP_Query( [
+	public static function get_distances( int $event_id = 0 ): \WP_Query {
+		$args = [
 			'posts_per_page' => - 1,
 			'post_type'      => Initialization::POST_TYPE,
-		] );
+		];
+		if ( $event_id ) {
+			$args['meta_query'] = [
+				[
+					'key'   => Initialization::POST_TYPE . '_event',
+					'value' => $event_id,
+				],
+			];
+		}
+
+		return new \WP_Query( $args );
 	}
 
 	/**

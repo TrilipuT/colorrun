@@ -116,4 +116,15 @@ class Functions extends AbstractFunctions {
 
 		return $valid_signature == $signature;
 	}
+
+	/**
+	 * @return array
+	 */
+	public static function get_statuses(): array {
+		return [
+			\modules\payment\Initialization::STATUS['NOT_PAYED']        => __( 'Not Payed', 'colorrun' ),
+			\modules\payment\Initialization::STATUS['AWAITING_PAYMENT'] => __( 'Awaiting Payment', 'colorrun' ),
+			\modules\payment\Initialization::STATUS['PAYED']            => __( 'Payed', 'colorrun' ),
+		];
+	}
 }

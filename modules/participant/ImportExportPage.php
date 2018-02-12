@@ -9,6 +9,7 @@
 namespace modules\participant;
 
 
+use SimpleExcel\SimpleExcel;
 use WPKit\AdminPage\CustomPage;
 
 class ImportExportPage extends CustomPage {
@@ -30,22 +31,19 @@ class ImportExportPage extends CustomPage {
                         </th>
                         <td>
                             <select name="export_id" id="export_id" class="regular-text select2" required="required">
-                                <optgroup label="<?php _e( 'Event', 'colorrun' ); ?>">
-									<?php foreach ( \modules\event\Functions::get_all_events()->posts as $distance ) : ?>
-                                        <option value="<?= $distance->ID ?>"><?= get_the_title( $distance ) ?></option>
-									<?php endforeach; ?>
-                                </optgroup>
-                                <optgroup label="<?php _e( 'Distance', 'colorrun' ); ?>">
-									<?php foreach ( \modules\distance\Functions::get_distances()->posts as $distance ) : ?>
-                                        <option value="<?= $distance->ID ?>"><?= get_the_title( $distance ) ?></option>
-									<?php endforeach; ?>
-                                </optgroup>
+								<?php foreach ( \modules\event\Functions::get_all_events()->posts as $event ) : ?>
+                                    <optgroup label="<?= get_the_title( $event ) ?>">
+										<?php foreach ( \modules\distance\Functions::get_distances( $event->ID )->posts as $distance ) : ?>
+                                            <option value="<?= $distance->ID ?>"><?= get_the_title( $distance ) ?></option>
+										<?php endforeach; ?>
+                                    </optgroup>
+								<?php endforeach; ?>
                             </select>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <input type="hidden" name='action' value="export">
+                <input type="hidden" name='type' value="export">
 				<?php submit_button( __( 'Export' ) ) ?>
             </form>
             <h2 class="title"><?= __( 'Import' ) ?></h2>
@@ -71,8 +69,8 @@ class ImportExportPage extends CustomPage {
                     </tr>
                     </tbody>
                 </table>
-                <input type="hidden" name='action' value="import">
-				<?php submit_button( __( 'Import' ) ) ?>
+                <input type="hidden" name='type' value="import">
+				<?php // submit_button( __( 'Import' ) ) ?>
             </form>
             <script type="text/javascript">jQuery(function () {
                     jQuery(".select2").select2();
@@ -96,8 +94,14 @@ class ImportExportPage extends CustomPage {
 		if ( ! $export_id ) {
 			$this->show_error( __( 'Nothing selected', 'colorrun' ) );
 		}
-
-
+		$participants = \modules\distance\Functions::get_participants( $export_id );
+		$excel = new SimpleExcel( 'csv' );                    // instantiate new object (will automatically construct the parser & writer type as XML)
+		$excel->writer->addRow( array_keys( $participants[0] ) );
+		foreach ( $participants as $participant ) {
+			$excel->writer->addRow( array_values( $participant ) );
+		}
+		$excel->writer->saveFile( sanitize_file_name( 'export_' . get_the_title( $export_id ) . '_' . date_i18n( 'Y-m-d-His' ) ) );
+		exit();
 	}
 
 	private function show_error( string $message ): void {

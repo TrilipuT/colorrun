@@ -60,7 +60,7 @@ class Initialization extends AbstractInitialization {
 			global $post;
 
 			$status = MetaBox::get( $post->ID, Initialization::POST_TYPE, 'status' );
-			echo isset( Functions::get_statuses()[ $status ] ) ? Functions::get_statuses()[ $status ] : '';
+			echo isset( \modules\payment\Functions::get_statuses()[ $status ] ) ? \modules\payment\Functions::get_statuses()[ $status ] : '';
 		} );
 	}
 
@@ -90,6 +90,7 @@ class Initialization extends AbstractInitialization {
 					$bibs = array_merge( [ $current_bib => $current_bib ], $bibs );
 				}
 				$bibs = array_combine( $bibs, $bibs );
+				$bibs = array_merge( [ '' => __( '-- No bib --', 'colorrun' ) ], $bibs );
 				$f->set_options( $bibs );
 			} else {
 				$f = new Text();
@@ -108,7 +109,7 @@ class Initialization extends AbstractInitialization {
 		} );
 		$meta->add_field( 'status', __( 'Status', 'colorrun' ), function () {
 			$f = new Select();
-			$f->set_options( Functions::get_statuses() );
+			$f->set_options( \modules\payment\Functions::get_statuses() );
 
 			return $f;
 		} );
@@ -136,11 +137,13 @@ class Initialization extends AbstractInitialization {
 				$text .= "{$time}: <b>{$row['message']}</b><br>";
 			}
 			$p    = new Participant( get_the_ID() );
-			$text .= '<hr><b>Payment details</b><br><br>';
-			foreach ( $p->payment as $key => $value ) {
-				$text .= "{$key}: <b>{$value}</b><br>";
+			if ( $p->payment ) {
+				$text .= '<hr><b>Payment details</b><br><br>';
+				foreach ( $p->payment as $key => $value ) {
+					$text .= "{$key}: <b>{$value}</b><br>";
+				}
+				$f->set_description( $text );
 			}
-			$f->set_description( $text );
 
 			return $f;
 		} );

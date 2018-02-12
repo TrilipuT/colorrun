@@ -132,7 +132,7 @@ get_header(); ?>
                                         <span class="label"><?php _e( 'T-shirt size', 'colorrun' ) ?>:</span>
                                         <div class="options">
                                             <label class="radio">
-                                                <input id="xs" value="xc" type="radio" name="info[tshirt_size]"
+                                                <input id="xs" value="xs" type="radio" name="info[tshirt_size]"
                                                        required>
                                                 <span class="outer"><span class="inner"></span></span>
                                                 XS

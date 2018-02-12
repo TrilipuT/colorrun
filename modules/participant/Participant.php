@@ -88,6 +88,16 @@ class Participant {
 		return $this;
 	}
 
+	public function get_data_for_export() {
+		$data = $this->data;
+		$data = array_merge( $data, $this->additional_info );
+		unset( $data['payment'] );
+		unset( $data['status'] );
+		$data['distance'] = get_the_title( $data['distance'] );
+
+		return $data;
+	}
+
 	public function get_additional_info( string $name ) {
 		return isset( $this->additional_info[ $name ] ) ? $this->additional_info[ $name ] : '';
 	}
@@ -134,7 +144,7 @@ class Participant {
 		}
 		$data['distance'] = get_the_title( $this->distance );
 		$data['event']    = get_the_title( \modules\event\Functions::get_current_event()->post );
-		$data['status']   = Functions::get_statuses()[ $data['status'] ];
+		$data['status']   = \modules\payment\Functions::get_statuses()[ $data['status'] ];
 		foreach ( $this->payment as $key => $value ) {
 			$data[ 'payment_' . $key ] = $value;
 			if ( in_array( $key, [ 'create_date', 'end_date' ] ) ) {
@@ -197,7 +207,7 @@ class Participant {
 			'email'           => $this->email,
 			'firstname'       => $this->firstname,
 			'lastname'        => $this->lastname,
-			'status_name'     => Functions::get_statuses()[ $this->status ],
+			'status_name'     => \modules\payment\Functions::get_statuses()[ $this->status ],
 			'status'          => $this->status,
 			'additional_info' => $this->fill_additional_info(),
 		];
