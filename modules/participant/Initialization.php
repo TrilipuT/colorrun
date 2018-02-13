@@ -89,8 +89,9 @@ class Initialization extends AbstractInitialization {
 				if ( $current_bib = Functions::get_bib( $post->ID ) ) {
 					$bibs = array_merge( [ $current_bib => $current_bib ], $bibs );
 				}
+				array_unshift($bibs,'');
 				$bibs = array_combine( $bibs, $bibs );
-				$bibs = array_merge( [ '' => __( '-- No bib --', 'colorrun' ) ], $bibs );
+				$bibs[''] = '-- No bib --';
 				$f->set_options( $bibs );
 			} else {
 				$f = new Text();
