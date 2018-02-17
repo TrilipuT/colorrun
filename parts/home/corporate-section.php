@@ -6,7 +6,7 @@
  *
  */
 $texts = Homepage::get_corporate_texts();
-if ( $texts ):?>
+if ( $texts[0] || $texts[1] ):?>
     <section class="corporate-section">
         <div class="wrapper-outer">
             <h2 class="section-title"><?php vprintf( '%s <span class="offset">%s</span>', explode( ' ', __( 'Corporate teams', 'colorrun' ) ) ) ?></h2>
