@@ -37,23 +37,25 @@
                     </div>
 					<?php wp_nav_menu( [ 'theme_location' => 'primary', 'container' => 'ul' ] ) ?>
                 </div>
-                <div href="#" class="registration button">
-					<?php _e( 'Register', 'colorrun' ) ?>
-                    <ul class="sub-menu">
-						<?php $distances = Distance::get_current_distances();
-						if ( $distances->have_posts() ):
-							while ( $distances->have_posts() ):
-								$distances->the_post();
-								if ( Distance::is_open() ):?>
-                                    <li class="menu-item"><a
-                                                href="<?= Distance::get_registration_url() ?>"><?php the_title() ?></a>
-                                    </li>
-								<?php endif;
-							endwhile;
-						endif;
-						wp_reset_postdata(); ?>
-                    </ul>
-                </div>
+				<?php $distances = Distance::get_current_distances();
+				if ( $distances->have_posts() ):
+					$list = '';
+					while ( $distances->have_posts() ) {
+						$distances->the_post();
+						if ( Distance::is_open() ) {
+							$list .= "<li class=\"menu-item\"><a href=\"" . Distance::get_registration_url() . "\">" . the_title() . "</a></li>";
+						}
+					}
+					wp_reset_postdata();
+					if ( $list ):?>
+                        <div href="#" class="registration button">
+							<?php _e( 'Register', 'colorrun' ) ?>
+                            <ul class="sub-menu">
+								<?= $list ?>
+                            </ul>
+                        </div>
+					<?php endif; ?>
+				<?php endif; ?>
             </div>
         </div>
     </header>

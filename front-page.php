@@ -11,7 +11,7 @@ get_template_part( 'parts/home/hero-section' );
 
 if ( Event::get_current_event_date( 'U' ) < time() ) {
 	get_template_part( 'parts/home/about-section', 'final' );
-	get_template_part( 'parts/home/media-section' );
+//	get_template_part( 'parts/home/media-section' );
 } else {
 	get_template_part( 'parts/home/about-section' );
 	get_template_part( 'parts/home/distance-section' );
