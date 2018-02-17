@@ -65,25 +65,31 @@ class Functions extends AbstractFunctions {
 		return date( $format, strtotime( MetaBox::get( $id, Initialization::POST_TYPE, 'date' ) ) );
 	}
 
+	private static function get_registration_end_date( int $id ): string {
+		$registration_end_date = MetaBox::get( $id, Initialization::POST_TYPE, 'registration_end_date' );
+		if ( ! $registration_end_date ) {
+			$registration_end_date = MetaBox::get( $id, Initialization::POST_TYPE, 'date' );
+		}
+
+		return $registration_end_date;
+	}
+
 	public static function is_open( int $id = 0 ): bool {
-		$id = self::get_id( $id );
-		if ( ! $is_open = wp_cache_get( 'is_open_' . $id, 'distance' ) ) {
+		$id  = self::get_id( $id );
+		$key = 'is_open_' . $id;
+
+		if ( ! $is_open = wp_cache_get( $key, 'distance' ) ) {
 			$total      = self::get_total_slots( $id );
 			$registered = self::get_registered_for_distance_count( $id );
 			if ( $registered < $total ) {
-				wp_cache_add( 'is_open_' . $id, true, 'distance' );
+				$registration_end = self::get_registration_end_date( $id );
+				if ( current_time( 'mysql' ) < $registration_end ) {
+					wp_cache_add( $key, true, 'distance' );
 
-				return true;
+					return true;
+				}
 			}
-
-			$distance_start_time = MetaBox::get( $id, Initialization::POST_TYPE, 'date' );
-			$now                 = current_time( 'mysql' );
-			if ( $now < $distance_start_time ) {
-				wp_cache_add( 'is_open_' . $id, true, 'distance' );
-
-				return true;
-			}
-			wp_cache_add( 'is_open_' . $id, false, 'distance' );
+			wp_cache_add( $key, false, 'distance' );
 
 			return false;
 		}

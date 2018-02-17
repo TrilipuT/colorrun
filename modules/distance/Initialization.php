@@ -58,6 +58,7 @@ class Initialization extends AbstractInitialization {
 		$meta = new MetaBox( self::POST_TYPE, __( 'Details', 'colorrun' ) );
 		$meta->set_context( 'side' );
 		$meta->add_field( 'date', __( 'Start date', 'colorrun' ), 'Datetime' );
+		$meta->add_field( 'registration_end_date', __( 'Registration end date', 'colorrun' ), 'Datetime' );
 		$meta->add_field( 'distance', __( 'Distance', 'colorrun' ) );
 		$meta->add_field( 'min_age', __( 'Age limit', 'colorrun' ) );
 		$meta->add_field( 'slots', __( 'Count of slots', 'colorrun' ), 'Number' );
