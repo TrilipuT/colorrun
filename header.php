@@ -43,7 +43,7 @@
 					while ( $distances->have_posts() ) {
 						$distances->the_post();
 						if ( Distance::is_open() ) {
-							$list .= "<li class=\"menu-item\"><a href=\"" . Distance::get_registration_url() . "\">" . the_title() . "</a></li>";
+							$list .= "<li class=\"menu-item\"><a href=\"" . Distance::get_registration_url() . "\">" . get_the_title() . "</a></li>";
 						}
 					}
 					wp_reset_postdata();
