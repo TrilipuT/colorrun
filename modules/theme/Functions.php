@@ -45,11 +45,11 @@ class Functions extends AbstractThemeFunctions {
 	 * @return string
 	 */
 	public static function get_background_image(): string {
-		if ( has_post_thumbnail() ) {
-			return get_the_post_thumbnail_url( get_the_ID(), 'hero' );
+		if ( $bg = get_background_image() ) {
+			return $bg;
 		}
 
-		return get_background_image();
+		return get_the_post_thumbnail_url( get_the_ID(), 'hero' );
 	}
 
 	/**
