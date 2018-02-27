@@ -65,15 +65,6 @@ class Functions extends AbstractFunctions {
 		return date( $format, strtotime( MetaBox::get( $id, Initialization::POST_TYPE, 'date' ) ) );
 	}
 
-	private static function get_registration_end_date( int $id ): string {
-		$registration_end_date = MetaBox::get( $id, Initialization::POST_TYPE, 'registration_end_date' );
-		if ( ! $registration_end_date ) {
-			$registration_end_date = MetaBox::get( $id, Initialization::POST_TYPE, 'date' );
-		}
-
-		return $registration_end_date;
-	}
-
 	public static function is_open( int $id = 0 ): bool {
 		$id  = self::get_id( $id );
 		$key = 'is_open_' . $id;
@@ -134,6 +125,15 @@ class Functions extends AbstractFunctions {
 		}
 
 		return $count;
+	}
+
+	private static function get_registration_end_date( int $id ): string {
+		$registration_end_date = MetaBox::get( $id, Initialization::POST_TYPE, 'registration_end_date' );
+		if ( ! $registration_end_date ) {
+			$registration_end_date = MetaBox::get( $id, Initialization::POST_TYPE, 'date' );
+		}
+
+		return $registration_end_date;
 	}
 
 	public static function get_participants( int $distance_id ) {
@@ -253,13 +253,16 @@ class Functions extends AbstractFunctions {
 	}
 
 	/**
+	 * @param int $count
+	 *
 	 * @return \WP_Query
 	 */
-	public static function get_current_distances(): \WP_Query {
+	public static function get_current_distances( $count = 10 ): \WP_Query {
 		$current_event = \modules\event\Functions::get_current_event()->post->ID;
-		if ( ! $current_distances = wp_cache_get( 'get_current_distances_' . $current_event, 'distance' ) ) {
+		$key           = 'get_current_distances_' . $current_event . '_' . $count;
+		if ( ! $current_distances = wp_cache_get( $key, 'distance' ) ) {
 			$current_distances = new \WP_Query( [
-				'posts_per_page' => 10,
+				'posts_per_page' => $count,
 				'post_type'      => Initialization::POST_TYPE,
 				'meta_query'     => [
 					[
@@ -268,7 +271,7 @@ class Functions extends AbstractFunctions {
 					],
 				],
 			] );
-			wp_cache_add( 'get_current_distances_' . $current_event, $current_distances, 'distance', 600 );
+			wp_cache_add( $key, $current_distances, 'distance', 600 );
 		}
 
 		return $current_distances;
