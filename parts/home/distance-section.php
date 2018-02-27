@@ -5,7 +5,7 @@
  * @author     vitaly
  *
  */
-$distances = Distance::get_current_distances( 3 );
+$distances = Distance::get_current_distances(3);
 if ( $distances->have_posts() ):
 	$col_classes = [
 		'dark',
