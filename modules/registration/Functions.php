@@ -98,11 +98,15 @@ class Functions extends AbstractFunctions {
 	}
 
 	public static function get_personal_data_link(): string {
-		return get_permalink( Option::get( 'registration_personal_data' ) );
+		$translations = pll_get_post_translations( Option::get( 'registration_personal_data' ) );
+
+		return isset( $translations[ pll_current_language() ] ) ? get_permalink( $translations[ pll_current_language() ] ) : '';
 	}
 
 	public static function get_event_rules_link(): string {
-		return get_permalink( Option::get( 'registration_event_rules' ) );
+		$translations = pll_get_post_translations( Option::get( 'registration_event_rules' ) );
+
+		return isset( $translations[ pll_current_language() ] ) ? get_permalink( $translations[ pll_current_language() ] ) : '';
 	}
 
 	/**

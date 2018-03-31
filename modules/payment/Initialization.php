@@ -41,8 +41,9 @@ class Initialization extends AbstractInitialization {
 			$options->add_field( 'liqpay_private_key', __( 'Private key', 'colorrun' ) );
 			$options->add_field( 'liqpay_sandbox', __( 'Sandbox', 'colorrun' ), 'Checkbox' );
 			$pages = function () {
-				$f = new Select2();
-				$f->set_options( wp_list_pluck( get_pages(), 'post_title', 'ID' ) );
+				$f     = new Select2();
+				$query = new \WP_Query( [ 'post_type' => 'page', 'lang' => '' ] );
+				$f->set_options( wp_list_pluck( $query->posts, 'post_title', 'ID' ) );
 				$f->set_placeholder( 'Select page' );
 
 				return $f;

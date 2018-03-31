@@ -200,8 +200,9 @@ class Initialization extends AbstractInitialization {
 
 			$reg   = new OptionBox( 'registration', __( 'Form settings', 'colorrun' ) );
 			$pages = function () {
-				$f = new Select2();
-				$f->set_options( wp_list_pluck( get_pages(), 'post_title', 'ID' ) );
+				$f     = new Select2();
+				$query = new \WP_Query( [ 'post_type' => 'page', 'lang' => '' ] );
+				$f->set_options( wp_list_pluck( $query->posts, 'post_title', 'ID' ) );
 				$f->set_placeholder( 'Select page' );
 
 				return $f;
