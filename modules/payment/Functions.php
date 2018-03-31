@@ -13,8 +13,6 @@ use WPKit\Options\Option;
  * @package modules\theme
  */
 class Functions extends AbstractFunctions {
-	const ORDER_PREFIX = 'participant_';
-
 	public static function get_payment_url( int $participant_id ): string {
 		$participant = new Participant( $participant_id );
 		// If already payed - return empty
@@ -36,13 +34,18 @@ class Functions extends AbstractFunctions {
 		if ( $participant->coupon ) {
 			$description .= ' ' . sprintf( 'Coupon %s applied', $participant->coupon );
 		}
+		$order_id = implode( '_', [
+			\modules\event\Functions::get_current_event()->posts[0]->post_name,
+			get_post( $participant->distance )->post_name,
+			$participant_id
+		] );
 
 		$params = array(
 			'action'       => 'pay',
 			'amount'       => $participant->get_amount_to_pay(),
 			'currency'     => \LiqPay::CURRENCY_UAH,
 			'description'  => $description,
-			'order_id'     => self::ORDER_PREFIX . $participant_id,
+			'order_id'     => $order_id,
 			'version'      => '3',
 			'language'     => \modules\theme\Functions::get_current_language(),
 			'public_key'   => $public_key,
@@ -98,7 +101,7 @@ class Functions extends AbstractFunctions {
 	 */
 	public static function process_success( $raw_data, $signature ) {
 		$data           = json_decode( base64_decode( $_POST['data'] ) );
-		$participant_id = (int) substr( $data->order_id, strlen( self::ORDER_PREFIX ) );
+		$participant_id = (int) array_pop( explode( '_', $data->order_id ) );
 		if ( ! self::is_valid_request( $raw_data, $signature ) ) {
 			Log::error( 'Not valid request: ' . $data->payment_id, $participant_id );
 

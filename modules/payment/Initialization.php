@@ -57,7 +57,7 @@ class Initialization extends AbstractInitialization {
 			Functions::process_success( $_POST['data'], $_POST['signature'] );
 
 			$data           = json_decode( base64_decode( $_POST['data'] ) );
-			$participant_id = (int) substr( $data->order_id, strlen( Functions::ORDER_PREFIX ) );
+			$participant_id = (int) array_pop( explode( '_', $data->order_id ) );
 			$participant    = new Participant( $participant_id );
 			add_filter( 'the_content', function ( $content ) use ( $participant ) {
 				$content = $participant->replace_placeholders( $content );
