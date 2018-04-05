@@ -1,0 +1,885 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-05 19:47+0300\n"
+"PO-Revision-Date: 2018-04-05 19:48+0300\n"
+"Last-Translator: coloradmin <trilliput@gmail.com>\n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c;_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets\n"
+"X-Poedit-SearchPathExcluded-1: gulp\n"
+"X-Poedit-SearchPathExcluded-2: vendor\n"
+"X-Poedit-SearchPathExcluded-3: node_modules\n"
+
+#: header.php:52 templates/registration.php:261 templates/registration.php:262
+msgid "Register"
+msgstr "Реєстрація"
+
+#: modules/coupons/Coupon.php:136 modules/coupons/Initialization.php:55
+msgid "Used"
+msgstr "Використано"
+
+#: modules/coupons/Coupon.php:137
+msgid "Aсtive"
+msgstr "Активний"
+
+#: modules/coupons/Coupon.php:154 modules/distance/Functions.php:227
+msgid "UAH"
+msgstr " грн."
+
+#: modules/coupons/GeneratorPage.php:36
+msgid "Count"
+msgstr "Кількість"
+
+#: modules/coupons/GeneratorPage.php:39
+msgid "How many coupons to generate."
+msgstr "Скільки купонів генерувати."
+
+#: modules/coupons/GeneratorPage.php:42
+msgid "Amount"
+msgstr "Сума"
+
+#: modules/coupons/GeneratorPage.php:45
+msgid "Amount of discount."
+msgstr "Сума знижки."
+
+#: modules/coupons/GeneratorPage.php:49 modules/sponsor/Initialization.php:45
+msgid "Type"
+msgstr "Тип"
+
+#: modules/coupons/GeneratorPage.php:59
+msgid "Generate"
+msgstr "Генерувати"
+
+#: modules/coupons/GeneratorPage.php:70
+msgid "Could not create. Enter count of codes to generate."
+msgstr "Невдалося згенерувати. Введіть кількість кодів для генерації."
+
+#: modules/coupons/GeneratorPage.php:81
+#, php-format
+msgid "%d coupons successfully generated"
+msgstr "%d купонів успішно згенеровано"
+
+#: modules/coupons/Initialization.php:60
+#: modules/participant/Initialization.php:61
+#: modules/participant/Initialization.php:113
+msgid "Status"
+msgstr "Статус"
+
+#: modules/coupons/Initialization.php:65
+msgid "Created"
+msgstr "Створено"
+
+#: modules/coupons/Initialization.php:115
+msgid "Coupons generator"
+msgstr "Генератор купонів"
+
+#: modules/customization/Initialization.php:81
+#: modules/registration/Initialization.php:258
+msgid "Place"
+msgstr "Місце"
+
+#: modules/customization/Initialization.php:89
+msgid "Date"
+msgstr "Дата"
+
+#: modules/distance/Initialization.php:27
+#: modules/distance/Initialization.php:62
+#: modules/participant/ImportExportPage.php:60
+#: modules/participant/Initialization.php:45
+#: modules/participant/Initialization.php:106
+#: modules/participant/Initialization.php:208 templates/participants.php:40
+#: templates/registration.php:47 templates/registration.php:190
+msgid "Distance"
+msgstr "Дистанція"
+
+#: modules/distance/Initialization.php:44 modules/event/Initialization.php:45
+msgid "Event Date"
+msgstr "Дата події"
+
+#: modules/distance/Initialization.php:49
+msgid "Slots"
+msgstr "Слоти"
+
+#: modules/distance/Initialization.php:58 modules/event/Initialization.php:38
+#: modules/participant/Initialization.php:70
+msgid "Details"
+msgstr "Деталі"
+
+#: modules/distance/Initialization.php:60
+msgid "Start date"
+msgstr "Дата початку"
+
+#: modules/distance/Initialization.php:61
+msgid "Registration end date"
+msgstr "Кінцева дата реєстрації"
+
+#: modules/distance/Initialization.php:63
+msgid "Age limit"
+msgstr "Віковий ліміт"
+
+#: modules/distance/Initialization.php:64
+msgid "Count of slots"
+msgstr "Кількість слотів"
+
+#: modules/distance/Initialization.php:65
+msgid "Bib start"
+msgstr "Початковий номер"
+
+#: modules/distance/Initialization.php:66 modules/event/Initialization.php:23
+msgid "Event"
+msgstr "Подія"
+
+#: modules/distance/Initialization.php:76
+#: modules/distance/Initialization.php:77
+msgid "Content"
+msgstr "Контент"
+
+#: modules/distance/Initialization.php:82
+#: modules/distance/Initialization.php:83
+msgid "Price"
+msgstr "Ціна"
+
+#: modules/distance/Initialization.php:84
+msgid "Last day of price (including)"
+msgstr "Останній день ціни (включно)"
+
+#: modules/event/Initialization.php:39
+msgid "Event date"
+msgstr "Дата події"
+
+#: modules/homepage/Initialization.php:36
+msgid "Homepage about blocks"
+msgstr ""
+
+#: modules/homepage/Initialization.php:37
+msgid "Icon"
+msgstr ""
+
+#: modules/homepage/Initialization.php:68
+#: modules/shortcode/shortcodes/Acordeon.php:32
+msgid "Title"
+msgstr "Заголовок"
+
+#: modules/homepage/Initialization.php:69
+#: modules/shortcode/shortcodes/Acordeon.php:33
+#: modules/shortcode/shortcodes/Quote.php:33
+msgid "Text"
+msgstr "Текст"
+
+#: modules/homepage/Initialization.php:85
+msgid "Homepage distance"
+msgstr "Дистанція на головній"
+
+#: modules/homepage/Initialization.php:86
+#: modules/homepage/Initialization.php:92
+msgid "Image"
+msgstr "Зображення"
+
+#: modules/homepage/Initialization.php:91
+msgid "Homepage corporate"
+msgstr ""
+
+#: modules/homepage/Initialization.php:93
+msgid "Text left"
+msgstr "Текст зліва"
+
+#: modules/homepage/Initialization.php:94
+msgid "Text right"
+msgstr "Текст справа"
+
+#: modules/participant/Functions.php:26
+msgid "Telephone"
+msgstr "Телефон"
+
+#: modules/participant/Functions.php:27
+#: modules/registration/Initialization.php:253 templates/registration.php:126
+#: templates/registration.php:211
+msgid "Club"
+msgstr "Клуб/Компанія"
+
+#: modules/participant/Functions.php:28 templates/registration.php:132
+msgid "T-shirt size"
+msgstr "Розмір футболки"
+
+#: modules/participant/ImportExportPage.php:24
+#: modules/participant/ImportExportPage.php:47
+msgid "Export"
+msgstr "Експорт"
+
+#: modules/participant/ImportExportPage.php:30
+msgid "Choose what to export"
+msgstr "Оберіть що експортувати"
+
+#: modules/participant/ImportExportPage.php:49
+#: modules/participant/ImportExportPage.php:80
+msgid "Import"
+msgstr "Імпорт"
+
+#: modules/participant/ImportExportPage.php:54
+msgid "File"
+msgstr "Файл"
+
+#: modules/participant/ImportExportPage.php:72
+msgid "Send registration email?"
+msgstr "Відправити реєстраційний email?"
+
+#: modules/participant/ImportExportPage.php:102
+msgid "Nothing selected"
+msgstr "Нічого не вибрано"
+
+#: modules/participant/ImportExportPage.php:127
+msgid "Ooops, you should add file to import!"
+msgstr "Упс, ви маєте вібирати файл для імпорту!"
+
+#: modules/participant/ImportExportPage.php:133
+msgid "Ooops, file should be in CSV format (.csv)"
+msgstr "Упс, файл має бути в форматі CSV (.csv)"
+
+#: modules/participant/ImportExportPage.php:150
+msgid "No email field in csv"
+msgstr "Нема email у csv"
+
+#: modules/participant/Initialization.php:27
+msgid "Participant"
+msgstr "Учасник"
+
+#: modules/participant/Initialization.php:51
+#: modules/participant/Initialization.php:86
+msgid "Bib"
+msgstr "Номер"
+
+#: modules/participant/Initialization.php:56
+#: modules/participant/Initialization.php:73
+msgid "Email"
+msgstr "Email"
+
+#: modules/participant/Initialization.php:71 templates/registration.php:62
+#: templates/registration.php:194
+msgid "First name"
+msgstr "Ім'я"
+
+#: modules/participant/Initialization.php:72 templates/registration.php:67
+#: templates/registration.php:192
+msgid "Last name"
+msgstr "Прізвище"
+
+#: modules/participant/Initialization.php:74 templates/registration.php:98
+#: templates/registration.php:204
+msgid "Date of birth"
+msgstr "Дата народження"
+
+#: modules/participant/Initialization.php:75
+msgid "Gender"
+msgstr "Стать"
+
+#: modules/participant/Initialization.php:78
+#: modules/registration/Initialization.php:241 templates/registration.php:77
+msgid "Male"
+msgstr "Чоловік"
+
+#: modules/participant/Initialization.php:79
+#: modules/registration/Initialization.php:243 templates/registration.php:84
+msgid "Female"
+msgstr "Жінка"
+
+#: modules/participant/Initialization.php:84
+#: modules/registration/Initialization.php:256 templates/registration.php:110
+#: templates/registration.php:206
+msgid "Country"
+msgstr "Країна"
+
+#: modules/participant/Initialization.php:85
+#: modules/registration/Initialization.php:255 templates/registration.php:120
+#: templates/registration.php:208
+msgid "City"
+msgstr "Місто"
+
+#: modules/participant/Initialization.php:119
+msgid "Coupon"
+msgstr "Купон"
+
+#: modules/participant/Initialization.php:131
+#: modules/payment/Initialization.php:38
+msgid "Payment"
+msgstr "Оплата"
+
+#: modules/participant/Initialization.php:133
+msgid "Log"
+msgstr "Лог"
+
+#: modules/participant/Initialization.php:158
+msgid "Additional info"
+msgstr "Додаткова інформація"
+
+#: modules/participant/Initialization.php:167
+msgid "Actions"
+msgstr "Дії"
+
+#: modules/participant/Initialization.php:172
+#, php-format
+msgid "Send registration email to %s"
+msgstr "Відправити реєстраційний email на %s"
+
+#: modules/participant/Initialization.php:175
+msgid "Send email"
+msgstr "Відправити email"
+
+#: modules/participant/Initialization.php:177
+#, php-format
+msgid "Email will be send in %s"
+msgstr "Email буде надіслано на %s мові"
+
+#: modules/participant/Initialization.php:195
+msgid "Import/Export"
+msgstr "Імпорт/Експорт"
+
+#: modules/payment/Functions.php:128
+msgid "Not Payed"
+msgstr "Не оплачено"
+
+#: modules/payment/Functions.php:129
+msgid "Awaiting Payment"
+msgstr "Очікує оплату"
+
+#: modules/payment/Functions.php:130
+msgid "Payed"
+msgstr "Оплачено"
+
+#: modules/payment/Initialization.php:39
+msgid "LiqPay"
+msgstr ""
+
+#: modules/payment/Initialization.php:40
+msgid "Public key"
+msgstr ""
+
+#: modules/payment/Initialization.php:41
+msgid "Private key"
+msgstr ""
+
+#: modules/payment/Initialization.php:42
+msgid "Sandbox"
+msgstr ""
+
+#: modules/payment/Initialization.php:51
+msgid "Result page"
+msgstr ""
+
+#: modules/registration/Initialization.php:39
+#: modules/registration/Initialization.php:66
+msgid "Email already registered for this distance"
+msgstr "Користувач з таким email вже зареєстрований на цю дистанцію"
+
+#: modules/registration/Initialization.php:85
+msgid ""
+"You have successfully used the promo code. Please, pay the registration fee."
+msgstr ""
+"Промокод було використано успішно. Будь ласка, сплатіть реєстраційний внесок."
+
+#: modules/registration/Initialization.php:91
+msgid "Can't use coupon"
+msgstr "Неможливо використати купон"
+
+#: modules/registration/Initialization.php:134
+msgid "Registration"
+msgstr "Реєстрація"
+
+#: modules/registration/Initialization.php:136
+msgid "New registration notification template"
+msgstr "Шаблон повідомлення про нову реєстрацію"
+
+#: modules/registration/Initialization.php:137
+msgid "Subject"
+msgstr "Тема"
+
+#: modules/registration/Initialization.php:138
+msgid "Message"
+msgstr "Повідомлення"
+
+#: modules/registration/Initialization.php:189
+msgid "Form settings"
+msgstr "Налаштування форми"
+
+#: modules/registration/Initialization.php:198
+msgid "Free registration result page"
+msgstr "Сторінка результату безкоштовної реєстрації"
+
+#: modules/registration/Initialization.php:199
+msgid "Personal data page"
+msgstr "Згода на обробку персональних даних"
+
+#: modules/registration/Initialization.php:200
+msgid "Event rules page"
+msgstr "Регламент заходу"
+
+#: modules/registration/Initialization.php:201
+msgid "Additional form fields"
+msgstr "Додаткові поля форми"
+
+#: modules/registration/Initialization.php:216
+msgid "No data available in table"
+msgstr "Немає доступних в таблиці даних"
+
+#: modules/registration/Initialization.php:217
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "Записи з _START_ по _END_ із _TOTAL_ записів"
+
+#: modules/registration/Initialization.php:218
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Записи з 0 по 0 із 0 записів"
+
+#: modules/registration/Initialization.php:219
+msgid "(filtered from _MAX_ total entries)"
+msgstr ""
+
+#: modules/registration/Initialization.php:221
+msgctxt "datatables thousands separator"
+msgid ","
+msgstr ""
+
+#: modules/registration/Initialization.php:222
+msgid "Show _MENU_ entries"
+msgstr ""
+
+#: modules/registration/Initialization.php:223
+msgid "Loading..."
+msgstr ""
+
+#: modules/registration/Initialization.php:224
+msgid "Processing..."
+msgstr ""
+
+#: modules/registration/Initialization.php:225
+msgid "Search:"
+msgstr "Пошук:"
+
+#: modules/registration/Initialization.php:226
+msgid "No matching records found"
+msgstr ""
+
+#: modules/registration/Initialization.php:228
+msgid "First"
+msgstr "Перша"
+
+#: modules/registration/Initialization.php:229
+msgid "Last"
+msgstr "Остання"
+
+#: modules/registration/Initialization.php:230
+msgid "Next"
+msgstr "Наступна"
+
+#: modules/registration/Initialization.php:231
+msgid "Previous"
+msgstr "Попередня"
+
+#: modules/registration/Initialization.php:234
+msgid ": activate to sort column ascending"
+msgstr ""
+
+#: modules/registration/Initialization.php:235
+msgid ": activate to sort column descending"
+msgstr ""
+
+#: modules/registration/Initialization.php:240
+msgid "M"
+msgstr "Ч"
+
+#: modules/registration/Initialization.php:242
+msgid "F"
+msgstr "Ж"
+
+#: modules/registration/Initialization.php:248
+msgid "Name"
+msgstr "Ім'я Прізвище"
+
+#: modules/registration/Initialization.php:249
+msgid "Sex"
+msgstr "Стать"
+
+#: modules/registration/Initialization.php:250
+msgid "BIB"
+msgstr "Номер"
+
+#: modules/registration/Initialization.php:251
+msgid "Year of birth"
+msgstr "Рік народження"
+
+#: modules/registration/Initialization.php:252
+msgid "Age group"
+msgstr "Вікова група"
+
+#: modules/registration/Initialization.php:254
+msgid "Team"
+msgstr "Команда"
+
+#: modules/registration/Initialization.php:257
+msgid "Category"
+msgstr "Категорія"
+
+#: modules/registration/Initialization.php:259
+msgid "AG place"
+msgstr ""
+
+#: modules/registration/Initialization.php:260
+msgid "Net time"
+msgstr "Net time"
+
+#: modules/registration/Initialization.php:261
+msgid "Gross time"
+msgstr "Gross time"
+
+#: modules/registration/Initialization.php:262
+msgid "5 km"
+msgstr ""
+
+#: modules/registration/Initialization.php:263
+msgid "10 km"
+msgstr ""
+
+#: modules/registration/Initialization.php:264
+msgid "15 km"
+msgstr ""
+
+#: modules/registration/Initialization.php:265
+msgid "20 km"
+msgstr ""
+
+#: modules/registration/Initialization.php:266
+msgid "21 km"
+msgstr ""
+
+#: modules/registration/Initialization.php:267
+msgid "30 km"
+msgstr ""
+
+#: modules/shortcode/shortcodes/Acordeon.php:28
+msgid "Acordeon"
+msgstr ""
+
+#: modules/shortcode/shortcodes/Quote.php:29
+msgid "Quote"
+msgstr "Цитата"
+
+#: modules/shortcode/shortcodes/Quote.php:34
+msgid "Author"
+msgstr "Автор"
+
+#: modules/shortcode/shortcodes/Quote.php:35
+msgid "Align"
+msgstr ""
+
+#: modules/shortcode/shortcodes/Rating.php:29
+#: modules/shortcode/shortcodes/Rating.php:33
+msgid "Rating"
+msgstr ""
+
+#: modules/shortcode/shortcodes/Related.php:29
+msgid "Related"
+msgstr ""
+
+#: modules/shortcode/shortcodes/Related.php:33
+msgid "Post"
+msgstr ""
+
+#: modules/sponsor/Initialization.php:25
+msgid "Sponsor"
+msgstr "Спонсор"
+
+#: modules/sponsor/Initialization.php:44
+msgid "Info"
+msgstr "Інфо"
+
+#: modules/sponsor/Initialization.php:48
+msgid "Large"
+msgstr ""
+
+#: modules/sponsor/Initialization.php:49
+msgid "Medium"
+msgstr ""
+
+#: modules/sponsor/Initialization.php:50
+msgid "Small"
+msgstr ""
+
+#: modules/sponsor/Initialization.php:55
+msgid "Url"
+msgstr ""
+
+#: modules/theme/Initialization.php:60
+msgid "Excerpt"
+msgstr ""
+
+#: modules/theme/Initialization.php:158
+msgid "Primary"
+msgstr "Головне"
+
+#: modules/theme/Initialization.php:159
+msgid "Footer"
+msgstr "Футер"
+
+#: modules/theme/Initialization.php:165
+msgid "Single news"
+msgstr "Новина"
+
+#: modules/theme/Initialization.php:167
+msgid "Widgets in this area will be shown on all news."
+msgstr ""
+
+#: modules/theme/Initialization.php:338
+msgid ""
+"JavaScript is disabled on your browser. Please enable JavaScript or upgrade "
+"to a JavaScript-capable browser to use this site."
+msgstr ""
+
+#: modules/theme/Initialization.php:395
+msgid "Theme Settings"
+msgstr "Налаштування"
+
+#: modules/theme/Initialization.php:396
+msgid "Social"
+msgstr "Соціальні"
+
+#: modules/theme/Initialization.php:406
+msgid "Home page"
+msgstr ""
+
+#: modules/theme/Initialization.php:408
+msgid "General Options"
+msgstr "Головні налаштування"
+
+#: modules/theme/Initialization.php:409
+msgid "Head code"
+msgstr ""
+
+#: modules/theme/Initialization.php:410
+msgid "Footer code"
+msgstr ""
+
+#: modules/theme/Initialization.php:415
+msgid "Social Links"
+msgstr ""
+
+#: nggallery/gallery-homepage.php:14
+msgid "Photo and video"
+msgstr "Фото та відео"
+
+#: parts/home/corporate-section.php:12
+msgid "Corporate teams"
+msgstr "Корпоративні команди"
+
+#: parts/home/distance-section.php:17
+msgid "Distances"
+msgstr "Дистанції"
+
+#: parts/home/distance/item.php:18
+msgid "start"
+msgstr "Старт"
+
+#: parts/home/distance/item.php:29
+msgid "participants"
+msgstr "учасники"
+
+#: parts/home/distance/item.php:48
+#, php-format
+msgid "till %s"
+msgstr "до %s"
+
+#: parts/home/distance/item.php:55
+msgid "REGISTER NOW"
+msgstr "РЕЄСТРУЙСЯ ЗАРАЗ"
+
+#: parts/home/hero-section.php:18
+msgid "days"
+msgstr "днів"
+
+#: parts/home/hero-section.php:31
+msgid "hours"
+msgstr "годин"
+
+#: parts/home/hero-section.php:44
+msgid "minutes"
+msgstr "хвилин"
+
+#: parts/home/hero-section.php:57
+msgid "seconds"
+msgstr "секунд"
+
+#: parts/home/news-section.php:12
+msgid "news"
+msgstr "новини"
+
+#: parts/home/news/item.php:22
+msgid "Read more"
+msgstr "Читати більше"
+
+#: parts/home/sponsors-section.php:13
+msgid "Sponsors and partners"
+msgstr "Спонсори та партнери"
+
+#: templates/participants.php:37
+msgid "Choose Distance"
+msgstr "Оберіть дистанцію"
+
+#: templates/participants.php:56
+#, php-format
+msgid "Participants for event <strong>%s</strong> - by the <strong>%s</strong>"
+msgstr ""
+"Список учасників <strong>%s</strong> - дані станом на <strong>%s</strong>"
+
+#: templates/registration.php:24
+msgctxt "Внесіть особисті дані"
+msgid "Personal info"
+msgstr "Внесіть особисті дані"
+
+#: templates/registration.php:27
+msgctxt "Перевірка даних"
+msgid "Check personal info"
+msgstr "Перевірка даних"
+
+#: templates/registration.php:30
+msgctxt "Оплата реєстрації"
+msgid "Payment"
+msgstr "Оплата реєстрації"
+
+#: templates/registration.php:37
+msgctxt "У вас є <strong>15 хвилин</strong><br> щоб завершити реєстрацію"
+msgid "You have <strong>15 minutes</strong><br> to complete your registration"
+msgstr "Ви маєте <strong> 15 хвилин, </strong> <br>щоб завершити реєстрацію"
+
+#: templates/registration.php:42
+msgctxt "Форма заповнення даних"
+msgid "Your information"
+msgstr "Внеcіть ваші персональні дані"
+
+#: templates/registration.php:70 templates/registration.php:196
+msgid "Gender:"
+msgstr "Стать"
+
+#: templates/registration.php:91 templates/registration.php:198
+msgid "E-mail"
+msgstr "Ел. адреса"
+
+#: templates/registration.php:105 templates/registration.php:201
+msgid "Phone"
+msgstr "Телефон"
+
+#: templates/registration.php:168
+#, php-format
+msgid ""
+"Yes, I confirm that the data I provided is accurate and up-to-date. "
+"%sAgreement to personal data processing%s"
+msgstr ""
+"Так, я підтверджую, що вказані мною дані є вірними та актуальними. %sЗгода "
+"на обробку персональних даних%s."
+
+#: templates/registration.php:174
+#, php-format
+msgid "I have read the %sEvent Regulations%s"
+msgstr "Я ознайомлений/ознайомлена з %sРегламентом Заходу%s"
+
+#: templates/registration.php:182
+msgid "Personal information"
+msgstr "Персональна інформація"
+
+#: templates/registration.php:187
+msgid "Edit"
+msgstr "Редагувати"
+
+#: templates/registration.php:215
+msgid "T-shirt size:"
+msgstr "Розмір футболки"
+
+#: templates/registration.php:222
+msgid "Order confirmation"
+msgstr "Підтвердження замовлення"
+
+#: templates/registration.php:229
+msgid "Do you have a promocode?"
+msgstr "Маєте промокод?"
+
+#: templates/registration.php:231
+msgid "Enter promocode"
+msgstr "Введіть промокод"
+
+#: templates/registration.php:233
+msgctxt "Промокод"
+msgid "Apply"
+msgstr "Застосувати"
+
+#: templates/registration.php:236
+msgid ""
+"Please, notice! The promo code may be used only one time. If you have "
+"entered the promo code but failed to pay the registration fee, your promo "
+"code will not be valid for the next attempt!"
+msgstr ""
+"Увага! Промокод можна використати лише один раз. Якщо ви використали "
+"промокод, але не встигли сплатити реєстрацію, він вже не буде дійсним під "
+"час наступної спроби"
+
+#: templates/registration.php:239 templates/registration.php:249
+msgid "Amount to pay"
+msgstr "Сума для оплати"
+
+#: templates/registration.php:245
+msgid "Payment for registration"
+msgstr "Оплата"
+
+#: templates/registration.php:259
+msgid "Back"
+msgstr "Назад"
+
+#: templates/registration.php:260 templates/registration.php:279
+msgid "Continue"
+msgstr "Продовжити"
+
+#: templates/registration.php:262
+msgid "Pay"
+msgstr "Сплатити"
+
+#: templates/registration.php:276
+msgid ""
+"Unfortunately, the payment time has expired. You order has been cancelled. "
+"Please, place a new order."
+msgstr ""
+"На жаль, час оплати вийшов. Замовлення анульоване. Будь ласка, створіть нове "
+"замовлення."
+
+#, fuzzy
+#~| msgid "Count"
+#~ msgid "count"
+#~ msgstr "Кількість"
+
+#, fuzzy
+#~| msgid "Generate"
+#~ msgid "generated-value"
+#~ msgstr "Генерувати"
+
+#, fuzzy
+#~| msgid "Pay"
+#~ msgid "any"
+#~ msgstr "Сплатити"
+
+#~ msgid ""
+#~ "Так, я підтверджую, що вказані мною дані є вірними та актуальними. "
+#~ "%sЗгода на обробку персональних даних%s."
+#~ msgstr ""
+#~ "Так, я підтверджую, що вказані мною дані є вірними та актуальними. "
+#~ "%sЗгода на обробку персональних даних%s."
+
+#~ msgid "Я ознайомлений/ознайомлена з %sРегламентом Заходу%s."
+#~ msgstr "Я ознайомлений/ознайомлена з %sРегламентом Заходу%s."

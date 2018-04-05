@@ -82,12 +82,20 @@ class Participant {
 		return $participant;
 	}
 
+	/**
+	 * @param string $status
+	 *
+	 * @return Participant
+	 */
 	public function set_status( string $status ): Participant {
 		$this->status = $status;
 
 		return $this;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function get_data_for_export() {
 		$data = $this->data;
 		$data = array_merge( $data, $this->additional_info );
@@ -98,18 +106,35 @@ class Participant {
 		return $data;
 	}
 
+	/**
+	 * @param string $name
+	 *
+	 * @return mixed|string
+	 */
 	public function get_additional_info( string $name ) {
 		return isset( $this->additional_info[ $name ] ) ? $this->additional_info[ $name ] : '';
 	}
 
-	public function finish_registration() {
+	/**
+	 * Finish registration - assign bib
+	 *
+	 * @param bool $is_send_email
+	 */
+	public function finish_registration( $is_send_email = true ) {
 		$this->set_status( \modules\payment\Initialization::STATUS['PAYED'] );
 		wp_publish_post( $this->id );
-		$this->assign_bib();
+		$this->assign_bib( $is_send_email );
 		wp_cache_delete( 'registered_for_distance_count_' . $this->distance, 'distance' );
 	}
 
-	private function assign_bib() {
+	/**
+	 * Assign bib and send email if needed
+	 *
+	 * @param bool $is_send_email
+	 *
+	 * @return bool
+	 */
+	private function assign_bib( $is_send_email = true ) {
 		$bib = \modules\distance\Functions::get_next_free_bib( $this->distance );
 		if ( ! $bib ) {
 			Log::error( 'No bib found' . $bib, $this->get_id() );
@@ -118,25 +143,39 @@ class Participant {
 		}
 		$this->bib = $bib;
 		Log::info( 'Assigned bib ' . $bib, $this->get_id() );
-		$this->send_notification_email();
+		if ( $is_send_email ) {
+			$this->send_notification_email();
+		}
 
 		return true;
 	}
 
+	/**
+	 * @return int|string
+	 */
 	public function get_id() {
 		return $this->id;
 	}
 
-	private function send_notification_email() {
+	/**
+	 * @return bool
+	 */
+	public function send_notification_email() {
 		$subject = $this->replace_placeholders( Functions::get_email_subject() );
 		$message = nl2br( $this->replace_placeholders( Functions::get_email_message() ) );
 		$headers = [
 			'Content-Type: text/html; charset=UTF-8',
 			'From: ' . get_option( 'blogname' ) . ' <' . get_option( 'admin_email' ) . '>',
 		];
-		wp_mail( $this->email, $subject, $message, $headers );
+
+		return wp_mail( $this->email, $subject, $message, $headers );
 	}
 
+	/**
+	 * @param $content
+	 *
+	 * @return mixed
+	 */
 	public function replace_placeholders( $content ) {
 		$data = (array) $this->data;
 		foreach ( $this->additional_info as $key => $value ) {
@@ -168,8 +207,7 @@ class Participant {
 	public function __set( $name, $value ) {
 		$this->data[ $name ] = $value;
 		if ( $name == 'dateofbirth' ) {
-			$v     = explode( '/', $value );
-			$value = $v[2] . '-' . $v[1] . '-' . $v[0];;
+			$value = date( 'Y-m-d', strtotime( $value ) );
 		} elseif ( $name == 'email' ) {
 			$value               = strtolower( $value );
 			$this->data[ $name ] = $value;
@@ -178,12 +216,20 @@ class Participant {
 		return (bool) MetaBox::set( $this->id, Initialization::POST_TYPE, $name, $value );
 	}
 
+	/**
+	 * @param int $id
+	 *
+	 * @return Participant
+	 */
 	public function set_distance( int $id ): self {
 		$this->distance = $id;
 
 		return $this;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function get_amount_to_pay(): int {
 		$price = \modules\distance\Functions::get_current_price( $this->distance );
 		if ( $this->coupon ) {
@@ -194,6 +240,9 @@ class Participant {
 		return (int) $price;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function get_payment_status() {
 		return $this->status;
 	}
@@ -243,12 +292,21 @@ class Participant {
 		return date( $format, $start_time_utc + ( 15 * MINUTE_IN_SECONDS ) );
 	}
 
+	/**
+	 * @param array $info
+	 *
+	 * @throws \WPKit\Exception\WpException
+	 */
 	public function set_info( array $info ) {
 		foreach ( $info as $key => $value ) {
 			if ( $key == 'info' ) {
 				foreach ( $value as $k => $v ) {
 					MetaBox::set( $this->id, Initialization::POST_TYPE . '_info', $k, $v );
+					$this->additional_info[ $k ] = $v;
 				}
+			} else if ( in_array( $key, array_keys( Functions::get_additional_fields() ) ) ) {
+				MetaBox::set( $this->id, Initialization::POST_TYPE . '_info', $key, $value );
+				$this->additional_info[ $key ] = $value;
 			} else {
 				$this->$key = $value;
 			}

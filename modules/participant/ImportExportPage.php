@@ -47,30 +47,37 @@ class ImportExportPage extends CustomPage {
 				<?php submit_button( __( 'Export' ) ) ?>
             </form>
             <h2 class="title"><?= __( 'Import' ) ?></h2>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <table class="form-table">
                     <tbody>
                     <tr>
                         <th scope="row"><label for="count"><?php _e( 'File', 'colorrun' ); ?></label></th>
-                        <td><input type="file" name="import_file">
-                            <p class="description">Archive could contain any amount of files, could have
-                                subdirectories.</p></td>
+                        <td><input type="file" name="import_file" accept=".csv,text/csv"/>
+                            <p class="description">CSV file.</p></td>
                     </tr>
 
                     <tr>
-                        <th scope="row"><label for="export_id"><?php _e( 'Distance', 'colorrun' ) ?></label></th>
+                        <th scope="row"><label for="distance_id"><?php _e( 'Distance', 'colorrun' ) ?></label></th>
                         <td>
-                            <select name="import_id" id="import_id" class="regular-text select2" required="required">
+                            <select name="distance_id" id="distance_id" class="regular-text select2"
+                                    required="required">
 								<?php foreach ( \modules\distance\Functions::get_distances()->posts as $distance ) : ?>
                                     <option value="<?= $distance->ID ?>"><?= get_the_title( $distance ) ?></option>
 								<?php endforeach; ?>
                             </select>
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row"><label
+                                    for="send_email"><?php _e( 'Send registration email?', 'colorrun' ) ?></label></th>
+                        <td>
+                            <input name="send_email" id="send_email" class="regular-text select2" type="checkbox"/>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
                 <input type="hidden" name='type' value="import">
-				<?php // submit_button( __( 'Import' ) ) ?>
+				<?php submit_button( __( 'Import' ) ) ?>
             </form>
             <script type="text/javascript">jQuery(function () {
                     jQuery(".select2").select2();
@@ -111,19 +118,64 @@ class ImportExportPage extends CustomPage {
 	private function show_message( string $type, string $message ): void {
 		add_action( 'admin_notices', function () use ( $type, $message ) {
 			$class = 'notice notice-' . $type;
-			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
+			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
 		} );
 	}
 
 	private function import() {
+		if ( ! isset( $_FILES['import_file'] ) || ! $_FILES['import_file'] ) {
+			$this->show_error( __( 'Ooops, you should add file to import!', 'colorrun' ) );
 
-	}
+			return false;
+		}
+		$file = $_FILES['import_file'];
+		if ( strpos( $file['type'], 'csv' ) === false ) {
+			$this->show_error( __( 'Ooops, file should be in CSV format (.csv)', 'colorrun' ) );
 
-	protected function _ajax_action() {
-		// TODO: Implement _ajax_action() method.
+			return false;
+		}
+		$is_send_email = isset( $_POST['send_email'] ) ? (bool) $_POST['send_email'] : false;
+		$distance_id   = (int) $_POST['distance_id'];
+		if ( ( $handle = fopen( $_FILES["import_file"]["tmp_name"], 'r' ) ) !== false ) {
+			// necessary if a large csv file
+			set_time_limit( 600 );
+
+			$row      = 0;
+			$imported = [];
+			$list     = '';
+			while ( ( $data = fgetcsv( $handle, 1000, ',' ) ) !== false ) {
+				if ( $row == 0 ) {
+					$mapping = $data;
+					if ( ! in_array( 'email', $mapping ) ) {
+						$this->show_error( __( 'No email field in csv', 'colorrun' ) );
+					}
+					$row ++;
+					continue;
+				}
+				$participant = Participant::create();
+				$participant->set_distance( $distance_id );
+				$participant->set_info( array_combine( $mapping, $data ) );
+				\modules\registration\Functions::finish_registration( $participant->get_id(), (object) [
+					'payment_id'  => 'import',
+					'create_date' => time() * 1000,
+					'amount'      => 0,
+				], $is_send_email );
+				$participant = new Participant( $participant->get_id() );
+				$imported[]  = $participant;
+				$list        .= $participant->bib . '&#9;' . $participant->firstname . ' ' . $participant->lastname . "<br>";
+				$row ++;
+			}
+			fclose( $handle );
+		}
+
+		$this->show_success( 'Import finished. ' . count( $imported ) . ' participants created.<br>' . $list );
 	}
 
 	private function show_success( string $message ): void {
 		$this->show_message( 'success', $message );
+	}
+
+	protected function _ajax_action() {
+		// TODO: Implement _ajax_action() method.
 	}
 }

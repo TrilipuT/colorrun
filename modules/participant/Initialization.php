@@ -2,6 +2,7 @@
 
 namespace modules\participant;
 
+use WPKit\Fields\Button;
 use WPKit\Fields\Select;
 use WPKit\Fields\Select2;
 use WPKit\Fields\Text;
@@ -37,6 +38,7 @@ class Initialization extends AbstractInitialization {
 		$this->participant_info();
 		$this->payment_info();
 		$this->custom_info();
+		$this->actions_metabox();
 	}
 
 	public function setup_columns() {
@@ -89,8 +91,8 @@ class Initialization extends AbstractInitialization {
 				if ( $current_bib = Functions::get_bib( $post->ID ) ) {
 					$bibs = array_merge( [ $current_bib => $current_bib ], $bibs );
 				}
-				array_unshift($bibs,'');
-				$bibs = array_combine( $bibs, $bibs );
+				array_unshift( $bibs, '' );
+				$bibs     = array_combine( $bibs, $bibs );
 				$bibs[''] = '-- No bib --';
 				$f->set_options( $bibs );
 			} else {
@@ -137,7 +139,7 @@ class Initialization extends AbstractInitialization {
 				$time = date_i18n( 'd.m.Y H:i', $row['time'] );
 				$text .= "{$time}: <b>{$row['message']}</b><br>";
 			}
-			$p    = new Participant( get_the_ID() );
+			$p = new Participant( get_the_ID() );
 			if ( $p->payment ) {
 				$text .= '<hr><b>Payment details</b><br><br>';
 				foreach ( $p->payment as $key => $value ) {
@@ -150,10 +152,6 @@ class Initialization extends AbstractInitialization {
 		} );
 
 		$this->post_type->add_meta_box( $meta );
-
-		$m = new MetaBox( self::POST_TYPE . '_' . \modules\theme\Functions::get_current_language(), __( 'Content', 'colorrun' ) );
-		$m->add_field( 'content', __( 'Content', 'colorrun' ), 'WPEditor' );
-		$m->add_post_type( $this->post_type );
 	}
 
 	public function custom_info() {
@@ -163,6 +161,34 @@ class Initialization extends AbstractInitialization {
 		}
 		$meta->set_priority( 'high' );
 		$meta->add_post_type( $this->post_type );
+	}
+
+	public function actions_metabox() {
+		$actions = new MetaBox( self::POST_TYPE . '_actions', __( 'Actions', 'colorrun' ) );
+		$actions->set_context( 'side' );
+		$actions->set_priority( 'core' );
+		$post_id     = isset( $_GET['post'] ) ? $_GET['post'] : get_the_ID();
+		$participant = new Participant( $post_id );
+		$actions->add_field( 'resend_email', sprintf( __( 'Send registration email to %s', 'colorrun' ), $participant->email ), function () {
+			$f = new Button();
+			$f->set_classes( [ 'button', 'button-primary' ] );
+			$f->set_text( __( 'Send email', 'colorrun' ) );
+			$f->set_attribute( 'data-post_id', get_the_ID() );
+			$f->set_description( sprintf( __( 'Email will be send in %s', 'colorrun' ), pll_current_language( 'name' ) ) );
+
+			return $f;
+		} );
+		add_action( 'wp_ajax_' . self::POST_TYPE . '_actions_resend_email', function () {
+			$id = $_POST['post_id'];
+
+			$participant = new Participant( $id );
+			if ( ! $participant->send_notification_email() ) {
+				wp_send_json_error('Some problem with sending email');
+			}
+			wp_send_json_success();
+		} );
+
+		$this->post_type->add_meta_box( $actions );
 	}
 
 	public function admin_register_coupon_generator_page() {

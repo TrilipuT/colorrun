@@ -105,27 +105,15 @@ class Initialization extends AbstractInitialization {
 		} );
 
 		$router->get( '/registerFree/{participant_id}', function ( $participant_id ) {
-			Functions::finish_registration( $participant_id, (object) [ 'payment_id' => 'free' ] );
+			Functions::finish_registration( $participant_id, (object) [
+				'payment_id'  => 'free',
+				"create_date" => time() * 1000,
+				'amount'      => 0,
+			] );
 			wp_redirect( Functions::get_result_url() . '?participant=' . $participant_id );
 		} )->convert( 'participant_id', function ( $participant_id ) {
 			return absint( $participant_id );
 		} );
-	}
-
-	private function send_success( array $data = [] ): array {
-		unset( $data['success'] );
-
-		return array_merge( [
-			'success' => true,
-		], $data );
-	}
-
-	private function send_error( string $error = '', string $type = '' ): array {
-		return [
-			'success' => false,
-			'message' => $error,
-			'type'    => $type,
-		];
 	}
 
 	public function add_action_remove_registration( $id ) {
@@ -289,6 +277,22 @@ class Initialization extends AbstractInitialization {
 
 			wp_localize_script( 'theme', 'table_settings', $settings );
 		}, 11 );
+	}
+
+	private function send_success( array $data = [] ): array {
+		unset( $data['success'] );
+
+		return array_merge( [
+			'success' => true,
+		], $data );
+	}
+
+	private function send_error( string $error = '', string $type = '' ): array {
+		return [
+			'success' => false,
+			'message' => $error,
+			'type'    => $type,
+		];
 	}
 }
 

@@ -139,27 +139,45 @@ class Functions extends AbstractFunctions {
 		return $participant->get_id();
 	}
 
-	public static function finish_registration( int $participant_id, \stdClass $data ) {
+	/**
+	 * @param int $participant_id
+	 * @param \stdClass $data
+	 * @param bool $is_send_email
+	 */
+	public static function finish_registration( int $participant_id, \stdClass $data, $is_send_email = true ) {
 		$participant = new Participant( $participant_id );
 		if ( $participant->get_payment_status() == \modules\payment\Initialization::STATUS['PAYED'] ) {
 			return;
 		}
 		Log::info( 'Success payment: ' . $data->payment_id, $participant_id );
 		$participant->payment = $data;
-		$participant->finish_registration();
+		$participant->finish_registration($is_send_email);
 		// Lets delete remove_registration schedule
 		$event_time = wp_next_scheduled( 'remove_registration', [ $participant->get_id() ] );
 		wp_unschedule_event( $event_time, 'remove_registration', [ $participant->get_id() ] );
 	}
 
+	/**
+	 * @param int $distance
+	 *
+	 * @return string
+	 */
 	public static function get_registration_url( int $distance ): string {
 		return \modules\theme\Functions::get_page_url_by_template( 'registration.php' ) . '?distance=' . $distance;
 	}
 
+	/**
+	 * @param string $name
+	 *
+	 * @return bool
+	 */
 	public static function is_active_field( string $name ): bool {
 		return in_array( $name, self::get_active_additional_fields() );
 	}
 
+	/**
+	 * @return array
+	 */
 	public static function get_active_additional_fields(): array {
 		return Option::get( 'registration_additional_fields' ) ?: [];
 	}
