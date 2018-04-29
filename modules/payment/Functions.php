@@ -92,7 +92,9 @@ class Functions extends AbstractFunctions {
 	 * @return string
 	 */
 	public static function get_result_url(): string {
-		return get_permalink( (int) Option::get( 'liqpay_result_page' ) );
+		$translations = pll_get_post_translations( Option::get( 'liqpay_result_page' ) );
+
+		return isset( $translations[ pll_current_language() ] ) ? get_permalink( $translations[ pll_current_language() ] ) : get_permalink( (int) Option::get( 'liqpay_result_page' ) );
 	}
 
 	/**

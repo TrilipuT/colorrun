@@ -168,6 +168,10 @@ class Initialization extends AbstractInitialization {
 		$actions->set_context( 'side' );
 		$actions->set_priority( 'core' );
 		$post_id     = isset( $_GET['post'] ) ? $_GET['post'] : get_the_ID();
+		// We need this in case of bulk actions. They are also fires this function.
+		if ( is_array( $post_id ) ) {
+			$post_id = $post_id[0];
+		}
 		$participant = new Participant( $post_id );
 		$actions->add_field( 'resend_email', sprintf( __( 'Send registration email to %s', 'colorrun' ), $participant->email ), function () {
 			$f = new Button();

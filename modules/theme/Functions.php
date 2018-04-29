@@ -56,10 +56,14 @@ class Functions extends AbstractThemeFunctions {
 	 * @return string
 	 */
 	public static function get_current_language(): string {
+		$lang = 'uk';
 		if ( function_exists( 'pll_current_language' ) ) {
-			return pll_current_language();
+			$lang = pll_current_language();
+		}
+		if ( ! $lang ) {
+			$lang = 'uk';
 		}
 
-		return 'uk';
+		return $lang;
 	}
 }

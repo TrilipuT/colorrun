@@ -34,6 +34,6 @@ class Functions extends AbstractFunctions {
 	}
 
 	public static function get_email_message() {
-		return Option::get( 'registration_message_' . \modules\theme\Functions::get_current_language(), 'Dear {{firstname}}! Thank you for registration on {{distance}}' );
+		return Option::get( 'registration_message_' . \modules\theme\Functions::get_current_language(), 'Dear {{firstname}}! Thank you for registration on {{distance}}. Your bib is {{bib}}' );
 	}
 }
