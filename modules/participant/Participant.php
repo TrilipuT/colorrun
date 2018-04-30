@@ -207,7 +207,7 @@ class Participant {
 	public function __set( $name, $value ) {
 		$this->data[ $name ] = $value;
 		if ( $name == 'dateofbirth' ) {
-``			$value = date( 'Y-m-d', strtotime( str_replace( '/', '.', $value ) ) );
+			$value = date( 'Y-m-d', strtotime( str_replace( '/', '.', $value ) ) );
 		} elseif ( $name == 'email' ) {
 			$value               = strtolower( $value );
 			$this->data[ $name ] = $value;
