@@ -67,11 +67,18 @@ class Functions extends AbstractFunctions {
 			'no_found_rows'  => true,
 			'posts_per_page' => - 1,
 			'meta_query'     => [
-				[
+				'relation'        => 'AND',
+				'distance_clause' => [
 					'key'   => \modules\participant\Initialization::POST_TYPE . '_distance',
 					'value' => $distance_id,
-				]
+				],
+				'bib_clause'      => [
+					'key'     => \modules\participant\Initialization::POST_TYPE . '_bib',
+					'compare' => 'EXISTS',
+				],
 			],
+			'orderby'        => 'bib_clause',
+			'order'          => 'DESC',
 		] );
 		$result       = [];
 		foreach ( $participants->posts as $post ) {
@@ -151,7 +158,7 @@ class Functions extends AbstractFunctions {
 		}
 		Log::info( 'Success payment: ' . $data->payment_id, $participant_id );
 		$participant->payment = $data;
-		$participant->finish_registration($is_send_email);
+		$participant->finish_registration( $is_send_email );
 		// Lets delete remove_registration schedule
 		$event_time = wp_next_scheduled( 'remove_registration', [ $participant->get_id() ] );
 		wp_unschedule_event( $event_time, 'remove_registration', [ $participant->get_id() ] );
