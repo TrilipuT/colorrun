@@ -129,7 +129,7 @@ class ImportExportPage extends CustomPage {
 			return false;
 		}
 		$file = $_FILES['import_file'];
-		if ( strpos( $file['type'], 'csv' ) === false ) {
+		if ( strpos( $file['type'], 'csv' ) === false && strpos( $file['type'], 'vnd.ms-excel' ) === false ) {
 			$this->show_error( __( 'Ooops, file should be in CSV format (.csv)', 'colorrun' ) );
 
 			return false;
