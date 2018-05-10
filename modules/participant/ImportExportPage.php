@@ -102,7 +102,7 @@ class ImportExportPage extends CustomPage {
 			$this->show_error( __( 'Nothing selected', 'colorrun' ) );
 		}
 		$participants = \modules\distance\Functions::get_participants( $export_id );
-		$excel = new SimpleExcel( 'csv' );                    // instantiate new object (will automatically construct the parser & writer type as XML)
+		$excel        = new SimpleExcel( 'csv' );                    // instantiate new object (will automatically construct the parser & writer type as XML)
 		$excel->writer->addRow( array_keys( $participants[0] ) );
 		foreach ( $participants as $participant ) {
 			$excel->writer->addRow( array_values( $participant ) );
@@ -144,6 +144,8 @@ class ImportExportPage extends CustomPage {
 			$imported = [];
 			$list     = '';
 			while ( ( $data = fgetcsv( $handle, 1000, ',' ) ) !== false ) {
+			    // filter empty cols at the end
+				$data = array_filter( $data );
 				if ( $row == 0 ) {
 					$mapping = $data;
 					if ( ! in_array( 'email', $mapping ) ) {
@@ -152,17 +154,26 @@ class ImportExportPage extends CustomPage {
 					$row ++;
 					continue;
 				}
+				// We do not want to import empty rows
+				if ( count( $data ) == 0 ) {
+					continue;
+				}
 				$participant = Participant::create();
-				$participant->set_distance( $distance_id );
-				$participant->set_info( array_combine( $mapping, $data ) );
-				\modules\registration\Functions::finish_registration( $participant->get_id(), (object) [
-					'payment_id'  => 'import',
-					'create_date' => time() * 1000,
-					'amount'      => 0,
-				], $is_send_email );
-				$participant = new Participant( $participant->get_id() );
-				$imported[]  = $participant;
-				$list        .= $participant->bib . '&#9;' . $participant->firstname . ' ' . $participant->lastname . "<br>";
+				try {
+					$participant->set_distance( $distance_id );
+					$participant->set_info( array_combine( $mapping, $data ) );
+					\modules\registration\Functions::finish_registration( $participant->get_id(), (object) [
+						'payment_id'  => 'import',
+						'create_date' => time() * 1000,
+						'amount'      => 0,
+					], $is_send_email );
+					$participant = new Participant( $participant->get_id() );
+					$imported[]  = $participant;
+					$list        .= $participant->bib . '&#9;' . $participant->firstname . ' ' . $participant->lastname . "<br>";
+				} catch ( \Exception $exception ) {
+					$list .= 'Error: ' . $exception->getMessage() . '<br>';
+					wp_trash_post( $participant->get_id() );
+				}
 				$row ++;
 			}
 			fclose( $handle );
