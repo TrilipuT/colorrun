@@ -45,14 +45,16 @@ get_header(); ?>
                                 <div class="input-group">
                                     <select id="distance" name="distance" required>
                                         <option value="hide"><?php _e( 'Distance', 'colorrun' ) ?></option>
-										<?php $distances = Distance::get_distances();
-										while ( $distances->have_posts() ):
-											$distances->the_post(); ?>
-                                            <option
-												<?= selected( get_the_ID(), $distance_id ) ?>value="<?php the_ID() ?>"
-                                                data-age="<?= Distance::get_age() ?>"
-                                                data-price="<?= Distance::format_price( Distance::get_current_price() ) ?>"><?php the_title() ?></option>
-										<?php endwhile;
+	                                    <?php $distances = Distance::get_current_distances();
+	                                    while ( $distances->have_posts() ):
+		                                    $distances->the_post();
+		                                    if ( Distance::is_open() ) : ?>
+                                                <option
+				                                    <?= selected( get_the_ID(), $distance_id ) ?>value="<?php the_ID() ?>"
+                                                    data-age="<?= Distance::get_age() ?>"
+                                                    data-price="<?= Distance::format_price( Distance::get_current_price() ) ?>"><?php the_title() ?></option>
+		                                    <?php endif;
+	                                    endwhile;
 										wp_reset_postdata(); ?>
                                     </select>
                                 </div>
