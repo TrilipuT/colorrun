@@ -39,7 +39,7 @@ get_header(); ?>
 							<?php if ( ! in_array( $current, array_keys( (array) $distances ) ) ): ?>
                                 <option value="hide"><?php _e( 'Distance', 'colorrun' ) ?></option>
 							<?php endif;
-							$distances = Distance::get_distances();
+							$distances = Distance::get_distances(Event::get_current_event()->post->ID);
 							while ( $distances->have_posts() ):
 								$distances->the_post();
 								if ( $current == get_the_ID() ) {

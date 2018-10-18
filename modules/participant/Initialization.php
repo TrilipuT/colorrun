@@ -167,7 +167,7 @@ class Initialization extends AbstractInitialization {
 		$actions = new MetaBox( self::POST_TYPE . '_actions', __( 'Actions', 'colorrun' ) );
 		$actions->set_context( 'side' );
 		$actions->set_priority( 'core' );
-		$post_id     = isset( $_GET['post'] ) ? $_GET['post'] : get_the_ID();
+		$post_id = isset( $_GET['post'] ) ? $_GET['post'] : get_the_ID();
 		// We need this in case of bulk actions. They are also fires this function.
 		if ( is_array( $post_id ) ) {
 			$post_id = $post_id[0];
@@ -187,7 +187,7 @@ class Initialization extends AbstractInitialization {
 
 			$participant = new Participant( $id );
 			if ( ! $participant->send_notification_email() ) {
-				wp_send_json_error('Some problem with sending email');
+				wp_send_json_error( 'Some problem with sending email' );
 			}
 			wp_send_json_success();
 		} );
@@ -206,7 +206,7 @@ class Initialization extends AbstractInitialization {
 				$type = $_GET['post_type'];
 			}
 			if ( self::POST_TYPE == $type ) {
-				$values = wp_list_pluck( \modules\distance\Functions::get_current_distances()->posts, 'post_title', 'ID' );
+				$values = wp_list_pluck( \modules\distance\Functions::get_distances()->posts, 'post_title', 'ID' );
 				?>
                 <select name="distance">
                     <option value=""><?php _e( 'Distance', 'colorrun' ); ?></option>

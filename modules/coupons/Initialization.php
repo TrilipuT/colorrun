@@ -40,7 +40,7 @@ class Initialization extends AbstractInitialization {
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;' );
 
 		$table = new TablePage( 'coupons', 'Coupons' );
-		$table->set_menu_position(9);
+		$table->set_menu_position(6);
 		$table->set_menu_icon( 'dashicons-tickets-alt' );
 		$t = new Table( 'coupons', 'id' );
 		$t->setup_general_column( 'coupon_code', 'Code', function ( $data ) {

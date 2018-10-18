@@ -110,7 +110,7 @@ class Coupon {
 	}
 
 	public function __get( $key ) {
-		return $this->data[ $key ];
+		return isset( $this->data[ $key ] ) ? $this->data[ $key ] : false;
 	}
 
 	public function set_active() {

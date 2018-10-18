@@ -30,7 +30,7 @@ class Initialization extends AbstractInitialization {
 		$post_type->set_use_archive( false );
 		$post_type->set_public( false );
 		$post_type->set_show_in_nav_menus( false );
-		$post_type->set_menu_position( 9 );
+		$post_type->set_menu_position( 7 );
 		$this->post_type = $post_type;
 		$this->setup_columns();
 		$this->add_meta();
