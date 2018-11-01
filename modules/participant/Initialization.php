@@ -206,34 +206,55 @@ class Initialization extends AbstractInitialization {
 				$type = $_GET['post_type'];
 			}
 			if ( self::POST_TYPE == $type ) {
-				$values = wp_list_pluck( \modules\distance\Functions::get_distances()->posts, 'post_title', 'ID' );
-				?>
-                <select name="distance">
-                    <option value=""><?php _e( 'Distance', 'colorrun' ); ?></option>
-					<?php
-					$current_v = isset( $_GET['distance'] ) ? $_GET['distance'] : '';
-					foreach ( $values as $value => $label ) {
-						printf
-						(
+				$current_event    = isset( $_GET['event'] ) ? $_GET['event'] : \modules\event\Functions::get_current_event()->post->ID;
+				$current_distance = isset( $_GET['distance'] ) ? $_GET['distance'] : 0; ?>
+				<?php $values = wp_list_pluck( \modules\event\Functions::get_all_events()->posts, 'post_title', 'ID' ); ?>
+                <select name="event">
+					<?php foreach ( $values as $value => $label ) {
+						printf(
 							'<option value="%s"%s>%s</option>',
 							$value,
-							selected( $value, $current_v ),
+							selected( $value, $current_event ),
 							$label
 						);
-					}
-					?>
+					} ?>
                 </select>
-				<?php
+				<?php if ( $current_event ):
+					$values = wp_list_pluck( \modules\distance\Functions::get_distances( $current_event )->posts, 'post_title', 'ID' ); ?>
+                    <select name="distance">
+                        <option value=""><?php _e( 'All distances', 'colorrun' ); ?></option>
+						<?php foreach ( $values as $value => $label ) {
+							printf(
+								'<option value="%s"%s>%s</option>',
+								$value,
+								selected( $value, $current_distance ),
+								$label
+							);
+						} ?>
+                    </select>
+				<?php endif;
 			}
 		} );
 
 
 		add_filter( 'parse_query', function ( $query ) {
 			global $pagenow;
-			if ( isset( $_GET['post_type'] ) && self::POST_TYPE == $_GET['post_type'] && is_admin() && $pagenow == 'edit.php' && isset( $_GET['distance'] ) && $_GET['distance'] != '' ) {
-				$query->query_vars['meta_key']   = self::POST_TYPE . '_distance';
-				$query->query_vars['meta_value'] = $_GET['distance'];
+			if ( isset( $_GET['post_type'] ) && self::POST_TYPE == $_GET['post_type'] && is_admin() && $pagenow == 'edit.php' && $query->is_main_query() ) {
+				if ( isset( $_GET['event'] ) && $_GET['event'] != '' ) {
+					$distances = wp_list_pluck( \modules\distance\Functions::get_distances( $_GET['event'] )->posts, 'ID' );
+				} else {
+					$distances = wp_list_pluck( \modules\distance\Functions::get_current_distances( - 1 )->posts, 'ID' );
+				}
+				$query->query_vars['meta_key']     = self::POST_TYPE . '_distance';
+				$query->query_vars['meta_compare'] = 'IN';
+				$query->query_vars['meta_value']   = $distances;
+
+				if ( isset( $_GET['distance'] ) && $_GET['distance'] != '' ) {
+					$query->query_vars['meta_value'] = $_GET['distance'];
+				}
 			}
+
+			return $query;
 		} );
 
 	}

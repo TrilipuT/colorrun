@@ -268,7 +268,7 @@ class Initialization extends AbstractInitialization {
 				]
 			];
 
-			$distances = $dist = \modules\distance\Functions::get_distances();
+			$distances = $dist = \modules\distance\Functions::get_current_distances();
 			$id        = isset( $_GET['id'] ) ? (int) $_GET['id'] : (int) $distances->post->ID;
 //		if ( isset( $distances[ $id ] ) ) {
 //			$settings['distance'] = $distances[ $id ];
