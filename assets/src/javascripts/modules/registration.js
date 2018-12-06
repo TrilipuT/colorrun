@@ -1,5 +1,5 @@
-import $ from 'jquery';
-import 'jquery-countdown';
+import $ from 'jquery'
+import 'jquery-countdown'
 
 export default () => {
     // Will be stored participant data
@@ -29,9 +29,9 @@ export default () => {
                 participant[$input.attr('name')] = value
             }
         });
-        let url = '/wp-json/register/startRegistration';
+        let url = api.root + '/wp-json/register/startRegistration'
         if (participant.hasOwnProperty('participant_id') && participant.participant_id !== '') {
-            url = '/wp-json/register/updateInfo';
+            url = api.root + '/wp-json/register/updateInfo';
         }
         $.post({
             url: url, //TODO: set url from settings
@@ -98,7 +98,7 @@ export default () => {
         let coupon = $('.promo-input').val();
 
         $.post({
-            url: '/wp-json/register/getPaymentInfo/' + participant.participant_id, //TODO: set url from settings
+            url: api.root + '/wp-json/register/getPaymentInfo/' + participant.participant_id, //TODO: set url from settings
             data: {"coupon": coupon},
             beforeSend: function () {
                 $stepsArea.addClass('loading');

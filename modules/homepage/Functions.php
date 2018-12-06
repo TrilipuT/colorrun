@@ -18,12 +18,14 @@ class Functions extends AbstractFunctions {
 		$titles = MetaBoxRepeatable::get( $id, Initialization::HOME_INFO, 'title' );
 		$texts  = MetaBoxRepeatable::get( $id, Initialization::HOME_INFO, 'text' );
 		$items  = [];
-		foreach ( $titles as $i => $title ) {
-			$items[] = [
-				'icon'  => $icons[ $i ],
-				'title' => $title,
-				'text'  => wpautop( $texts[ $i ] ),
-			];
+		if ( $titles ) {
+			foreach ( $titles as $i => $title ) {
+				$items[] = [
+					'icon'  => $icons[ $i ],
+					'title' => $title,
+					'text'  => wpautop( $texts[ $i ] ),
+				];
+			}
 		}
 
 		return $items;

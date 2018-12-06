@@ -189,47 +189,47 @@ class Initialization extends AbstractThemeInitialization {
 		add_action( 'wp_head', function () {
 			?>
             <script>
-                (function (w, d, u) {
-                    var alias,
-                        pushToQ;
+              (function (w, d, u) {
+                var alias,
+                  pushToQ
 
-                    w.bindReadyQ = [];
-                    w.bindLoadQ = [];
+                w.bindReadyQ = []
+                w.bindLoadQ = []
 
-                    pushToQ = function (x, y) {
+                pushToQ = function (x, y) {
 
-                        switch (x) {
-                            case 'load':
-                                w.bindLoadQ.push(y);
+                  switch (x) {
+                    case 'load':
+                      w.bindLoadQ.push(y)
 
-                                break;
-                            case 'ready':
-                                w.bindReadyQ.push(y);
+                      break
+                    case 'ready':
+                      w.bindReadyQ.push(y)
 
-                                break;
-                            default:
-                                w.bindReadyQ.push(x);
+                      break
+                    default:
+                      w.bindReadyQ.push(x)
 
-                                break;
-                        }
-                    };
+                      break
+                  }
+                }
 
-                    alias = {
-                        load: pushToQ,
-                        ready: pushToQ,
-                        bind: pushToQ,
-                        on: pushToQ
-                    };
+                alias = {
+                  load: pushToQ,
+                  ready: pushToQ,
+                  bind: pushToQ,
+                  on: pushToQ,
+                }
 
-                    w.$ = w.jQuery = function (handler) {
+                w.$ = w.jQuery = function (handler) {
 
-                        if (handler === d || handler === u || handler === w) {
-                            return alias;
-                        } else {
-                            pushToQ(handler);
-                        }
-                    };
-                })(window, document);
+                  if (handler === d || handler === u || handler === w) {
+                    return alias
+                  } else {
+                    pushToQ(handler)
+                  }
+                }
+              })(window, document)
             </script>
 			<?php
 		}, 1 );
@@ -260,11 +260,11 @@ class Initialization extends AbstractThemeInitialization {
 		wp_register_script(
 			'theme',
 			$this->get_theme_assets_url() . '/built/javascripts/common.js',
-			[ 'jquery', ],
+			[ 'jquery' ],
 			wp_get_theme()->get( 'Version' ),
 			true
 		);
-//		wp_localize_script('theme', 'theme_settings', []);
+		wp_localize_script( 'theme', 'api', [ 'root' => get_home_url() ] );
 		wp_enqueue_script( 'theme' );
 	}
 

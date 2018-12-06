@@ -1,8 +1,1 @@
-<?php
-/**
- *
- * @package    colorrun
- * @author     vitaly
- *
- */
-echo do_shortcode('[random max="8" template="homepage" id="1" /]')?>
+<?php echo do_shortcode('[nggallery template="homepage" source="random" maximum_entity_count="8"]');

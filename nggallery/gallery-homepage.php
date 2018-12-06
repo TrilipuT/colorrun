@@ -13,16 +13,16 @@
     <div class="wrapper-outer">
         <h2 class="section-title"><?php _e( 'Photo and video', 'colorrun' ) ?></h2>
         <div class="media-grid">
-			<?php foreach ( $images as $i => $image ) :?>
+			<?php foreach ( $images as $i => $image ) : ?>
 				<?php if ( $i % 2 == 0 ): ?>
                     <div class="column">
 				<?php endif; ?>
                 <article class="media-item image-<?= $image->pid ?>">
                     <div class="thumbnail-container">
-                        <img src="<?php echo $image->thumbnailURL ?>" alt="<?php echo $image->alttext ?>">
+                        <img src="<?= $image->thumbnailURL ?>" alt="<?= $image->alttext ?>">
                     </div>
                     <div class="hover-container">
-                        <a href="<?php echo $image->imageURL ?>" class="button">БІЛЬШЕ ФОТО/ВІДЕО</a>
+                        <a href="<?= home_url( '/foto-galereya/' ) ?>" class="button">БІЛЬШЕ ФОТО/ВІДЕО</a>
                     </div>
                 </article>
 				<?php if ( $i % 2 != 0 ): ?>
