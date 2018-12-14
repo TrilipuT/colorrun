@@ -22,8 +22,9 @@
     <header id="header">
         <div class="top-bar">
             <div class="wrapper-outer">
-				<?php get_template_part( 'parts/socials' ) ?>
-				<?php get_template_part( 'parts/languages' ) ?>
+	            <?php get_template_part( 'parts/socials' ) ?>
+	            <?php get_template_part( 'parts/languages' ) ?>
+	            <?php get_template_part( 'parts/locations' ) ?>
             </div>
         </div>
         <div class="main-navigation">

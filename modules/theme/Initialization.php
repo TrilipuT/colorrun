@@ -245,13 +245,13 @@ class Initialization extends AbstractThemeInitialization {
 			'theme',
 			$this->get_theme_assets_url() . "/built/stylesheets/screen.css",
 			[],
-			wp_get_theme()->get( 'Version' )
+			filemtime( get_template_directory() . '/assets/built/stylesheets/screen.css' )
 		);
 		wp_enqueue_style(
 			'theme-print',
 			$this->get_theme_assets_url() . "/built/stylesheets/print.css",
 			[],
-			wp_get_theme()->get( 'Version' ),
+			filemtime( get_template_directory() . '/assets/built/stylesheets/print.css' ),
 			'print'
 		);
 	}
@@ -261,7 +261,7 @@ class Initialization extends AbstractThemeInitialization {
 			'theme',
 			$this->get_theme_assets_url() . '/built/javascripts/common.js',
 			[ 'jquery' ],
-			wp_get_theme()->get( 'Version' ),
+			filemtime( get_template_directory() . '/assets/built/javascripts/common.js' ),
 			true
 		);
 		wp_localize_script( 'theme', 'api', [ 'root' => get_home_url() ] );
