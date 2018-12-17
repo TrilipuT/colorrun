@@ -1,5 +1,6 @@
 <?php
-if ( $sites = get_sites() ) :?>
+if ( $sites = get_sites() ) :
+	$cur = get_current_blog_id(); ?>
     <div class="language-dropdown dropdown">
         <div class="label">
             <svg role="icon" class="sprite-icon sprite-icon-point">
@@ -14,5 +15,5 @@ if ( $sites = get_sites() ) :?>
 			<?php endforeach; ?>
         </div>
     </div>
-	<?php restore_current_blog(); ?>
-<?php endif; ?>
+	<?php switch_to_blog( $cur ); ?>
+<?php endif;
