@@ -4,5 +4,11 @@
 	@extend %top-gradient
 	.wrapper-outer
 		+clearfix
+		+breakpoint-max(480)
+			display: flex
+			flex-wrap: wrap
+			justify-content: center
+			.socials
+				order: 5
 	.language-dropdown
 		margin-right: 10px

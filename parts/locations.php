@@ -1,5 +1,5 @@
 <?php
-if ( $sites = get_sites() ) :
+if ( is_multisite() && $sites = get_sites() ) :
 	$cur = get_current_blog_id(); ?>
     <div class="language-dropdown dropdown">
         <div class="label">
