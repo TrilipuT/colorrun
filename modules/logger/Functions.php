@@ -40,6 +40,9 @@ class Functions extends AbstractFunctions {
 		global $wpdb;
 		$table = Initialization::TABLE_NAME;
 
-		return $wpdb->get_results( $wpdb->prepare( "SELECT message, time FROM {$table} WHERE participant_id = %d ORDER BY id DESC", [ $id ] ), ARRAY_A );
+		return $wpdb->get_results( $wpdb->prepare( "SELECT message, time FROM {$table} WHERE participant_id = %d AND channel = %s ORDER BY id DESC", [
+			$id,
+			self::get_logger()->getName()
+		] ), ARRAY_A );
 	}
 }

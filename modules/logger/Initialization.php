@@ -17,7 +17,7 @@ class Initialization extends AbstractInitialization {
 
 	public function register_logger() {
 		global $logger;
-		$logger = new Logger( 'registration' );
+		$logger = new Logger( 'registration_' . get_current_blog_id() );
 		$pdo    = new \PDO( 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD );
 
 		$mySQLHandler = new MySQLHandler( $pdo, self::TABLE_NAME, [ 'participant_id' ], Logger::INFO );
