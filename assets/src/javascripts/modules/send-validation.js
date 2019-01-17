@@ -1,6 +1,6 @@
-import $ from 'jquery';
-import '../plugins/jquery.inputmask.bundle';
-import Inputmask from 'inputmask';
+import $ from 'jquery'
+import '../plugins/jquery.inputmask.bundle'
+import Inputmask from 'inputmask'
 
 export default () => {
     let phone = document.getElementById('phone'),
@@ -28,6 +28,10 @@ export default () => {
 
         if (errors.length === 0) {
             $('.registration-form').submit();
+        } else {
+            $('html, body').animate({
+                scrollTop: $('.registration-form').find('.error').offset().top - 20 - $('#header').height(),
+            }, 500)
         }
     });
 

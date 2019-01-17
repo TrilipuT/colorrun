@@ -264,7 +264,7 @@ class Initialization extends AbstractThemeInitialization {
 			filemtime( get_template_directory() . '/assets/built/javascripts/common.js' ),
 			true
 		);
-		wp_localize_script( 'theme', 'api', [ 'root' => get_home_url() ] );
+		wp_localize_script( 'theme', 'api', [ 'root' => get_rest_url() ] );
 		wp_enqueue_script( 'theme' );
 	}
 
