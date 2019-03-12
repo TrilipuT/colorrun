@@ -30,10 +30,10 @@ class Functions extends AbstractFunctions {
 		}
 		$liqpay = new \LiqPay( $public_key, $private_key );
 
-		$description = sprintf( '#%s Pay charitable contribution for event %s. ', $participant_id, get_the_title( $participant->distance ) );
-		if ( $participant->coupon ) {
-			$description .= ' ' . sprintf( 'Coupon %s applied', $participant->coupon );
-		}
+		$description = 'Безповоротний благодийний внесок';
+//		if ( $participant->coupon ) {
+//			$description .= ' ' . sprintf( 'Coupon %s applied', $participant->coupon );
+//		}
 		$order_id = implode( '_', [
 			\modules\event\Functions::get_current_event()->posts[0]->post_name,
 			get_post( $participant->distance )->post_name,
