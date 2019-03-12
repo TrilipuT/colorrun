@@ -30,7 +30,7 @@ class Functions extends AbstractFunctions {
 		}
 		$liqpay = new \LiqPay( $public_key, $private_key );
 
-		$description = sprintf( 'Pay for order #%s participation in event %s.', $participant_id, get_the_title( $participant->distance ) );
+		$description = sprintf( '#%s Pay charitable contribution for event %s. ', $participant_id, get_the_title( $participant->distance ) );
 		if ( $participant->coupon ) {
 			$description .= ' ' . sprintf( 'Coupon %s applied', $participant->coupon );
 		}
