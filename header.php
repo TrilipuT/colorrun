@@ -49,7 +49,7 @@
 					}
 					wp_reset_postdata();
 					if ( $list ):?>
-                        <div href="#" class="registration button">
+                        <div class="registration button" onclick="">
 							<?php _e( 'Register', 'colorrun' ) ?>
                             <ul class="sub-menu">
 								<?= $list ?>
