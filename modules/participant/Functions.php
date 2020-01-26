@@ -23,9 +23,10 @@ class Functions extends AbstractFunctions {
 
 	public static function get_additional_fields() {
 		return [
-			'phone'       => __( 'Telephone', 'colorrun' ),
-			'club'        => __( 'Club', 'colorrun' ),
-			'tshirt_size' => __( 'T-shirt size', 'colorrun' ),
+			'phone'       => __('Telephone','colorrun'),
+			'club'        => __('Club','colorrun'),
+			'tshirt_size' => __('T-shirt size','colorrun'),
+			'pancakes'    => __('Pancakes','colorrun'),
 		];
 	}
 

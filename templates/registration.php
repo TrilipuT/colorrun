@@ -61,12 +61,12 @@ get_header(); ?>
                                 <div class="input-group">
                                     <input type="text" name="firstname" id="firstname" required>
                                     <span class="bar"></span>
-                                    <label><?php _e( 'First name', 'colorrun' ) ?></label>
+                                    <label for="firstname"><?php _e( 'First name', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" name="lastname" id="lastname" required>
                                     <span class="bar"></span>
-                                    <label><?php _e( 'Last name', 'colorrun' ) ?></label>
+                                    <label for="lastname"><?php _e( 'Last name', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="radio-group">
                                     <span class="label"><?php _e( 'Gender:', 'colorrun' ) ?></span>
@@ -90,21 +90,21 @@ get_header(); ?>
                                 <div class="input-group">
                                     <input type="email" id="email" name="email" required>
                                     <span class="bar"></span>
-                                    <label><?php _e( 'E-mail', 'colorrun' ) ?></label>
+                                    <label for="email"><?php _e( 'E-mail', 'colorrun' ) ?></label>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" id="dateofbirth" name="dateofbirth"
                                            data-inputmask-alias="dd/mm/yyyy"
                                            data-val="true" required>
                                     <span class="bar"></span>
-                                    <label><?php _e( 'Date of birth', 'colorrun' ) ?></label>
+                                    <label for="dateofbirth"><?php _e( 'Date of birth', 'colorrun' ) ?></label>
                                 </div>
 								<?php if ( Registration::is_active_field( 'phone' ) ): ?>
                                     <div class="input-group">
                                         <input type="text" id="phone" name="info[phone]"
                                                data-inputmask="'mask': '(999)9999999'" required>
                                         <span class="bar"></span>
-                                        <label><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></label>
+                                        <label for="phone"><?php _e( 'Phone', 'colorrun' ) //Моб. телефон ?></label>
                                     </div>
 								<?php endif; ?>
                                 <div class="input-group">
@@ -119,13 +119,13 @@ get_header(); ?>
                                 <div class="input-group">
                                     <input type="text" id="city" name="city" required>
                                     <span class="bar"></span>
-                                    <label><?php _e( 'City', 'colorrun' ) ?></label>
+                                    <label for="city"><?php _e( 'City', 'colorrun' ) ?></label>
                                 </div>
 								<?php if ( Registration::is_active_field( 'club' ) ): ?>
                                     <div class="input-group">
                                         <input type="text" id="club" name="info[club]">
                                         <span class="bar"></span>
-                                        <label><?php _e( 'Club', 'colorrun' ) ?></label>
+                                        <label for="club"><?php _e( 'Club', 'colorrun' ) ?></label>
                                     </div>
 								<?php endif; ?>
 								<?php if ( Registration::is_active_field( 'tshirt_size' ) ): ?>
@@ -163,6 +163,20 @@ get_header(); ?>
                                         </div>
                                     </div>
 								<?php endif; ?>
+
+	                            <?php if ( Registration::is_active_field( 'pancakes' ) ): ?>
+                                    <div class="select-group">
+                                        <label class="color-blue" for="pancakes"><?php _e( 'Pancakes and tea (45 uah/portion)', 'colorrun' ) ?></label>
+                                        <select id="pancakes" name="info[pancakes]" required>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+	                            <?php endif; ?>
 
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="personal_data" name="personal_data" value="1" required/>
@@ -217,6 +231,10 @@ get_header(); ?>
                                     <dt><?php _e( 'T-shirt size:', 'colorrun' ) ?></dt>
                                     <dd data-id="info[tshirt_size]"></dd>
 								<?php endif; ?>
+	                            <?php if ( Registration::is_active_field( 'pancakes' ) ): ?>
+                                    <dt><?php _e( 'Pancakes and tea:', 'colorrun' ) ?></dt>
+                                    <dd data-id="info[pancakes]"></dd>
+	                            <?php endif; ?>
                             </dl>
                         </div>
                     </div>

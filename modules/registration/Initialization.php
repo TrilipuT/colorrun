@@ -71,7 +71,7 @@ class Initialization extends AbstractInitialization {
 			unset( $data['participant_id'] );
 			$participant->set_info( $data );
 
-			return $this->send_success();
+			return $this->send_success([ 'price' => \modules\distance\Functions::format_price($participant->get_amount_to_pay()), ]);
 		} );
 
 		$router->post( '/getPaymentInfo/{participant_id}', function ( $participant_id ) {

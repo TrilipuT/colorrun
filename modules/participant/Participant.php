@@ -236,6 +236,9 @@ class Participant {
 			$coupon = new Coupon( $this->coupon );
 			$price  = $coupon->apply_to_price( $price );
 		}
+		if ( $pancakes = $this->get_additional_info('pancakes') ) {
+			$price = $pancakes * 45 + $price;
+		}
 
 		return (int) $price;
 	}

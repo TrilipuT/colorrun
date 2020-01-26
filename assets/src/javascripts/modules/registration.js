@@ -49,6 +49,9 @@ export default () => {
                     participant.participant_id = result.participant_id;
                     $form.find('[name="participant_id"]').val(result.participant_id);
                 }
+                if (result.hasOwnProperty('price')) {
+                    $('.price').text(result.price);
+                }
                 infoFill(participant);
                 countdownStart();
                 goToNext(e);
