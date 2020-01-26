@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Color Run project\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 19:54+0300\n"
-"PO-Revision-Date: 2018-04-05 19:58+0300\n"
+"POT-Creation-Date: 2020-01-26 19:09+0200\n"
+"PO-Revision-Date: 2020-01-26 19:10+0200\n"
 "Last-Translator: coloradmin <trilliput@gmail.com>\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
 "%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-2: vendor\n"
 "X-Poedit-SearchPathExcluded-3: node_modules\n"
 
-#: header.php:52 templates/registration.php:261 templates/registration.php:262
+#: header.php:53 templates/registration.php:281 templates/registration.php:282
 msgid "Register"
 msgstr "Регистрация"
 
@@ -100,9 +100,8 @@ msgstr "Дата"
 #: modules/distance/Initialization.php:62
 #: modules/participant/ImportExportPage.php:60
 #: modules/participant/Initialization.php:45
-#: modules/participant/Initialization.php:106
-#: modules/participant/Initialization.php:208 templates/participants.php:40
-#: templates/registration.php:47 templates/registration.php:190
+#: modules/participant/Initialization.php:106 templates/participants.php:40
+#: templates/registration.php:47 templates/registration.php:206
 msgid "Distance"
 msgstr "Дистанция"
 
@@ -206,14 +205,18 @@ msgid "Telephone"
 msgstr "Телефон"
 
 #: modules/participant/Functions.php:27
-#: modules/registration/Initialization.php:253 templates/registration.php:126
-#: templates/registration.php:211
+#: modules/registration/Initialization.php:253 templates/registration.php:128
+#: templates/registration.php:227
 msgid "Club"
 msgstr "Клуб/Название компании"
 
-#: modules/participant/Functions.php:28 templates/registration.php:132
+#: modules/participant/Functions.php:28 templates/registration.php:134
 msgid "T-shirt size"
 msgstr "Размер футболки:"
+
+#: modules/participant/Functions.php:29
+msgid "Pancakes"
+msgstr ""
 
 #: modules/participant/ImportExportPage.php:24
 #: modules/participant/ImportExportPage.php:47
@@ -249,7 +252,7 @@ msgstr "Упс, вы должны добавить файл для импорт�
 msgid "Ooops, file should be in CSV format (.csv)"
 msgstr "Упс, файл должен быть в формате CSV (.csv)"
 
-#: modules/participant/ImportExportPage.php:150
+#: modules/participant/ImportExportPage.php:152
 msgid "No email field in csv"
 msgstr "Нет поля email в файле"
 
@@ -267,18 +270,18 @@ msgstr "Стартовый номер"
 msgid "Email"
 msgstr "Email"
 
-#: modules/participant/Initialization.php:71 templates/registration.php:62
-#: templates/registration.php:194
+#: modules/participant/Initialization.php:71 templates/registration.php:64
+#: templates/registration.php:210
 msgid "First name"
 msgstr "Имя"
 
-#: modules/participant/Initialization.php:72 templates/registration.php:67
-#: templates/registration.php:192
+#: modules/participant/Initialization.php:72 templates/registration.php:69
+#: templates/registration.php:208
 msgid "Last name"
 msgstr "Фамилия"
 
-#: modules/participant/Initialization.php:74 templates/registration.php:98
-#: templates/registration.php:204
+#: modules/participant/Initialization.php:74 templates/registration.php:100
+#: templates/registration.php:220
 msgid "Date of birth"
 msgstr "Дата рождения"
 
@@ -287,24 +290,24 @@ msgid "Gender"
 msgstr "Пол"
 
 #: modules/participant/Initialization.php:78
-#: modules/registration/Initialization.php:241 templates/registration.php:77
+#: modules/registration/Initialization.php:241 templates/registration.php:79
 msgid "Male"
 msgstr "Мужчина"
 
 #: modules/participant/Initialization.php:79
-#: modules/registration/Initialization.php:243 templates/registration.php:84
+#: modules/registration/Initialization.php:243 templates/registration.php:86
 msgid "Female"
 msgstr "Женщина"
 
 #: modules/participant/Initialization.php:84
-#: modules/registration/Initialization.php:256 templates/registration.php:110
-#: templates/registration.php:206
+#: modules/registration/Initialization.php:256 templates/registration.php:112
+#: templates/registration.php:222
 msgid "Country"
 msgstr "Страна"
 
 #: modules/participant/Initialization.php:85
-#: modules/registration/Initialization.php:255 templates/registration.php:120
-#: templates/registration.php:208
+#: modules/registration/Initialization.php:255 templates/registration.php:122
+#: templates/registration.php:224
 msgid "City"
 msgstr "Город"
 
@@ -329,33 +332,39 @@ msgstr "Дополнительная информация"
 msgid "Actions"
 msgstr "Действия"
 
-#: modules/participant/Initialization.php:172
+#: modules/participant/Initialization.php:176
 #, php-format
 msgid "Send registration email to %s"
 msgstr "Отправить email с данными о регистрации на %s"
 
-#: modules/participant/Initialization.php:175
+#: modules/participant/Initialization.php:179
 msgid "Send email"
 msgstr "Отправить email"
 
-#: modules/participant/Initialization.php:177
+#: modules/participant/Initialization.php:181
 #, php-format
 msgid "Email will be send in %s"
 msgstr "Emai будет отправлен на %s"
 
-#: modules/participant/Initialization.php:195
+#: modules/participant/Initialization.php:199
 msgid "Import/Export"
 msgstr "Импорт/Экспорт"
 
-#: modules/payment/Functions.php:128
+#: modules/participant/Initialization.php:225
+#, fuzzy
+#| msgid "Distances"
+msgid "All distances"
+msgstr "Дистанции"
+
+#: modules/payment/Functions.php:130
 msgid "Not Payed"
 msgstr "Не оплачено"
 
-#: modules/payment/Functions.php:129
+#: modules/payment/Functions.php:131
 msgid "Awaiting Payment"
 msgstr "Ожидание оплаты"
 
-#: modules/payment/Functions.php:130
+#: modules/payment/Functions.php:132
 msgid "Payed"
 msgstr "Оплачено"
 
@@ -764,19 +773,23 @@ msgctxt "Форма заповнення даних"
 msgid "Your information"
 msgstr "Регистрационная форма"
 
-#: templates/registration.php:70 templates/registration.php:196
+#: templates/registration.php:72 templates/registration.php:212
 msgid "Gender:"
 msgstr "Пол:"
 
-#: templates/registration.php:91 templates/registration.php:198
+#: templates/registration.php:93 templates/registration.php:214
 msgid "E-mail"
 msgstr "Эл. адрес"
 
-#: templates/registration.php:105 templates/registration.php:201
+#: templates/registration.php:107 templates/registration.php:217
 msgid "Phone"
 msgstr "Телефон"
 
-#: templates/registration.php:168
+#: templates/registration.php:169
+msgid "Pancakes and tea (45 uah/portion)"
+msgstr "Блинчики и чай с малиной (45грн/порция)"
+
+#: templates/registration.php:184
 #, php-format
 msgid ""
 "Yes, I confirm that the data I provided is accurate and up-to-date. "
@@ -785,41 +798,45 @@ msgstr ""
 "Да, я подтверждаю, что предоставленные мной данные являются точными и "
 "актуальными. %sAgreement для обработки персональных данных%s"
 
-#: templates/registration.php:174
+#: templates/registration.php:190
 #, php-format
 msgid "I have read the %sEvent Regulations%s"
 msgstr "Я прочитал %sРегламент мероприятия%s"
 
-#: templates/registration.php:182
+#: templates/registration.php:198
 msgid "Personal information"
 msgstr "Личная информация"
 
-#: templates/registration.php:187
+#: templates/registration.php:203
 msgid "Edit"
 msgstr "Редактировать"
 
-#: templates/registration.php:215
+#: templates/registration.php:231
 msgid "T-shirt size:"
 msgstr "Размер футболки:"
 
-#: templates/registration.php:222
+#: templates/registration.php:235
+msgid "Pancakes and tea:"
+msgstr "Блинчики и чай с малиной:"
+
+#: templates/registration.php:242
 msgid "Order confirmation"
 msgstr "Подтверждение регистрации"
 
-#: templates/registration.php:229
+#: templates/registration.php:249
 msgid "Do you have a promocode?"
 msgstr "Вы имеете промокод?"
 
-#: templates/registration.php:231
+#: templates/registration.php:251
 msgid "Enter promocode"
 msgstr "Введите промокод"
 
-#: templates/registration.php:233
+#: templates/registration.php:253
 msgctxt "Промокод"
 msgid "Apply"
 msgstr "Применить"
 
-#: templates/registration.php:236
+#: templates/registration.php:256
 msgid ""
 "Please, notice! The promo code may be used only one time. If you have "
 "entered the promo code but failed to pay the registration fee, your promo "
@@ -829,27 +846,27 @@ msgstr ""
 "ввели промо-код, но не оплатили регистрационный взнос, ваш промо-код не "
 "будет действителен для следующей попытки!"
 
-#: templates/registration.php:239 templates/registration.php:249
+#: templates/registration.php:259 templates/registration.php:269
 msgid "Amount to pay"
 msgstr "К оплате"
 
-#: templates/registration.php:245
+#: templates/registration.php:265
 msgid "Payment for registration"
 msgstr "Оплата"
 
-#: templates/registration.php:259
+#: templates/registration.php:279
 msgid "Back"
 msgstr "Назад"
 
-#: templates/registration.php:260 templates/registration.php:279
+#: templates/registration.php:280 templates/registration.php:299
 msgid "Continue"
 msgstr "Продолжить"
 
-#: templates/registration.php:262
+#: templates/registration.php:282
 msgid "Pay"
 msgstr "Оплатить"
 
-#: templates/registration.php:276
+#: templates/registration.php:296
 msgid ""
 "Unfortunately, the payment time has expired. You order has been cancelled. "
 "Please, place a new order."
