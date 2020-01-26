@@ -14,7 +14,7 @@
         <span class="sponsor">Організатор пробігу — KM Running Club</span>
     </div>
     <div class="copyrights">
-        &copy; Kyiv Color Run 2018. All rights reserved
+        &copy; Kyiv Color Run <?= date('Y') ?>. All rights reserved
     </div>
 </footer>
 
