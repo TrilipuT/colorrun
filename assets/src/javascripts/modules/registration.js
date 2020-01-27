@@ -52,6 +52,14 @@ export default () => {
                 if (result.hasOwnProperty('price')) {
                     $('.price').text(result.price);
                 }
+                if (result.hasOwnProperty('additional-items')) {
+                    const $items = $('.additional-items')
+                    $items.html('')
+                    for (const name in result['additional-items']) {
+                        $items.append(
+                            `<dt>${name}</dt><dd>${result['additional-items'][name]}</dd>`)
+                    }
+                }
                 infoFill(participant);
                 countdownStart();
                 goToNext(e);

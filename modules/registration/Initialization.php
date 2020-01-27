@@ -71,7 +71,15 @@ class Initialization extends AbstractInitialization {
 			unset( $data['participant_id'] );
 			$participant->set_info( $data );
 
-			return $this->send_success([ 'price' => \modules\distance\Functions::format_price($participant->get_amount_to_pay()), ]);
+			$info = [];
+			if ( $pancakes = $participant->get_additional_info('pancakes') ) {
+				$info[ __('Pancakes and tea','colorrun') ] = \modules\distance\Functions::format_price($pancakes * 45);
+			}
+
+			return $this->send_success([
+				'price'            => \modules\distance\Functions::format_price($participant->get_amount_to_pay()),
+				'additional-items' => $info,
+			]);
 		} );
 
 		$router->post( '/getPaymentInfo/{participant_id}', function ( $participant_id ) {

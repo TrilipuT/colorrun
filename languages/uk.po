@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-26 19:08+0200\n"
-"PO-Revision-Date: 2020-01-26 19:10+0200\n"
+"POT-Creation-Date: 2020-01-27 07:51+0200\n"
+"PO-Revision-Date: 2020-01-27 07:51+0200\n"
 "Last-Translator: coloradmin <trilliput@gmail.com>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-2: vendor\n"
 "X-Poedit-SearchPathExcluded-3: node_modules\n"
 
-#: header.php:53 templates/registration.php:281 templates/registration.php:282
+#: header.php:53 templates/registration.php:282 templates/registration.php:283
 msgid "Register"
 msgstr "Реєстрація"
 
@@ -88,7 +88,7 @@ msgid "Coupons generator"
 msgstr "Генератор купонів"
 
 #: modules/customization/Initialization.php:81
-#: modules/registration/Initialization.php:258
+#: modules/registration/Initialization.php:266
 msgid "Place"
 msgstr "Місце"
 
@@ -205,7 +205,7 @@ msgid "Telephone"
 msgstr "Телефон"
 
 #: modules/participant/Functions.php:27
-#: modules/registration/Initialization.php:253 templates/registration.php:128
+#: modules/registration/Initialization.php:261 templates/registration.php:128
 #: templates/registration.php:227
 msgid "Club"
 msgstr "Клуб/Компанія"
@@ -290,23 +290,23 @@ msgid "Gender"
 msgstr "Стать"
 
 #: modules/participant/Initialization.php:78
-#: modules/registration/Initialization.php:241 templates/registration.php:79
+#: modules/registration/Initialization.php:249 templates/registration.php:79
 msgid "Male"
 msgstr "Чоловік"
 
 #: modules/participant/Initialization.php:79
-#: modules/registration/Initialization.php:243 templates/registration.php:86
+#: modules/registration/Initialization.php:251 templates/registration.php:86
 msgid "Female"
 msgstr "Жінка"
 
 #: modules/participant/Initialization.php:84
-#: modules/registration/Initialization.php:256 templates/registration.php:112
+#: modules/registration/Initialization.php:264 templates/registration.php:112
 #: templates/registration.php:222
 msgid "Country"
 msgstr "Країна"
 
 #: modules/participant/Initialization.php:85
-#: modules/registration/Initialization.php:255 templates/registration.php:122
+#: modules/registration/Initialization.php:263 templates/registration.php:122
 #: templates/registration.php:224
 msgid "City"
 msgstr "Місто"
@@ -393,186 +393,190 @@ msgstr ""
 msgid "Email already registered for this distance"
 msgstr "Користувач з таким email вже зареєстрований на цю дистанцію"
 
-#: modules/registration/Initialization.php:85
+#: modules/registration/Initialization.php:76 templates/registration.php:235
+msgid "Pancakes and tea"
+msgstr "Млинці та чай з малиною"
+
+#: modules/registration/Initialization.php:93
 msgid ""
 "You have successfully used the promo code. Please, pay the registration fee."
 msgstr ""
 "Промокод було використано успішно. Будь ласка, сплатіть реєстраційний внесок."
 
-#: modules/registration/Initialization.php:91
+#: modules/registration/Initialization.php:99
 msgid "Can't use coupon"
 msgstr "Неможливо використати купон"
 
-#: modules/registration/Initialization.php:134
+#: modules/registration/Initialization.php:142
 msgid "Registration"
 msgstr "Реєстрація"
 
-#: modules/registration/Initialization.php:136
+#: modules/registration/Initialization.php:144
 msgid "New registration notification template"
 msgstr "Шаблон повідомлення про нову реєстрацію"
 
-#: modules/registration/Initialization.php:137
+#: modules/registration/Initialization.php:145
 msgid "Subject"
 msgstr "Тема"
 
-#: modules/registration/Initialization.php:138
+#: modules/registration/Initialization.php:146
 msgid "Message"
 msgstr "Повідомлення"
 
-#: modules/registration/Initialization.php:189
+#: modules/registration/Initialization.php:197
 msgid "Form settings"
 msgstr "Налаштування форми"
 
-#: modules/registration/Initialization.php:198
+#: modules/registration/Initialization.php:206
 msgid "Free registration result page"
 msgstr "Сторінка результату безкоштовної реєстрації"
 
-#: modules/registration/Initialization.php:199
+#: modules/registration/Initialization.php:207
 msgid "Personal data page"
 msgstr "Згода на обробку персональних даних"
 
-#: modules/registration/Initialization.php:200
+#: modules/registration/Initialization.php:208
 msgid "Event rules page"
 msgstr "Регламент заходу"
 
-#: modules/registration/Initialization.php:201
+#: modules/registration/Initialization.php:209
 msgid "Additional form fields"
 msgstr "Додаткові поля форми"
 
-#: modules/registration/Initialization.php:216
+#: modules/registration/Initialization.php:224
 msgid "No data available in table"
 msgstr "Немає доступних в таблиці даних"
 
-#: modules/registration/Initialization.php:217
+#: modules/registration/Initialization.php:225
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr "Записи з _START_ по _END_ із _TOTAL_ записів"
 
-#: modules/registration/Initialization.php:218
+#: modules/registration/Initialization.php:226
 msgid "Showing 0 to 0 of 0 entries"
 msgstr "Записи з 0 по 0 із 0 записів"
 
-#: modules/registration/Initialization.php:219
+#: modules/registration/Initialization.php:227
 msgid "(filtered from _MAX_ total entries)"
 msgstr ""
 
-#: modules/registration/Initialization.php:221
+#: modules/registration/Initialization.php:229
 msgctxt "datatables thousands separator"
 msgid ","
 msgstr ""
 
-#: modules/registration/Initialization.php:222
+#: modules/registration/Initialization.php:230
 msgid "Show _MENU_ entries"
 msgstr ""
 
-#: modules/registration/Initialization.php:223
+#: modules/registration/Initialization.php:231
 msgid "Loading..."
 msgstr ""
 
-#: modules/registration/Initialization.php:224
+#: modules/registration/Initialization.php:232
 msgid "Processing..."
 msgstr ""
 
-#: modules/registration/Initialization.php:225
+#: modules/registration/Initialization.php:233
 msgid "Search:"
 msgstr "Пошук:"
 
-#: modules/registration/Initialization.php:226
+#: modules/registration/Initialization.php:234
 msgid "No matching records found"
 msgstr ""
 
-#: modules/registration/Initialization.php:228
+#: modules/registration/Initialization.php:236
 msgid "First"
 msgstr "Перша"
 
-#: modules/registration/Initialization.php:229
+#: modules/registration/Initialization.php:237
 msgid "Last"
 msgstr "Остання"
 
-#: modules/registration/Initialization.php:230
+#: modules/registration/Initialization.php:238
 msgid "Next"
 msgstr "Наступна"
 
-#: modules/registration/Initialization.php:231
+#: modules/registration/Initialization.php:239
 msgid "Previous"
 msgstr "Попередня"
 
-#: modules/registration/Initialization.php:234
+#: modules/registration/Initialization.php:242
 msgid ": activate to sort column ascending"
 msgstr ""
 
-#: modules/registration/Initialization.php:235
+#: modules/registration/Initialization.php:243
 msgid ": activate to sort column descending"
 msgstr ""
 
-#: modules/registration/Initialization.php:240
+#: modules/registration/Initialization.php:248
 msgid "M"
 msgstr "Ч"
 
-#: modules/registration/Initialization.php:242
+#: modules/registration/Initialization.php:250
 msgid "F"
 msgstr "Ж"
 
-#: modules/registration/Initialization.php:248
+#: modules/registration/Initialization.php:256
 msgid "Name"
 msgstr "Ім'я Прізвище"
 
-#: modules/registration/Initialization.php:249
+#: modules/registration/Initialization.php:257
 msgid "Sex"
 msgstr "Стать"
 
-#: modules/registration/Initialization.php:250
+#: modules/registration/Initialization.php:258
 msgid "BIB"
 msgstr "Номер"
 
-#: modules/registration/Initialization.php:251
+#: modules/registration/Initialization.php:259
 msgid "Year of birth"
 msgstr "Рік народження"
 
-#: modules/registration/Initialization.php:252
+#: modules/registration/Initialization.php:260
 msgid "Age group"
 msgstr "Вікова група"
 
-#: modules/registration/Initialization.php:254
+#: modules/registration/Initialization.php:262
 msgid "Team"
 msgstr "Команда"
 
-#: modules/registration/Initialization.php:257
+#: modules/registration/Initialization.php:265
 msgid "Category"
 msgstr "Категорія"
 
-#: modules/registration/Initialization.php:259
+#: modules/registration/Initialization.php:267
 msgid "AG place"
 msgstr ""
 
-#: modules/registration/Initialization.php:260
+#: modules/registration/Initialization.php:268
 msgid "Net time"
 msgstr "Net time"
 
-#: modules/registration/Initialization.php:261
+#: modules/registration/Initialization.php:269
 msgid "Gross time"
 msgstr "Gross time"
 
-#: modules/registration/Initialization.php:262
+#: modules/registration/Initialization.php:270
 msgid "5 km"
 msgstr ""
 
-#: modules/registration/Initialization.php:263
+#: modules/registration/Initialization.php:271
 msgid "10 km"
 msgstr ""
 
-#: modules/registration/Initialization.php:264
+#: modules/registration/Initialization.php:272
 msgid "15 km"
 msgstr ""
 
-#: modules/registration/Initialization.php:265
+#: modules/registration/Initialization.php:273
 msgid "20 km"
 msgstr ""
 
-#: modules/registration/Initialization.php:266
+#: modules/registration/Initialization.php:274
 msgid "21 km"
 msgstr ""
 
-#: modules/registration/Initialization.php:267
+#: modules/registration/Initialization.php:275
 msgid "30 km"
 msgstr ""
 
@@ -817,28 +821,24 @@ msgstr "Редагувати"
 msgid "T-shirt size:"
 msgstr "Розмір футболки"
 
-#: templates/registration.php:235
-msgid "Pancakes and tea:"
-msgstr "Млинці та чай з малиною:"
-
 #: templates/registration.php:242
 msgid "Order confirmation"
 msgstr "Підтвердження замовлення"
 
-#: templates/registration.php:249
+#: templates/registration.php:250
 msgid "Do you have a promocode?"
 msgstr "Маєте промокод?"
 
-#: templates/registration.php:251
+#: templates/registration.php:252
 msgid "Enter promocode"
 msgstr "Введіть промокод"
 
-#: templates/registration.php:253
+#: templates/registration.php:254
 msgctxt "Промокод"
 msgid "Apply"
 msgstr "Застосувати"
 
-#: templates/registration.php:256
+#: templates/registration.php:257
 msgid ""
 "Please, notice! The promo code may be used only one time. If you have "
 "entered the promo code but failed to pay the registration fee, your promo "
@@ -848,27 +848,27 @@ msgstr ""
 "промокод, але не встигли сплатити реєстрацію, він вже не буде дійсним під "
 "час наступної спроби"
 
-#: templates/registration.php:259 templates/registration.php:269
+#: templates/registration.php:260 templates/registration.php:270
 msgid "Amount to pay"
 msgstr "Сума для оплати"
 
-#: templates/registration.php:265
+#: templates/registration.php:266
 msgid "Payment for registration"
 msgstr "Оплата"
 
-#: templates/registration.php:279
+#: templates/registration.php:280
 msgid "Back"
 msgstr "Назад"
 
-#: templates/registration.php:280 templates/registration.php:299
+#: templates/registration.php:281 templates/registration.php:300
 msgid "Continue"
 msgstr "Продовжити"
 
-#: templates/registration.php:282
+#: templates/registration.php:283
 msgid "Pay"
 msgstr "Сплатити"
 
-#: templates/registration.php:296
+#: templates/registration.php:297
 msgid ""
 "Unfortunately, the payment time has expired. You order has been cancelled. "
 "Please, place a new order."

@@ -232,7 +232,7 @@ get_header(); ?>
                                     <dd data-id="info[tshirt_size]"></dd>
 								<?php endif; ?>
 	                            <?php if ( Registration::is_active_field( 'pancakes' ) ): ?>
-                                    <dt><?php _e( 'Pancakes and tea:', 'colorrun' ) ?></dt>
+                                    <dt><?php _e( 'Pancakes and tea', 'colorrun' ) ?></dt>
                                     <dd data-id="info[pancakes]"></dd>
 	                            <?php endif; ?>
                             </dl>
@@ -244,6 +244,7 @@ get_header(); ?>
                             <dl class="preliminary-price">
                                 <dt data-distance-title><?= get_the_title( $distance_id ) ?></dt>
                                 <dd data-distance-price><?= Distance::format_price( $price ) ?></dd>
+                                <div class="additional-items"></div>
                             </dl>
                             <div class="promo-group">
                                 <p><?php _e( 'Do you have a promocode?', 'colorrun' ) ?></p>
